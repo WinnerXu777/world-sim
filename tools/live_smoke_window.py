@@ -2,6 +2,7 @@
 ``EDEN_WINDOW EDEN_SPACES EDEN_PERCEPTION_BOUNDED EDEN_MAP_RESOURCES`` plus ``EDEN_CHUNK_ROUTES``.
 
     .venv/Scripts/python.exe tools/live_smoke_window.py [--port 8021] [--keep]
+    .venv/Scripts/python.exe tools/live_smoke_window.py --port 8031 --long-distance 5000 [--walk-seconds 1800] [--evidence out.json]   (R0.5, Gate D)
 
 It starts the backend itself in a fresh isolated data root (never a world you want to keep), then checks over HTTP:
   * ``/bootstrap``: the ``world`` infinite block, ``window_origin`` / ``window_epoch``, ``maps[]`` and ``spaces[]`` rows with ``window_shift``;
@@ -44,8 +45,11 @@ def check(label, ok, detail=""):
 
 
 class Backend:
-    def __init__(self, port, data_root, flags):
+    def __init__(self, port, data_root, flags, shim=False):
         self.port, self.data_root, self.flags = port, data_root, flags
+        # shim (the --long-distance walk only): map_test's own app plus the read-only SHIM_ROUTE, see serve_backend()
+        self.command = ([sys.executable, str(Path(__file__).resolve()), "--serve-backend"] if shim
+                        else [sys.executable, str(ROOT / "at_the_beginning" / "map_test.py")])
         self.proc = None
         self.client = None
         self.session = None
@@ -58,7 +62,7 @@ class Backend:
                    EDEN_MAP_ORIGINS=json.dumps(ORIGINS), **self.flags)
         log = open(self.data_root / f"backend-{self.port}-{int(time.time())}.log", "wb")
         flags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0       # so CTRL_BREAK reaches this backend alone
-        self.proc = subprocess.Popen([sys.executable, str(ROOT / "at_the_beginning" / "map_test.py")], cwd=str(ROOT), env=env, stdout=log, stderr=subprocess.STDOUT,
+        self.proc = subprocess.Popen(self.command, cwd=str(ROOT), env=env, stdout=log, stderr=subprocess.STDOUT,
                                      creationflags=flags)
         self.client = httpx.Client(base_url=f"http://127.0.0.1:{self.port}", timeout=60)
         deadline = time.time() + timeout
@@ -308,13 +312,44 @@ def memory_sample(pid):
         return {'bytes': None, 'metric': 'main_backend_rss', 'source': None, 'unavailable': str(exc)}
 
 
+SUBLINEAR_FACTOR = 0.5   # orchestrator ruling 1118 (R0.5 REVISE), not a contract number
+
+
+def memory_bound(samples):
+    """R0.5 plateau rule on main-backend RSS (no fixed byte threshold exists, so none is invented). With growth g1 = rss(half) - rss(start)
+    over the outbound leg's first half, it passes only when the second half grew clearly sublinearly, rss(far) - rss(half) <= 0.5 * g1, and
+    the return leg grew no more than the first half, rss(end) - rss(far) <= g1. ``ok`` is None when any marked sample is missing."""
+    marks = {}
+    for sample in samples:
+        if sample.get('mark') and sample['mark'] not in marks:
+            # a sample of the venv launcher stub (backend_pid fallback) is not the backend's memory: unknown, never evidence
+            marks[sample['mark']] = None if sample.get('pid_kind') == 'launcher_fallback' else sample.get('bytes')
+    start, half, far, end = (marks.get(key) for key in ('start', 'half', 'far', 'end'))
+    values = [s['bytes'] for s in samples if type(s.get('bytes')) is int and s.get('pid_kind') != 'launcher_fallback']
+    known = all(type(v) is int for v in (start, half, far, end))
+    first = half - start if known else None
+    return {'rule': 'rss(far) - rss(half) <= 0.5 * (rss(half) - rss(start)) and rss(end) - rss(far) <= rss(half) - rss(start), main backend RSS',
+            'sublinear_factor': SUBLINEAR_FACTOR,
+            'sublinear_factor_source': 'orchestrator ruling 1118 (R0.5 REVISE); not a contract number',
+            'start_bytes': start, 'half_bytes': half, 'far_bytes': far, 'end_bytes': end,
+            'first_half_growth_bytes': first, 'second_half_growth_bytes': far - half if known else None,
+            'return_leg_growth_bytes': end - far if known else None,
+            'peak_minus_start_bytes': max(values) - start if values and type(start) is int else None,   # information only
+            'ok': (far - half <= SUBLINEAR_FACTOR * first and end - far <= first) if known else None}
+
+
 def memory_summary(samples):
     values = [s['bytes'] for s in samples if s.get('bytes') is not None]
+    bound = memory_bound(samples)
+    missing = ['worker-tree RSS is not sampled (main backend only)']
+    if bound['ok'] is None:
+        missing.insert(0, 'start, half-way or far-point RSS sample missing: the plateau rule is unknown, not a pass')
     return {'samples': samples, 'start_bytes': samples[0].get('bytes') if samples else None,
             'end_bytes': samples[-1].get('bytes') if samples else None,
             'peak_bytes': max(values) if values else None,
-            'bounded_growth_acceptance': None,
-            'missing': ['No RSS growth limit is specified by the existing HTTP/window contract; worker-tree RSS is not sampled.']}
+            'plateau': bound, 'peak_minus_start_bytes_information_only': bound['peak_minus_start_bytes'],
+            'bounded_growth_acceptance': bound['ok'],
+            'missing': missing}
 
 
 def player_void_delta(before_stats, after_stats, *, before_world_epoch, after_world_epoch,
@@ -351,6 +386,202 @@ def player_void_delta(before_stats, after_stats, *, before_world_epoch, after_wo
             'before': values[0][1], 'after': values[1][1]}
 
 
+SHIM_ROUTE = '/_smoke/window_stats'
+SHIM_SOURCE = f'live_smoke_window --serve-backend shim: GET {SHIM_ROUTE} (read-only, added in the smoke backend process only; map_test.py unchanged)'
+
+
+def void_from_window_stats(before, after, player):
+    """Two shim telemetry replies -> ``player_void_delta``; the scope (same world, same manager, no counter reset, the walker the only
+    controller) is decided only from what the shim reported, so a missing or odd reply stays unknown."""
+    def get(reply, key):
+        return reply.get(key) if isinstance(reply, dict) else None
+    manager, generation = get(before, 'manager_id'), get(before, 'counter_generation')
+    result = player_void_delta(get(before, 'stats'), get(after, 'stats'),
+                               before_world_epoch=get(before, 'world_epoch'), after_world_epoch=get(after, 'world_epoch'),
+                               same_manager=manager is not None and manager == get(after, 'manager_id'),
+                               same_counter_generation=type(generation) is int and generation == get(after, 'counter_generation'),
+                               sole_controller=get(before, 'controlled') == [player] and get(after, 'controlled') == [player])
+    return {**result, 'telemetry_source': SHIM_SOURCE}
+
+
+def left_behind_stable(samples, player, frame=(-1280.0, 1536.0), tolerance=0.01):
+    """Residents left behind keep their absolute positions across re-bases. A resident counts once it is outside the fixed window frame
+    (window-local [-1280, 1536), harness/window.py WINDOW_FRAME) in three consecutive samples, so it is past the dormancy grace; its absolute
+    position must then agree between the last two within ``tolerance`` units. ``ok`` is None unless at least one checked pair spans a re-base."""
+    def outside(sample, rid):
+        row = sample['residents'].get(rid)
+        if not row or row.get('space', 0) != 0 or row.get('absolute') is None:
+            return False
+        ox, oy = sample['origin']
+        lx, ly = row['absolute'][0] - ox * 256.0, row['absolute'][1] - oy * 256.0
+        return not (frame[0] <= lx < frame[1] and frame[0] <= ly < frame[1])
+    checked, across, drift = 0, 0, []
+    for a, b, c in zip(samples, samples[1:], samples[2:]):
+        for rid in b['residents']:
+            if rid == player or not all(outside(s, rid) for s in (a, b, c)):
+                continue
+            p, q = b['residents'][rid]['absolute'], c['residents'][rid]['absolute']
+            checked += 1
+            across += b['epoch'] != c['epoch']
+            moved = max(abs(p[0] - q[0]), abs(p[1] - q[1]))
+            if moved > tolerance:
+                drift.append({'id': rid, 'moved': moved, 'epochs': [b['epoch'], c['epoch']]})
+    return {'pairs_checked': checked, 'pairs_across_rebase': across, 'tolerance_units': tolerance, 'drift': drift,
+            'ok': False if drift else (True if across else None)}
+
+
+def live_gate(evidence):
+    """Gate D verdict for the long walk: (passed, reasons). Unknown never passes."""
+    reasons = []
+    if evidence.get('measured_walk_pass') is not True:
+        reasons.append('measured east-and-return walk did not pass')
+    if type(evidence.get('void_hits')) is not int:
+        reasons.append('player void hits unknown')
+    elif evidence['void_hits'] != 0:
+        reasons.append(f"{evidence['void_hits']} player void hits")
+    if (evidence.get('memory') or {}).get('bounded_growth_acceptance') is not True:
+        reasons.append(f"memory plateau rule {(evidence.get('memory') or {}).get('bounded_growth_acceptance')}")
+    if (evidence.get('left_behind') or {}).get('ok') is not True:
+        reasons.append(f"left-behind residents check {(evidence.get('left_behind') or {}).get('ok')}")
+    if (evidence.get('input_counts') or {}).get('valid_input_rejected') != 0:
+        reasons.append(f"rejected inputs {(evidence.get('input_counts') or {}).get('valid_input_rejected')}")
+    return (not reasons, reasons)
+
+
+class Steer:
+    """Capped Pledge wall-follow for one leg of the measured walk (R0.5 amend 2; the gate is net displacement, not a straight line).
+    ``move(pos, heading, tick)`` before every input. Feedback is taken only when the frame tick advanced by ``eval_ticks`` (the frame may
+    refresh every few ticks): if the walker moved less than ``min_move`` units since the last evaluation it turns ``step`` degrees (turn sum
+    +step, rotating the heading towards +y first); if it moved and the turn sum is positive it tries ``step`` back (-step). It walks
+    rotate(heading, turn sum) and leaves the wall after ``clear_moves`` free evaluations at turn sum 0. That escapes any finite obstacle,
+    pockets included. Caps, so a dead end fails cleanly: an episode is a dead end past ``max_turn`` degrees or ``max_seconds``; at most
+    ``max_episodes`` per leg. Every episode is recorded (start/end delta, max turn, duration, outcome)."""
+
+    def __init__(self, name, step=45.0, min_move=0.5, eval_ticks=4, clear_moves=5, max_turn=1080.0, max_seconds=300.0, max_episodes=12,
+                 stuck_window=4, stuck_net=1.0, clock=time.monotonic):
+        self.name, self.step, self.min_move, self.eval_ticks, self.clear_moves = name, step, min_move, eval_ticks, clear_moves
+        self.max_turn, self.max_seconds, self.max_episodes, self.clock = max_turn, max_seconds, max_episodes, clock
+        self.stuck_window, self.stuck_net = stuck_window, stuck_net
+        self.turn, self.last, self.last_tick, self.free, self.episode = 0.0, None, None, 0, None
+        # hysteresis (orchestrator ruling after run 4): one decision per window of ``stuck_window`` evaluations, and the walker counts as
+        # stuck when its NET progress over that window is under ``stuck_net`` units; the windows do not overlap, so neither a pinned
+        # walker's sub-unit frame wobble nor the motion of an earlier window reads as movement. 0 = the old per-evaluation test.
+        self.decide_ticks = eval_ticks * max(1, stuck_window)
+        self.threshold = max(min_move, stuck_net) if stuck_window else min_move
+        self.episodes, self.exhausted = [], False
+
+    def _feedback(self, pos):
+        moved = math.hypot(pos[0] - self.last[0], pos[1] - self.last[1]) >= self.threshold
+        if not moved:
+            if self.episode is None:
+                if len(self.episodes) >= self.max_episodes:
+                    self.exhausted = True
+                    return
+                self.episode = {'leg': self.name, 'start_delta': [round(pos[0], 1), round(pos[1], 1)], 'turn_first': '+y from an east heading',
+                                'max_turn_degrees': 0.0, 'started': self.clock(), 'duration_s': 0.0, 'end_delta': None, 'outcome': 'open'}
+                self.episodes.append(self.episode)
+            self.turn += self.step
+            self.free = 0
+        elif self.turn > 0:
+            self.turn -= self.step
+            self.free = 0
+        else:
+            self.free += 1
+        episode = self.episode
+        if episode is None:
+            return
+        episode['max_turn_degrees'] = max(episode['max_turn_degrees'], self.turn)
+        episode['duration_s'] = round(self.clock() - episode['started'], 2)
+        episode['end_delta'] = [round(pos[0], 1), round(pos[1], 1)]
+        if self.turn <= 0 and self.free >= self.clear_moves:
+            episode['outcome'], self.episode = 'cleared', None
+        elif self.turn > self.max_turn or episode['duration_s'] > self.max_seconds:
+            episode['outcome'], self.exhausted = 'dead_end', True
+
+    def move(self, pos, heading, tick):
+        if not self.exhausted and (self.last_tick is None or tick - self.last_tick >= self.decide_ticks):
+            if self.last is not None:
+                self._feedback(pos)
+            self.last, self.last_tick = tuple(pos), tick
+        if self.exhausted:
+            return {'x': 0.0, 'y': 0.0}
+        a = math.radians(self.turn)
+        x, y = heading[0] * math.cos(a) - heading[1] * math.sin(a), heading[0] * math.sin(a) + heading[1] * math.cos(a)
+        norm = max(1e-9, math.hypot(x, y))
+        return {'x': x / norm, 'y': y / norm}
+
+
+class Breadcrumbs:
+    """The outbound leg's path, a point every ``spacing`` units (R0.5 ruling after run 4: the outbound is proven walkable, so the back leg
+    retraces it in reverse). ``heading(pos)`` is the unit vector to the current target crumb: the target moves one crumb towards the start
+    once within ``reach``, and jumps to the earliest crumb within ``reach`` when the walker stands near one (an outbound loop is not
+    replayed). The first crumb is the start itself, so the last target is home. ``Steer`` stays the local fallback between crumbs."""
+
+    def __init__(self, spacing=16.0, reach=12.0):
+        self.spacing, self.reach = spacing, reach
+        self.points, self.index, self.jumps = [], None, 0
+
+    def record(self, pos):
+        if not self.points or math.hypot(pos[0] - self.points[-1][0], pos[1] - self.points[-1][1]) >= self.spacing:
+            self.points.append((float(pos[0]), float(pos[1])))
+
+    def heading(self, pos):
+        if not self.points:
+            norm = max(1e-9, math.hypot(pos[0], pos[1]))
+            return (-pos[0] / norm, -pos[1] / norm)
+        if self.index is None:
+            self.index = len(self.points) - 1
+        near = [i for i in range(self.index + 1) if math.hypot(pos[0] - self.points[i][0], pos[1] - self.points[i][1]) <= self.reach]
+        if near:
+            if near[0] < self.index - 1:
+                self.jumps += 1
+            self.index = max(0, near[0] - 1)
+        tx, ty = self.points[self.index]
+        dx, dy = tx - pos[0], ty - pos[1]
+        norm = math.hypot(dx, dy)
+        if norm < 1e-9:
+            return (0.0, 0.0)
+        return (dx / norm, dy / norm)
+
+
+def route_verdict(route_samples):
+    """Every sampled player chunk must be ``ready`` on /chunks; it must also be in the window's integrated set, with at most a one-sample lag
+    (a sprint across a border can sample the new chunk before its integration tick). Samples without a set coherent with the frame neither
+    extend nor break a lag run. Every lag is counted; two or more consecutive lagging samples fail (orchestrator ruling 1118)."""
+    lags, run, worst, ready = [], 0, 0, bool(route_samples)
+    for index, sample in enumerate(route_samples):
+        chunk_id = f"{sample['chunk'][0]}:{sample['chunk'][1]}"
+        rows = sample.get('route') or []
+        ready &= len(rows) == 1 and rows[0].get('chunk_id') == chunk_id and rows[0].get('state') == 'ready'
+        if not sample.get('coherent_with_frame') or sample.get('integrated') is None:
+            continue
+        if chunk_id in sample['integrated']:
+            run = 0
+        else:
+            run += 1
+            worst = max(worst, run)
+            lags.append({'index': index, 'chunk': list(sample['chunk'])})
+    return {'ok': bool(ready and worst < 2), 'all_ready': bool(ready), 'lag_samples': len(lags), 'max_consecutive_lag': worst, 'lags': lags,
+            'rule': 'ready on /chunks always; integrated at that sample or after at most one lagging sample'}
+
+
+def backend_pid(stats, fallback):
+    """The pid whose RSS is the backend's: the shim reports its own interpreter's pid (``.venv\\Scripts\\python.exe`` is a launcher stub that
+    spawns it, so ``Popen.pid`` is the stub's). Without it the launcher pid is returned, labelled, and its samples never count as evidence."""
+    pid = stats.get('pid') if isinstance(stats, dict) else None
+    return (pid, 'backend_interpreter') if type(pid) is int and pid > 0 else (fallback, 'launcher_fallback')
+
+
+def window_stats(b):
+    """One shim telemetry read; any failure is recorded, never raised (the counters then stay unknown)."""
+    try:
+        reply = b.get(SHIM_ROUTE)
+        payload = reply.json()
+        return payload if reply.status_code == 200 and isinstance(payload, dict) else {'unavailable': f'{reply.status_code}'}
+    except (httpx.HTTPError, ValueError) as exc:
+        return {'unavailable': str(exc)}
+
+
 def resident_snapshot(frame):
     positions = residents_abs(frame)
     return {a['id']: {'absolute': positions.get(a['id']), 'space': a.get('space', 0),
@@ -362,7 +593,7 @@ def phase_long_walk(b, target, seconds, evidence):
     evidence.update(target_east_units=target, deadline_seconds=seconds, return_tolerance_units=32,
                     samples=[], route_samples=[], memory_samples=[],
                     input_counts=dict(accepted=0, stale_window=0, stale_exhausted=0, valid_input_rejected=0),
-                    missing_metrics=['void hit counter is not exposed by the HTTP API',
+                    missing_metrics=['void hit counters come only through the smoke shim route, not the game API',
                                      'resident row slots are recorded only when exposed'], void_hits=None,
                     void_telemetry_ready=False,
                     live_gate_complete=False)
@@ -370,37 +601,62 @@ def phase_long_walk(b, target, seconds, evidence):
     start = current = None
     max_east, max_distance, outbound = 0.0, 0.0, False
     epochs = set()
-    route_ok = True
+    player, stats_before, half_marked = None, None, False
+    legs = {'out': Steer('out'), 'back': Steer('back')}
+    crumbs = Breadcrumbs()
+    path_length, max_lateral, last = 0.0, 0.0, None
+    mem_pid, mem_kind = getattr(getattr(b, 'proc', None), 'pid', None), 'launcher_fallback'
+
+    def mem(**extra):
+        return {**memory_sample(mem_pid), 'pid': mem_pid, 'pid_kind': mem_kind, **extra}
     try:
         claim = b.post('/control/claim', {'mode': 'incarnate', 'preferred_name': 'LongWalker'})
         if claim.status_code != 200:
             raise RuntimeError(f'incarnation failed: {claim.status_code} {claim.text[:120]}')
         control = claim.json()
         player = control['target_id']
+        stats_before = window_stats(b)
+        mem_pid, mem_kind = backend_pid(stats_before, mem_pid)
+        evidence['memory_pid'] = {'pid': mem_pid, 'kind': mem_kind, 'launcher_pid': getattr(getattr(b, 'proc', None), 'pid', None)}
         frame = b.get('/frame').json()
         start = current = player_position(frame, player)
-        evidence['memory_samples'].append(memory_sample(b.proc.pid))
+        evidence['memory_samples'].append(mem(mark='start', delta_east=0.0))
         evidence['player_id'] = player
         evidence['residents_start'] = resident_snapshot(frame)
         deadline = time.monotonic() + seconds
-        seq, side, flips, still, previous = 0, 0.0, 0, 0, None
+        seq = 0
         iteration = 0
         while time.monotonic() < deadline:
             frame = b.get('/frame').json()
             current = player_position(frame, player)
             dx, dy = displacement(start, current)
+            if last is not None:
+                path_length += math.hypot(dx - last[0], dy - last[1])
+            last = (dx, dy)
+            max_lateral = max(max_lateral, abs(dy))
             max_east = max(max_east, dx)
             max_distance = max(max_distance, math.hypot(dx, dy))
             epochs.add(frame['window_epoch'])
-            if dx >= target:
+            if not half_marked and dx >= target / 2:
+                half_marked = True
+                evidence['memory_samples'].append(mem(mark='half', delta_east=dx))
+            if not outbound:
+                crumbs.record((dx, dy))                               # the proven-walkable outbound path, every 16 units
+            if dx >= target and not outbound:
                 outbound = True
+                evidence['memory_samples'].append(mem(mark='far', delta_east=dx))
             if outbound and math.hypot(dx, dy) <= 32:
                 break
+            steer = legs['back' if outbound else 'out']
+            norm = math.hypot(dx, dy)
+            heading = crumbs.heading((dx, dy)) if outbound else (1.0, 0.0)      # back leg: retrace the outbound crumbs in reverse
+            if heading == (0.0, 0.0):
+                heading = (-dx / max(norm, 1e-9), -dy / max(norm, 1e-9))
             if iteration % 20 == 0:
                 evidence['samples'].append({'elapsed': seconds - (deadline - time.monotonic()),
                     'epoch': frame['window_epoch'], 'origin': list(current[0]), 'delta': [dx, dy],
                     'residents': resident_snapshot(frame)})
-                evidence['memory_samples'].append(memory_sample(b.proc.pid))
+                evidence['memory_samples'].append(mem(delta_east=dx))
                 # Read-only route query at the player's actual absolute chunk.
                 cx = int(current[0][0]) + math.floor(current[1][0] / 256)
                 cy = int(current[0][1]) + math.floor(current[1][1] / 256)
@@ -408,30 +664,15 @@ def phase_long_walk(b, target, seconds, evidence):
                 if route.status_code != 200:
                     raise RuntimeError(f'chunk route failed: {route.status_code}')
                 rows = route.json().get('chunks', [])
-                route_ok &= len(rows) == 1 and rows[0].get('chunk_id') == f'{cx}:{cy}' and rows[0].get('state') == 'ready'
                 delta = b.get('/map_delta').json()
                 integrated = delta.get('window', {}).get('integrated')
                 coherent = delta.get('window_epoch') == frame['window_epoch'] and delta.get('window_origin') == frame['window_origin']
-                if coherent and integrated is not None:
-                    route_ok &= f'{cx}:{cy}' in integrated
                 evidence['route_samples'].append({'chunk': [cx, cy], 'route': rows, 'integrated': integrated,
                     'coherent_with_frame': coherent, 'state_version': delta.get('state_version')})
-                if previous is not None and math.hypot(dx-previous[0], dy-previous[1]) < 0.5:
-                    still += 1
-                    if still >= 2:
-                        flips, still = flips + 1, 0
-                        side = 1.0 if (flips // 2) % 2 == 0 else -1.0
-                else:
-                    still = 0
-                    side = 0.0
-                previous = (dx, dy)
-            if outbound:
-                norm = math.hypot(dx, dy)
-                move = {'x': -dx / norm, 'y': -dy / norm + side * 0.5}
-                move_norm = max(1.0, math.hypot(move['x'], move['y']))
-                move = {axis: value / move_norm for axis, value in move.items()}
-            else:
-                move = {'x': 1.0, 'y': side}
+            move = steer.move((dx, dy), heading, tick=int(frame.get('tick', 4 * iteration)))
+            if steer.exhausted:
+                raise RuntimeError(f'wall-follow cap reached on the {steer.name} leg at delta {[round(dx, 1), round(dy, 1)]}: dead end '
+                                   f'({len(steer.episodes)} episodes, last {steer.episodes[-1] if steer.episodes else None})')
             seq += 1
             body = dict(protocol_version=1, world_epoch=control['world_epoch'], possession_epoch=control['possession_epoch'],
                         target_kind='human', target_id=player, seq=seq, move=move,
@@ -446,6 +687,7 @@ def phase_long_walk(b, target, seconds, evidence):
                          buttons={'sprint': False}, intent_state={'moving': False, 'sprinting': False})
         frame = stamped_input(b, stop_body, frame, counts)
         time.sleep(0.1)  # allow the accepted stop to enter a normal tick; no movement shortcut
+        evidence['window_stats_after'] = window_stats(b)
         frame = b.get('/frame').json()
         current = player_position(frame, player)
         dx, dy = displacement(start, current)
@@ -458,8 +700,27 @@ def phase_long_walk(b, target, seconds, evidence):
     except (httpx.HTTPError, RuntimeError, ValueError, KeyError, StopIteration) as exc:
         evidence['error'] = str(exc)
     finally:
-        evidence['memory_samples'].append(memory_sample(b.proc.pid))
+        evidence['memory_samples'].append(mem(mark='end'))
         evidence['memory'] = memory_summary(evidence.pop('memory_samples'))
+        evidence['path'] = {'gate': 'net displacement (>= target east, then back within 32 units), not a straight line',
+                            'total_path_length': round(path_length, 1), 'max_lateral_offset': round(max_lateral, 1),
+                            'steering': ('outbound heads east; the back leg retraces the outbound breadcrumbs in reverse; capped Pledge wall-follow '
+                                         '(Steer) only as the local fallback between crumbs: 45 degree turns, caps 1080 degrees / 300 s per episode, '
+                                         f'12 episodes per leg; stuck only if net progress < {legs["out"].stuck_net} unit over '
+                                         f'{legs["out"].stuck_window} inputs (hysteresis, non-overlapping windows)'),
+                            'breadcrumbs': {'count': len(crumbs.points), 'spacing': crumbs.spacing, 'reach': crumbs.reach,
+                                            'index_reached': crumbs.index, 'jumps': crumbs.jumps},
+                            'detours': [{k: v for k, v in e.items() if k != 'started'} for e in legs['out'].episodes + legs['back'].episodes],
+                            'episode_budget_per_leg': legs['out'].max_episodes, 'exhausted': [n for n, s in legs.items() if s.exhausted]}
+        if 'window_stats_after' not in evidence and stats_before is not None:
+            evidence['window_stats_after'] = window_stats(b)          # the walk failed early: void must still be known
+            evidence['window_stats_after_read_on_error_path'] = True
+        evidence['window_stats_before'] = stats_before
+        void = void_from_window_stats(stats_before, evidence.get('window_stats_after'), player)
+        evidence['void'] = void
+        evidence['void_telemetry_ready'] = void['known']
+        evidence['void_hits'] = void['player_void_hits']
+        evidence['left_behind'] = left_behind_stable(evidence['samples'], player)
         evidence['maximum_absolute_displacement'] = max_distance
         final_delta = displacement(start, current) if start is not None and current is not None else (0, 0)
         evidence.update(distance_result(max_east, final_delta, target, outbound))
@@ -470,7 +731,8 @@ def phase_long_walk(b, target, seconds, evidence):
             {'added': sorted(after-before), 'removed': sorted(before-after)}
             for before, after in zip(coherent_sets, coherent_sets[1:]) if before != after]
         evidence['residency_changed'] = bool(evidence['residency_transitions'])
-        evidence['routes_ready'] = route_ok and bool(evidence['route_samples'])
+        evidence['route_verdict'] = route_verdict(evidence['route_samples'])
+        evidence['routes_ready'] = evidence['route_verdict']['ok']
         measured_ok = (evidence['outbound_complete'] and evidence['return_complete'] and len(epochs) > 1
                        and evidence['routes_ready'] and evidence['residency_changed'] and evidence.get('resident_ids_restored')
                        and evidence.get('resident_slots_stable') is not False
@@ -478,7 +740,18 @@ def phase_long_walk(b, target, seconds, evidence):
         evidence['measured_walk_pass'] = bool(measured_ok)
         check('long walk reaches measured east target and returns', bool(measured_ok),
               f"max east {max_east:.1f}, return {evidence['return_distance']:.1f}, error {evidence.get('error')}")
-        print('INFO  full Gate D acceptance remains unverified: void-hit counter and bounded-memory contract unavailable', flush=True)
+        gate, reasons = live_gate(evidence)
+        evidence['live_gate_complete'], evidence['live_gate_reasons'] = gate, reasons
+        plateau = evidence['memory']['plateau']
+        print(f"INFO  epochs {len(epochs)}, inputs {counts}, player void hits {evidence['void_hits']} (resident {void.get('resident_void_hits')}; "
+              f"via the smoke shim), RSS growth first/second half/return {plateau['first_half_growth_bytes']}/{plateau['second_half_growth_bytes']}/"
+              f"{plateau['return_leg_growth_bytes']} (rule factor {plateau['sublinear_factor']}, orchestrator ruling), "
+              f"peak-start {plateau['peak_minus_start_bytes']} (information only), left-behind pairs {evidence['left_behind']['pairs_checked']} "
+              f"({evidence['left_behind']['pairs_across_rebase']} across a re-base), path {evidence['path']['total_path_length']} units, "
+              f"max lateral {evidence['path']['max_lateral_offset']}, detours {len(evidence['path']['detours'])}, route lags "
+              f"{evidence['route_verdict']['lag_samples']} (max {evidence['route_verdict']['max_consecutive_lag']} in a row), memory pid "
+              f"{evidence.get('memory_pid')}", flush=True)
+        check('Gate D: 0 player void hits, memory plateaus, residents left behind keep absolute positions, 0 rejected inputs', gate, '; '.join(reasons))
 
 
 def phase_walk(b, seconds=150.0, chunks_away=3):
@@ -563,7 +836,41 @@ def same_window(label, before, after):
     check(f"{label}: the chunk features come back", len(shared) >= max(1, int(0.8 * len(before["features"]))), f"{len(shared)} of {len(before['features'])}")
 
 
+def serve_backend():
+    """The long-walk backend (``--serve-backend``, started by ``Backend(shim=True)``): imports ``map_test`` exactly as its script does, adds ONE
+    read-only route, ``GET /_smoke/window_stats``, to the app object in this process only, then serves it like map_test's own ``__main__``. The
+    game's source and its app as shipped are unchanged; the route reports the window manager's void and wall counters, which no game route
+    exposes. ``counter_generation`` counts calls to ``WindowManager.reset_void_counters`` in this process, so a reset is never read as 0 hits.
+    Everything happens under the caller's ``__main__`` guard: the chunk pool's spawn workers re-import this file without building an engine."""
+    sys.path.insert(0, str(ROOT / "at_the_beginning"))
+    import uvicorn
+    import map_test
+    from harness import window_manager
+    generation = [0]
+    reset = window_manager.WindowManager.reset_void_counters
+
+    def counted_reset(self):
+        generation[0] += 1
+        return reset(self)
+    window_manager.WindowManager.reset_void_counters = counted_reset
+
+    @map_test.app.get(SHIM_ROUTE)
+    async def smoke_window_stats():
+        engine = map_test.engine
+        manager = getattr(engine, "_window", None)
+        sessions = getattr(getattr(engine, "player_control", None), "sessions_by_controller", None) or {}
+        controlled = sorted(str(s.get("target_id")) for s in sessions.values() if hasattr(s, "get") and s.get("target_kind") == "human")
+        return {"world_epoch": getattr(engine, "world_epoch", None), "manager_id": id(manager) if manager is not None else None,
+                "counter_generation": generation[0], "controlled": controlled, "stats": manager.stats() if manager is not None else None,
+                "pid": os.getpid(), "source": SHIM_SOURCE}       # the backend interpreter, not the .venv launcher stub that spawned it
+
+    uvicorn.run(map_test.app, host=map_test.LAUNCH_CONFIG.host, port=map_test.LAUNCH_CONFIG.port, access_log=False)
+    return 0
+
+
 def main():
+    if sys.argv[1:] == ["--serve-backend"]:
+        return serve_backend()
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--port", type=int, default=8021)
     parser.add_argument("--keep", action="store_true", help="leave the data root in place")
@@ -612,7 +919,7 @@ def main():
                   f"{refused.status_code} {refused.text[:200]}")
             check("the refusal leaves the save listed and unchanged", any((s.get("save_id") or s.get("id")) == save_id for s in b.get("/session").json().get("saves", [])))
         b.stop()
-        b = Backend(args.port, data_root, {**FLAGS, "EDEN_WINDOW_DORMANCY": "1"})
+        b = Backend(args.port, data_root, {**FLAGS, "EDEN_WINDOW_DORMANCY": "1"}, shim=args.long_distance is not None)
         b.start()
         b.post("/session/new", {"name": "walk"})
         time.sleep(3.0)
