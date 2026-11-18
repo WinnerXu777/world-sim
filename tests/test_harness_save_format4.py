@@ -39,6 +39,7 @@ class FormatFourFixture(SaveFixture):
         patcher = mock.patch.dict(os.environ, {"EDEN_STRUCTURE_STORE": "1"})
         patcher.start()
         self.addCleanup(patcher.stop)
+        os.environ.pop("EDEN_CALENDAR", None)          # R0.6: the session is the short calendar unless a case sets EDEN_CALENDAR=1 itself
         self.place_human(0, 520.0, 520.0)
         self.run_ticks(30)
         self.assertIn(COORD, self.manager.chunks)
@@ -213,7 +214,7 @@ class CalendarKeyTests(FormatFourFixture):
             payload["world_format"]["calendar"]["day_ticks"] = 6000
             with self.assertRaises(ValueError) as caught:
                 world_snapshot.validate(payload, self.engine)
-            self.assertNotIsInstance(caught.exception, world_snapshot.SaveFormatError)
+            self.assertIsInstance(caught.exception, world_snapshot.SaveFormatError)
             self.assertIn("calendar", str(caught.exception))
 
     async def test_a_format_1_world_gets_a_world_format_only_under_the_flag(self):

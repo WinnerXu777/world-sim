@@ -48,7 +48,7 @@ def segment_blocked(start, end, boxes):
 def _window_part(engine):
     """EDEN_WINDOW=1: the streaming window's wall boxes (integrated chunks plus void boxes), bounds and cached revision, else None."""
     from harness.numerics import window_enabled
-    if window_enabled() or getattr(engine, "_window", None) is not None:
+    if window_enabled():
         return getattr(engine, "_window_contract", None)
     return None
 

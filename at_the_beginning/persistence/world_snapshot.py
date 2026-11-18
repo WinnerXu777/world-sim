@@ -35,6 +35,12 @@ REFUSAL_CALENDAR_LONG_WITHOUT = (
 REFUSAL_CALENDAR_SHORT_WITH = (
     "This save was made with the original short calendar (a game day is 2400 ticks), whose hunger, growth, weather and ageing rates differ from the long calendar (EDEN_CALENDAR=1), so it cannot be continued in this session. Start a new world, or start the game without EDEN_CALENDAR=1 to continue the save. The save file has not been changed."
 )
+REFUSAL_CALENDAR_DIFFERENT = (
+    "This save was made with a long calendar whose game day is {saved_day} ticks and whose year is {saved_year} ticks, "
+    "but this session's long calendar has a game day of {now_day} ticks and a year of {now_year} ticks, so hunger, growth, weather and ageing "
+    "would run at different rates and the save cannot be continued. Use the build the save was made with, or start a new world. "
+    "The save file has not been changed."
+)
 
 
 class SaveFormatError(ValueError):
@@ -79,8 +85,13 @@ def _check_calendar(payload) -> None:
         raise SaveFormatError(REFUSAL_CALENDAR_SHORT_WITH)
     if saved is not None and not _calendar_enabled():
         raise SaveFormatError(REFUSAL_CALENDAR_LONG_WITHOUT)
-    if saved is not None and saved != _calendar_section():
-        raise ValueError(f"This save's calendar {saved} is not this session's {_calendar_section()}; start the game with the calendar the save was made with")
+    if saved is not None:
+        current = _calendar_section()
+        if saved != current:
+            raise SaveFormatError(REFUSAL_CALENDAR_DIFFERENT.format(
+                saved_day=saved["day_ticks"], saved_year=saved["year_ticks"],
+                now_day=current["day_ticks"], now_year=current["year_ticks"],
+            ))
 
 
 def _space_layout(map_name) -> list:
