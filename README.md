@@ -80,7 +80,7 @@ Logs are in `.runtime\play-logs`. If the backend dies while the game is open, th
 
 ### Documentation index
 
-`DOCS.md` lists every design, API, report and audit document with its status (current, plan or historical). The ones to read first: `BACKEND.md` (running the backend, routes, limits), `godot_client_2d/README.md` (client), `1006_map_wire_contract.md`, `1006_commission_api.md`, `1006_god_mode_api.md` (the contracts), `1006_performance_report.md` and `1006_live_smoke_report.md` (evidence).
+`design_docs/README.md` lists every design, API, report and audit document with its status (current, plan or historical). The ones to read first: `BACKEND.md` (running the backend, routes, limits), `godot_client_2d/README.md` (client), `design_docs/contracts/map_wire_contract.md`, `design_docs/contracts/commission_api.md`, `design_docs/contracts/god_mode_api.md` (the contracts), `design_docs/reports/performance_report.md` and `design_docs/reports/live_smoke_report.md` (evidence).
 
 ---
 
@@ -224,7 +224,7 @@ The implementation lives under `at_the_beginning/systems/memory/`, while the per
 
 - `arcade/`
   Legacy Python viewer support.
-- `implement.md`
+- `design_docs/archive/implement.md`
   Backend/frontend architecture notes and serving protocol plan.
 
 ## Quick Start
