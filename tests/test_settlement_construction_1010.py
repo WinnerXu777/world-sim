@@ -499,7 +499,7 @@ class TestSiteViabilityAndProtectedFootprints(unittest.TestCase):
 
     def test_outside_settlement_claim_rejected(self):
         # Settlement claim radius default is 51,200 subunits (200 units)
-        far_cand = make_anchor(0, 0, 32768 + 60000, 32768)
+        far_cand = make_anchor(1, 0, 32768 + 60000 - 65536, 32768)   # same point as sub 92,768 in chunk 0; sub must be 0..65,535 (settlements.make_anchor)
         viable, reason = is_site_candidate_viable(far_cand, self.engine, self.registry, self.settlement_id)
         self.assertFalse(viable)
         self.assertEqual(reason, "outside_settlement_claim")
@@ -933,7 +933,7 @@ class TestPrecisionRollbackInjectedFaults(unittest.TestCase):
 
         # Registry bit-for-bit identical to pre-state
         self.assertEqual(self.registry.export_state(), pre_reg_memento)
-        self.assertEqual(len(self.registry.projects), 0)
+        self.assertEqual(len(self.registry.list_projects()), 0)   # public enumeration API (settlements.list_projects)
 
         # Inventory, tensor, and geo cleaned
         self.assertEqual(total_quantity(inv, "wood_bundle"), 6)

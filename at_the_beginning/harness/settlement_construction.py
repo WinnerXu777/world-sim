@@ -3,7 +3,7 @@
 R6.4 Bounded Settlement Construction Service: Deterministic Site Selection,
 Material-Funded Project Commitment, and Exact Labor Progress.
 
-Design reference: ``1010_settlement_gap.md`` (2026-10-10).
+Design reference: ``design_docs/designs/settlement_gap.md`` (2026-10-10).
 Architectural status:
 - Pure engine service layer; caller-driven execution only.
 - No automatic tick hooks, global allocator registrations, or default action verb flips.
@@ -149,7 +149,7 @@ except ImportError:  # pragma: no cover - package import fallback
         from at_the_beginning.systems.worldgen.rings import ChunkCoord
     except ImportError:
         from collections import namedtuple
-        ChunkCoord = namedtuple("ChunkCoord", ["cx", "cy"])
+        ChunkCoord = namedtuple("ChunkCoord", ["x", "y"])
 
 
 # =============================================================================
@@ -293,7 +293,9 @@ def make_engine_structure_resolver(engine: Any) -> Callable[[str], Optional[Dict
             m = engine.state.m_tensor
             m_type = int(m[slot, cfg.M_TYPE])
             space = int(m[slot, cfg.M_SPACE]) if hasattr(cfg, "M_SPACE") else 0
-            progress = int(round(float(m[slot, cfg.S_BUILD_PROGRESS])))
+            # The registry accepts integer progress. Fractional work below 100
+            # must stay below 100 when presented through the resolver.
+            progress = math.floor(float(m[slot, cfg.S_BUILD_PROGRESS]))
             return {
                 "uid": structure_uid,
                 "type": m_type,
@@ -312,7 +314,7 @@ def make_engine_structure_resolver(engine: Any) -> Callable[[str], Optional[Dict
                     if rec.get("uid") == structure_uid:
                         m_type = int(rec["type"])
                         cols = rec.get("cols", {})
-                        progress = int(round(float(cols.get(cfg.S_BUILD_PROGRESS, 0.0))))
+                        progress = math.floor(float(cols.get(cfg.S_BUILD_PROGRESS, 0.0)))
                         return {
                             "uid": structure_uid,
                             "type": m_type,
@@ -337,7 +339,7 @@ def make_engine_human_resolver(engine: Any) -> Callable[[str], Optional[Dict[str
 
         alive = True
         status = resident.get("status", {})
-        if status.get("deceased") or status.get("dead"):
+        if status.get("alive") is False or status.get("deceased") or status.get("dead"):
             alive = False
 
         h_uids = getattr(engine, "_human_uid_by_slot", [])
@@ -431,13 +433,10 @@ def is_site_candidate_viable(
     if settlement["status"] != "active":
         return False, "settlement_not_active"
 
-    # 1. Claim containment: candidate must lie inside owning settlement claim
-    if not is_point_in_claim(cand, settlement["anchor"], settlement["claim_radius_q"]):
-        return False, "outside_settlement_claim"
-
-    # 1b. Claim exclusivity: candidate must not lie inside another active settlement's claim
+    # Report a foreign claim even when the candidate is also outside its own claim.
     if not allowed_claim_overlap:
-        for other_id, other_rec in registry.list_settlements(status="active"):
+        for other_rec in registry.list_settlements(status="active"):
+            other_id = other_rec["uid"]
             if other_id == settlement_id:
                 continue
             if is_point_in_claim(cand, other_rec["anchor"], other_rec["claim_radius_q"]):
@@ -504,9 +503,10 @@ def is_site_candidate_viable(
     # 5. Dormant structure footprints in StructureStore
     if window is not None and hasattr(window, "structures"):
         for coord, rec_list in window.structures.records.items():
-            bx, by = window._local_origin(coord)
+            bx = (coord.x - origin_cx) * CHUNK_UNITS
+            by = (coord.y - origin_cy) * CHUNK_UNITS
             for rec in rec_list:
-                offset = rec.get("offset", [0.0, 0.0])
+                offset = rec["offset"]
                 dormant_x = bx + float(offset[0])
                 dormant_y = by + float(offset[1])
                 geo = rec.get("geo")
@@ -540,6 +540,9 @@ def is_site_candidate_viable(
             if math.hypot(local_x - float(epos[0]), local_y - float(epos[1])) < (footprint_radius + er):
                 return False, f"authored_entity_overlap:{ent.get('id')}"
 
+    if not is_point_in_claim(cand, settlement["anchor"], settlement["claim_radius_q"]):
+        return False, "outside_settlement_claim"
+
     return True, "viable"
 
 
@@ -569,8 +572,6 @@ def plan_settlement_site(
     - Evaluates candidates in strict (dist_sq_q, cx, cy, sx, sy) order.
     - Returns a self-contained SitePlan holding integer absolute anchor and live local coords.
     """
-    if settlement_id not in registry.records:
-        raise KeyError(f"Settlement not found: {settlement_id!r}")
     settlement = registry.get_settlement(settlement_id)
     if settlement["status"] != "active":
         raise SettlementSiteSelectionError(f"Settlement {settlement_id} is not active")
@@ -582,8 +583,13 @@ def plan_settlement_site(
     # Authoritative human validation
     human_resolver = make_engine_human_resolver(engine)
     h_info = human_resolver(builder_id)
-    if not h_info or not h_info.get("alive"):
-        raise SettlementSiteSelectionError(f"Builder {builder_id} is deceased or unresolved")
+    h_uids = engine._human_uid_by_slot
+    if not h_info or not h_info["alive"] or builder_id not in h_uids:
+        raise SettlementSiteSelectionError(f"Builder {builder_id} is deceased or not live in world tensors")
+    builder = engine.state.h_tensor[h_uids.index(builder_id)]
+    if int(builder[cfg.H_SPACE]) != 0:
+        raise SettlementSiteSelectionError(f"Builder {builder_id} is outside the overworld")
+    bx, by = float(builder[cfg.X]), float(builder[cfg.Y])
 
     # Catalog kind and recipe check
     if building_kind != "personal_shelter":
@@ -604,7 +610,10 @@ def plan_settlement_site(
     # Check registry project cap and settlement open project status
     if registry.get_open_project(settlement_id) is not None:
         raise SettlementConflictError(f"Settlement {settlement_id} already has an open project")
-    if len(registry.projects) >= registry.config.max_projects:
+    if (
+        len(registry.list_projects()) >= registry.config.max_projects
+        or registry.next_project_id >= MAX_ID_COUNTER
+    ):
         raise SettlementCapError("Settlement registry project cap reached")
 
     # Determine window origin and epoch
@@ -625,32 +634,15 @@ def plan_settlement_site(
     if target_anchor is not None:
         center_anchor = validate_anchor(target_anchor, "target_anchor")
     else:
-        # Default to builder position snapped to Q256 lattice
-        h_uids = getattr(engine, "_human_uid_by_slot", [])
-        if builder_id in h_uids:
-            slot = h_uids.index(builder_id)
-            bx = float(engine.state.h_tensor[slot, cfg.X])
-            by = float(engine.state.h_tensor[slot, cfg.Y])
-            center_anchor = quantize_chunk_local_to_anchor(origin_cx, origin_cy, bx, by)
-        else:
+        # An implicit target can fall back to the settlement anchor.
+        center_anchor = quantize_chunk_local_to_anchor(origin_cx, origin_cy, bx, by)
+        if not is_point_in_claim(center_anchor, settlement["anchor"], settlement["claim_radius_q"]):
             center_anchor = settlement["anchor"]
-
-    # Fallback to settlement anchor if center is outside claim
-    if not is_point_in_claim(center_anchor, settlement["anchor"], settlement["claim_radius_q"]):
-        center_anchor = settlement["anchor"]
 
     # Generate lattice candidates
     candidates = generate_lattice_candidates(center_anchor, step_units=step_units, max_candidates=max_candidates)
 
     footprint_r = SHELTER_SCALE
-
-    # Resolve builder position for reach check
-    h_uids = getattr(engine, "_human_uid_by_slot", [])
-    if builder_id in h_uids:
-        b_slot = h_uids.index(builder_id)
-        builder_pos = (float(engine.state.h_tensor[b_slot, cfg.X]), float(engine.state.h_tensor[b_slot, cfg.Y]))
-    else:
-        builder_pos = None
 
     evaluated_count = 0
     for cand in candidates:
@@ -668,10 +660,8 @@ def plan_settlement_site(
         lx, ly = anchor_to_local(cand, origin_cx, origin_cy)
 
         # Reach check
-        if builder_pos is not None:
-            dist_to_builder = math.hypot(lx - builder_pos[0], ly - builder_pos[1])
-            if dist_to_builder > max_reach:
-                continue
+        if math.hypot(lx - bx, ly - by) > max_reach:
+            continue
 
         # Found the first viable candidate in deterministic order!
         cx, cy = cand["chunk"]
@@ -732,9 +722,9 @@ def commit_settlement_project(
        e. Emit audit event.
     3. Rollback on ANY exception after first mutation:
        - Complete restoration of inventory items.
-       - Zeroing of affected tensor rows.
+       - Restoration of the original tensor row.
        - Restoration of entity counts and next UID counters.
-       - Unregistration of map_geo geometry and restoration of geo_version.
+       - Restoration of map_geo geometry, tile ownership, and geo_version.
        - Atomic restoration of SettlementRegistry state.
        - Event ledger cleanup.
     """
@@ -744,6 +734,10 @@ def commit_settlement_project(
     settlement = registry.get_settlement(plan.settlement_id)
     if settlement["status"] != "active":
         raise SettlementPreflightError(f"Settlement {plan.settlement_id} is not active")
+    if plan.building_kind != "personal_shelter" or plan.recipe != RECIPE_PERSONAL_SHELTER:
+        raise SettlementPreflightError("Site plan must use the personal shelter catalog recipe")
+    if plan.footprint_radius != SHELTER_SCALE:
+        raise SettlementPreflightError("Site plan must use the personal shelter footprint")
 
     # 0. Revalidation of plan freshness and revisions
     window = getattr(engine, "_window", None)
@@ -752,6 +746,8 @@ def commit_settlement_project(
         raise SettlementStalePlanError(
             f"Stale plan window epoch: plan had {plan.window_epoch}, current window epoch is {current_epoch}"
         )
+    if plan.world_revision != int(getattr(engine, "_map_state_version", 0)):
+        raise SettlementStalePlanError("Stale plan world revision")
 
     current_tick = int(getattr(engine, "tick", 0))
     if plan.engine_tick > current_tick:
@@ -762,30 +758,54 @@ def commit_settlement_project(
     # Builder living and membership revalidation
     human_resolver = make_engine_human_resolver(engine)
     h_info = human_resolver(plan.builder_id)
-    if not h_info or not h_info.get("alive"):
+    if not h_info or not h_info["alive"]:
         raise SettlementPreflightError(f"Builder {plan.builder_id} is deceased or missing")
+    if plan.builder_id not in settlement["members"]:
+        raise SettlementPreflightError(f"Builder {plan.builder_id} is no longer a settlement member")
 
     h_uids = getattr(engine, "_human_uid_by_slot", [])
     if plan.builder_id not in h_uids:
         raise SettlementPreflightError(f"Builder {plan.builder_id} is not live in world tensors")
-    b_slot = h_uids.index(plan.builder_id)
+    builder = engine.state.h_tensor[h_uids.index(plan.builder_id)]
+    if int(builder[cfg.H_SPACE]) != 0:
+        raise SettlementPreflightError(f"Builder {plan.builder_id} is outside the overworld")
 
     # Reach revalidation
-    origin_cx, origin_cy = plan.origin_chunk
+    origin_cx, origin_cy = window.frame.origin if window is not None else (0, 0)
     lx, ly = anchor_to_local(plan.anchor, origin_cx, origin_cy)
-    bx = float(engine.state.h_tensor[b_slot, cfg.X])
-    by = float(engine.state.h_tensor[b_slot, cfg.Y])
+    bx, by = float(builder[cfg.X]), float(builder[cfg.Y])
     if math.hypot(lx - bx, ly - by) > BUILD_RADIUS:
         raise SettlementPreflightError(
             f"Builder {plan.builder_id} at ({bx:.1f}, {by:.1f}) is out of reach of site ({lx:.1f}, {ly:.1f})"
         )
 
     # Capacity revalidation
-    max_entities = int(getattr(cfg, "MAX_ENTITIES", 1024))
+    m_tensor = engine.state.m_tensor
+    max_entities = min(cfg.MAX_ENTITIES, len(m_tensor), len(engine._entity_uid_by_slot))
     if int(engine._entity_count_ref[0]) >= max_entities:
         raise SettlementCapError("Engine entity capacity reached")
-    if len(registry.projects) >= registry.config.max_projects:
-        raise SettlementCapError("Registry project cap reached")
+    free_slots = torch.where(m_tensor[:max_entities, cfg.M_TYPE] == 0)[0]
+    if not len(free_slots):
+        raise SettlementCapError("Engine has no free entity row")
+    reserved_slot = int(free_slots[0])
+    if engine._entity_uid_by_slot[reserved_slot] is not None or reserved_slot in map_geo.MAP_GEO:
+        raise SettlementPreflightError(f"Free entity row {reserved_slot} still has a UID or geometry")
+
+    open_project = registry.get_open_project(plan.settlement_id)
+    if open_project is None:
+        if (
+            len(registry.list_projects()) >= registry.config.max_projects
+            or registry.next_project_id >= MAX_ID_COUNTER
+        ):
+            raise SettlementCapError("Registry project cap reached")
+    elif (
+        open_project["status"] != "planned"
+        or open_project["builder_id"] != plan.builder_id
+        or open_project["building_kind"] != plan.building_kind
+        or open_project["anchor"] != plan.anchor
+        or open_project["recipe"] != plan.recipe
+    ):
+        raise SettlementConflictError(f"Settlement {plan.settlement_id} already has a different open project")
 
     # Inventory materials balance revalidation
     builder_inv = engine._human_inventory_record(plan.builder_id)
@@ -812,12 +832,16 @@ def commit_settlement_project(
     registry_memento = registry.export_state()
     pre_entity_count = int(engine._entity_count_ref[0])
     pre_next_entity_uid = int(engine._next_entity_uid)
+    pre_row = m_tensor[reserved_slot].clone()
     pre_geo_version = int(map_geo.geo_version)
     pre_events_len = len(engine._pending_events)
+    pre_event_seq = getattr(engine, "_event_seq", None)
+    pre_tiles = None
 
-    allocated_slot = -1
-    created_structure_uid: Optional[str] = None
-    proj_id: Optional[str] = None
+    def create_site_row(*args, **kwargs):
+        # Designation configures the row. The transaction registers geometry later.
+        kwargs["register_geo"] = False
+        return iat.instinct_create_object(*args, **kwargs)
 
     # 2. Atomic mutation execution with complete rollback on exception
     try:
@@ -841,11 +865,11 @@ def commit_settlement_project(
             durability=SHELTER_DURABILITY,
             shelter_cap=SHELTER_CAP,
             build_progress=0.0,
-            create_object_fn=iat.instinct_create_object,
+            create_object_fn=create_site_row,
             device=engine.state.device,
         )
-        if allocated_slot == -1:
-            raise RuntimeError("Failed to allocate entity row in m_tensor")
+        if allocated_slot != reserved_slot:
+            raise RuntimeError("Failed to allocate the reserved entity row")
 
         # 2c. Allocate runtime e_* UID
         created_structure_uid = engine._make_entity_id()
@@ -855,6 +879,7 @@ def commit_settlement_project(
             fault_hook_after_create(allocated_slot)
 
         # 2d. Register geometry in map_geo
+        pre_tiles = map_geo.TILE_TO_ENTITY.copy()
         map_geo.register_entity(
             allocated_slot,
             "circle",
@@ -868,9 +893,8 @@ def commit_settlement_project(
             fault_hook_after_geo(allocated_slot)
 
         # 2e. Update SettlementRegistry
-        open_p = registry.get_open_project(plan.settlement_id)
-        if open_p is not None and open_p["status"] == "planned":
-            proj_id = open_p["id"]
+        if open_project is not None:
+            proj_id = open_project["id"]
         else:
             proj_id = registry.create_project(
                 plan.settlement_id,
@@ -922,14 +946,15 @@ def commit_settlement_project(
         registry.restore_state(registry_memento)
 
         # 2. Restore map_geo geometry
-        if allocated_slot != -1 and allocated_slot in map_geo.MAP_GEO:
-            map_geo.unregister_entity(allocated_slot)
-        map_geo.geo_version = pre_geo_version
+        if pre_tiles is not None:
+            map_geo.MAP_GEO.pop(reserved_slot, None)
+            map_geo.TILE_TO_ENTITY.clear()
+            map_geo.TILE_TO_ENTITY.update(pre_tiles)
+            map_geo.geo_version = pre_geo_version
 
         # 3. Restore entity slot and counters
-        if allocated_slot != -1:
-            engine.state.m_tensor[allocated_slot] = 0.0
-            engine._entity_uid_by_slot[allocated_slot] = None
+        m_tensor[reserved_slot] = pre_row
+        engine._entity_uid_by_slot[reserved_slot] = None
         engine._entity_count_ref[0] = pre_entity_count
         engine._next_entity_uid = pre_next_entity_uid
 
@@ -939,6 +964,8 @@ def commit_settlement_project(
 
         # 5. Restore event ledger
         del engine._pending_events[pre_events_len:]
+        if pre_event_seq is not None:
+            engine._event_seq = pre_event_seq
 
         raise SettlementTransactionError(f"Transaction failed and rolled back cleanly: {exc}") from exc
 
@@ -966,13 +993,13 @@ def advance_settlement_construction(
     - Links completed structure UID into settlement buildings list.
     - Enforces complete rollback on injected fault before completion.
     """
-    if project_id not in registry.projects:
-        raise KeyError(f"Project not found: {project_id!r}")
     proj = registry.get_project(project_id)
     if proj["status"] not in ("funded", "building"):
         raise SettlementPreflightError(
             f"Cannot advance construction on project in status {proj['status']!r}; must be 'funded' or 'building'"
         )
+    if proj["paid"] != proj["recipe"]:
+        raise SettlementPreflightError(f"Project {project_id} has not been fully paid")
 
     settlement = registry.get_settlement(proj["settlement_id"])
     if settlement["status"] != "active":
@@ -992,6 +1019,8 @@ def advance_settlement_construction(
     if worker_id not in h_uids:
         raise SettlementPreflightError(f"Worker {worker_id} is not live in world tensors")
     w_slot = h_uids.index(worker_id)
+    if int(engine.state.h_tensor[w_slot, cfg.H_SPACE]) != 0:
+        raise SettlementPreflightError(f"Worker {worker_id} is outside the overworld")
 
     # Worker stamina check
     stamina = float(engine.state.h_tensor[w_slot, cfg.H_STAMINA])
@@ -1036,12 +1065,17 @@ def advance_settlement_construction(
         raise SettlementPreflightError(f"Worker {worker_id} is out of reach of structure {structure_uid}")
 
     current_tick = int(getattr(engine, "tick", 0))
+    step = BUILD_PROGRESS_PER_HUMAN if progress_step is None else validate_finite_number(progress_step, "progress_step")
+    if step <= 0.0:
+        raise SettlementPreflightError("Construction progress step must be positive")
 
     # Capture mementos for rollback
     pre_stamina = float(engine.state.h_tensor[w_slot, cfg.H_STAMINA])
     pre_progress = float(engine.state.m_tensor[s_slot, cfg.S_BUILD_PROGRESS])
     pre_hp = float(engine.state.m_tensor[s_slot, cfg.M_HP])
     registry_memento = registry.export_state()
+    pre_events_len = len(engine._pending_events)
+    pre_event_seq = getattr(engine, "_event_seq", None)
 
     try:
         # Deduct stamina
@@ -1050,38 +1084,35 @@ def advance_settlement_construction(
         # Calculate progress gain
         skill = float(engine.state.h_tensor[w_slot, cfg.H_SKILL])
         skill_factor = 1.0 + skill / 100.0
-        step_val = progress_step if progress_step is not None else BUILD_PROGRESS_PER_HUMAN
-        gain = step_val * skill_factor
-        new_progress = min(100.0, pre_progress + gain)
+        gain = step * skill_factor
+        row = engine.state.m_tensor[s_slot]
+        row[cfg.S_BUILD_PROGRESS] = min(100.0, pre_progress + gain)
+        new_progress = float(row[cfg.S_BUILD_PROGRESS])
 
         # Update tensor progress and HP
         durability = float(engine.state.m_tensor[s_slot, cfg.S_DURABILITY])
         new_hp = max(1.0, durability * (new_progress / 100.0))
-        engine.state.m_tensor[s_slot, cfg.S_BUILD_PROGRESS] = new_progress
-        engine.state.m_tensor[s_slot, cfg.M_HP] = new_hp
+        row[cfg.M_HP] = new_hp
 
         # Update registry status
         struct_resolver = make_engine_structure_resolver(engine)
-        if proj["status"] == "funded":
+        completed = new_progress >= 100.0
+        if not completed:
             registry.advance_project_work(
                 project_id,
                 current_tick=current_tick,
                 structure_resolver=struct_resolver,
             )
 
-        completed = False
-        if new_progress >= 100.0:
+        else:
             if fault_hook_before_complete is not None:
                 fault_hook_before_complete()
 
-            engine.state.m_tensor[s_slot, cfg.S_BUILD_PROGRESS] = 100.0
-            engine.state.m_tensor[s_slot, cfg.M_HP] = durability
             registry.complete_project(
                 project_id,
                 current_tick=current_tick,
                 structure_resolver=struct_resolver,
             )
-            completed = True
             engine._queue_event(
                 "settlement_shelter_completed",
                 structure_uid,
@@ -1108,6 +1139,9 @@ def advance_settlement_construction(
         engine.state.m_tensor[s_slot, cfg.S_BUILD_PROGRESS] = pre_progress
         engine.state.m_tensor[s_slot, cfg.M_HP] = pre_hp
         registry.restore_state(registry_memento)
+        del engine._pending_events[pre_events_len:]
+        if pre_event_seq is not None:
+            engine._event_seq = pre_event_seq
         raise SettlementTransactionError(f"Construction progress failed and rolled back: {exc}") from exc
 
 
