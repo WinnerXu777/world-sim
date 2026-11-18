@@ -168,3 +168,43 @@ The ten invented species and the other bible fauna (dog, cat, cow, horse, goat, 
 * Not done: creatures do not path around obstacles (they slide along them and stop at a dead end), and a creature stuck against a wall while chasing gives up when the epoch changes.
 * `systems/creatures/frame.py` + two lines in `map_test._export_animal` (flag on only): `animals[].creature = {species, sprite, footprint, state, variant}`; documented in `../contracts/client_contract.md` section 5b. Flag off: no key, no behaviour change.
 * Tests: `tests/test_creatures_collide.py` (19: slide maths, closed room vs door control, blow gate, built wall, flyer/swimmer/land, lake, pocket), `tests/test_creatures_frame.py` (4).
+
+### R0.3 as built: 10-day long-calendar balance (2026-11-18)
+
+* Probe: `tools/creature_balance.py --days 10 --brain kernel --calendar user --seed 1` (`EDEN_CALENDAR=1`: 12,000-tick day, one life-year per day; sheep, deer and wolf on the table brain; 6 residents fed every tick so deaths measure creature pressure; residents do not fight back and a dead resident respawns in place). Each run took about 90 min in a `git archive` extract at a short path. Evidence: `.orchestration/wsim/reports/r03-*`.
+* Baseline (fc69f3c, C:\e4, 12:47-14:20): start sheep 5, deer 6, boar 5, fox 1, no wolves.
+  * Wolves 9 on day 1, 30 on day 10. Sheep 17 -> 9, deer 15 -> 9, boar 5 -> 1.
+  * 551 resident deaths, all on day 9, all from one wolf. With `cooldown=1` it bit every 2 ticks for 15 HP and killed a resident in 14 ticks. Attribution is instrumented: 551 creature, 0 unattributed.
+  * Duel estimate (closed form, not observed): wolf 0.3 s to kill a resident, hunter 5 s to kill a wolf.
+* Causes:
+  * (1) Wolf (and tiger) `cooldown=1` is the legacy value. The kernel reads it as ticks between bites (300 dps).
+  * (2) `animal_tool_reproduce` gives a mature female one birth per life-year, which is one game day under the calendar. Packs grew daily, prey collapsed, and hungry wolves (`humans: "hungry"`) turned on residents.
+* Changes (owner 1118: "thorough fix, do both"):
+  * `table.py` data: wolf and tiger `cooldown` 1 -> 20 (15 dps: 6.7 s to kill a resident vs 5 s for a hunter).
+    * Only the kernel reads `cooldown`. Both rows keep `brain="legacy"`, and `export()` has no behaviour numbers.
+    * 24 was tried first and failed `test_creatures_parity` test_2 (the kernel pack killed 0 of 12 prey in 1,200 ticks). 16 and 20 pass.
+  * `instincts_and_tools.animal_tool_reproduce`: the post-birth recovery is `year_ticks / life_year_ticks` life-years instead of `1.0`.
+    * Legacy: 600/600 = 1.0, so flag-off is bit-identical.
+    * Calendar: 8.0 = one calendar year (8 game days), so one birth per mature female per calendar year.
+    * The decay is unchanged, so the creature store's decay stays consistent.
+  * New `tests/test_animal_birth_calendar.py`: 2 F + 2 OK -> 4 OK.
+* Counting run (fc69f3c + both changes, C:\e5, 14:44-16:08, exit 0):
+
+| day | sheep | deer | wolf | boar | fox | kills | resident deaths |
+|---|---|---|---|---|---|---|---|
+| 1 | 17 | 11 | 9 | 5 | 1 | deer 1 | 0 |
+| 3 | 17 | 17 | 7 | 5 | 1 | - | 0 |
+| 5 | 13 | 17 | 7 | 5 | 1 | - | 0 |
+| 7 | 12 | 14 | 6 | 5 | 0 | - | 0 |
+| 9 | 5 | 24 | 11 | 3 | 1 | - | 0 |
+| 10 | 7 | 20 | 11 | 1 | 0 | - | 0 |
+
+* Verdict per target:
+  * Wolves no longer explode (9 -> 11 over 10 days; baseline 30). Deer grow 11 -> 20.
+  * **Sheep (17 -> 7) and boar (5 -> 1) decline with almost no recorded kills** (1 kill in 10 days). This is believed to be old age (boar life 8-15 life-years = days; sheep `life_exp` is pinned legacy) with births slowed to one per 8 days. Not verified: the probe attributes kills and resident deaths only, not animal deaths of age or hunger. Boar is near extinction by day 10. Open.
+  * The fox count flickers between 1 and 0 (single animal, not explained; open).
+  * Resident deaths: 0 (baseline 551). "Rare" holds; "possible" was not shown in 10 days.
+  * Hunters can win: wolf 6.7 s vs hunter 5 s (estimate, not observed; a live hunter-vs-creature duel was not exercised).
+  * No bug deaths: none in the counting run. The earlier partial-run cases (a wolf death at probe tick 52114, a resident death on day 7) did not recur in either run.
+* Flag off: 4 strict goldens (default, `--resources`, `--spaces`, `--window-hook`) report no drift (11 checkpoints), on fc69f3c and again on 506f6c6 with the three files on top. Singles OK: creatures table 21 / parity 4 / kernel 21 / feed 11, harness_spaces_columns 18, harness_calendar x6.
+* Not done: per-species birth rates or litter sizes, an age/hunger death breakdown in the probe, and a run longer than 10 days.

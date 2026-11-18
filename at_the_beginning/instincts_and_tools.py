@@ -1966,7 +1966,7 @@ def animal_tool_reproduce(ctx: dict, m_tensor: torch.Tensor,
             cy  = float(m_tensor[fi, CY]) + random.uniform(-5, 5)
             animal_born(m_tensor, entity_count_ref, cx, cy, species,
                         device=device)
-            m_tensor[fi, A_COOLDOWN] = 1.0   # 1-year recovery
+            m_tensor[fi, A_COOLDOWN] = _calendar.active().year_ticks / _calendar.active().life_year_ticks   # one calendar year of recovery (legacy: 600/600 = 1.0)
 
     # Decay cooldowns
     if a_mask.any():
