@@ -1,0 +1,106 @@
+{
+  "request": {
+    "job_id": "resident:p1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "background",
+    "deadline_ms": 8000,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "plan_ops",
+      "cases": [
+        {
+          "resident_id": "h_000123",
+          "tick": 5120,
+          "reason": "replan",
+          "needs": {
+            "hunger": 82.0,
+            "thirst": 35.0,
+            "stamina": 61.0,
+            "hp": 90.0,
+            "threat": 0.0,
+            "mood": 55.0
+          },
+          "scene": {
+            "neighbours": 1,
+            "hostiles": 0,
+            "at_home": false,
+            "at_station": false,
+            "is_night": false
+          },
+          "goals": [
+            "keep the family fed"
+          ],
+          "plan": "none",
+          "options": [
+            {
+              "verb": "eat",
+              "params": {
+                "item": "rations"
+              }
+            },
+            {
+              "verb": "rest",
+              "params": {}
+            },
+            {
+              "verb": "go_to_work",
+              "params": {}
+            }
+          ],
+          "plan_ops": [
+            "eat",
+            "rest",
+            "go_to_work"
+          ],
+          "limits": {
+            "max_steps": 3,
+            "min_confidence": 0.6
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "resident:p1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "plan_ops",
+      "responses": [
+        {
+          "packet": {
+            "resident_id": "h_000123",
+            "summary": "mock plan: eat, rest, go_to_work",
+            "confidence": 0.932,
+            "steps": [
+              {
+                "op": "eat",
+                "args": {
+                  "item": "rations"
+                }
+              },
+              {
+                "op": "rest",
+                "args": {}
+              },
+              {
+                "op": "go_to_work",
+                "args": {}
+              }
+            ]
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

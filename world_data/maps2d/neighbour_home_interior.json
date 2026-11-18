@@ -1,0 +1,485 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "neighbour_home_interior",
+  "revision": 1,
+  "tile_size_px": 48,
+  "units_per_tile": 8,
+  "actor_radius": 2.4,
+  "coordinate_system": "top_left_x_right_y_down",
+  "map_kind": "interior",
+  "size_tiles": [
+    12,
+    10
+  ],
+  "layers": [
+    {
+      "name": "floor",
+      "kind": "terrain",
+      "palette": {
+        "1": "terrain/plank_floor.png"
+      },
+      "tiles": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "id": "neighbour_interior:boundary_north",
+      "min": [
+        0,
+        0
+      ],
+      "max": [
+        96,
+        4
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_north"
+    },
+    {
+      "id": "neighbour_interior:boundary_west",
+      "min": [
+        0,
+        4
+      ],
+      "max": [
+        4,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_west"
+    },
+    {
+      "id": "neighbour_interior:boundary_east",
+      "min": [
+        92,
+        4
+      ],
+      "max": [
+        96,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_east"
+    },
+    {
+      "id": "neighbour_interior:boundary_south",
+      "min": [
+        4,
+        76
+      ],
+      "max": [
+        92,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_south"
+    },
+    {
+      "id": "neighbour_interior:boundary_door_left",
+      "min": [
+        4,
+        68
+      ],
+      "max": [
+        43,
+        72
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_door_left"
+    },
+    {
+      "id": "neighbour_interior:boundary_door_right",
+      "min": [
+        53,
+        68
+      ],
+      "max": [
+        92,
+        72
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:wall_art_door_right"
+    },
+    {
+      "id": "neighbour_interior:bed_1_wall",
+      "min": [
+        14,
+        20
+      ],
+      "max": [
+        26,
+        28
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:bed_1"
+    },
+    {
+      "id": "neighbour_interior:bed_2_wall",
+      "min": [
+        42,
+        20
+      ],
+      "max": [
+        54,
+        28
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour_interior:bed_2"
+    },
+    {
+      "id": "neighbour_interior:storage_wall",
+      "min": [
+        72,
+        44
+      ],
+      "max": [
+        80,
+        48
+      ],
+      "height": 2.4,
+      "owner_entity": "neighbour:pantry"
+    }
+  ],
+  "anchors": [
+    {
+      "id": "neighbour_interior:sleep_1",
+      "kind": "sleep",
+      "position": [
+        20,
+        36
+      ]
+    },
+    {
+      "id": "neighbour_interior:bed_use_1",
+      "kind": "work",
+      "position": [
+        20,
+        36
+      ]
+    },
+    {
+      "id": "neighbour_interior:sleep_2",
+      "kind": "sleep",
+      "position": [
+        48,
+        36
+      ]
+    },
+    {
+      "id": "neighbour_interior:bed_use_2",
+      "kind": "work",
+      "position": [
+        48,
+        36
+      ]
+    },
+    {
+      "id": "neighbour_interior:storage_use",
+      "kind": "work",
+      "position": [
+        76,
+        56
+      ]
+    },
+    {
+      "id": "neighbour_interior:spawn",
+      "kind": "spawn",
+      "position": [
+        40,
+        56
+      ]
+    },
+    {
+      "id": "neighbour_interior:talk",
+      "kind": "talk",
+      "position": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "neighbour_interior:entry",
+      "kind": "door",
+      "position": [
+        48,
+        60
+      ]
+    },
+    {
+      "id": "neighbour_interior:exit",
+      "kind": "door",
+      "position": [
+        48,
+        70
+      ]
+    },
+    {
+      "id": "neighbour_interior:door_approach",
+      "kind": "work",
+      "position": [
+        48,
+        62
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "neighbour_interior:wall_art_north",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        48.0,
+        4
+      ],
+      "sprite": "a2/sprites/room-wall-north-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:wall_art_west",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        2.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-side-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:wall_art_east",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        94.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-side-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:wall_art_south",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        48.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-south-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:wall_art_door_left",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        23.5,
+        72
+      ],
+      "sprite": "a2/sprites/room-wall-partition-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:wall_art_door_right",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        72.5,
+        72
+      ],
+      "sprite": "a2/sprites/room-wall-partition-a2-v1.png"
+    },
+    {
+      "id": "neighbour_interior:bed_1",
+      "kind": "bed",
+      "interactive": true,
+      "position": [
+        20,
+        28
+      ],
+      "sprite": "a2/sprites/cot-local-a2-v1.png",
+      "interact_radius": 16,
+      "capacity": 1
+    },
+    {
+      "id": "neighbour_interior:bed_2",
+      "kind": "bed",
+      "interactive": true,
+      "position": [
+        48,
+        28
+      ],
+      "sprite": "a2/sprites/cot-local-a2-v1.png",
+      "interact_radius": 16,
+      "capacity": 1
+    },
+    {
+      "id": "neighbour:pantry",
+      "kind": "storage",
+      "interactive": true,
+      "position": [
+        76,
+        48
+      ],
+      "sprite": "a2/sprites/crate-a2-v1.png",
+      "interact_radius": 16,
+      "stock": {
+        "rations": 14,
+        "crop_bundle": 6
+      }
+    },
+    {
+      "id": "neighbour_interior:exit_door",
+      "kind": "door",
+      "interactive": true,
+      "position": [
+        48,
+        70
+      ],
+      "interact_radius": 10
+    }
+  ],
+  "portals": [
+    {
+      "id": "neighbour_interior:portal_farm",
+      "from_anchor": "neighbour_interior:exit",
+      "to_map": "family_farm",
+      "to_anchor": "neighbour:door_anchor"
+    }
+  ]
+}

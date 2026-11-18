@@ -1,0 +1,31 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "example_smith",
+  "revision": 0,
+  "tile_size_px": 48,
+  "units_per_tile": 8,
+  "actor_radius": 2.4,
+  "coordinate_system": "top_left_x_right_y_down",
+  "size_tiles": [6, 6],
+  "layers": [{
+    "name": "ground", "kind": "terrain",
+    "palette": {"1": "sprites/grass.png"},
+    "tiles": [[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],
+              [1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]
+  }],
+  "walls": [{
+    "id": "example_smith:wall_forge",
+    "min": [16, 8], "max": [32, 16],
+    "owner_entity": "example_smith:forge"
+  }],
+  "anchors": [
+    {"id": "example_smith:spawn", "kind": "spawn", "position": [8, 32]},
+    {"id": "example_smith:work", "kind": "work", "position": [24, 21]},
+    {"id": "example_smith:talk", "kind": "talk", "position": [24, 29]}
+  ],
+  "entities": [{
+    "id": "example_smith:forge", "kind": "forge", "interactive": true,
+    "position": [24, 16], "sprite": "sprites/forge.png"
+  }],
+  "portals": []
+}

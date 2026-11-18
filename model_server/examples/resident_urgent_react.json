@@ -1,0 +1,74 @@
+{
+  "request": {
+    "job_id": "resident:u1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "critical",
+    "deadline_ms": 400,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "urgent_react",
+      "cases": [
+        {
+          "resident_model_mode": "urgent_react",
+          "human_id": "h_000123",
+          "local_state": {
+            "distress": 0.74,
+            "threat": 82.0,
+            "hp": 54.0,
+            "stamina": 33.0
+          },
+          "nearby": {
+            "predator": {
+              "eid": 47,
+              "distance": 6.5
+            }
+          },
+          "primary_goal": {
+            "id": "survive"
+          },
+          "personality_summary": "guarded (caution=0.84)",
+          "escalation": {}
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "resident:u1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "urgent_react",
+      "responses": [
+        {
+          "packet": {
+            "resident_model_mode": "urgent_react",
+            "human_id": "h_000123",
+            "lane": "urgent",
+            "intent": "flee_predator",
+            "reason": "mock urgent_react",
+            "action": {
+              "type": "move_away",
+              "magnitude": 3.0
+            },
+            "confidence": 0.68,
+            "followup": {
+              "goal_review_requested": false,
+              "reaction_ticket_requested": false,
+              "consequence_ticket_requested": false
+            }
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

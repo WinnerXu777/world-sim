@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Legacy Python viewer dependencies.
+arcade
+

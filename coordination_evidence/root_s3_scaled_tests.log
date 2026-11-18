@@ -1,0 +1,78 @@
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+Executing <Task finished name='Task-1' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.197 seconds
+.Executing <Task finished name='Task-5' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.201 seconds
+.Executing <Task finished name='Task-9' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.202 seconds
+.Executing <Task finished name='Task-13' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.211 seconds
+.Executing <Task finished name='Task-17' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.210 seconds
+.Executing <Task finished name='Task-21' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.209 seconds
+.Executing <Task finished name='Task-25' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.214 seconds
+.Executing <Task finished name='Task-29' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.206 seconds
+.Executing <Task finished name='Task-33' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.224 seconds
+.Executing <Task finished name='Task-37' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.229 seconds
+.Executing <Task finished name='Task-41' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.226 seconds
+.Executing <Task finished name='Task-45' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.213 seconds
+.Executing <Task finished name='Task-49' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.207 seconds
+.Executing <Task finished name='Task-53' coro=<NeedsTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_needs.py:30> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.216 seconds
+.
+----------------------------------------------------------------------
+Ran 14 tests in 6.551s
+
+OK
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8d9271c0e2d248bbb2dad72278a5cd71\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready �� 27 entities, device=cpu.

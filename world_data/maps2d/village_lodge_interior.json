@@ -1,0 +1,582 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "village_lodge_interior",
+  "revision": 1,
+  "tile_size_px": 48,
+  "units_per_tile": 8,
+  "actor_radius": 2.4,
+  "coordinate_system": "top_left_x_right_y_down",
+  "map_kind": "interior",
+  "size_tiles": [
+    12,
+    10
+  ],
+  "layers": [
+    {
+      "name": "floor",
+      "kind": "terrain",
+      "palette": {
+        "1": "terrain/plank_floor.png"
+      },
+      "tiles": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "id": "lodge:boundary_north",
+      "min": [
+        0,
+        0
+      ],
+      "max": [
+        96,
+        4
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_north"
+    },
+    {
+      "id": "lodge:boundary_west",
+      "min": [
+        0,
+        4
+      ],
+      "max": [
+        4,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_west"
+    },
+    {
+      "id": "lodge:boundary_east",
+      "min": [
+        92,
+        4
+      ],
+      "max": [
+        96,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_east"
+    },
+    {
+      "id": "lodge:boundary_south",
+      "min": [
+        4,
+        76
+      ],
+      "max": [
+        92,
+        80
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_south"
+    },
+    {
+      "id": "lodge:boundary_door_left",
+      "min": [
+        4,
+        68
+      ],
+      "max": [
+        43,
+        72
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_door_left"
+    },
+    {
+      "id": "lodge:boundary_door_right",
+      "min": [
+        53,
+        68
+      ],
+      "max": [
+        92,
+        72
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:wall_art_door_right"
+    },
+    {
+      "id": "lodge:wall_bed_orrin",
+      "min": [
+        14,
+        20
+      ],
+      "max": [
+        26,
+        28
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:bed_orrin"
+    },
+    {
+      "id": "lodge:wall_bed_iven",
+      "min": [
+        42,
+        20
+      ],
+      "max": [
+        54,
+        28
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:bed_iven"
+    },
+    {
+      "id": "lodge:wall_bed_elsa",
+      "min": [
+        70,
+        20
+      ],
+      "max": [
+        82,
+        28
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:bed_elsa"
+    },
+    {
+      "id": "lodge:wall_storage",
+      "min": [
+        72,
+        44
+      ],
+      "max": [
+        80,
+        48
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:storage"
+    },
+    {
+      "id": "lodge:wall_barrel",
+      "min": [
+        9,
+        44
+      ],
+      "max": [
+        15,
+        48
+      ],
+      "height": 2.4,
+      "owner_entity": "lodge:water_barrel"
+    }
+  ],
+  "anchors": [
+    {
+      "id": "lodge:sleep_orrin",
+      "kind": "sleep",
+      "position": [
+        20,
+        36
+      ]
+    },
+    {
+      "id": "lodge:bed_use_orrin",
+      "kind": "work",
+      "position": [
+        20,
+        36
+      ]
+    },
+    {
+      "id": "lodge:talk_orrin",
+      "kind": "talk",
+      "position": [
+        20,
+        52
+      ]
+    },
+    {
+      "id": "lodge:home_orrin",
+      "kind": "door",
+      "position": [
+        20,
+        60
+      ]
+    },
+    {
+      "id": "lodge:sleep_iven",
+      "kind": "sleep",
+      "position": [
+        48,
+        36
+      ]
+    },
+    {
+      "id": "lodge:bed_use_iven",
+      "kind": "work",
+      "position": [
+        48,
+        36
+      ]
+    },
+    {
+      "id": "lodge:talk_iven",
+      "kind": "talk",
+      "position": [
+        48,
+        52
+      ]
+    },
+    {
+      "id": "lodge:home_iven",
+      "kind": "door",
+      "position": [
+        48,
+        60
+      ]
+    },
+    {
+      "id": "lodge:sleep_elsa",
+      "kind": "sleep",
+      "position": [
+        76,
+        36
+      ]
+    },
+    {
+      "id": "lodge:bed_use_elsa",
+      "kind": "work",
+      "position": [
+        76,
+        36
+      ]
+    },
+    {
+      "id": "lodge:talk_elsa",
+      "kind": "talk",
+      "position": [
+        76,
+        52
+      ]
+    },
+    {
+      "id": "lodge:home_elsa",
+      "kind": "door",
+      "position": [
+        76,
+        60
+      ]
+    },
+    {
+      "id": "lodge:storage_use",
+      "kind": "work",
+      "position": [
+        76,
+        56
+      ]
+    },
+    {
+      "id": "lodge:spawn",
+      "kind": "spawn",
+      "position": [
+        40,
+        56
+      ]
+    },
+    {
+      "id": "lodge:entry",
+      "kind": "door",
+      "position": [
+        48,
+        60
+      ]
+    },
+    {
+      "id": "lodge:exit",
+      "kind": "door",
+      "position": [
+        48,
+        70
+      ]
+    },
+    {
+      "id": "lodge:door_approach",
+      "kind": "work",
+      "position": [
+        48,
+        62
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "lodge:wall_art_north",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        48.0,
+        4
+      ],
+      "sprite": "a2/sprites/room-wall-north-a2-v1.png"
+    },
+    {
+      "id": "lodge:wall_art_west",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        2.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-side-a2-v1.png"
+    },
+    {
+      "id": "lodge:wall_art_east",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        94.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-side-a2-v1.png"
+    },
+    {
+      "id": "lodge:wall_art_south",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        48.0,
+        80
+      ],
+      "sprite": "a2/sprites/room-wall-south-a2-v1.png"
+    },
+    {
+      "id": "lodge:wall_art_door_left",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        23.5,
+        72
+      ],
+      "sprite": "a2/sprites/room-wall-partition-a2-v1.png"
+    },
+    {
+      "id": "lodge:wall_art_door_right",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        72.5,
+        72
+      ],
+      "sprite": "a2/sprites/room-wall-partition-a2-v1.png"
+    },
+    {
+      "id": "lodge:bed_orrin",
+      "kind": "bed",
+      "interactive": true,
+      "position": [
+        20,
+        28
+      ],
+      "sprite": "a2/sprites/cot-local-a2-v1.png",
+      "interact_radius": 16
+    },
+    {
+      "id": "lodge:bed_iven",
+      "kind": "bed",
+      "interactive": true,
+      "position": [
+        48,
+        28
+      ],
+      "sprite": "a2/sprites/cot-local-a2-v1.png",
+      "interact_radius": 16
+    },
+    {
+      "id": "lodge:bed_elsa",
+      "kind": "bed",
+      "interactive": true,
+      "position": [
+        76,
+        28
+      ],
+      "sprite": "a2/sprites/cot-local-a2-v1.png",
+      "interact_radius": 16
+    },
+    {
+      "id": "lodge:storage",
+      "kind": "storage",
+      "interactive": true,
+      "position": [
+        76,
+        48
+      ],
+      "sprite": "a2/sprites/crate-a2-v1.png",
+      "interact_radius": 16
+    },
+    {
+      "id": "lodge:water_barrel",
+      "kind": "decoration",
+      "interactive": false,
+      "position": [
+        12,
+        48
+      ],
+      "sprite": "a2/sprites/barrel-a2-v1.png"
+    },
+    {
+      "id": "lodge:exit_door",
+      "kind": "door",
+      "interactive": true,
+      "position": [
+        48,
+        70
+      ],
+      "interact_radius": 10
+    }
+  ],
+  "portals": [
+    {
+      "id": "lodge:portal_village",
+      "from_anchor": "lodge:exit",
+      "to_map": "starter_village",
+      "to_anchor": "village:door_lodge"
+    }
+  ]
+}

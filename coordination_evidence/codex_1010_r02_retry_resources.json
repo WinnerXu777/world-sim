@@ -1,0 +1,1311 @@
+{
+ "checkpoints": [
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "768d13dfb2d75dfa549ca3e7a98228de325e3dc0fa4df9b13b872a64f53d8a5b",
+   "humans": 8,
+   "m_sha256": "5f3d2b15d2fd27094f9acf362a3404d0b6ee6fd27a9ea2a53b4df329dfb737a2",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 40.0,
+    "hp": 2700.0,
+    "water": 80.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 660.0,
+     "y": 56.0
+    },
+    "Elsa": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 179.2,
+     "y": 160.0
+    },
+    "Iven": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 184.0,
+     "y": 164.8
+    },
+    "Mara": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 184.0,
+     "y": 160.0
+    },
+    "Nessa": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 179.2,
+     "y": 164.8
+    },
+    "Orrin": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 188.8,
+     "y": 164.8
+    },
+    "Rhea": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 184.0,
+     "y": 155.2
+    },
+    "Toma": {
+     "at_anchor": null,
+     "goal": null,
+     "hp": 100.0,
+     "hunger": 0.0,
+     "mood": 80.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.0,
+     "x": 188.8,
+     "y": 160.0
+    }
+   },
+   "tick": 0
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "ab404cc44e52867b69e84d15e411de44c1948214509833d41f4d12104f227fb5",
+   "humans": 8,
+   "m_sha256": "45bcadd360678dc8756d0baeb8243deb9aefdb234a0404b3f75a971ee5a62386",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 40.015,
+    "hp": 2700.0,
+    "water": 80.08
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 659.3753,
+     "y": 55.2191
+    },
+    "Elsa": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 178.6003,
+     "y": 160.8003
+    },
+    "Iven": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 184.2316,
+     "y": 163.8272
+    },
+    "Mara": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 184.9864,
+     "y": 159.8356
+    },
+    "Nessa": {
+     "at_anchor": null,
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 178.5364,
+     "y": 165.5481
+    },
+    "Orrin": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 189.7526,
+     "y": 164.4957
+    },
+    "Rhea": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 183.0004,
+     "y": 155.1714
+    },
+    "Toma": {
+     "at_anchor": null,
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.001,
+     "mood": 80.3,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.001,
+     "x": 188.9961,
+     "y": 160.9806
+    }
+   },
+   "tick": 1
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "da094b7c243ff8bb8ac8a3f4aa2b329c8f55fe134d58a4461d703262b4918c6d",
+   "humans": 8,
+   "m_sha256": "4fe906e6bf14f28247b75f66f643255506404482b2199c6ed06a3a5f47fd2b07",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 40.3,
+    "hp": 2700.0,
+    "water": 81.6
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 647.5061,
+     "y": 40.3826
+    },
+    "Elsa": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 167.2069,
+     "y": 176.0052
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 187.7059,
+     "y": 149.2351
+    },
+    "Mara": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 203.7278,
+     "y": 156.712
+    },
+    "Nessa": {
+     "at_anchor": null,
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 165.9284,
+     "y": 179.7622
+    },
+    "Orrin": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 207.8515,
+     "y": 158.7142
+    },
+    "Rhea": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 164.0082,
+     "y": 154.6287
+    },
+    "Toma": {
+     "at_anchor": null,
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.015,
+     "mood": 86.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.021,
+     "x": 192.7224,
+     "y": 179.6115
+    }
+   },
+   "tick": 20
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "a15fa954a4e147915647291cfe37752c672f15855ac1bd74361bf77ccdea68ad",
+   "humans": 8,
+   "m_sha256": "4228968a59e4d0fc391f400fd8f6262124575fee2688b8c5e7983f9932b7c9d1",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 41.5,
+    "hp": 2700.0,
+    "water": 88.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 645.0073,
+     "y": 37.2592
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 153.4023,
+     "y": 191.3313
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 187.7059,
+     "y": 149.2351
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 278.6934,
+     "y": 144.2178
+    },
+    "Nessa": {
+     "at_anchor": null,
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 105.2434,
+     "y": 230.8299
+    },
+    "Orrin": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 284.0576,
+     "y": 134.3706
+    },
+    "Rhea": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 84.0409,
+     "y": 152.344
+    },
+    "Toma": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.075,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.105,
+     "x": 199.7825,
+     "y": 214.9122
+    }
+   },
+   "tick": 100
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "bd38a5efb78b01768ebdc87891e3e6731780a774ef95f251ff418f890a4a99c9",
+   "humans": 8,
+   "m_sha256": "62eb4c2b88a7149240e9ec4df486b74b5d7969a1fb2b9e4e670c2ddc7e1a5e28",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 44.5,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 645.0073,
+     "y": 37.2592
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 153.4023,
+     "y": 191.3313
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 187.7059,
+     "y": 149.2351
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 278.6934,
+     "y": 144.2178
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 73.3884,
+     "y": 262.6147
+    },
+    "Orrin": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 302.1565,
+     "y": 128.5889
+    },
+    "Rhea": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 73.0453,
+     "y": 152.0299
+    },
+    "Toma": {
+     "at_anchor": null,
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.225,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.315,
+     "x": 145.4404,
+     "y": 240.3476
+    }
+   },
+   "tick": 300
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "26e8ec262498a34cceb54bc2d45472e2a38df30e0b16503bff3d3dda9dfaeedb",
+   "humans": 8,
+   "m_sha256": "5814b2b13a13789c68b217be9bd385617b580ad4290a1ef9d9a8d4f806bd49b3",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 49.0,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 696.2266,
+     "y": 61.9628
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 153.1155,
+     "y": 190.9563
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 187.7537,
+     "y": 147.7358
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 278.5944,
+     "y": 144.0496
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 72.7373,
+     "y": 263.2374
+    },
+    "Orrin": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 303.007,
+     "y": 128.2014
+    },
+    "Rhea": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 981.4257,
+     "y": 197.222
+    },
+    "Toma": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.45,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 0.63,
+     "x": 113.3895,
+     "y": 254.7548
+    }
+   },
+   "tick": 600
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "9cec7b9062b26404a0ec506cb92b75772bfe9303d82d12c6a70fe4459b823d61",
+   "humans": 8,
+   "m_sha256": "bf9c997c3e21cdc277d2da22ebdc108f3b19aeaf67b5d778b94b3c0ffbab73da",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 58.0,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 643.4703,
+     "y": 36.8638
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 153.0254,
+     "y": 190.7632
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 187.8962,
+     "y": 146.634
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 278.4963,
+     "y": 143.9811
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 71.5333,
+     "y": 262.7276
+    },
+    "Orrin": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 302.9001,
+     "y": 128.1484
+    },
+    "Rhea": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 71.4923,
+     "y": 151.8482
+    },
+    "Toma": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 0.9,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 1.26,
+     "x": 112.6089,
+     "y": 255.1768
+    }
+   },
+   "tick": 1200
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "02cb2914826167fa4aa8e60a6b042a0bd138546372e6ee16521bf73c4e85bc63",
+   "humans": 8,
+   "m_sha256": "f214328bd79cec9e13a2e745ed3e862d2b0ef87d46b62b895da02f7583ed7b34",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 67.0,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 696.6946,
+     "y": 62.114
+    },
+    "Elsa": {
+     "at_anchor": null,
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 325.2353,
+     "y": 146.5995
+    },
+    "Iven": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 666.7256,
+     "y": 437.2088
+    },
+    "Mara": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 247.0218,
+     "y": 101.0939
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 73.038,
+     "y": 262.3221
+    },
+    "Orrin": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 641.4258,
+     "y": 437.2222
+    },
+    "Rhea": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 978.7487,
+     "y": 196.5566
+    },
+    "Toma": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.35,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 1.89,
+     "x": 246.7999,
+     "y": 219.5179
+    }
+   },
+   "tick": 1800
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "a5a5aa529761790ee53ab99d4a2d09b10f4f1d275141680842e5ad029613a8a5",
+   "humans": 8,
+   "m_sha256": "2ea0deb27516765a99bed2b4c3e8233adea28a7976edff16b154343cc5fbf0dd",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 75.999,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 696.5067,
+     "y": 62.2133
+    },
+    "Elsa": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 694.7108,
+     "y": 436.0427
+    },
+    "Iven": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 667.0264,
+     "y": 435.6342
+    },
+    "Mara": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 246.8123,
+     "y": 100.9782
+    },
+    "Nessa": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 1006.7151,
+     "y": 197.2261
+    },
+    "Orrin": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 640.1713,
+     "y": 436.3998
+    },
+    "Rhea": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 978.6394,
+     "y": 196.1654
+    },
+    "Toma": {
+     "at_anchor": "sleep",
+     "goal": "sleep",
+     "hp": 100.0,
+     "hunger": 1.8,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 2.52,
+     "x": 247.1081,
+     "y": 218.979
+    }
+   },
+   "tick": 2400
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "4bbb70f98556415dbbaba6e7a187b3fbe628ff18f57527984f2f2a7b2acdfb75",
+   "humans": 8,
+   "m_sha256": "107b95b7e14947fb4df9ca1fdecf5fd6e18e6ce0e1edaaf85b83162df4f9f66b",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 84.999,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 643.7026,
+     "y": 36.9924
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 152.7972,
+     "y": 191.2935
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 188.4325,
+     "y": 146.8278
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 278.9516,
+     "y": 143.5954
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 72.4868,
+     "y": 262.6796
+    },
+    "Orrin": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 303.7826,
+     "y": 129.5969
+    },
+    "Rhea": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 71.4923,
+     "y": 151.8482
+    },
+    "Toma": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.25,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 3.15,
+     "x": 112.7311,
+     "y": 255.3161
+    }
+   },
+   "tick": 3000
+  },
+  {
+   "entities": 27,
+   "entity_types": {
+    "23": 1,
+    "25": 7,
+    "26": 15,
+    "27": 4
+   },
+   "h_sha256": "43f811a32d1441447d33c6db910c24a0a700d1219ed67efb775abfa73237e390",
+   "humans": 8,
+   "m_sha256": "bceb0966b8c900dc057a1305483083a5b8e426145714c261c52f6d7e65c50fdc",
+   "m_sums": {
+    "cx": 13154.0,
+    "cy": 5292.0,
+    "food": 93.999,
+    "hp": 2700.0,
+    "water": 100.0
+   },
+   "residents": {
+    "Brann": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 0,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 642.504,
+     "y": 36.9282
+    },
+    "Elsa": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 4,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 152.7337,
+     "y": 190.9981
+    },
+    "Iven": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 3,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 188.0328,
+     "y": 146.6234
+    },
+    "Mara": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 1,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 278.6249,
+     "y": 143.3346
+    },
+    "Nessa": {
+     "at_anchor": "talk",
+     "goal": "talk",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 7,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 72.9716,
+     "y": 262.8199
+    },
+    "Orrin": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 6,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 303.4812,
+     "y": 129.3052
+    },
+    "Rhea": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 5,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 70.0,
+     "y": 152.0
+    },
+    "Toma": {
+     "at_anchor": "work",
+     "goal": "work",
+     "hp": 100.0,
+     "hunger": 2.7,
+     "mood": 100.0,
+     "slot": 2,
+     "stamina": 100.0,
+     "thirst": 3.78,
+     "x": 112.6712,
+     "y": 255.0301
+    }
+   },
+   "tick": 3600
+  }
+ ],
+ "meta": {
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.5",
+  "torch": "2.11.0+cpu",
+  "wall_seconds": 52.8
+ },
+ "schema": 1,
+ "seed": 1008,
+ "ticks": 3600
+}

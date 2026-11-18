@@ -1,0 +1,415 @@
+{
+  "$defs": {
+    "DecideOption": {
+      "additionalProperties": true,
+      "description": "DecideOption(id: 'str', description: 'str' = '', tags: 'list[str]' = <factory>)",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "DecidePayload": {
+      "additionalProperties": true,
+      "description": "Tier 2 (Clef-style) typed choice: options are already legal; the model returns one probability per option.",
+      "properties": {
+        "options": {
+          "items": {
+            "$ref": "#/$defs/DecideOption"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        },
+        "question_kind": {
+          "enum": [
+            "choice",
+            "yes_no"
+          ],
+          "type": "string"
+        },
+        "resident_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "object"
+        },
+        "tick": {
+          "type": "integer"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "trigger": {
+          "description": "Event type plus causal event id, e.g. commission_request:o_000001.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resident_id",
+        "trigger",
+        "question_kind",
+        "options"
+      ],
+      "type": "object"
+    },
+    "DecideResult": {
+      "additionalProperties": true,
+      "description": "DecideResult(probabilities: 'dict[str, float]')",
+      "properties": {
+        "probabilities": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "description": "Exactly the offered option ids; finite, >= 0, sum 1 (+-1e-3).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "probabilities"
+      ],
+      "type": "object"
+    },
+    "DialoguePayload": {
+      "additionalProperties": true,
+      "description": "Tier 3 ``dialogue``: wording from an already decided outcome (talk_reply, ambient_npc_talk).",
+      "properties": {
+        "cases": {
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "mode": {
+          "enum": [
+            "talk_reply",
+            "ambient_npc_talk"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "cases"
+      ],
+      "type": "object"
+    },
+    "DialogueResult": {
+      "additionalProperties": true,
+      "description": "DialogueResult(mode: 'str', responses: 'list[PacketResponse]')",
+      "properties": {
+        "mode": {
+          "enum": [
+            "talk_reply",
+            "ambient_npc_talk"
+          ],
+          "type": "string"
+        },
+        "responses": {
+          "items": {
+            "$ref": "#/$defs/PacketResponse"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "mode",
+        "responses"
+      ],
+      "type": "object"
+    },
+    "Envelope": {
+      "additionalProperties": true,
+      "description": "Request envelope. ``payload`` depends on ``role`` (DecidePayload, ResidentPayload, DialoguePayload, WorldPayload).",
+      "properties": {
+        "cancel_token": {
+          "default": "",
+          "description": "Opaque group id; POST /v1/cancel {cancel_token} abandons the work.",
+          "type": "string"
+        },
+        "deadline_ms": {
+          "default": 1000,
+          "description": "The caller stops waiting after this; a late answer is discarded.",
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "job_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "payload": {
+          "description": "Role specific body, see the *Payload schemas.",
+          "type": "object"
+        },
+        "priority": {
+          "default": "active",
+          "enum": [
+            "critical",
+            "active",
+            "background"
+          ],
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "decide",
+            "resident",
+            "dialogue",
+            "world"
+          ],
+          "type": "string"
+        },
+        "schema_version": {
+          "default": 1,
+          "type": "integer"
+        },
+        "state_revision": {
+          "description": "Revision of the state the request was built from; echoed back.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "world_epoch": {
+          "description": "Game world epoch; echoed back unchanged. A reply that disagrees is stale.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "role",
+        "world_epoch",
+        "state_revision",
+        "payload"
+      ],
+      "type": "object"
+    },
+    "ErrorBody": {
+      "additionalProperties": true,
+      "description": "ErrorBody(code: 'str', message: 'str' = '', retryable: 'bool' = False)",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "type": "object"
+    },
+    "PacketResponse": {
+      "additionalProperties": true,
+      "description": "One answer per case, in the same order. ``packet`` keeps the legacy structured contract (implement_llm.md).",
+      "properties": {
+        "packet": {
+          "type": "object"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "packet"
+      ],
+      "type": "object"
+    },
+    "ResidentPayload": {
+      "additionalProperties": true,
+      "description": "Tier 3 ``resident``: urgent_react / normal_live (tiny reactions) and resident_reasoning (goals and plans).",
+      "properties": {
+        "cases": {
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "mode": {
+          "enum": [
+            "urgent_react",
+            "normal_live",
+            "resident_reasoning",
+            "plan_ops"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "cases"
+      ],
+      "type": "object"
+    },
+    "ResidentResult": {
+      "additionalProperties": true,
+      "description": "ResidentResult(mode: 'str', responses: 'list[PacketResponse]')",
+      "properties": {
+        "mode": {
+          "enum": [
+            "urgent_react",
+            "normal_live",
+            "resident_reasoning",
+            "plan_ops"
+          ],
+          "type": "string"
+        },
+        "responses": {
+          "items": {
+            "$ref": "#/$defs/PacketResponse"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "mode",
+        "responses"
+      ],
+      "type": "object"
+    },
+    "ResponseEnvelope": {
+      "additionalProperties": true,
+      "description": "Reply envelope. On failure ``ok`` is false, ``error`` is set and ``result`` is empty.",
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorBody"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "job_id": {
+          "type": "string"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "provider_mode": {
+          "enum": [
+            "rules",
+            "mock",
+            "recorded",
+            "live",
+            "fallback"
+          ],
+          "type": "string"
+        },
+        "result": {
+          "type": "object"
+        },
+        "role": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "integer"
+        },
+        "state_revision": {
+          "type": "integer"
+        },
+        "world_epoch": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "role",
+        "world_epoch",
+        "state_revision",
+        "provider_mode",
+        "latency_ms"
+      ],
+      "type": "object"
+    },
+    "WorldPayload": {
+      "additionalProperties": true,
+      "description": "Tier 3 ``world``: god decrees and world operations. The reply is a packet; Python validates and executes it.",
+      "properties": {
+        "cases": {
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "mode": {
+          "enum": [
+            "decree",
+            "director"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "cases"
+      ],
+      "type": "object"
+    },
+    "WorldResult": {
+      "additionalProperties": true,
+      "description": "WorldResult(mode: 'str', responses: 'list[PacketResponse]')",
+      "properties": {
+        "mode": {
+          "enum": [
+            "decree",
+            "director"
+          ],
+          "type": "string"
+        },
+        "responses": {
+          "items": {
+            "$ref": "#/$defs/PacketResponse"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "mode",
+        "responses"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "eden-model-contract-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Eden model plane wire contract",
+  "x-schema-version": 1
+}

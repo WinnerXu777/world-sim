@@ -1,0 +1,63 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "tiny_village",
+  "revision": 1,
+  "tile_size_px": 48,
+  "units_per_tile": 2.0,
+  "actor_radius": 0.5,
+  "coordinate_system": "top_left_x_right_y_down",
+  "size_tiles": [10, 8],
+  "layers": [
+    {
+      "name": "ground",
+      "kind": "terrain",
+      "palette": {"1": "sprites/grass.png", "2": "sprites/path.png"},
+      "tiles": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      ]
+    },
+    {
+      "name": "buildings",
+      "kind": "footprint",
+      "palette": {"1": "sprites/floor.png"},
+      "tiles": [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      ]
+    }
+  ],
+  "walls": [
+    {"id": "wall_house_back", "min": [6, 2], "max": [14, 3]},
+    {"id": "wall_house_left", "min": [6, 3], "max": [7, 9]},
+    {"id": "wall_house_right", "min": [13, 3], "max": [14, 9]},
+    {"id": "wall_house_front_left", "min": [7, 8], "max": [9.5, 9]},
+    {"id": "wall_house_front_right", "min": [11.5, 8], "max": [13, 9]}
+  ],
+  "anchors": [
+    {"id": "spawn_start", "kind": "spawn", "position": [3, 12]},
+    {"id": "door_front", "kind": "door", "position": [10.5, 10]},
+    {"id": "work_forge", "kind": "work", "position": [8.5, 4.8]},
+    {"id": "sleep_bed", "kind": "sleep", "position": [10, 6]}
+  ],
+  "entities": [
+    {"id": "forge_01", "kind": "forge", "interactive": true, "position": [8.5, 3.6], "sprite": "sprites/forge.png", "interact_radius": 3.0},
+    {"id": "chest_01", "kind": "chest", "interactive": true, "position": [12, 4.5], "sprite": "sprites/chest.png"},
+    {"id": "tree_deco_01", "kind": "tree", "interactive": false, "position": [3, 4], "sprite": "sprites/tree.png"}
+  ],
+  "portals": [
+    {"id": "portal_house", "from_anchor": "door_front", "to_map": "tiny_interior", "to_anchor": "interior_entry"}
+  ]
+}

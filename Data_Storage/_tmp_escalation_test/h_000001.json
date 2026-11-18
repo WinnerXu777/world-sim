@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "id": "h_000001",
+  "profile": {
+    "name": "Adam-1",
+    "created_tick": 120,
+    "sex": 0,
+    "life_exp": 70.0,
+    "personality": {
+      "archetype": "coward",
+      "top_traits": [
+        "caution",
+        "fearfulness"
+      ],
+      "aggression": 0.206,
+      "caution": 0.845,
+      "vengefulness": 0.237,
+      "greed": 0.431,
+      "loyalty": 0.554,
+      "mercy": 0.487,
+      "pride": 0.418,
+      "fearfulness": 0.833,
+      "curiosity": 0.508,
+      "ambition": 0.223,
+      "deceitfulness": 0.318,
+      "protectiveness": 0.573,
+      "sociability": 0.553,
+      "discipline": 0.562,
+      "resourcefulness": 0.57,
+      "resolve": 0.239
+    }
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "seek_food",
+    "last_decision_tick": 120,
+    "last_reason": "hunger is outranking other needs this tick"
+  },
+  "relationships": {
+    "h_000002": {
+      "kind": "tribe_mate",
+      "closeness": 0.05,
+      "last_seen_tick": 120,
+      "tags": [
+        "tribe_mate"
+      ],
+      "tag_meta": {
+        "tribe_mate": {
+          "last_seen_tick": 120,
+          "memory_class": "relationship",
+          "salience": 0.55,
+          "created_tick": 120,
+          "last_reinforced_tick": 120,
+          "expires_tick": 1320,
+          "permanent": false,
+          "archived": false
+        }
+      }
+    }
+  },
+  "personality": {
+    "schema_version": 1,
+    "archetype": "coward",
+    "birth_seed": 1514516891,
+    "traits": {
+      "aggression": 0.206,
+      "caution": 0.845,
+      "vengefulness": 0.237,
+      "greed": 0.431,
+      "loyalty": 0.554,
+      "mercy": 0.487,
+      "pride": 0.418,
+      "fearfulness": 0.833,
+      "curiosity": 0.508,
+      "ambition": 0.223,
+      "deceitfulness": 0.318,
+      "protectiveness": 0.573,
+      "sociability": 0.553,
+      "discipline": 0.562,
+      "resourcefulness": 0.57,
+      "resolve": 0.239
+    },
+    "top_traits": [
+      "caution",
+      "fearfulness"
+    ]
+  },
+  "pressures": {
+    "fear_pressure": 0.311,
+    "vengeance_pressure": 0.082,
+    "greed_pressure": 0.485,
+    "loyalty_pressure": 0.412,
+    "security_pressure": 0.576,
+    "status_pressure": 0.296,
+    "curiosity_pressure": 0.456,
+    "resource_pressure": 0.714
+  },
+  "goals": [
+    {
+      "schema_version": 1,
+      "id": "g_0001",
+      "kind": "guard_home",
+      "priority": 0.694,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "seed",
+      "plan_hint": "",
+      "confidence": 0.5,
+      "created_tick": 120,
+      "last_review_tick": 120,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    }
+  ],
+  "goal_state": {
+    "schema_version": 1,
+    "goal_counter": 1,
+    "last_review_tick": 120,
+    "last_review_source": "seed",
+    "review_needed": false,
+    "review_reason": "",
+    "next_review_tick": 601
+  },
+  "memory": {
+    "recent_events": [
+      {
+        "tick": 120,
+        "kind": "decision",
+        "intent": "seek_food",
+        "reason": "hunger is outranking other needs this tick",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 120,
+        "last_reinforced_tick": 120,
+        "expires_tick": 1920,
+        "permanent": false,
+        "archived": false
+      }
+    ],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [
+      {
+        "tick": 120,
+        "intent": "seek_food",
+        "reason": "hunger is outranking other needs this tick",
+        "action": {
+          "type": "move_toward",
+          "target_eid": -1,
+          "magnitude": 6.300000000000001
+        },
+        "distress": 1.69
+      }
+    ],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 120,
+    "slot": 0,
+    "x": 100.0,
+    "y": 100.0,
+    "sex": 0,
+    "age": 0.0,
+    "hp": 80.0,
+    "hunger": 99.0,
+    "thirst": 20.0,
+    "threat": 30.0,
+    "mood": 60.0,
+    "stamina": 50.0,
+    "infection": 0.0,
+    "tribe": 1.0,
+    "escalated": false
+  },
+  "runtime": {
+    "slot": 0,
+    "alive": true,
+    "last_seen_tick": 120
+  }
+}

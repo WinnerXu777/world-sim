@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "id": "h_000002",
+  "profile": {
+    "name": "Mira-1",
+    "created_tick": 100,
+    "sex": 1,
+    "life_exp": 79.0,
+    "personality": {
+      "archetype": "avenger",
+      "top_traits": [
+        "vengefulness",
+        "resolve",
+        "pride"
+      ],
+      "aggression": 0.67,
+      "caution": 0.539,
+      "vengefulness": 0.903,
+      "greed": 0.403,
+      "loyalty": 0.478,
+      "mercy": 0.276,
+      "pride": 0.678,
+      "fearfulness": 0.277,
+      "curiosity": 0.42,
+      "ambition": 0.485,
+      "deceitfulness": 0.244,
+      "protectiveness": 0.573,
+      "sociability": 0.427,
+      "discipline": 0.542,
+      "resourcefulness": 0.594,
+      "resolve": 0.761
+    }
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "observe",
+    "last_decision_tick": 100,
+    "last_reason": "created"
+  },
+  "relationships": {},
+  "personality": {
+    "schema_version": 1,
+    "archetype": "avenger",
+    "birth_seed": 1868293239,
+    "traits": {
+      "aggression": 0.67,
+      "caution": 0.539,
+      "vengefulness": 0.903,
+      "greed": 0.403,
+      "loyalty": 0.478,
+      "mercy": 0.276,
+      "pride": 0.678,
+      "fearfulness": 0.277,
+      "curiosity": 0.42,
+      "ambition": 0.485,
+      "deceitfulness": 0.244,
+      "protectiveness": 0.573,
+      "sociability": 0.427,
+      "discipline": 0.542,
+      "resourcefulness": 0.594,
+      "resolve": 0.761
+    },
+    "top_traits": [
+      "vengefulness",
+      "resolve",
+      "pride"
+    ]
+  },
+  "pressures": {
+    "fear_pressure": 0.193,
+    "vengeance_pressure": 0.346,
+    "greed_pressure": 0.536,
+    "loyalty_pressure": 0.351,
+    "security_pressure": 0.348,
+    "status_pressure": 0.469,
+    "curiosity_pressure": 0.437,
+    "resource_pressure": 0.582
+  },
+  "goals": [
+    {
+      "schema_version": 1,
+      "id": "g_0001",
+      "kind": "guard_home",
+      "priority": 0.5,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "seed",
+      "plan_hint": "",
+      "confidence": 0.5,
+      "created_tick": 100,
+      "last_review_tick": 100,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    }
+  ],
+  "goal_state": {
+    "schema_version": 1,
+    "goal_counter": 1,
+    "last_review_tick": 100,
+    "last_review_source": "seed",
+    "review_needed": false,
+    "review_reason": "",
+    "next_review_tick": 517
+  },
+  "memory": {
+    "recent_events": [],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 100,
+    "slot": 0,
+    "x": 40.0,
+    "y": 60.0,
+    "sex": 1,
+    "age": 0.0,
+    "hp": 70.0,
+    "hunger": 55.0,
+    "thirst": 25.0,
+    "threat": 5.0,
+    "mood": 48.0,
+    "stamina": 44.0,
+    "infection": 0.0,
+    "tribe": 2.0,
+    "escalated": false
+  },
+  "runtime": {
+    "slot": 0,
+    "alive": true,
+    "last_seen_tick": 100
+  }
+}

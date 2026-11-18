@@ -1,0 +1,29 @@
+{
+  "base": "b555adc33776696f529ae9e4047c88acdb42f408",
+  "archive": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.tmp\\r63_after_final",
+  "phase": "after_final",
+  "commands": [
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "-m",
+      "model_server.s1_commons",
+      "--seeds",
+      "1008,1,2,3",
+      "--repeat",
+      "--ticks",
+      "4000",
+      "--json",
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\r63_after_final.json"
+    ]
+  ],
+  "source_sha256": {
+    "model_server/s1_commons.py": "8d29678ebba6e1eacbab25f276214cf73b36b3d05d28081758f17fb2fbd6a3f3",
+    "at_the_beginning/systems/actions/market_day.py": "eaf632bd36de1800d92dbadb44b5aa4555aba0e30aefe5eda46b79435b3f0911",
+    "at_the_beginning/systems/actions/ladder.py": "534474d080a822251714f903a862fa2a75fd6d929068b1d8918be5e3c11ee6f9",
+    "at_the_beginning/systems/actions/resource_verbs.py": "213fd5e65d940a11f8ce763177c146fc64db8ef0983acf1164620ac9766c4793",
+    "at_the_beginning/systems/actions/economy_verbs.py": "759e80b4b3fbbd2180c4977b892e278d2957ed8de30ce22ad232af0be97d6cc6",
+    "at_the_beginning/systems/affordance/predicates.py": "409bbad0a34f057d8de19ea420612654614181f322010143ac0cda7585e2f121",
+    "at_the_beginning/systems/affordance/economy_predicates.py": "e4bf1bd314b6eeecd1e56122795cddf3a8eafea18b8c239b13beb6fa77d576b6",
+    "tests/test_economy_balance.py": "108209f34c5fa254aaff9dc5fdba22a16bc2129c08e10d3bef61be2fa3bec012"
+  }
+}

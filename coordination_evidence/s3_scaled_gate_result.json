@@ -1,0 +1,73 @@
+{
+  "base": "08338f3314885306d8dbc83f82470487ddbe972b",
+  "snapshot": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.tmp\\s3-bed4afa9",
+  "source_sha256": {
+    "at_the_beginning/harness/needs.py": "8478cb060a7deab9d3ef63957df981b09b036fde270afd822fdd78b88f7c87ca",
+    "tests/test_harness_needs.py": "f9ca165a4e9b46fef1ca554ee35bc83fcad81e9a0d94d7fa48e68ed0c50f3f21"
+  },
+  "scope": "Current committed base plus S3 owned files only; excludes unrelated uncommitted peers, no full integration or timing claim",
+  "checks": [
+    {
+      "mode": "off",
+      "flags": [],
+      "exit_code": 0,
+      "seconds": 80.07
+    },
+    {
+      "mode": "off",
+      "flags": [
+        "--resources"
+      ],
+      "exit_code": 0,
+      "seconds": 83.77
+    },
+    {
+      "mode": "off",
+      "flags": [
+        "--spaces"
+      ],
+      "exit_code": 0,
+      "seconds": 69.06
+    },
+    {
+      "mode": "off",
+      "flags": [
+        "--window-hook"
+      ],
+      "exit_code": 0,
+      "seconds": 60.31
+    },
+    {
+      "mode": "on",
+      "flags": [],
+      "exit_code": 0,
+      "seconds": 50.65
+    },
+    {
+      "mode": "on",
+      "flags": [
+        "--resources"
+      ],
+      "exit_code": 0,
+      "seconds": 56.33
+    },
+    {
+      "mode": "on",
+      "flags": [
+        "--spaces"
+      ],
+      "exit_code": 0,
+      "seconds": 52.06
+    },
+    {
+      "mode": "on",
+      "flags": [
+        "--window-hook"
+      ],
+      "exit_code": 0,
+      "seconds": 58.7
+    }
+  ],
+  "complete": true,
+  "live_source_unchanged": true
+}

@@ -1,0 +1,9938 @@
+{
+ "rows": [
+  {
+   "seed": 1008,
+   "digest": "2fbbeae222e2dbd0",
+   "dead": 0,
+   "peak": 90.0,
+   "thefts": 1,
+   "cases": 1,
+   "levied": 1,
+   "robbed": 0,
+   "fought_off": 0,
+   "arrested": 0,
+   "loans": 2,
+   "repaid": 1,
+   "defaulted": 1,
+   "hired": 8,
+   "paid": 6,
+   "sales": 2,
+   "pass": true,
+   "ok_by_rung": {
+    "forage": 35,
+    "work": 42,
+    "buy": 2,
+    "trade": 21,
+    "beg": 20,
+    "borrow": 3,
+    "steal": 1,
+    "rob": 0
+   }
+  },
+  {
+   "seed": 1,
+   "digest": "506087d6cd7c03b7",
+   "dead": 0,
+   "peak": 90.0,
+   "thefts": 0,
+   "cases": 0,
+   "levied": 0,
+   "robbed": 0,
+   "fought_off": 0,
+   "arrested": 0,
+   "loans": 2,
+   "repaid": 1,
+   "defaulted": 1,
+   "hired": 9,
+   "paid": 7,
+   "sales": 2,
+   "pass": true,
+   "ok_by_rung": {
+    "forage": 38,
+    "work": 53,
+    "buy": 2,
+    "trade": 5,
+    "beg": 26,
+    "borrow": 6,
+    "steal": 0,
+    "rob": 0
+   }
+  },
+  {
+   "seed": 2,
+   "digest": "0c1caa5f808ab31f",
+   "dead": 0,
+   "peak": 90.0,
+   "thefts": 1,
+   "cases": 1,
+   "levied": 1,
+   "robbed": 0,
+   "fought_off": 0,
+   "arrested": 0,
+   "loans": 2,
+   "repaid": 1,
+   "defaulted": 1,
+   "hired": 8,
+   "paid": 6,
+   "sales": 2,
+   "pass": true,
+   "ok_by_rung": {
+    "forage": 37,
+    "work": 41,
+    "buy": 2,
+    "trade": 12,
+    "beg": 21,
+    "borrow": 11,
+    "steal": 1,
+    "rob": 0
+   }
+  },
+  {
+   "seed": 3,
+   "digest": "a346757a68219f68",
+   "dead": 0,
+   "peak": 90.0,
+   "thefts": 1,
+   "cases": 1,
+   "levied": 1,
+   "robbed": 0,
+   "fought_off": 0,
+   "arrested": 0,
+   "loans": 2,
+   "repaid": 1,
+   "defaulted": 1,
+   "hired": 10,
+   "paid": 8,
+   "sales": 2,
+   "pass": true,
+   "ok_by_rung": {
+    "forage": 28,
+    "work": 43,
+    "buy": 2,
+    "trade": 15,
+    "beg": 20,
+    "borrow": 3,
+    "steal": 1,
+    "rob": 0
+   }
+  },
+  {
+   "seed": 1008,
+   "digest": "2fbbeae222e2dbd0",
+   "dead": 0,
+   "peak": 90.0,
+   "thefts": 1,
+   "cases": 1,
+   "levied": 1,
+   "robbed": 0,
+   "fought_off": 0,
+   "arrested": 0,
+   "loans": 2,
+   "repaid": 1,
+   "defaulted": 1,
+   "hired": 8,
+   "paid": 6,
+   "sales": 2,
+   "pass": true,
+   "ok_by_rung": {
+    "forage": 35,
+    "work": 42,
+    "buy": 2,
+    "trade": 21,
+    "beg": 20,
+    "borrow": 3,
+    "steal": 1,
+    "rob": 0
+   }
+  }
+ ],
+ "runs": [
+  {
+   "seed": 1008,
+   "ticks": 4000,
+   "start": {
+    "loans": {
+     "family_mara->neighbour_orrin": "loan_00001",
+     "family_tomas->neighbour_elsa": "loan_00002"
+    },
+    "removed": {
+     "family:pantry:rations": 6
+    },
+    "stall": "neighbour:pantry",
+    "keeper": "neighbour_orrin",
+    "guard": "neighbour_elsa"
+   },
+   "peak_hunger": {
+    "family_mara": 54.5,
+    "family_tomas": 90.0,
+    "family_lina": 84.9,
+    "neighbour_orrin": 41.4,
+    "neighbour_elsa": 72.8
+   },
+   "dead_at": {},
+   "thefts": 1,
+   "cases": [
+    {
+     "id": "case_00001",
+     "thief": "family_tomas",
+     "victim": "neighbour_orrin",
+     "authority": "neighbour_elsa",
+     "status": "closed",
+     "outcome": "part_paid"
+    }
+   ],
+   "damages_levied": 1,
+   "loans": {
+    "opened": 2,
+    "repaid": 1,
+    "overdue": 1,
+    "defaulted": 1,
+    "rows": [
+     {
+      "id": "loan_00001",
+      "lender": "neighbour_orrin",
+      "borrower": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "repaid",
+      "owed": 0.0
+     },
+     {
+      "id": "loan_00002",
+      "lender": "neighbour_elsa",
+      "borrower": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "defaulted",
+      "owed": 3.0
+     }
+    ]
+   },
+   "wages": {
+    "hired": 8,
+    "paid": 6,
+    "lapsed": 2,
+    "rows": [
+     {
+      "id": "job_00001",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00002",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00003",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00004",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00005",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00006",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00007",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00008",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     }
+    ]
+   },
+   "stall": {
+    "sales": 2,
+    "ask_end": 12,
+    "factors": [
+     {
+      "day": 1,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.625,
+       "rations": 0.7273,
+       "wood_bundle": 0.7692
+      }
+     },
+     {
+      "day": 2,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.5,
+       "rations": 1.8321,
+       "wood_bundle": 0.6623
+      }
+     },
+     {
+      "day": 3,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.7227,
+       "rations": 1.3534,
+       "wood_bundle": 0.6035
+      }
+     },
+     {
+      "day": 4,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8979,
+       "rations": 1.448,
+       "wood_bundle": 0.5682
+      }
+     },
+     {
+      "day": 5,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0172,
+       "rations": 2.408,
+       "wood_bundle": 0.5459
+      }
+     },
+     {
+      "day": 6,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0125,
+       "rations": 3.0,
+       "wood_bundle": 0.5313
+      }
+     }
+    ]
+   },
+   "ladder_counts": {
+    "repay:errand": 1,
+    "forage:errand": 17,
+    "work:errand": 33,
+    "forage:ok": 35,
+    "repay:ok": 1,
+    "work:ok": 42,
+    "buy:out_of_stock": 14,
+    "beg:ok": 20,
+    "beg:errand": 15,
+    "work:illegal:employer_cannot_pay": 2,
+    "trade:errand": 11,
+    "trade:ok": 21,
+    "buy:errand": 2,
+    "buy:ok": 2,
+    "buy:cannot_afford": 6,
+    "borrow:ok": 3,
+    "steal:errand": 1,
+    "steal:illegal:watched": 10,
+    "steal:ok": 1,
+    "report:errand": 1,
+    "report:ok": 1,
+    "enforce:errand": 1,
+    "enforce:ok": 1
+   },
+   "answers": {
+    "work_for:hire": 8,
+    "work_for:refuse_staffed": 1,
+    "request_item:give": 5,
+    "work_for:refuse_no_wage": 22,
+    "offer_trade:refuse_no_item": 21,
+    "request_item:refuse_no_item": 14,
+    "work_for:refuse_defaulter": 4,
+    "borrow_item:refuse_defaulter": 1,
+    "borrow_item:refuse_stranger": 2,
+    "report_theft:accept": 1,
+    "request_item:refuse_thief": 1,
+    "work_for:refuse_thief": 1
+   },
+   "events": {
+    "fetched_item": 18,
+    "ate": 25,
+    "debt_paid": 1,
+    "work_asked": 36,
+    "item_requested": 20,
+    "gave_item": 5,
+    "wage_paid": 6,
+    "trade_offered": 21,
+    "loan_overdue": 1,
+    "chatted": 4,
+    "loan_defaulted": 1,
+    "bought": 2,
+    "loan_asked": 3,
+    "theft": 1,
+    "loss_discovered": 1,
+    "gossiped": 4,
+    "theft_reported": 1,
+    "damages_levied": 1,
+    "warned": 1
+   },
+   "reputation": {
+    "theft": 1,
+    "discovered": 1,
+    "opinion_drop": 2,
+    "gossip": 4,
+    "confront": 1
+   },
+   "items_start": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 6,
+    "rations": 20,
+    "wood_bundle": 3
+   },
+   "items_end": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 1,
+    "wood_bundle": 3
+   },
+   "silent_starvation": [],
+   "stuck_errands": [],
+   "late_actions": 82,
+   "errors": 0,
+   "last_action": {
+    "neighbour_elsa": 3856,
+    "family_mara": 3638,
+    "family_tomas": 3839,
+    "family_lina": 3848,
+    "neighbour_orrin": 3704
+   },
+   "timeline": [
+    {
+     "tick": 1,
+     "residents": {
+      "family_mara": {
+       "x": 57.0,
+       "y": 88.0,
+       "hunger": 40.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 60.6,
+       "y": 89.0,
+       "hunger": 80.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.1,
+       "y": 92.4,
+       "hunger": 80.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.1,
+       "y": 89.0,
+       "hunger": 0.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 146.2,
+       "y": 88.9,
+       "hunger": 70.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 101,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 45.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 85.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 111.3,
+       "y": 114.2,
+       "hunger": 65.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 5.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 655.0,
+       "y": 403.5,
+       "hunger": 15.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 201,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 50.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 134.0,
+       "y": 117.9,
+       "hunger": 65.05,
+       "thirst": 14.07,
+       "hp": 98.3
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 50.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 10.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 301,
+     "residents": {
+      "family_mara": {
+       "x": 120.4,
+       "y": 117.8,
+       "hunger": 35.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 50.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 55.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 401,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.9,
+       "hunger": 40.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 55.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 60.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 501,
+     "residents": {
+      "family_mara": {
+       "x": 133.8,
+       "y": 117.6,
+       "hunger": 20.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 122.9,
+       "y": 119.8,
+       "hunger": 35.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 660.7,
+       "y": 401.3,
+       "hunger": 40.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.5,
+       "y": 118.8,
+       "hunger": 25.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 658.8,
+       "y": 402.1,
+       "hunger": 10.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 601,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 25.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.4,
+       "y": 118.7,
+       "hunger": 40.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 156.3,
+       "y": 118.2,
+       "hunger": 45.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.4,
+       "y": 118.4,
+       "hunger": 30.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 15.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 701,
+     "residents": {
+      "family_mara": {
+       "x": 50.9,
+       "y": 113.2,
+       "hunger": 30.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.4,
+       "y": 118.7,
+       "hunger": 45.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.2,
+       "y": 119.1,
+       "hunger": 50.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 15.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 801,
+     "residents": {
+      "family_mara": {
+       "x": 150.8,
+       "y": 118.7,
+       "hunger": 10.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.6,
+       "y": 122.6,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 160.2,
+       "y": 119.0,
+       "hunger": 30.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 901,
+     "residents": {
+      "family_mara": {
+       "x": 66.7,
+       "y": 120.7,
+       "hunger": 15.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 38.9,
+       "y": 135.0,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 118.4,
+       "y": 115.3,
+       "hunger": 35.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.5,
+       "y": 118.3,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1001,
+     "residents": {
+      "family_mara": {
+       "x": 49.1,
+       "y": 112.8,
+       "hunger": 20.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 124.1,
+       "y": 87.6,
+       "hunger": 35.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 44.6,
+       "y": 107.7,
+       "hunger": 40.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.6,
+       "y": 100.6,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1101,
+     "residents": {
+      "family_mara": {
+       "x": 49.1,
+       "y": 112.8,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 142.3,
+       "y": 116.6,
+       "hunger": 40.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.5,
+       "y": 82.4,
+       "hunger": 45.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 136.8,
+       "y": 90.3,
+       "hunger": 15.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1201,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 112.3,
+       "hunger": 10.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 64.1,
+       "y": 130.2,
+       "hunger": 20.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 104.9,
+       "y": 113.4,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 20.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1301,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 15.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 25.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 674.1,
+       "y": 36.9,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1401,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 40.0,
+       "hunger": 30.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.3,
+       "y": 80.6,
+       "hunger": 35.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 30.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 15.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1501,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 25.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 120.0,
+       "y": 80.0,
+       "hunger": 10.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 122.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 15.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 20.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1601,
+     "residents": {
+      "family_mara": {
+       "x": 620.6,
+       "y": 38.2,
+       "hunger": 30.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 76.0,
+       "y": 80.0,
+       "hunger": 15.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 668.3,
+       "y": 40.7,
+       "hunger": 25.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 20.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 25.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1701,
+     "residents": {
+      "family_mara": {
+       "x": 105.2,
+       "y": 80.7,
+       "hunger": 35.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 649.9,
+       "y": 45.3,
+       "hunger": 20.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 30.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 25.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 30.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1801,
+     "residents": {
+      "family_mara": {
+       "x": 630.8,
+       "y": 384.6,
+       "hunger": 40.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 649.4,
+       "y": 46.3,
+       "hunger": 25.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 30.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 15.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1901,
+     "residents": {
+      "family_mara": {
+       "x": 63.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.2,
+       "y": 37.4,
+       "hunger": 30.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.7,
+       "y": 81.0,
+       "hunger": 15.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 10.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 20.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2001,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 25.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 20.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 25.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2101,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 30.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 671.3,
+       "y": 394.5,
+       "hunger": 40.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 25.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 20.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 30.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2201,
+     "residents": {
+      "family_mara": {
+       "x": 107.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 66.0,
+       "y": 80.0,
+       "hunger": 25.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 30.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 25.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 15.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2301,
+     "residents": {
+      "family_mara": {
+       "x": 114.0,
+       "y": 80.0,
+       "hunger": 15.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 30.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 97.4,
+       "y": 80.8,
+       "hunger": 10.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.2,
+       "y": 375.8,
+       "hunger": 10.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 20.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2401,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 20.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 110.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 100.0,
+       "y": 80.1,
+       "hunger": 15.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.9,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2501,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 112.5,
+       "hunger": 25.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 141.6,
+       "y": 111.2,
+       "hunger": 40.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 20.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2601,
+     "residents": {
+      "family_mara": {
+       "x": 49.4,
+       "y": 111.4,
+       "hunger": 30.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 47.3,
+       "y": 133.1,
+       "hunger": 20.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 25.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 10.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2701,
+     "residents": {
+      "family_mara": {
+       "x": 131.8,
+       "y": 83.0,
+       "hunger": 35.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 51.4,
+       "y": 85.7,
+       "hunger": 25.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 30.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.0,
+       "y": 390.0,
+       "hunger": 30.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 15.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2801,
+     "residents": {
+      "family_mara": {
+       "x": 136.9,
+       "y": 115.9,
+       "hunger": 20.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 50.0,
+       "hunger": 30.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 110.1,
+       "y": 114.0,
+       "hunger": 35.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.4,
+       "y": 388.4,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2901,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 25.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 120.5,
+       "y": 80.3,
+       "hunger": 35.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 136.0,
+       "y": 116.9,
+       "hunger": 40.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.4,
+       "y": 388.4,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3001,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 111.9,
+       "hunger": 30.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 74.4,
+       "y": 112.5,
+       "hunger": 15.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 36.7,
+       "y": 106.9,
+       "hunger": 20.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.0,
+       "y": 394.4,
+       "hunger": 25.05,
+       "thirst": 35.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3101,
+     "residents": {
+      "family_mara": {
+       "x": 648.0,
+       "y": 400.0,
+       "hunger": 35.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.3,
+       "y": 135.3,
+       "hunger": 20.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.5,
+       "y": 97.2,
+       "hunger": 25.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 30.05,
+       "thirst": 42.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3201,
+     "residents": {
+      "family_mara": {
+       "x": 51.2,
+       "y": 112.7,
+       "hunger": 40.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 45.0,
+       "hunger": 25.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 30.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 35.05,
+       "thirst": 49.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3301,
+     "residents": {
+      "family_mara": {
+       "x": 49.2,
+       "y": 112.9,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 30.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 10.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 40.05,
+       "thirst": 56.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3401,
+     "residents": {
+      "family_mara": {
+       "x": 48.5,
+       "y": 111.7,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 108.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 15.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.9,
+       "y": 389.6,
+       "hunger": 20.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3501,
+     "residents": {
+      "family_mara": {
+       "x": 49.5,
+       "y": 111.8,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 670.8,
+       "y": 396.7,
+       "hunger": 40.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 20.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.5,
+       "y": 109.6,
+       "hunger": 25.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 658.8,
+       "y": 402.1,
+       "hunger": 15.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3601,
+     "residents": {
+      "family_mara": {
+       "x": 137.2,
+       "y": 118.5,
+       "hunger": 35.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 84.1,
+       "y": 106.1,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 30.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 20.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3701,
+     "residents": {
+      "family_mara": {
+       "x": 80.8,
+       "y": 97.1,
+       "hunger": 15.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 30.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 109.4,
+       "y": 92.1,
+       "hunger": 30.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 658.1,
+       "y": 389.5,
+       "hunger": 10.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3801,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 20.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 108.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 635.7,
+       "y": 391.3,
+       "hunger": 35.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.0,
+       "y": 376.3,
+       "hunger": 15.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 379.0,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3901,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 25.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 64.0,
+       "y": 80.0,
+       "hunger": 40.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 106.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.0,
+       "y": 376.3,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 15.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    }
+   ],
+   "balance": {
+    "mean_hunger": {
+     "family_mara": 27.74,
+     "family_tomas": 34.27,
+     "family_lina": 31.69,
+     "neighbour_orrin": 21.4,
+     "neighbour_elsa": 23.1
+    },
+    "tail_mean_hunger": {
+     "family_mara": 28.2,
+     "family_tomas": 30.4,
+     "family_lina": 24.11,
+     "neighbour_orrin": 24.27,
+     "neighbour_elsa": 23.58
+    },
+    "tail_peak_hunger": {
+     "family_mara": 44.25,
+     "family_tomas": 45.0,
+     "family_lina": 37.4,
+     "neighbour_orrin": 41.4,
+     "neighbour_elsa": 34.3
+    },
+    "tail_probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "floor_cycle_ticks_ge65": {
+     "family_mara": 0,
+     "family_tomas": 279,
+     "family_lina": 127,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 56
+    },
+    "probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 1,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "wage_capacity_samples": {
+     "family_mara": 2,
+     "family_tomas": 33,
+     "family_lina": 72,
+     "neighbour_orrin": 13,
+     "neighbour_elsa": 16
+    },
+    "wage_samples": 80,
+    "stall_coin_end": 5,
+    "keeper_coin_end": 2,
+    "collect_till": {},
+    "declared_farm_crop_bundles": 0
+   },
+   "digest": "2fbbeae222e2dbd0",
+   "verdict": {
+    "checks": {
+     "nobody_dies": true,
+     "no_silent_starvation": true,
+     "no_stuck_errands": true,
+     "no_deadlock": true,
+     "coin_conserved": true,
+     "nothing_created": true,
+     "no_errors": true
+    },
+    "pass": true,
+    "created": []
+   }
+  },
+  {
+   "seed": 1,
+   "ticks": 4000,
+   "start": {
+    "loans": {
+     "family_mara->neighbour_orrin": "loan_00001",
+     "family_tomas->neighbour_elsa": "loan_00002"
+    },
+    "removed": {
+     "family:pantry:rations": 6
+    },
+    "stall": "neighbour:pantry",
+    "keeper": "neighbour_orrin",
+    "guard": "neighbour_elsa"
+   },
+   "peak_hunger": {
+    "family_mara": 58.7,
+    "family_tomas": 90.0,
+    "family_lina": 80.5,
+    "neighbour_orrin": 37.1,
+    "neighbour_elsa": 69.9
+   },
+   "dead_at": {},
+   "thefts": 0,
+   "cases": [],
+   "damages_levied": 0,
+   "loans": {
+    "opened": 2,
+    "repaid": 1,
+    "overdue": 1,
+    "defaulted": 1,
+    "rows": [
+     {
+      "id": "loan_00001",
+      "lender": "neighbour_orrin",
+      "borrower": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "repaid",
+      "owed": 0.0
+     },
+     {
+      "id": "loan_00002",
+      "lender": "neighbour_elsa",
+      "borrower": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "defaulted",
+      "owed": 3.0
+     }
+    ]
+   },
+   "wages": {
+    "hired": 9,
+    "paid": 7,
+    "lapsed": 2,
+    "rows": [
+     {
+      "id": "job_00001",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00002",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00003",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00004",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00005",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00006",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00007",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00008",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00009",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     }
+    ]
+   },
+   "stall": {
+    "sales": 2,
+    "ask_end": 12,
+    "factors": [
+     {
+      "day": 1,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.625,
+       "rations": 0.5909,
+       "wood_bundle": 0.7692
+      }
+     },
+     {
+      "day": 2,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.6436,
+       "rations": 1.5394,
+       "wood_bundle": 0.6623
+      }
+     },
+     {
+      "day": 3,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0885,
+       "rations": 1.2256,
+       "wood_bundle": 0.6035
+      }
+     },
+     {
+      "day": 4,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8456,
+       "rations": 1.4884,
+       "wood_bundle": 0.5682
+      }
+     },
+     {
+      "day": 5,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.208,
+       "rations": 2.3753,
+       "wood_bundle": 0.5459
+      }
+     },
+     {
+      "day": 6,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.3399,
+       "rations": 3.0,
+       "wood_bundle": 0.5313
+      }
+     }
+    ]
+   },
+   "ladder_counts": {
+    "repay:errand": 1,
+    "forage:errand": 17,
+    "work:errand": 47,
+    "forage:ok": 38,
+    "repay:ok": 1,
+    "work:ok": 53,
+    "buy:out_of_stock": 14,
+    "beg:ok": 26,
+    "beg:errand": 17,
+    "work:illegal:employer_cannot_pay": 2,
+    "buy:cannot_afford": 7,
+    "trade:ok": 5,
+    "borrow:ok": 6,
+    "trade:errand": 3,
+    "buy:errand": 2,
+    "buy:ok": 2,
+    "borrow:errand": 3,
+    "steal:errand": 1,
+    "steal:illegal:watched": 121
+   },
+   "answers": {
+    "work_for:hire": 9,
+    "work_for:refuse_staffed": 1,
+    "request_item:give": 5,
+    "work_for:refuse_no_wage": 31,
+    "request_item:refuse_no_item": 21,
+    "offer_trade:refuse_no_item": 4,
+    "borrow_item:refuse_no_item": 1,
+    "offer_trade:accept": 1,
+    "work_for:refuse_defaulter": 5,
+    "borrow_item:refuse_stranger": 3,
+    "borrow_item:refuse_defaulter": 2
+   },
+   "events": {
+    "fetched_item": 20,
+    "ate": 26,
+    "debt_paid": 1,
+    "work_asked": 46,
+    "item_requested": 26,
+    "gave_item": 5,
+    "wage_paid": 7,
+    "loan_overdue": 1,
+    "trade_offered": 5,
+    "loan_asked": 6,
+    "chatted": 3,
+    "traded": 1,
+    "loan_defaulted": 1,
+    "bought": 2
+   },
+   "reputation": {},
+   "items_start": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 6,
+    "rations": 20,
+    "wood_bundle": 3
+   },
+   "items_end": {
+    "bandage": 2,
+    "coin": 49,
+    "wood_bundle": 3
+   },
+   "silent_starvation": [],
+   "stuck_errands": [],
+   "late_actions": 190,
+   "errors": 0,
+   "last_action": {
+    "neighbour_elsa": 3958,
+    "family_mara": 3928,
+    "family_tomas": 3649,
+    "family_lina": 3988,
+    "neighbour_orrin": 3637
+   },
+   "timeline": [
+    {
+     "tick": 1,
+     "residents": {
+      "family_mara": {
+       "x": 57.0,
+       "y": 88.0,
+       "hunger": 44.22,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 60.6,
+       "y": 89.0,
+       "hunger": 83.22,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.1,
+       "y": 92.4,
+       "hunger": 75.66,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.1,
+       "y": 89.0,
+       "hunger": 0.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 146.2,
+       "y": 88.9,
+       "hunger": 67.11,
+       "thirst": 0.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 101,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 49.22,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 88.22,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 111.3,
+       "y": 114.2,
+       "hunger": 60.66,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 5.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 655.0,
+       "y": 403.5,
+       "hunger": 12.11,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 201,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 54.22,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 134.0,
+       "y": 117.9,
+       "hunger": 68.22,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 45.66,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 10.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 17.11,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 301,
+     "residents": {
+      "family_mara": {
+       "x": 120.4,
+       "y": 117.8,
+       "hunger": 39.22,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 53.22,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 50.66,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 22.11,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 401,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.9,
+       "hunger": 44.22,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 58.22,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 55.66,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 27.11,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 501,
+     "residents": {
+      "family_mara": {
+       "x": 133.8,
+       "y": 117.6,
+       "hunger": 24.22,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 122.9,
+       "y": 119.8,
+       "hunger": 38.22,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 143.4,
+       "y": 95.9,
+       "hunger": 35.66,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.5,
+       "y": 118.8,
+       "hunger": 25.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.8,
+       "y": 93.5,
+       "hunger": 32.11,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 601,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 29.22,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 146.7,
+       "y": 100.9,
+       "hunger": 43.22,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 133.6,
+       "y": 91.9,
+       "hunger": 40.66,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.4,
+       "y": 118.4,
+       "hunger": 30.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 148.3,
+       "y": 103.4,
+       "hunger": 17.11,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 701,
+     "residents": {
+      "family_mara": {
+       "x": 116.3,
+       "y": 88.5,
+       "hunger": 34.22,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.3,
+       "y": 118.5,
+       "hunger": 48.22,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.6,
+       "y": 118.8,
+       "hunger": 45.66,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 15.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 22.11,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 801,
+     "residents": {
+      "family_mara": {
+       "x": 127.1,
+       "y": 103.2,
+       "hunger": 14.22,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 143.5,
+       "y": 121.6,
+       "hunger": 28.22,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.6,
+       "y": 118.8,
+       "hunger": 25.66,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 27.11,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 901,
+     "residents": {
+      "family_mara": {
+       "x": 116.8,
+       "y": 113.2,
+       "hunger": 19.22,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 141.9,
+       "y": 111.3,
+       "hunger": 33.22,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 116.8,
+       "y": 106.9,
+       "hunger": 30.66,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.3,
+       "y": 94.2,
+       "hunger": 32.11,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1001,
+     "residents": {
+      "family_mara": {
+       "x": 51.6,
+       "y": 112.2,
+       "hunger": 24.22,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 100.6,
+       "y": 97.9,
+       "hunger": 18.22,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 96.1,
+       "y": 82.2,
+       "hunger": 15.66,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.0,
+       "y": 98.8,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 134.1,
+       "y": 81.7,
+       "hunger": 17.11,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1101,
+     "residents": {
+      "family_mara": {
+       "x": 49.7,
+       "y": 112.6,
+       "hunger": 29.22,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.3,
+       "y": 135.3,
+       "hunger": 23.22,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 20.66,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 137.5,
+       "y": 92.2,
+       "hunger": 15.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 22.11,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1201,
+     "residents": {
+      "family_mara": {
+       "x": 114.6,
+       "y": 117.4,
+       "hunger": 9.22,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 34.1,
+       "y": 134.7,
+       "hunger": 28.22,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.3,
+       "y": 93.3,
+       "hunger": 25.66,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 20.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 27.11,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1301,
+     "residents": {
+      "family_mara": {
+       "x": 628.6,
+       "y": 43.8,
+       "hunger": 14.22,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 116.4,
+       "y": 88.5,
+       "hunger": 33.22,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 665.3,
+       "y": 44.9,
+       "hunger": 30.66,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 669.8,
+       "y": 391.9,
+       "hunger": 12.11,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1401,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 19.22,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 666.9,
+       "y": 398.5,
+       "hunger": 18.22,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.1,
+       "y": 80.9,
+       "hunger": 35.66,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 30.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.3,
+       "y": 376.4,
+       "hunger": 17.11,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1501,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 24.22,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 55.0,
+       "y": 80.0,
+       "hunger": 23.22,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.1,
+       "y": 378.3,
+       "hunger": 15.66,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 15.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.3,
+       "y": 376.4,
+       "hunger": 22.11,
+       "thirst": 5.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1601,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 29.22,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 28.22,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.1,
+       "y": 378.3,
+       "hunger": 20.66,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 20.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.3,
+       "y": 376.4,
+       "hunger": 27.11,
+       "thirst": 12.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1701,
+     "residents": {
+      "family_mara": {
+       "x": 86.7,
+       "y": 81.0,
+       "hunger": 34.22,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 78.0,
+       "y": 80.0,
+       "hunger": 33.22,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.0,
+       "y": 80.0,
+       "hunger": 25.66,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 25.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 672.0,
+       "y": 393.1,
+       "hunger": 12.11,
+       "thirst": 19.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1801,
+     "residents": {
+      "family_mara": {
+       "x": 632.8,
+       "y": 385.4,
+       "hunger": 39.22,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 632.0,
+       "y": 386.1,
+       "hunger": 38.22,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 654.2,
+       "y": 58.7,
+       "hunger": 30.66,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 30.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.1,
+       "hunger": 17.11,
+       "thirst": 26.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1901,
+     "residents": {
+      "family_mara": {
+       "x": 67.0,
+       "y": 80.0,
+       "hunger": 19.22,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 94.0,
+       "y": 80.0,
+       "hunger": 18.21,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.0,
+       "y": 394.0,
+       "hunger": 10.66,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 10.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.1,
+       "hunger": 22.11,
+       "thirst": 8.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2001,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 24.22,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 23.21,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 60.0,
+       "y": 80.0,
+       "hunger": 15.66,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.1,
+       "hunger": 27.11,
+       "thirst": 15.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2101,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 29.22,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 28.21,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 20.66,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 20.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 673.2,
+       "y": 394.0,
+       "hunger": 32.11,
+       "thirst": 22.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2201,
+     "residents": {
+      "family_mara": {
+       "x": 87.0,
+       "y": 80.0,
+       "hunger": 34.22,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 78.0,
+       "y": 80.0,
+       "hunger": 33.21,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 25.66,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 25.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 17.11,
+       "thirst": 29.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2301,
+     "residents": {
+      "family_mara": {
+       "x": 648.0,
+       "y": 407.6,
+       "hunger": 14.22,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 120.0,
+       "y": 80.0,
+       "hunger": 13.21,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 665.2,
+       "y": 44.9,
+       "hunger": 30.66,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.2,
+       "y": 375.8,
+       "hunger": 10.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 22.11,
+       "thirst": 11.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2401,
+     "residents": {
+      "family_mara": {
+       "x": 637.1,
+       "y": 51.1,
+       "hunger": 19.22,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 39.0,
+       "hunger": 18.21,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.0,
+       "y": 80.0,
+       "hunger": 35.66,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.9,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 376.9,
+       "hunger": 27.11,
+       "thirst": 18.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2501,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 112.5,
+       "hunger": 24.22,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.4,
+       "y": 135.1,
+       "hunger": 23.21,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 120.0,
+       "y": 80.8,
+       "hunger": 20.66,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 651.0,
+       "y": 399.6,
+       "hunger": 32.11,
+       "thirst": 25.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2601,
+     "residents": {
+      "family_mara": {
+       "x": 48.4,
+       "y": 111.3,
+       "hunger": 29.22,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.4,
+       "y": 135.1,
+       "hunger": 28.21,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.6,
+       "y": 91.4,
+       "hunger": 25.66,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 159.5,
+       "y": 117.1,
+       "hunger": 17.11,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2701,
+     "residents": {
+      "family_mara": {
+       "x": 121.8,
+       "y": 91.5,
+       "hunger": 34.22,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 89.5,
+       "y": 110.9,
+       "hunger": 33.21,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 31.6,
+       "y": 103.9,
+       "hunger": 30.66,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.0,
+       "y": 390.0,
+       "hunger": 30.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.4,
+       "y": 118.7,
+       "hunger": 22.11,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2801,
+     "residents": {
+      "family_mara": {
+       "x": 86.4,
+       "y": 85.9,
+       "hunger": 19.22,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 147.5,
+       "y": 105.0,
+       "hunger": 38.21,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 127.8,
+       "y": 115.5,
+       "hunger": 35.66,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.4,
+       "y": 388.4,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.4,
+       "y": 118.7,
+       "hunger": 27.11,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2901,
+     "residents": {
+      "family_mara": {
+       "x": 49.2,
+       "y": 112.9,
+       "hunger": 24.22,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 674.7,
+       "y": 396.2,
+       "hunger": 43.21,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 78.0,
+       "y": 111.4,
+       "hunger": 40.66,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.0,
+       "y": 389.7,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.9,
+       "y": 93.5,
+       "hunger": 32.11,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3001,
+     "residents": {
+      "family_mara": {
+       "x": 48.5,
+       "y": 111.7,
+       "hunger": 29.22,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 674.7,
+       "y": 396.2,
+       "hunger": 23.21,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.4,
+       "y": 97.0,
+       "hunger": 20.66,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.0,
+       "y": 390.7,
+       "hunger": 25.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 148.3,
+       "y": 103.4,
+       "hunger": 12.11,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3101,
+     "residents": {
+      "family_mara": {
+       "x": 118.0,
+       "y": 115.6,
+       "hunger": 34.22,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 81.4,
+       "y": 108.6,
+       "hunger": 28.21,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.4,
+       "y": 97.0,
+       "hunger": 25.66,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.4,
+       "y": 118.3,
+       "hunger": 30.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.5,
+       "y": 119.1,
+       "hunger": 17.11,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3201,
+     "residents": {
+      "family_mara": {
+       "x": 115.9,
+       "y": 116.5,
+       "hunger": 19.22,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 118.5,
+       "y": 88.1,
+       "hunger": 33.21,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 33.7,
+       "y": 105.4,
+       "hunger": 30.66,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 666.1,
+       "y": 393.5,
+       "hunger": 15.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.5,
+       "y": 119.1,
+       "hunger": 22.11,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3301,
+     "residents": {
+      "family_mara": {
+       "x": 49.0,
+       "y": 113.1,
+       "hunger": 24.22,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 143.2,
+       "y": 104.2,
+       "hunger": 13.21,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 130.8,
+       "y": 115.9,
+       "hunger": 10.66,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.5,
+       "y": 119.1,
+       "hunger": 27.11,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3401,
+     "residents": {
+      "family_mara": {
+       "x": 48.4,
+       "y": 111.9,
+       "hunger": 29.22,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 59.1,
+       "y": 111.6,
+       "hunger": 18.21,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 73.0,
+       "y": 111.0,
+       "hunger": 15.66,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.3,
+       "y": 99.7,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.5,
+       "y": 92.9,
+       "hunger": 32.11,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3501,
+     "residents": {
+      "family_mara": {
+       "x": 117.2,
+       "y": 117.4,
+       "hunger": 34.22,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.4,
+       "y": 135.2,
+       "hunger": 23.21,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.5,
+       "y": 97.2,
+       "hunger": 20.66,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.4,
+       "y": 118.3,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 148.9,
+       "y": 104.3,
+       "hunger": 17.11,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3601,
+     "residents": {
+      "family_mara": {
+       "x": 115.1,
+       "y": 116.1,
+       "hunger": 39.22,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.8,
+       "y": 134.2,
+       "hunger": 28.21,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.6,
+       "y": 96.2,
+       "hunger": 25.66,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 88.0,
+       "y": 127.4,
+       "hunger": 35.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 22.11,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3701,
+     "residents": {
+      "family_mara": {
+       "x": 629.0,
+       "y": 43.7,
+       "hunger": 19.22,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 43.0,
+       "hunger": 8.21,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 665.2,
+       "y": 44.9,
+       "hunger": 30.66,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 123.3,
+       "y": 85.8,
+       "hunger": 15.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 27.11,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3801,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 24.22,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 13.21,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.0,
+       "y": 80.0,
+       "hunger": 35.66,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 20.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 642.3,
+       "y": 391.4,
+       "hunger": 32.11,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3901,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 29.22,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 18.21,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 635.7,
+       "y": 393.2,
+       "hunger": 40.66,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 51.1,
+       "y": 80.7,
+       "hunger": 37.11,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    }
+   ],
+   "balance": {
+    "mean_hunger": {
+     "family_mara": 28.1,
+     "family_tomas": 31.78,
+     "family_lina": 31.19,
+     "neighbour_orrin": 21.6,
+     "neighbour_elsa": 24.51
+    },
+    "tail_mean_hunger": {
+     "family_mara": 28.64,
+     "family_tomas": 21.36,
+     "family_lina": 27.76,
+     "neighbour_orrin": 25.01,
+     "neighbour_elsa": 26.0
+    },
+    "tail_peak_hunger": {
+     "family_mara": 41.27,
+     "family_tomas": 37.41,
+     "family_lina": 45.61,
+     "neighbour_orrin": 37.1,
+     "neighbour_elsa": 42.06
+    },
+    "tail_probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "floor_cycle_ticks_ge65": {
+     "family_mara": 0,
+     "family_tomas": 279,
+     "family_lina": 98,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 56
+    },
+    "probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 1,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "wage_capacity_samples": {
+     "family_mara": 2,
+     "family_tomas": 18,
+     "family_lina": 27,
+     "neighbour_orrin": 10,
+     "neighbour_elsa": 31
+    },
+    "wage_samples": 80,
+    "stall_coin_end": 6,
+    "keeper_coin_end": 1,
+    "collect_till": {},
+    "declared_farm_crop_bundles": 0
+   },
+   "digest": "506087d6cd7c03b7",
+   "verdict": {
+    "checks": {
+     "nobody_dies": true,
+     "no_silent_starvation": true,
+     "no_stuck_errands": true,
+     "no_deadlock": true,
+     "coin_conserved": true,
+     "nothing_created": true,
+     "no_errors": true
+    },
+    "pass": true,
+    "created": []
+   }
+  },
+  {
+   "seed": 2,
+   "ticks": 4000,
+   "start": {
+    "loans": {
+     "family_mara->neighbour_orrin": "loan_00001",
+     "family_tomas->neighbour_elsa": "loan_00002"
+    },
+    "removed": {
+     "family:pantry:rations": 6
+    },
+    "stall": "neighbour:pantry",
+    "keeper": "neighbour_orrin",
+    "guard": "neighbour_elsa"
+   },
+   "peak_hunger": {
+    "family_mara": 59.9,
+    "family_tomas": 88.6,
+    "family_lina": 90.0,
+    "neighbour_orrin": 39.0,
+    "neighbour_elsa": 67.8
+   },
+   "dead_at": {},
+   "thefts": 1,
+   "cases": [
+    {
+     "id": "case_00001",
+     "thief": "family_tomas",
+     "victim": "neighbour_orrin",
+     "authority": "neighbour_elsa",
+     "status": "closed",
+     "outcome": "nothing_to_levy"
+    }
+   ],
+   "damages_levied": 1,
+   "loans": {
+    "opened": 2,
+    "repaid": 1,
+    "overdue": 1,
+    "defaulted": 1,
+    "rows": [
+     {
+      "id": "loan_00001",
+      "lender": "neighbour_orrin",
+      "borrower": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "repaid",
+      "owed": 0.0
+     },
+     {
+      "id": "loan_00002",
+      "lender": "neighbour_elsa",
+      "borrower": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "defaulted",
+      "owed": 3.0
+     }
+    ]
+   },
+   "wages": {
+    "hired": 8,
+    "paid": 6,
+    "lapsed": 2,
+    "rows": [
+     {
+      "id": "job_00001",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00002",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00003",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00004",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00005",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00006",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00007",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00008",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     }
+    ]
+   },
+   "stall": {
+    "sales": 2,
+    "ask_end": 12,
+    "factors": [
+     {
+      "day": 1,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.625,
+       "rations": 0.619,
+       "wood_bundle": 0.7692
+      }
+     },
+     {
+      "day": 2,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8791,
+       "rations": 1.1273,
+       "wood_bundle": 0.6623
+      }
+     },
+     {
+      "day": 3,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.1753,
+       "rations": 1.239,
+       "wood_bundle": 0.6035
+      }
+     },
+     {
+      "day": 4,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0683,
+       "rations": 1.424,
+       "wood_bundle": 0.5682
+      }
+     },
+     {
+      "day": 5,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8607,
+       "rations": 2.6928,
+       "wood_bundle": 0.5459
+      }
+     },
+     {
+      "day": 6,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.9946,
+       "rations": 3.0,
+       "wood_bundle": 0.5313
+      }
+     }
+    ]
+   },
+   "ladder_counts": {
+    "repay:errand": 1,
+    "forage:errand": 20,
+    "work:errand": 36,
+    "forage:ok": 37,
+    "repay:ok": 1,
+    "work:ok": 41,
+    "buy:out_of_stock": 15,
+    "beg:ok": 21,
+    "beg:errand": 12,
+    "work:illegal:employer_cannot_pay": 2,
+    "borrow:errand": 6,
+    "borrow:ok": 11,
+    "buy:errand": 2,
+    "buy:ok": 2,
+    "trade:errand": 7,
+    "trade:ok": 12,
+    "buy:cannot_afford": 5,
+    "steal:errand": 2,
+    "steal:illegal:watched": 66,
+    "steal:ok": 1,
+    "report:errand": 1,
+    "report:ok": 1,
+    "enforce:errand": 1,
+    "enforce:ok": 1,
+    "forage:illegal:no_item": 1,
+    "steal:empty": 1
+   },
+   "answers": {
+    "work_for:hire": 8,
+    "work_for:refuse_staffed": 1,
+    "request_item:give": 3,
+    "work_for:refuse_no_wage": 21,
+    "request_item:refuse_no_item": 16,
+    "borrow_item:refuse_no_item": 3,
+    "offer_trade:refuse_no_item": 12,
+    "work_for:refuse_defaulter": 2,
+    "borrow_item:refuse_defaulter": 2,
+    "borrow_item:refuse_stranger": 4,
+    "report_theft:accept": 1,
+    "work_for:refuse_thief": 3,
+    "request_item:refuse_thief": 2,
+    "borrow_item:refuse_thief": 2
+   },
+   "events": {
+    "fetched_item": 19,
+    "ate": 26,
+    "debt_paid": 1,
+    "work_asked": 35,
+    "item_requested": 21,
+    "gave_item": 3,
+    "wage_paid": 6,
+    "loan_overdue": 1,
+    "loan_asked": 11,
+    "chatted": 3,
+    "bought": 2,
+    "loan_defaulted": 1,
+    "trade_offered": 12,
+    "theft": 1,
+    "loss_discovered": 1,
+    "gossiped": 3,
+    "theft_reported": 1,
+    "warned": 1,
+    "damages_levied": 1
+   },
+   "reputation": {
+    "theft": 1,
+    "discovered": 1,
+    "opinion_drop": 2,
+    "gossip": 3,
+    "confront": 1
+   },
+   "items_start": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 6,
+    "rations": 20,
+    "wood_bundle": 3
+   },
+   "items_end": {
+    "bandage": 2,
+    "coin": 49,
+    "wood_bundle": 3
+   },
+   "silent_starvation": [],
+   "stuck_errands": [],
+   "late_actions": 136,
+   "errors": 0,
+   "last_action": {
+    "neighbour_elsa": 3846,
+    "family_mara": 3662,
+    "family_tomas": 3959,
+    "family_lina": 3968,
+    "neighbour_orrin": 3902
+   },
+   "timeline": [
+    {
+     "tick": 1,
+     "residents": {
+      "family_mara": {
+       "x": 57.0,
+       "y": 88.0,
+       "hunger": 45.42,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 60.6,
+       "y": 89.0,
+       "hunger": 74.73,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.1,
+       "y": 92.4,
+       "hunger": 85.52,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.1,
+       "y": 89.0,
+       "hunger": 4.08,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 146.2,
+       "y": 88.9,
+       "hunger": 65.07,
+       "thirst": 0.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 101,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 50.42,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 79.73,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 113.3,
+       "y": 113.7,
+       "hunger": 45.52,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 9.08,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 655.0,
+       "y": 403.5,
+       "hunger": 30.07,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 201,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 55.42,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 84.73,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.3,
+       "y": 109.7,
+       "hunger": 30.52,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 14.08,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 154.3,
+       "y": 112.6,
+       "hunger": 15.07,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 301,
+     "residents": {
+      "family_mara": {
+       "x": 120.4,
+       "y": 117.8,
+       "hunger": 40.42,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.0,
+       "y": 119.3,
+       "hunger": 69.73,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 154.9,
+       "y": 118.6,
+       "hunger": 35.52,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 19.08,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.07,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 401,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.9,
+       "hunger": 45.42,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.0,
+       "y": 119.2,
+       "hunger": 74.73,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.8,
+       "y": 119.3,
+       "hunger": 40.52,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 24.08,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.07,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 501,
+     "residents": {
+      "family_mara": {
+       "x": 133.8,
+       "y": 117.6,
+       "hunger": 25.42,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 122.8,
+       "y": 119.8,
+       "hunger": 54.73,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 161.3,
+       "y": 117.7,
+       "hunger": 20.52,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.5,
+       "y": 118.8,
+       "hunger": 29.08,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.5,
+       "y": 118.3,
+       "hunger": 30.07,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 601,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 30.42,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 660.6,
+       "y": 401.4,
+       "hunger": 59.73,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 61.6,
+       "y": 109.9,
+       "hunger": 25.52,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 671.9,
+       "y": 396.5,
+       "hunger": 14.08,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.07,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 701,
+     "residents": {
+      "family_mara": {
+       "x": 129.6,
+       "y": 117.1,
+       "hunger": 35.42,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.3,
+       "y": 118.5,
+       "hunger": 64.73,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 26.7,
+       "y": 99.9,
+       "hunger": 30.52,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.3,
+       "y": 388.5,
+       "hunger": 19.08,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.07,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 801,
+     "residents": {
+      "family_mara": {
+       "x": 92.7,
+       "y": 103.7,
+       "hunger": 15.42,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.3,
+       "y": 119.2,
+       "hunger": 44.73,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 122.2,
+       "y": 119.0,
+       "hunger": 10.52,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.3,
+       "y": 388.5,
+       "hunger": 24.08,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.07,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 901,
+     "residents": {
+      "family_mara": {
+       "x": 121.7,
+       "y": 114.5,
+       "hunger": 20.42,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 163.4,
+       "y": 118.2,
+       "hunger": 49.73,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.9,
+       "y": 118.7,
+       "hunger": 15.52,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.3,
+       "y": 388.5,
+       "hunger": 29.08,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.5,
+       "y": 118.3,
+       "hunger": 30.07,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1001,
+     "residents": {
+      "family_mara": {
+       "x": 78.1,
+       "y": 106.3,
+       "hunger": 25.42,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 659.8,
+       "y": 401.7,
+       "hunger": 54.73,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 659.7,
+       "y": 401.7,
+       "hunger": 20.52,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 138.6,
+       "y": 95.0,
+       "hunger": 14.08,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.07,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1101,
+     "residents": {
+      "family_mara": {
+       "x": 50.8,
+       "y": 112.7,
+       "hunger": 30.42,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 127.8,
+       "y": 82.9,
+       "hunger": 19.73,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 71.5,
+       "y": 87.2,
+       "hunger": 25.52,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 19.08,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.07,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1201,
+     "residents": {
+      "family_mara": {
+       "x": 94.8,
+       "y": 115.9,
+       "hunger": 10.42,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 41.8,
+       "y": 130.1,
+       "hunger": 24.73,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.8,
+       "y": 97.3,
+       "hunger": 30.52,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 24.08,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 25.07,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1301,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 15.42,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 29.73,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 117.5,
+       "y": 87.9,
+       "hunger": 35.52,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 29.08,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.2,
+       "y": 376.7,
+       "hunger": 30.07,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1401,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 20.42,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 110.0,
+       "y": 80.0,
+       "hunger": 34.73,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.4,
+       "y": 394.2,
+       "hunger": 40.52,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 659.3,
+       "y": 390.0,
+       "hunger": 14.08,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 377.0,
+       "hunger": 15.07,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1501,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 25.42,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 639.5,
+       "y": 392.2,
+       "hunger": 14.73,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.0,
+       "y": 63.0,
+       "hunger": 20.52,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 19.08,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 377.0,
+       "hunger": 20.07,
+       "thirst": 5.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1601,
+     "residents": {
+      "family_mara": {
+       "x": 621.9,
+       "y": 37.8,
+       "hunger": 30.42,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 63.0,
+       "y": 80.0,
+       "hunger": 19.73,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 648.7,
+       "y": 388.0,
+       "hunger": 25.52,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 24.08,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 377.0,
+       "hunger": 25.07,
+       "thirst": 12.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1701,
+     "residents": {
+      "family_mara": {
+       "x": 108.0,
+       "y": 80.0,
+       "hunger": 35.42,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 46.5,
+       "hunger": 24.73,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 53.0,
+       "y": 80.0,
+       "hunger": 30.52,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 29.08,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.1,
+       "y": 376.3,
+       "hunger": 30.07,
+       "thirst": 19.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1801,
+     "residents": {
+      "family_mara": {
+       "x": 648.4,
+       "y": 401.3,
+       "hunger": 40.42,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 46.5,
+       "hunger": 29.73,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 129.0,
+       "y": 80.0,
+       "hunger": 35.52,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 657.4,
+       "y": 389.3,
+       "hunger": 14.08,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.0,
+       "y": 376.7,
+       "hunger": 15.07,
+       "thirst": 26.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1901,
+     "residents": {
+      "family_mara": {
+       "x": 640.4,
+       "y": 53.5,
+       "hunger": 20.42,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 46.5,
+       "hunger": 34.73,
+       "thirst": 33.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 15.52,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.1,
+       "y": 376.4,
+       "hunger": 19.07,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.0,
+       "y": 376.7,
+       "hunger": 20.07,
+       "thirst": 8.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2001,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 25.42,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.7,
+       "y": 37.2,
+       "hunger": 14.73,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 20.52,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.1,
+       "y": 376.4,
+       "hunger": 24.07,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.0,
+       "y": 376.7,
+       "hunger": 25.07,
+       "thirst": 15.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2101,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 30.42,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.7,
+       "y": 37.2,
+       "hunger": 19.73,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 25.52,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.1,
+       "y": 376.4,
+       "hunger": 29.07,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.0,
+       "y": 376.7,
+       "hunger": 30.07,
+       "thirst": 22.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2201,
+     "residents": {
+      "family_mara": {
+       "x": 107.0,
+       "y": 80.0,
+       "hunger": 35.42,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.7,
+       "y": 37.2,
+       "hunger": 24.73,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 672.5,
+       "y": 38.2,
+       "hunger": 30.52,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 658.8,
+       "y": 389.9,
+       "hunger": 14.07,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 377.0,
+       "hunger": 15.07,
+       "thirst": 29.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2301,
+     "residents": {
+      "family_mara": {
+       "x": 112.0,
+       "y": 80.0,
+       "hunger": 15.42,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.7,
+       "y": 37.2,
+       "hunger": 29.73,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 109.3,
+       "y": 80.4,
+       "hunger": 10.52,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 19.07,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 377.0,
+       "hunger": 20.07,
+       "thirst": 11.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2401,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 20.42,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 34.73,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 87.0,
+       "y": 80.1,
+       "hunger": 15.52,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 622.3,
+       "y": 377.3,
+       "hunger": 24.07,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 649.4,
+       "y": 378.0,
+       "hunger": 25.07,
+       "thirst": 18.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2501,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 112.5,
+       "hunger": 25.42,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 147.2,
+       "y": 108.2,
+       "hunger": 39.73,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.1,
+       "y": 94.5,
+       "hunger": 20.52,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 29.07,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.07,
+       "thirst": 25.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2601,
+     "residents": {
+      "family_mara": {
+       "x": 48.4,
+       "y": 111.3,
+       "hunger": 30.42,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 674.7,
+       "y": 396.2,
+       "hunger": 19.73,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.1,
+       "y": 94.5,
+       "hunger": 25.52,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 667.8,
+       "y": 397.2,
+       "hunger": 9.07,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 658.8,
+       "y": 402.1,
+       "hunger": 10.07,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2701,
+     "residents": {
+      "family_mara": {
+       "x": 128.0,
+       "y": 116.5,
+       "hunger": 35.42,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 101.0,
+       "y": 80.0,
+       "hunger": 24.73,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.7,
+       "y": 97.5,
+       "hunger": 30.52,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.8,
+       "y": 399.4,
+       "hunger": 14.07,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 15.07,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2801,
+     "residents": {
+      "family_mara": {
+       "x": 77.9,
+       "y": 114.7,
+       "hunger": 20.42,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 48.8,
+       "hunger": 29.73,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 117.5,
+       "y": 114.9,
+       "hunger": 35.52,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.8,
+       "y": 399.4,
+       "hunger": 19.07,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.07,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2901,
+     "residents": {
+      "family_mara": {
+       "x": 50.0,
+       "y": 113.1,
+       "hunger": 25.42,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 48.5,
+       "y": 80.9,
+       "hunger": 14.73,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 127.4,
+       "y": 116.1,
+       "hunger": 40.52,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.8,
+       "y": 399.4,
+       "hunger": 24.07,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.07,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3001,
+     "residents": {
+      "family_mara": {
+       "x": 50.0,
+       "y": 112.0,
+       "hunger": 30.42,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.4,
+       "y": 135.1,
+       "hunger": 19.73,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 29.4,
+       "y": 102.2,
+       "hunger": 20.52,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.8,
+       "y": 399.4,
+       "hunger": 29.07,
+       "thirst": 35.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.5,
+       "y": 118.3,
+       "hunger": 30.07,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3101,
+     "residents": {
+      "family_mara": {
+       "x": 650.5,
+       "y": 403.8,
+       "hunger": 35.42,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.4,
+       "y": 135.1,
+       "hunger": 24.73,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.6,
+       "y": 97.7,
+       "hunger": 25.52,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.5,
+       "y": 110.6,
+       "hunger": 14.07,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.07,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3201,
+     "residents": {
+      "family_mara": {
+       "x": 88.6,
+       "y": 114.0,
+       "hunger": 40.42,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.7,
+       "y": 45.5,
+       "hunger": 29.73,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.7,
+       "y": 94.7,
+       "hunger": 30.52,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.6,
+       "y": 100.4,
+       "hunger": 19.07,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 66.6,
+       "y": 93.1,
+       "hunger": 20.07,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3301,
+     "residents": {
+      "family_mara": {
+       "x": 49.6,
+       "y": 113.0,
+       "hunger": 20.42,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 89.0,
+       "y": 80.0,
+       "hunger": 9.73,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.3,
+       "y": 93.3,
+       "hunger": 10.52,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.0,
+       "y": 390.0,
+       "hunger": 24.07,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 28.2,
+       "y": 86.8,
+       "hunger": 25.07,
+       "thirst": 31.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3401,
+     "residents": {
+      "family_mara": {
+       "x": 49.6,
+       "y": 113.0,
+       "hunger": 25.42,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 92.6,
+       "y": 106.3,
+       "hunger": 14.73,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 15.52,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.0,
+       "y": 390.0,
+       "hunger": 29.07,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 123.0,
+       "y": 95.4,
+       "hunger": 30.07,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3501,
+     "residents": {
+      "family_mara": {
+       "x": 49.7,
+       "y": 111.7,
+       "hunger": 30.42,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.1,
+       "y": 136.0,
+       "hunger": 19.73,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 20.52,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 138.9,
+       "y": 95.9,
+       "hunger": 14.07,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 144.5,
+       "y": 97.6,
+       "hunger": 15.07,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3601,
+     "residents": {
+      "family_mara": {
+       "x": 137.1,
+       "y": 117.9,
+       "hunger": 35.42,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.8,
+       "y": 135.3,
+       "hunger": 24.73,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.3,
+       "y": 93.3,
+       "hunger": 25.52,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.4,
+       "y": 117.9,
+       "hunger": 19.07,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 20.07,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3701,
+     "residents": {
+      "family_mara": {
+       "x": 103.0,
+       "y": 80.0,
+       "hunger": 15.42,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.9,
+       "y": 37.5,
+       "hunger": 29.73,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 672.5,
+       "y": 38.2,
+       "hunger": 30.52,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 24.07,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 25.07,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3801,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 20.42,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 34.73,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 35.52,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 29.07,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 30.07,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3901,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 25.42,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 654.6,
+       "y": 397.3,
+       "hunger": 39.73,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 98.0,
+       "y": 80.0,
+       "hunger": 40.52,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 659.7,
+       "y": 385.3,
+       "hunger": 34.07,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 15.07,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    }
+   ],
+   "balance": {
+    "mean_hunger": {
+     "family_mara": 28.96,
+     "family_tomas": 36.5,
+     "family_lina": 28.42,
+     "neighbour_orrin": 22.28,
+     "neighbour_elsa": 23.36
+    },
+    "tail_mean_hunger": {
+     "family_mara": 28.57,
+     "family_tomas": 26.83,
+     "family_lina": 27.62,
+     "neighbour_orrin": 24.35,
+     "neighbour_elsa": 22.8
+    },
+    "tail_peak_hunger": {
+     "family_mara": 44.62,
+     "family_tomas": 44.68,
+     "family_lina": 45.47,
+     "neighbour_orrin": 39.02,
+     "neighbour_elsa": 34.32
+    },
+    "tail_probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "floor_cycle_ticks_ge65": {
+     "family_mara": 0,
+     "family_tomas": 507,
+     "family_lina": 98,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 56
+    },
+    "probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 1,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "wage_capacity_samples": {
+     "family_mara": 2,
+     "family_tomas": 12,
+     "family_lina": 70,
+     "neighbour_orrin": 10,
+     "neighbour_elsa": 20
+    },
+    "wage_samples": 80,
+    "stall_coin_end": 6,
+    "keeper_coin_end": 1,
+    "collect_till": {},
+    "declared_farm_crop_bundles": 0
+   },
+   "digest": "0c1caa5f808ab31f",
+   "verdict": {
+    "checks": {
+     "nobody_dies": true,
+     "no_silent_starvation": true,
+     "no_stuck_errands": true,
+     "no_deadlock": true,
+     "coin_conserved": true,
+     "nothing_created": true,
+     "no_errors": true
+    },
+    "pass": true,
+    "created": []
+   }
+  },
+  {
+   "seed": 3,
+   "ticks": 4000,
+   "start": {
+    "loans": {
+     "family_mara->neighbour_orrin": "loan_00001",
+     "family_tomas->neighbour_elsa": "loan_00002"
+    },
+    "removed": {
+     "family:pantry:rations": 6
+    },
+    "stall": "neighbour:pantry",
+    "keeper": "neighbour_orrin",
+    "guard": "neighbour_elsa"
+   },
+   "peak_hunger": {
+    "family_mara": 55.0,
+    "family_tomas": 90.0,
+    "family_lina": 81.8,
+    "neighbour_orrin": 48.6,
+    "neighbour_elsa": 74.0
+   },
+   "dead_at": {},
+   "thefts": 1,
+   "cases": [
+    {
+     "id": "case_00001",
+     "thief": "family_tomas",
+     "victim": "neighbour_orrin",
+     "authority": "neighbour_elsa",
+     "status": "closed",
+     "outcome": "part_paid"
+    }
+   ],
+   "damages_levied": 1,
+   "loans": {
+    "opened": 2,
+    "repaid": 1,
+    "overdue": 1,
+    "defaulted": 1,
+    "rows": [
+     {
+      "id": "loan_00001",
+      "lender": "neighbour_orrin",
+      "borrower": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "repaid",
+      "owed": 0.0
+     },
+     {
+      "id": "loan_00002",
+      "lender": "neighbour_elsa",
+      "borrower": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "defaulted",
+      "owed": 3.0
+     }
+    ]
+   },
+   "wages": {
+    "hired": 10,
+    "paid": 8,
+    "lapsed": 2,
+    "rows": [
+     {
+      "id": "job_00001",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00002",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00003",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00004",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00005",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00006",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00007",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00008",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00009",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00010",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     }
+    ]
+   },
+   "stall": {
+    "sales": 2,
+    "ask_end": 10,
+    "factors": [
+     {
+      "day": 1,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.625,
+       "rations": 0.5909,
+       "wood_bundle": 0.7692
+      }
+     },
+     {
+      "day": 2,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.6436,
+       "rations": 1.7555,
+       "wood_bundle": 0.6623
+      }
+     },
+     {
+      "day": 3,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.6525,
+       "rations": 1.6207,
+       "wood_bundle": 0.6035
+      }
+     },
+     {
+      "day": 4,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8087,
+       "rations": 1.6452,
+       "wood_bundle": 0.5682
+      }
+     },
+     {
+      "day": 5,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.9482,
+       "rations": 2.9432,
+       "wood_bundle": 0.5459
+      }
+     },
+     {
+      "day": 6,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.7951,
+       "rations": 2.6457,
+       "wood_bundle": 0.5313
+      }
+     }
+    ]
+   },
+   "ladder_counts": {
+    "repay:errand": 1,
+    "forage:errand": 16,
+    "work:errand": 37,
+    "forage:ok": 28,
+    "repay:ok": 1,
+    "work:ok": 43,
+    "buy:out_of_stock": 12,
+    "beg:ok": 20,
+    "beg:errand": 12,
+    "work:illegal:employer_cannot_pay": 2,
+    "trade:ok": 15,
+    "buy:cannot_afford": 7,
+    "trade:errand": 7,
+    "steal:errand": 2,
+    "steal:ok": 1,
+    "report:errand": 1,
+    "report:ok": 1,
+    "enforce:errand": 1,
+    "borrow:ok": 3,
+    "buy:errand": 2,
+    "buy:ok": 2,
+    "enforce:ok": 1,
+    "borrow:errand": 1,
+    "steal:illegal:watched": 30
+   },
+   "answers": {
+    "work_for:hire": 10,
+    "work_for:refuse_staffed": 1,
+    "request_item:give": 3,
+    "work_for:refuse_no_wage": 22,
+    "offer_trade:accept": 1,
+    "request_item:refuse_no_item": 16,
+    "offer_trade:refuse_no_item": 14,
+    "report_theft:accept": 1,
+    "work_for:refuse_distrust": 1,
+    "request_item:refuse_distrust": 1,
+    "borrow_item:refuse_distrust": 1,
+    "work_for:refuse_defaulter": 1,
+    "borrow_item:refuse_stranger": 1,
+    "borrow_item:refuse_defaulter": 1
+   },
+   "events": {
+    "fetched_item": 17,
+    "ate": 24,
+    "debt_paid": 1,
+    "work_asked": 35,
+    "item_requested": 20,
+    "gave_item": 3,
+    "wage_paid": 8,
+    "loan_overdue": 1,
+    "trade_offered": 15,
+    "traded": 1,
+    "chatted": 4,
+    "loan_defaulted": 1,
+    "theft": 1,
+    "loss_discovered": 1,
+    "gossiped": 9,
+    "warned": 2,
+    "theft_reported": 1,
+    "loan_asked": 3,
+    "bought": 2,
+    "damages_levied": 1
+   },
+   "reputation": {
+    "theft": 1,
+    "discovered": 1,
+    "opinion_drop": 2,
+    "gossip": 9,
+    "confront": 2,
+    "forgiven": 1
+   },
+   "items_start": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 6,
+    "rations": 20,
+    "wood_bundle": 3
+   },
+   "items_end": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 2,
+    "wood_bundle": 3
+   },
+   "silent_starvation": [],
+   "stuck_errands": [],
+   "late_actions": 87,
+   "errors": 0,
+   "last_action": {
+    "neighbour_elsa": 3807,
+    "family_mara": 3960,
+    "family_tomas": 3999,
+    "family_lina": 3808,
+    "neighbour_orrin": 3659
+   },
+   "timeline": [
+    {
+     "tick": 1,
+     "residents": {
+      "family_mara": {
+       "x": 57.0,
+       "y": 88.0,
+       "hunger": 40.58,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 60.6,
+       "y": 89.0,
+       "hunger": 78.49,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.1,
+       "y": 92.4,
+       "hunger": 76.91,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.1,
+       "y": 89.0,
+       "hunger": 1.56,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 146.2,
+       "y": 88.9,
+       "hunger": 71.3,
+       "thirst": 0.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 101,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 45.58,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 83.49,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 111.3,
+       "y": 114.2,
+       "hunger": 61.91,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 6.56,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 655.0,
+       "y": 403.5,
+       "hunger": 16.3,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 201,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 50.58,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 88.49,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 46.91,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 11.56,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 21.3,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 301,
+     "residents": {
+      "family_mara": {
+       "x": 120.4,
+       "y": 117.8,
+       "hunger": 35.58,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 48.49,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 51.91,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 16.56,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 26.3,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 401,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.9,
+       "hunger": 40.58,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 53.49,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 149.8,
+       "y": 106.1,
+       "hunger": 56.91,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 21.56,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 147.2,
+       "y": 101.8,
+       "hunger": 31.3,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 501,
+     "residents": {
+      "family_mara": {
+       "x": 133.8,
+       "y": 117.6,
+       "hunger": 20.58,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 122.9,
+       "y": 119.8,
+       "hunger": 33.49,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 140.7,
+       "y": 91.7,
+       "hunger": 36.91,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.5,
+       "y": 118.8,
+       "hunger": 26.56,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.8,
+       "y": 93.4,
+       "hunger": 11.3,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 601,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 25.58,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.6,
+       "y": 119.3,
+       "hunger": 38.49,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 156.2,
+       "y": 118.2,
+       "hunger": 41.91,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.9,
+       "y": 100.3,
+       "hunger": 31.56,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 16.3,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 701,
+     "residents": {
+      "family_mara": {
+       "x": 50.9,
+       "y": 113.2,
+       "hunger": 30.58,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.6,
+       "y": 119.3,
+       "hunger": 43.49,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.2,
+       "y": 119.1,
+       "hunger": 46.91,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 16.56,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 21.3,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 801,
+     "residents": {
+      "family_mara": {
+       "x": 150.8,
+       "y": 118.7,
+       "hunger": 10.58,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 110.0,
+       "y": 126.0,
+       "hunger": 28.49,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 160.2,
+       "y": 119.0,
+       "hunger": 26.91,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 21.56,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 26.3,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 901,
+     "residents": {
+      "family_mara": {
+       "x": 98.1,
+       "y": 107.4,
+       "hunger": 15.58,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 134.6,
+       "y": 118.1,
+       "hunger": 33.49,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 126.4,
+       "y": 114.7,
+       "hunger": 31.91,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 26.56,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 148.9,
+       "y": 102.3,
+       "hunger": 31.3,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1001,
+     "residents": {
+      "family_mara": {
+       "x": 52.0,
+       "y": 112.2,
+       "hunger": 20.58,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 111.1,
+       "y": 92.1,
+       "hunger": 38.49,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 113.8,
+       "y": 82.4,
+       "hunger": 36.91,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 672.3,
+       "y": 397.3,
+       "hunger": 31.56,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 142.3,
+       "y": 94.2,
+       "hunger": 16.3,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1101,
+     "residents": {
+      "family_mara": {
+       "x": 49.0,
+       "y": 112.8,
+       "hunger": 25.58,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 121.1,
+       "y": 117.6,
+       "hunger": 43.49,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 121.1,
+       "y": 116.2,
+       "hunger": 41.91,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 16.56,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 21.3,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1201,
+     "residents": {
+      "family_mara": {
+       "x": 60.0,
+       "y": 113.6,
+       "hunger": 30.58,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 669.8,
+       "y": 396.9,
+       "hunger": 23.49,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 95.4,
+       "y": 112.8,
+       "hunger": 21.91,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 21.56,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 26.3,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1301,
+     "residents": {
+      "family_mara": {
+       "x": 635.4,
+       "y": 389.3,
+       "hunger": 35.58,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 69.0,
+       "y": 80.0,
+       "hunger": 28.49,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 26.9,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 26.56,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 669.0,
+       "y": 391.5,
+       "hunger": 31.3,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1401,
+     "residents": {
+      "family_mara": {
+       "x": 104.0,
+       "y": 80.0,
+       "hunger": 40.58,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 13.49,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 652.7,
+       "y": 60.9,
+       "hunger": 31.9,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 641.6,
+       "y": 399.1,
+       "hunger": 31.56,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.4,
+       "y": 377.9,
+       "hunger": 16.3,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1501,
+     "residents": {
+      "family_mara": {
+       "x": 621.6,
+       "y": 36.6,
+       "hunger": 20.58,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 18.49,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 647.8,
+       "y": 392.0,
+       "hunger": 11.9,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.3,
+       "y": 398.4,
+       "hunger": 36.56,
+       "thirst": 30.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.4,
+       "y": 377.9,
+       "hunger": 21.3,
+       "thirst": 5.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1601,
+     "residents": {
+      "family_mara": {
+       "x": 621.6,
+       "y": 36.6,
+       "hunger": 25.58,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 23.49,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.0,
+       "y": 80.0,
+       "hunger": 16.9,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.3,
+       "y": 398.4,
+       "hunger": 41.56,
+       "thirst": 37.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.4,
+       "y": 377.9,
+       "hunger": 26.3,
+       "thirst": 12.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1701,
+     "residents": {
+      "family_mara": {
+       "x": 638.3,
+       "y": 46.9,
+       "hunger": 30.58,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 646.0,
+       "y": 46.1,
+       "hunger": 28.49,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 21.9,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.3,
+       "y": 398.4,
+       "hunger": 46.56,
+       "thirst": 44.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 668.5,
+       "y": 391.2,
+       "hunger": 31.3,
+       "thirst": 19.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1801,
+     "residents": {
+      "family_mara": {
+       "x": 124.0,
+       "y": 80.0,
+       "hunger": 35.58,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 88.0,
+       "y": 80.0,
+       "hunger": 33.49,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 26.9,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.2,
+       "y": 376.6,
+       "hunger": 26.56,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 377.2,
+       "hunger": 16.3,
+       "thirst": 26.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1901,
+     "residents": {
+      "family_mara": {
+       "x": 110.0,
+       "y": 80.0,
+       "hunger": 15.58,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 54.1,
+       "y": 80.1,
+       "hunger": 13.49,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 653.3,
+       "y": 60.9,
+       "hunger": 31.9,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 642.5,
+       "y": 383.9,
+       "hunger": 31.56,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 64.0,
+       "y": 80.2,
+       "hunger": 21.3,
+       "thirst": 33.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2001,
+     "residents": {
+      "family_mara": {
+       "x": 621.0,
+       "y": 37.3,
+       "hunger": 20.58,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 18.49,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 643.5,
+       "y": 396.0,
+       "hunger": 36.9,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.8,
+       "y": 376.6,
+       "hunger": 16.56,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 60.0,
+       "y": 80.1,
+       "hunger": 26.3,
+       "thirst": 40.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2101,
+     "residents": {
+      "family_mara": {
+       "x": 621.0,
+       "y": 37.3,
+       "hunger": 25.58,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 23.49,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 131.0,
+       "y": 80.0,
+       "hunger": 21.9,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.8,
+       "y": 376.6,
+       "hunger": 21.56,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 60.0,
+       "y": 80.1,
+       "hunger": 31.3,
+       "thirst": 47.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2201,
+     "residents": {
+      "family_mara": {
+       "x": 628.3,
+       "y": 45.5,
+       "hunger": 30.58,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 28.49,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 661.8,
+       "y": 46.9,
+       "hunger": 26.9,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.8,
+       "y": 376.6,
+       "hunger": 26.56,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 59.4,
+       "y": 81.5,
+       "hunger": 36.3,
+       "thirst": 54.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2301,
+     "residents": {
+      "family_mara": {
+       "x": 118.0,
+       "y": 80.0,
+       "hunger": 10.58,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 78.0,
+       "y": 80.0,
+       "hunger": 33.49,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 653.3,
+       "y": 60.9,
+       "hunger": 31.9,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 644.4,
+       "y": 384.7,
+       "hunger": 31.56,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 90.0,
+       "y": 80.0,
+       "hunger": 16.3,
+       "thirst": 11.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2401,
+     "residents": {
+      "family_mara": {
+       "x": 626.2,
+       "y": 380.0,
+       "hunger": 15.58,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 626.5,
+       "y": 380.2,
+       "hunger": 38.49,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 655.9,
+       "y": 398.9,
+       "hunger": 36.9,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 628.1,
+       "y": 381.3,
+       "hunger": 16.56,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 102.0,
+       "y": 80.0,
+       "hunger": 21.3,
+       "thirst": 18.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2501,
+     "residents": {
+      "family_mara": {
+       "x": 135.4,
+       "y": 118.5,
+       "hunger": 20.58,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 135.4,
+       "y": 118.5,
+       "hunger": 43.49,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 83.0,
+       "y": 83.9,
+       "hunger": 21.9,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 21.56,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.5,
+       "y": 105.1,
+       "hunger": 26.3,
+       "thirst": 25.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2601,
+     "residents": {
+      "family_mara": {
+       "x": 51.1,
+       "y": 109.7,
+       "hunger": 25.58,
+       "thirst": 32.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.2,
+       "y": 118.1,
+       "hunger": 23.49,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 26.9,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 26.56,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 147.0,
+       "y": 102.0,
+       "hunger": 31.3,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2701,
+     "residents": {
+      "family_mara": {
+       "x": 57.1,
+       "y": 109.6,
+       "hunger": 30.58,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 50.8,
+       "y": 82.7,
+       "hunger": 28.49,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 50.5,
+       "y": 108.8,
+       "hunger": 31.9,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.4,
+       "y": 114.5,
+       "hunger": 31.56,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 141.8,
+       "y": 93.4,
+       "hunger": 16.3,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2801,
+     "residents": {
+      "family_mara": {
+       "x": 149.9,
+       "y": 118.9,
+       "hunger": 35.58,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 62.0,
+       "hunger": 33.49,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 150.1,
+       "y": 117.9,
+       "hunger": 36.9,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 666.8,
+       "y": 397.3,
+       "hunger": 36.56,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 21.3,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2901,
+     "residents": {
+      "family_mara": {
+       "x": 90.0,
+       "y": 115.4,
+       "hunger": 40.58,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.3,
+       "y": 82.1,
+       "hunger": 38.49,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 64.4,
+       "y": 110.3,
+       "hunger": 41.9,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 21.56,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 26.3,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3001,
+     "residents": {
+      "family_mara": {
+       "x": 48.4,
+       "y": 111.9,
+       "hunger": 20.58,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 94.4,
+       "y": 124.2,
+       "hunger": 18.49,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 21.9,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 26.56,
+       "thirst": 35.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 147.2,
+       "y": 101.8,
+       "hunger": 31.3,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3101,
+     "residents": {
+      "family_mara": {
+       "x": 48.4,
+       "y": 111.9,
+       "hunger": 25.58,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.5,
+       "y": 135.7,
+       "hunger": 23.49,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 26.9,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 31.56,
+       "thirst": 42.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 142.8,
+       "y": 95.1,
+       "hunger": 16.3,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3201,
+     "residents": {
+      "family_mara": {
+       "x": 59.4,
+       "y": 112.6,
+       "hunger": 30.58,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 45.0,
+       "hunger": 28.49,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 31.9,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 36.56,
+       "thirst": 49.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 21.3,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3301,
+     "residents": {
+      "family_mara": {
+       "x": 145.2,
+       "y": 118.3,
+       "hunger": 10.58,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 80.0,
+       "y": 80.0,
+       "hunger": 8.49,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 11.9,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.6,
+       "y": 387.8,
+       "hunger": 16.56,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 26.3,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3401,
+     "residents": {
+      "family_mara": {
+       "x": 49.3,
+       "y": 113.1,
+       "hunger": 15.58,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 98.9,
+       "y": 98.9,
+       "hunger": 13.49,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 16.9,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.6,
+       "y": 387.8,
+       "hunger": 21.56,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 147.2,
+       "y": 101.8,
+       "hunger": 31.3,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3501,
+     "residents": {
+      "family_mara": {
+       "x": 48.6,
+       "y": 111.9,
+       "hunger": 20.58,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.3,
+       "y": 135.3,
+       "hunger": 18.49,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 116.1,
+       "y": 93.5,
+       "hunger": 21.9,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 26.56,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 142.8,
+       "y": 95.1,
+       "hunger": 16.3,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3601,
+     "residents": {
+      "family_mara": {
+       "x": 49.5,
+       "y": 111.5,
+       "hunger": 25.58,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 34.1,
+       "y": 134.7,
+       "hunger": 23.49,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 98.6,
+       "y": 112.7,
+       "hunger": 26.9,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.5,
+       "y": 110.4,
+       "hunger": 31.56,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 162.9,
+       "y": 118.9,
+       "hunger": 21.3,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3701,
+     "residents": {
+      "family_mara": {
+       "x": 628.7,
+       "y": 45.5,
+       "hunger": 30.58,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 28.49,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 66.0,
+       "y": 80.0,
+       "hunger": 31.9,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 636.3,
+       "y": 382.0,
+       "hunger": 11.56,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 26.29,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3801,
+     "residents": {
+      "family_mara": {
+       "x": 118.0,
+       "y": 80.0,
+       "hunger": 35.58,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 79.0,
+       "y": 80.0,
+       "hunger": 33.49,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 633.0,
+       "y": 388.2,
+       "hunger": 36.9,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.2,
+       "y": 376.5,
+       "hunger": 16.56,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 669.0,
+       "y": 391.5,
+       "hunger": 31.29,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3901,
+     "residents": {
+      "family_mara": {
+       "x": 637.1,
+       "y": 390.9,
+       "hunger": 40.58,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 640.7,
+       "y": 392.1,
+       "hunger": 38.49,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 70.4,
+       "y": 80.6,
+       "hunger": 21.9,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.2,
+       "y": 376.5,
+       "hunger": 21.56,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.9,
+       "y": 376.7,
+       "hunger": 16.29,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    }
+   ],
+   "balance": {
+    "mean_hunger": {
+     "family_mara": 28.24,
+     "family_tomas": 33.08,
+     "family_lina": 32.47,
+     "neighbour_orrin": 24.53,
+     "neighbour_elsa": 23.89
+    },
+    "tail_mean_hunger": {
+     "family_mara": 27.68,
+     "family_tomas": 25.59,
+     "family_lina": 25.16,
+     "neighbour_orrin": 25.03,
+     "neighbour_elsa": 22.77
+    },
+    "tail_peak_hunger": {
+     "family_mara": 45.53,
+     "family_tomas": 43.44,
+     "family_lina": 37.25,
+     "neighbour_orrin": 41.41,
+     "neighbour_elsa": 34.0
+    },
+    "tail_probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "floor_cycle_ticks_ge65": {
+     "family_mara": 0,
+     "family_tomas": 279,
+     "family_lina": 98,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 56
+    },
+    "probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 1,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "wage_capacity_samples": {
+     "family_mara": 31,
+     "family_tomas": 6,
+     "family_lina": 41,
+     "neighbour_orrin": 16,
+     "neighbour_elsa": 15
+    },
+    "wage_samples": 80,
+    "stall_coin_end": 6,
+    "keeper_coin_end": 0,
+    "collect_till": {},
+    "declared_farm_crop_bundles": 0
+   },
+   "digest": "a346757a68219f68",
+   "verdict": {
+    "checks": {
+     "nobody_dies": true,
+     "no_silent_starvation": true,
+     "no_stuck_errands": true,
+     "no_deadlock": true,
+     "coin_conserved": true,
+     "nothing_created": true,
+     "no_errors": true
+    },
+    "pass": true,
+    "created": []
+   }
+  },
+  {
+   "seed": 1008,
+   "ticks": 4000,
+   "start": {
+    "loans": {
+     "family_mara->neighbour_orrin": "loan_00001",
+     "family_tomas->neighbour_elsa": "loan_00002"
+    },
+    "removed": {
+     "family:pantry:rations": 6
+    },
+    "stall": "neighbour:pantry",
+    "keeper": "neighbour_orrin",
+    "guard": "neighbour_elsa"
+   },
+   "peak_hunger": {
+    "family_mara": 54.5,
+    "family_tomas": 90.0,
+    "family_lina": 84.9,
+    "neighbour_orrin": 41.4,
+    "neighbour_elsa": 72.8
+   },
+   "dead_at": {},
+   "thefts": 1,
+   "cases": [
+    {
+     "id": "case_00001",
+     "thief": "family_tomas",
+     "victim": "neighbour_orrin",
+     "authority": "neighbour_elsa",
+     "status": "closed",
+     "outcome": "part_paid"
+    }
+   ],
+   "damages_levied": 1,
+   "loans": {
+    "opened": 2,
+    "repaid": 1,
+    "overdue": 1,
+    "defaulted": 1,
+    "rows": [
+     {
+      "id": "loan_00001",
+      "lender": "neighbour_orrin",
+      "borrower": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "repaid",
+      "owed": 0.0
+     },
+     {
+      "id": "loan_00002",
+      "lender": "neighbour_elsa",
+      "borrower": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "defaulted",
+      "owed": 3.0
+     }
+    ]
+   },
+   "wages": {
+    "hired": 8,
+    "paid": 6,
+    "lapsed": 2,
+    "rows": [
+     {
+      "id": "job_00001",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00002",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "rations",
+      "qty": 1,
+      "status": "paid"
+     },
+     {
+      "id": "job_00003",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00004",
+      "employer": "neighbour_orrin",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00005",
+      "employer": "neighbour_orrin",
+      "worker": "family_mara",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     },
+     {
+      "id": "job_00006",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00007",
+      "employer": "neighbour_elsa",
+      "worker": "family_tomas",
+      "item": "coin",
+      "qty": 2,
+      "status": "paid"
+     },
+     {
+      "id": "job_00008",
+      "employer": "neighbour_elsa",
+      "worker": "family_lina",
+      "item": "coin",
+      "qty": 2,
+      "status": "lapsed"
+     }
+    ]
+   },
+   "stall": {
+    "sales": 2,
+    "ask_end": 12,
+    "factors": [
+     {
+      "day": 1,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.625,
+       "rations": 0.7273,
+       "wood_bundle": 0.7692
+      }
+     },
+     {
+      "day": 2,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.5,
+       "rations": 1.8321,
+       "wood_bundle": 0.6623
+      }
+     },
+     {
+      "day": 3,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.7227,
+       "rations": 1.3534,
+       "wood_bundle": 0.6035
+      }
+     },
+     {
+      "day": 4,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 0.8979,
+       "rations": 1.448,
+       "wood_bundle": 0.5682
+      }
+     },
+     {
+      "day": 5,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0172,
+       "rations": 2.408,
+       "wood_bundle": 0.5459
+      }
+     },
+     {
+      "day": 6,
+      "factors": {
+       "berries": 1.0,
+       "crop_bundle": 1.0125,
+       "rations": 3.0,
+       "wood_bundle": 0.5313
+      }
+     }
+    ]
+   },
+   "ladder_counts": {
+    "repay:errand": 1,
+    "forage:errand": 17,
+    "work:errand": 33,
+    "forage:ok": 35,
+    "repay:ok": 1,
+    "work:ok": 42,
+    "buy:out_of_stock": 14,
+    "beg:ok": 20,
+    "beg:errand": 15,
+    "work:illegal:employer_cannot_pay": 2,
+    "trade:errand": 11,
+    "trade:ok": 21,
+    "buy:errand": 2,
+    "buy:ok": 2,
+    "buy:cannot_afford": 6,
+    "borrow:ok": 3,
+    "steal:errand": 1,
+    "steal:illegal:watched": 10,
+    "steal:ok": 1,
+    "report:errand": 1,
+    "report:ok": 1,
+    "enforce:errand": 1,
+    "enforce:ok": 1
+   },
+   "answers": {
+    "work_for:hire": 8,
+    "work_for:refuse_staffed": 1,
+    "request_item:give": 5,
+    "work_for:refuse_no_wage": 22,
+    "offer_trade:refuse_no_item": 21,
+    "request_item:refuse_no_item": 14,
+    "work_for:refuse_defaulter": 4,
+    "borrow_item:refuse_defaulter": 1,
+    "borrow_item:refuse_stranger": 2,
+    "report_theft:accept": 1,
+    "request_item:refuse_thief": 1,
+    "work_for:refuse_thief": 1
+   },
+   "events": {
+    "fetched_item": 18,
+    "ate": 25,
+    "debt_paid": 1,
+    "work_asked": 36,
+    "item_requested": 20,
+    "gave_item": 5,
+    "wage_paid": 6,
+    "trade_offered": 21,
+    "loan_overdue": 1,
+    "chatted": 4,
+    "loan_defaulted": 1,
+    "bought": 2,
+    "loan_asked": 3,
+    "theft": 1,
+    "loss_discovered": 1,
+    "gossiped": 4,
+    "theft_reported": 1,
+    "damages_levied": 1,
+    "warned": 1
+   },
+   "reputation": {
+    "theft": 1,
+    "discovered": 1,
+    "opinion_drop": 2,
+    "gossip": 4,
+    "confront": 1
+   },
+   "items_start": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 6,
+    "rations": 20,
+    "wood_bundle": 3
+   },
+   "items_end": {
+    "bandage": 2,
+    "coin": 49,
+    "crop_bundle": 1,
+    "wood_bundle": 3
+   },
+   "silent_starvation": [],
+   "stuck_errands": [],
+   "late_actions": 82,
+   "errors": 0,
+   "last_action": {
+    "neighbour_elsa": 3856,
+    "family_mara": 3638,
+    "family_tomas": 3839,
+    "family_lina": 3848,
+    "neighbour_orrin": 3704
+   },
+   "timeline": [
+    {
+     "tick": 1,
+     "residents": {
+      "family_mara": {
+       "x": 57.0,
+       "y": 88.0,
+       "hunger": 40.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 60.6,
+       "y": 89.0,
+       "hunger": 80.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 55.1,
+       "y": 92.4,
+       "hunger": 80.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.1,
+       "y": 89.0,
+       "hunger": 0.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 146.2,
+       "y": 88.9,
+       "hunger": 70.05,
+       "thirst": 0.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 101,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 45.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.8,
+       "y": 118.4,
+       "hunger": 85.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 111.3,
+       "y": 114.2,
+       "hunger": 65.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 5.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 655.0,
+       "y": 403.5,
+       "hunger": 15.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 201,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.7,
+       "hunger": 50.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 134.0,
+       "y": 117.9,
+       "hunger": 65.05,
+       "thirst": 14.07,
+       "hp": 98.3
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 50.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 10.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 301,
+     "residents": {
+      "family_mara": {
+       "x": 120.4,
+       "y": 117.8,
+       "hunger": 35.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 50.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 55.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 401,
+     "residents": {
+      "family_mara": {
+       "x": 133.4,
+       "y": 118.9,
+       "hunger": 40.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 133.1,
+       "y": 119.1,
+       "hunger": 55.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.1,
+       "y": 119.2,
+       "hunger": 60.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.7,
+       "y": 119.0,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 501,
+     "residents": {
+      "family_mara": {
+       "x": 133.8,
+       "y": 117.6,
+       "hunger": 20.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 122.9,
+       "y": 119.8,
+       "hunger": 35.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 660.7,
+       "y": 401.3,
+       "hunger": 40.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 133.5,
+       "y": 118.8,
+       "hunger": 25.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 658.8,
+       "y": 402.1,
+       "hunger": 10.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 601,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 25.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.4,
+       "y": 118.7,
+       "hunger": 40.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 156.3,
+       "y": 118.2,
+       "hunger": 45.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.4,
+       "y": 118.4,
+       "hunger": 30.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 15.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 701,
+     "residents": {
+      "family_mara": {
+       "x": 50.9,
+       "y": 113.2,
+       "hunger": 30.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 162.4,
+       "y": 118.7,
+       "hunger": 45.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 162.2,
+       "y": 119.1,
+       "hunger": 50.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 15.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 801,
+     "residents": {
+      "family_mara": {
+       "x": 150.8,
+       "y": 118.7,
+       "hunger": 10.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 132.6,
+       "y": 122.6,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 160.2,
+       "y": 119.0,
+       "hunger": 30.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 901,
+     "residents": {
+      "family_mara": {
+       "x": 66.7,
+       "y": 120.7,
+       "hunger": 15.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 38.9,
+       "y": 135.0,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 118.4,
+       "y": 115.3,
+       "hunger": 35.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.9,
+       "y": 388.6,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 164.5,
+       "y": 118.3,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1001,
+     "residents": {
+      "family_mara": {
+       "x": 49.1,
+       "y": 112.8,
+       "hunger": 20.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 124.1,
+       "y": 87.6,
+       "hunger": 35.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 44.6,
+       "y": 107.7,
+       "hunger": 40.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 140.6,
+       "y": 100.6,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1101,
+     "residents": {
+      "family_mara": {
+       "x": 49.1,
+       "y": 112.8,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 142.3,
+       "y": 116.6,
+       "hunger": 40.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 119.5,
+       "y": 82.4,
+       "hunger": 45.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 136.8,
+       "y": 90.3,
+       "hunger": 15.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1201,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 112.3,
+       "hunger": 10.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 64.1,
+       "y": 130.2,
+       "hunger": 20.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 104.9,
+       "y": 113.4,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 20.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1301,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 15.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 25.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 674.1,
+       "y": 36.9,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1401,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 40.0,
+       "hunger": 30.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.3,
+       "y": 80.6,
+       "hunger": 35.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.4,
+       "y": 377.2,
+       "hunger": 30.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 15.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1501,
+     "residents": {
+      "family_mara": {
+       "x": 619.9,
+       "y": 37.5,
+       "hunger": 25.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 120.0,
+       "y": 80.0,
+       "hunger": 10.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 122.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 15.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 20.05,
+       "thirst": 5.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1601,
+     "residents": {
+      "family_mara": {
+       "x": 620.6,
+       "y": 38.2,
+       "hunger": 30.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 76.0,
+       "y": 80.0,
+       "hunger": 15.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 668.3,
+       "y": 40.7,
+       "hunger": 25.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 20.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 25.05,
+       "thirst": 12.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1701,
+     "residents": {
+      "family_mara": {
+       "x": 105.2,
+       "y": 80.7,
+       "hunger": 35.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 649.9,
+       "y": 45.3,
+       "hunger": 20.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 30.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 25.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.8,
+       "y": 376.6,
+       "hunger": 30.05,
+       "thirst": 19.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1801,
+     "residents": {
+      "family_mara": {
+       "x": 630.8,
+       "y": 384.6,
+       "hunger": 40.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 649.4,
+       "y": 46.3,
+       "hunger": 25.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.6,
+       "y": 376.6,
+       "hunger": 30.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 15.05,
+       "thirst": 26.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 1901,
+     "residents": {
+      "family_mara": {
+       "x": 63.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.2,
+       "y": 37.4,
+       "hunger": 30.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 99.7,
+       "y": 81.0,
+       "hunger": 15.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 640.4,
+       "y": 383.3,
+       "hunger": 10.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 20.05,
+       "thirst": 8.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2001,
+     "residents": {
+      "family_mara": {
+       "x": 621.4,
+       "y": 37.2,
+       "hunger": 25.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 109.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 20.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 25.05,
+       "thirst": 15.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2101,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 30.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 671.3,
+       "y": 394.5,
+       "hunger": 40.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 25.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 20.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.5,
+       "y": 375.9,
+       "hunger": 30.05,
+       "thirst": 22.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2201,
+     "residents": {
+      "family_mara": {
+       "x": 107.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 66.0,
+       "y": 80.0,
+       "hunger": 25.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 675.0,
+       "y": 36.5,
+       "hunger": 30.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.5,
+       "y": 376.5,
+       "hunger": 25.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 15.05,
+       "thirst": 29.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2301,
+     "residents": {
+      "family_mara": {
+       "x": 114.0,
+       "y": 80.0,
+       "hunger": 15.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 38.0,
+       "hunger": 30.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 97.4,
+       "y": 80.8,
+       "hunger": 10.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.2,
+       "y": 375.8,
+       "hunger": 10.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 20.05,
+       "thirst": 11.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2401,
+     "residents": {
+      "family_mara": {
+       "x": 622.1,
+       "y": 38.0,
+       "hunger": 20.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 110.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 100.0,
+       "y": 80.1,
+       "hunger": 15.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 620.9,
+       "y": 376.5,
+       "hunger": 15.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 377.2,
+       "hunger": 25.05,
+       "thirst": 18.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2501,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 112.5,
+       "hunger": 25.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 141.6,
+       "y": 111.2,
+       "hunger": 40.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 20.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 25.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2601,
+     "residents": {
+      "family_mara": {
+       "x": 49.4,
+       "y": 111.4,
+       "hunger": 30.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 47.3,
+       "y": 133.1,
+       "hunger": 20.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 25.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.0,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 10.05,
+       "thirst": 7.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2701,
+     "residents": {
+      "family_mara": {
+       "x": 131.8,
+       "y": 83.0,
+       "hunger": 35.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 51.4,
+       "y": 85.7,
+       "hunger": 25.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.2,
+       "y": 94.3,
+       "hunger": 30.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 648.0,
+       "y": 390.0,
+       "hunger": 30.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 15.05,
+       "thirst": 14.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2801,
+     "residents": {
+      "family_mara": {
+       "x": 136.9,
+       "y": 115.9,
+       "hunger": 20.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 50.0,
+       "hunger": 30.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 110.1,
+       "y": 114.0,
+       "hunger": 35.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.4,
+       "y": 388.4,
+       "hunger": 15.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 21.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 2901,
+     "residents": {
+      "family_mara": {
+       "x": 49.9,
+       "y": 113.1,
+       "hunger": 25.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 120.5,
+       "y": 80.3,
+       "hunger": 35.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 136.0,
+       "y": 116.9,
+       "hunger": 40.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.4,
+       "y": 388.4,
+       "hunger": 20.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 28.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3001,
+     "residents": {
+      "family_mara": {
+       "x": 48.9,
+       "y": 111.9,
+       "hunger": 30.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 74.4,
+       "y": 112.5,
+       "hunger": 15.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 36.7,
+       "y": 106.9,
+       "hunger": 20.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 649.0,
+       "y": 394.4,
+       "hunger": 25.05,
+       "thirst": 35.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 10.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3101,
+     "residents": {
+      "family_mara": {
+       "x": 648.0,
+       "y": 400.0,
+       "hunger": 35.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 33.3,
+       "y": 135.3,
+       "hunger": 20.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 24.5,
+       "y": 97.2,
+       "hunger": 25.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 30.05,
+       "thirst": 42.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 657.8,
+       "y": 402.4,
+       "hunger": 15.05,
+       "thirst": 17.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3201,
+     "residents": {
+      "family_mara": {
+       "x": 51.2,
+       "y": 112.7,
+       "hunger": 40.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 648.0,
+       "y": 45.0,
+       "hunger": 25.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 30.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 35.05,
+       "thirst": 49.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 20.05,
+       "thirst": 24.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3301,
+     "residents": {
+      "family_mara": {
+       "x": 49.2,
+       "y": 112.9,
+       "hunger": 20.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 30.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 10.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.7,
+       "y": 393.6,
+       "hunger": 40.05,
+       "thirst": 56.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 25.05,
+       "thirst": 6.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3401,
+     "residents": {
+      "family_mara": {
+       "x": 48.5,
+       "y": 111.7,
+       "hunger": 25.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 108.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 15.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 647.9,
+       "y": 389.6,
+       "hunger": 20.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.9,
+       "y": 119.4,
+       "hunger": 30.05,
+       "thirst": 13.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3501,
+     "residents": {
+      "family_mara": {
+       "x": 49.5,
+       "y": 111.8,
+       "hunger": 30.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 670.8,
+       "y": 396.7,
+       "hunger": 40.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 20.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 141.5,
+       "y": 109.6,
+       "hunger": 25.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 658.8,
+       "y": 402.1,
+       "hunger": 15.05,
+       "thirst": 20.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3601,
+     "residents": {
+      "family_mara": {
+       "x": 137.2,
+       "y": 118.5,
+       "hunger": 35.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 84.1,
+       "y": 106.1,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 25.6,
+       "y": 97.9,
+       "hunger": 25.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 134.8,
+       "y": 118.9,
+       "hunger": 30.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 163.0,
+       "y": 118.9,
+       "hunger": 20.05,
+       "thirst": 27.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3701,
+     "residents": {
+      "family_mara": {
+       "x": 80.8,
+       "y": 97.1,
+       "hunger": 15.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 647.3,
+       "y": 36.8,
+       "hunger": 30.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 109.4,
+       "y": 92.1,
+       "hunger": 30.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 658.1,
+       "y": 389.5,
+       "hunger": 10.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 378.0,
+       "hunger": 25.05,
+       "thirst": 9.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3801,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 20.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 108.0,
+       "y": 80.0,
+       "hunger": 35.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 635.7,
+       "y": 391.3,
+       "hunger": 35.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.0,
+       "y": 376.3,
+       "hunger": 15.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 648.0,
+       "y": 379.0,
+       "hunger": 30.05,
+       "thirst": 16.07,
+       "hp": 100.0
+      }
+     }
+    },
+    {
+     "tick": 3901,
+     "residents": {
+      "family_mara": {
+       "x": 621.2,
+       "y": 37.1,
+       "hunger": 25.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_tomas": {
+       "x": 64.0,
+       "y": 80.0,
+       "hunger": 40.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "family_lina": {
+       "x": 106.0,
+       "y": 80.0,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_orrin": {
+       "x": 621.0,
+       "y": 376.3,
+       "hunger": 20.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      },
+      "neighbour_elsa": {
+       "x": 647.9,
+       "y": 376.2,
+       "hunger": 15.05,
+       "thirst": 23.07,
+       "hp": 100.0
+      }
+     }
+    }
+   ],
+   "balance": {
+    "mean_hunger": {
+     "family_mara": 27.74,
+     "family_tomas": 34.27,
+     "family_lina": 31.69,
+     "neighbour_orrin": 21.4,
+     "neighbour_elsa": 23.1
+    },
+    "tail_mean_hunger": {
+     "family_mara": 28.2,
+     "family_tomas": 30.4,
+     "family_lina": 24.11,
+     "neighbour_orrin": 24.27,
+     "neighbour_elsa": 23.58
+    },
+    "tail_peak_hunger": {
+     "family_mara": 44.25,
+     "family_tomas": 45.0,
+     "family_lina": 37.4,
+     "neighbour_orrin": 41.4,
+     "neighbour_elsa": 34.3
+    },
+    "tail_probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 0,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "floor_cycle_ticks_ge65": {
+     "family_mara": 0,
+     "family_tomas": 279,
+     "family_lina": 127,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 56
+    },
+    "probable_tier0_rescues": {
+     "family_mara": 0,
+     "family_tomas": 1,
+     "family_lina": 0,
+     "neighbour_orrin": 0,
+     "neighbour_elsa": 0
+    },
+    "wage_capacity_samples": {
+     "family_mara": 2,
+     "family_tomas": 33,
+     "family_lina": 72,
+     "neighbour_orrin": 13,
+     "neighbour_elsa": 16
+    },
+    "wage_samples": 80,
+    "stall_coin_end": 5,
+    "keeper_coin_end": 2,
+    "collect_till": {},
+    "declared_farm_crop_bundles": 0
+   },
+   "digest": "2fbbeae222e2dbd0",
+   "verdict": {
+    "checks": {
+     "nobody_dies": true,
+     "no_silent_starvation": true,
+     "no_stuck_errands": true,
+     "no_deadlock": true,
+     "coin_conserved": true,
+     "nothing_created": true,
+     "no_errors": true
+    },
+    "pass": true,
+    "created": []
+   }
+  }
+ ]
+}

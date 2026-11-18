@@ -1,0 +1,110 @@
+"""Resident task queue and future activity execution scaffolding."""
+
+from .catalog import TASK_KIND_DEFS, TASK_KIND_IDS
+from .contracts import TaskExecutionContext, TaskWorldBridge, build_task_execution_context
+from .dispatcher import TASK_FAMILY_MODULES, dispatch_family, execute_active_task_step
+from .families.combat import combat_task_specs
+from .families.construction import construction_task_specs
+from .families.occupation import (
+    baseline_provisioning_task_specs,
+    baseline_task_candidates,
+    builder_work_task_specs,
+    farmer_work_task_specs,
+    fisherman_work_task_specs,
+    gatherer_work_task_specs,
+    guard_work_task_specs,
+    healer_work_task_specs,
+    hunter_work_task_specs,
+    routine_task_specs,
+    should_activate_builder_work,
+    should_activate_farmer_work,
+    should_activate_fisherman_work,
+    should_activate_gatherer_work,
+    should_activate_guard_work,
+    should_activate_healer_work,
+    should_activate_hunter_work,
+    should_activate_trader_work,
+    should_activate_woodcutter_work,
+    suggested_occupation_task_kind,
+    trader_work_task_specs,
+    woodcutter_work_task_specs,
+)
+from .families.social import social_task_specs
+from .families.strategic import strategic_task_specs
+from .families.survival import survival_task_specs
+from .lifecycle import TASK_STATE_SCHEMA_VERSION, ensure_task_state
+from .ops import (
+    active_task_payload,
+    clear_resident_tasks,
+    complete_current_task,
+    ensure_resident_tasks,
+    interrupt_current_task,
+    queue_resident_task,
+    replace_resident_tasks,
+    resume_paused_tasks,
+    start_next_resident_task,
+    task_prompt_payload,
+    task_prompt_summary,
+)
+from .prompt_view import build_task_prompt_payload, summarize_tasks
+from .resolver import active_task, queued_tasks, task_kind_def
+from .schema import TASK_SCHEMA_VERSION, build_task_record, build_task_state
+
+__all__ = [
+    "TASK_KIND_DEFS",
+    "TASK_KIND_IDS",
+    "TASK_SCHEMA_VERSION",
+    "TASK_STATE_SCHEMA_VERSION",
+    "TASK_FAMILY_MODULES",
+    "TaskExecutionContext",
+    "TaskWorldBridge",
+    "active_task",
+    "active_task_payload",
+    "baseline_provisioning_task_specs",
+    "baseline_task_candidates",
+    "builder_work_task_specs",
+    "build_task_execution_context",
+    "build_task_prompt_payload",
+    "build_task_record",
+    "build_task_state",
+    "clear_resident_tasks",
+    "combat_task_specs",
+    "construction_task_specs",
+    "complete_current_task",
+    "dispatch_family",
+    "ensure_resident_tasks",
+    "ensure_task_state",
+    "execute_active_task_step",
+    "farmer_work_task_specs",
+    "fisherman_work_task_specs",
+    "gatherer_work_task_specs",
+    "guard_work_task_specs",
+    "healer_work_task_specs",
+    "hunter_work_task_specs",
+    "interrupt_current_task",
+    "queue_resident_task",
+    "queued_tasks",
+    "replace_resident_tasks",
+    "resume_paused_tasks",
+    "routine_task_specs",
+    "social_task_specs",
+    "strategic_task_specs",
+    "should_activate_builder_work",
+    "should_activate_farmer_work",
+    "should_activate_fisherman_work",
+    "should_activate_gatherer_work",
+    "should_activate_guard_work",
+    "should_activate_healer_work",
+    "should_activate_hunter_work",
+    "should_activate_trader_work",
+    "should_activate_woodcutter_work",
+    "start_next_resident_task",
+    "survival_task_specs",
+    "suggested_occupation_task_kind",
+    "summarize_tasks",
+    "task_kind_def",
+    "task_prompt_payload",
+    "task_prompt_summary",
+    "trader_work_task_specs",
+    "woodcutter_work_task_specs",
+]

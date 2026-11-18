@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "items": [
+    "R6.6"
+  ],
+  "updated_at": "2026-10-10T12:07:45.094219+00:00",
+  "returncode": 0,
+  "conversation_id": "d8147f71-8d0c-4ec5-9ac1-4eec87b448eb",
+  "denied_actions": [
+    {
+      "action": "command",
+      "display_name": "RunCommand"
+    }
+  ]
+}

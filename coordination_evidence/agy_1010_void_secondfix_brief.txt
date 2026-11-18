@@ -1,0 +1,12 @@
+Repair void telemetry handoff after actual root unittest verification. Standing Google/source-sharing/implementation authorization todayTorontoOct10. Native bounded reads/writes only, NO shell/RunCommand/Git/tests. Editable ONLY prior assigned systems/movement/spatial.py, narrow map_test.py movement reconciliation, harness/window_manager.py counters, tests/test_void_barrier_telemetry_1010.py, original void report. No other assignments/probe/economy edits.
+
+Root command .venv/Scripts/python.exe -m unittest discover -s tests -p test_void_barrier_telemetry_1010.py: 17 tests, FIVE FAILURES:
+test_real_engine_once_per_attempt_corner_accounting x260 vs expected255.65;
+test_real_engine_player_and_resident_hit_attribution x0 vs expected255.65;
+test_real_engine_teleport_and_stale_non_movement actual255.64999389648438 vs255.65 atplaces6 (float32 precision);
+test_real_engine_unobstructed_movement x0 vs252;
+test_mixed_blockers_wall_and_void diag['void_hit'] False while test expects True.
+
+Read actual Engine.step/resident/player runtime and fixture setup to correct factual path setup. Do not merely loosen positions into vacuous checks. Float32 rounding needs dtype-appropriate tolerance, not 1e-6 when dtype cannot represent value. Mixed wall/void must count only actually binding blockers; a nearer wall occluding a further void should NOT be counted void just because swept box intersects. Verify factual geometry expected contact.
+
+Counter scope: final reconciliation may miss anchor_mover pre-clamped autonomous contact. Document exactly tested controlled-player scope; do not promise all-resident zero-contact truth unless actually instrumented existing earlier path without double counting and with actual integration tests. Preserve flag-off movement, no public defaults. Actual controlled-player input coverage/once per attempt/rebase/teleport/stale nonmovement/existing window stats envelope must be tested truthfully. Root handles test execution. Report each changed cause and remaining coverage limits.

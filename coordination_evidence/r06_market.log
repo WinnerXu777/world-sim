@@ -1,0 +1,85 @@
+test_a_family_with_coin_buys_from_the_stall_instead_of_stealing_and_the_price_follows_a_shock (test_market_ladder.MarketScenario.test_a_family_with_coin_buys_from_the_stall_instead_of_stealing_and_the_price_follows_a_shock) ... FAIL
+test_the_market_run_is_deterministic (test_market_ladder.MarketScenario.test_the_market_run_is_deterministic) ... ok
+test_buy_is_not_built_without_the_market_and_sits_between_work_and_trade (test_market_ladder.Ordering.test_buy_is_not_built_without_the_market_and_sits_between_work_and_trade) ... ok
+test_paying_opens_before_begging_stealing_or_trading_at_any_conscience (test_market_ladder.Ordering.test_paying_opens_before_begging_stealing_or_trading_at_any_conscience) ... ok
+
+======================================================================
+FAIL: test_a_family_with_coin_buys_from_the_stall_instead_of_stealing_and_the_price_follows_a_shock (test_market_ladder.MarketScenario.test_a_family_with_coin_buys_from_the_stall_instead_of_stealing_and_the_price_follows_a_shock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\r63_fixed_goldens\tests\test_market_ladder.py", line 39, in test_a_family_with_coin_buys_from_the_stall_instead_of_stealing_and_the_price_follows_a_shock
+    self.assertEqual(proc.returncode, 0, proc.stdout[-1200:] + proc.stderr[-1200:])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ms
+{
+ "variant": "market",
+ "flags": {
+  "ladder": true,
+  "reputation": true,
+  "tier1": "rules",
+  "tier3": "off"
+ },
+ "peak_hunger": {
+  "family_mara": 40.84,
+  "family_tomas": 40.83,
+  "family_lina": 40.92,
+  "neighbour_orrin": 30.0,
+  "neighbour_elsa": 30.0
+ },
+ "dead_at": {},
+ "events": {
+  "trade_offered": 3,
+  "traded": 3,
+  "item_requested": 5,
+  "gave_item": 5,
+  "ate": 10,
+  "chatted": 1
+ },
+ "digest": "999831d2ac57f5c6",
+ "verdict": {
+  "checks": {
+   "nobody_dies": true,
+   "no_unexplained_starvation": true,
+   "ladder_acted": true,
+   "expected_rung_succeeded": false,
+   "no_errors": true,
+   "bought_event": false,
+   "no_theft_while_affordable": true,
+   "coin_conserved": true,
+   "paid_the_stall_price": false,
+   "price_rose_after_shock": false,
+   "bought_less_after_shock": true
+  },
+  "acted": {
+   "forage": 5,
+   "buy": 9,
+   "trade": 3,
+   "beg": 5,
+   "steal": 0
+  },
+  "succeeded": {
+   "forage": 5,
+   "buy": 0,
+   "trade": 3,
+   "beg": 5,
+   "steal": 0
+  },
+  "unexplained": [],
+  "pass": false
+ },
+ "ladder_counts": {
+  "buy:out_of_stock": 9,
+  "trade:errand": 3,
+  "beg:errand": 6,
+  "trade:ok": 3,
+  "beg:ok": 5,
+  "forage:ok": 5
+ },
+ "reputation_counts": {}
+}
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 95.427s
+
+FAILED (failures=1)

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "h_000001",
+  "profile": {
+    "name": "Adam",
+    "created_tick": 0,
+    "sex": 0,
+    "life_exp": 80.0,
+    "personality": {
+      "archetype": "communal",
+      "caution": 0.294,
+      "sociability": 0.778,
+      "resourcefulness": 0.735,
+      "resolve": 0.391
+    }
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "seek_shelter",
+    "last_decision_tick": 0,
+    "last_reason": "threat and low resilience favor shelter"
+  },
+  "relationships": {},
+  "memory": {
+    "recent_events": [
+      {
+        "tick": 0,
+        "kind": "decision",
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 0,
+        "last_reinforced_tick": 0,
+        "expires_tick": 1800,
+        "permanent": false,
+        "archived": false
+      }
+    ],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [
+      {
+        "tick": 0,
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "action": {
+          "type": "move_toward",
+          "target_eid": -1,
+          "magnitude": 6.8999999999999995
+        },
+        "distress": 1.85
+      }
+    ],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 0,
+    "slot": 0,
+    "x": 100.0,
+    "y": 100.0,
+    "sex": 0,
+    "age": 0.0,
+    "hp": 80.0,
+    "hunger": 70.0,
+    "thirst": 40.0,
+    "threat": 65.0,
+    "mood": 50.0,
+    "stamina": 50.0,
+    "infection": 0.0,
+    "tribe": 0.0,
+    "escalated": true
+  },
+  "runtime": {
+    "slot": 0,
+    "alive": true,
+    "last_seen_tick": 0
+  }
+}

@@ -1,0 +1,64 @@
+.F.F...............
+======================================================================
+FAIL: test_block_matches_the_resolver (test_harness_calendar.LegacyIsTodayTests.test_block_matches_the_resolver)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar.py", line 36, in test_block_matches_the_resolver
+    self.assertEqual(cal.LEGACY.block_for_tick(tick), resolver.tick_to_time_block(tick), tick)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'dawn' != 'day'
+- dawn
++ day
+ : 500
+
+======================================================================
+FAIL: test_season_matches_weather (test_harness_calendar.LegacyIsTodayTests.test_season_matches_weather)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar.py", line 29, in test_season_matches_weather
+    self.assertEqual(cal.LEGACY.season_for_tick(tick), weather.season_for_tick(tick), tick)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'summer' != 'spring'
+- summer
++ spring
+ : 150
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.145s
+
+FAILED (failures=2)
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.436s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.009s
+
+OK
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready — 27 entities, device=cpu.
+Executing <Task finished name='Task-2' coro=<FlagOffTests.test_no_calendar_key_anywhere() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar_wire.py:39> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.194 seconds
+.[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready — 27 entities, device=cpu.
+Executing <Task finished name='Task-7' coro=<FlagOnTests.test_bootstrap_world_carries_the_calendar() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar_wire.py:50> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.149 seconds
+.[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready — 27 entities, device=cpu.
+Executing <Task finished name='Task-12' coro=<FlagOnTests.test_every_frame_carries_the_time_block() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar_wire.py:60> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.166 seconds
+.[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-9c6b1387a5fa4dad89c006f0c0317d90\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready — 27 entities, device=cpu.
+Executing <Task finished name='Task-17' coro=<FlagOnTests.test_the_block_follows_the_calendar_through_a_day_and_a_year() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tests\test_harness_calendar_wire.py:71> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.156 seconds
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.997s
+
+OK

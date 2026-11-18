@@ -1,0 +1,74 @@
+{
+  "status": "complete",
+  "time": "2026-10-10T08:41:15-04:00",
+  "results": [
+    {
+      "mode": "default",
+      "exit_code": 0,
+      "seconds": 49.0,
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--out",
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_default.json"
+      ],
+      "log": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_default.log",
+      "trace": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_default.json",
+      "trace_sha256": "8ea4fa9561d9ed11979586ebecbc2747416cf60cd76b17037727fce128f566d1"
+    },
+    {
+      "mode": "resources",
+      "exit_code": 0,
+      "seconds": 55.1,
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--resources",
+        "--out",
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_resources.json"
+      ],
+      "log": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_resources.log",
+      "trace": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_resources.json",
+      "trace_sha256": "3506d44fe1fa13527ef0bccec2724755bb81bdc96a2b5f85daa31b28e55719ae"
+    },
+    {
+      "mode": "spaces",
+      "exit_code": 0,
+      "seconds": 51.8,
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--spaces",
+        "--out",
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_spaces.json"
+      ],
+      "log": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_spaces.log",
+      "trace": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_spaces.json",
+      "trace_sha256": "08fc27a5a6fb6d76e995e29bf04c0e5d2c18af4add0db1025a463984374ed510"
+    },
+    {
+      "mode": "window-hook",
+      "exit_code": 0,
+      "seconds": 59.6,
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--window-hook",
+        "--out",
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_window-hook.json"
+      ],
+      "log": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_window-hook.log",
+      "trace": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\coordination_evidence\\codex_1010_r02_retry_window-hook.json",
+      "trace_sha256": "f9708e838e1ba33c01ce1f5a35e6c42c649c0633a5eac8e51e612e8641913540"
+    }
+  ],
+  "snapshot_sha256": "c386c6ba115cb477de80ae6bab30f28ec2e7fb731caa4429f2fa7d5497db72ab"
+}

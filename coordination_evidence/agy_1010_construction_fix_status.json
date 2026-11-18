@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "items": [
+    "R6.4"
+  ],
+  "updated_at": "2026-10-11T03:10:53.641843+00:00",
+  "returncode": 3,
+  "conversation_id": "9046b394-8f46-48f4-95fc-e763d4077fde",
+  "denied_actions": []
+}

@@ -1,0 +1,68 @@
+{
+  "request": {
+    "job_id": "o_000001:decide",
+    "role": "decide",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 3,
+    "priority": "active",
+    "deadline_ms": 1000,
+    "cancel_token": "o_000001",
+    "schema_version": 1,
+    "payload": {
+      "resident_id": "h_000004",
+      "trigger": "commission_request:o_000001",
+      "question_kind": "choice",
+      "tick": 5120,
+      "topic": "commission",
+      "state": {
+        "closeness": 0.4,
+        "rival": false,
+        "traits": {
+          "greed": 0.6,
+          "discipline": 0.7
+        },
+        "pressures": {
+          "security": 0.1
+        },
+        "price": 18,
+        "open_orders": 1,
+        "capacity": 3,
+        "missing": [],
+        "forge_available": true
+      },
+      "options": [
+        {
+          "id": "accept_commission",
+          "description": "Accept the commission and reserve the materials and payment.",
+          "tags": [
+            "commission"
+          ]
+        },
+        {
+          "id": "refuse_busy",
+          "description": "Refuse: too many open orders already.",
+          "tags": [
+            "commission"
+          ]
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "o_000001:decide",
+    "role": "decide",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 3,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "probabilities": {
+        "accept_commission": 0.687374,
+        "refuse_busy": 0.312626
+      }
+    }
+  }
+}

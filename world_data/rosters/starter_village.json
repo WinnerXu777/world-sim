@@ -1,0 +1,227 @@
+{
+  "map_id": "starter_village",
+  "needs_scale": 0.015,
+  "age_scale": 0.05,
+  "needs": {
+    "threshold": 30,
+    "ration": 25,
+    "water": {
+      "anchor": "village:use_well",
+      "ticks": 40
+    },
+    "food": {
+      "anchor": "village:use_campfire",
+      "ticks": 60
+    }
+  },
+  "residents": [
+    {
+      "key": "smith",
+      "name": "Brann",
+      "sex": 0,
+      "age": 38,
+      "role": "smith",
+      "archetype": "stoic_survivor",
+      "traits": {
+        "greed": 0.45,
+        "discipline": 0.8
+      },
+      "anchors": {
+        "spawn": "smith:spawn",
+        "work": "smith:work_forge",
+        "talk": "smith:talk",
+        "sleep": "smith:sleep"
+      },
+      "stock": {
+        "iron_ingot": 4,
+        "wood_bundle": 4
+      },
+      "personal": {
+        "hammer": 1,
+        "coin": 20
+      },
+      "inventory": {
+        "slots": 16,
+        "weight": 80.0
+      },
+      "work_mode": "occupation"
+    },
+    {
+      "key": "builder",
+      "name": "Mara",
+      "sex": 1,
+      "age": 24,
+      "role": "builder",
+      "archetype": "caretaker",
+      "traits": {
+        "discipline": 0.65
+      },
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:builder_work",
+        "talk": "village:mara_talk",
+        "sleep": "village:mara_porch_rest",
+        "home": "village:door_mara"
+      },
+      "personal": {
+        "hammer": 1,
+        "coin": 35
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      },
+      "work_mode": "anchor_only"
+    },
+    {
+      "key": "gatherer",
+      "name": "Toma",
+      "sex": 0,
+      "age": 21,
+      "role": "gatherer",
+      "archetype": "wanderer",
+      "traits": {
+        "curiosity": 0.75
+      },
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:gatherer_work",
+        "talk": "village:toma_talk",
+        "sleep": "village:toma_porch_rest",
+        "home": "village:door_toma"
+      },
+      "personal": {
+        "basket": 1,
+        "coin": 35
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      },
+      "work_mode": "anchor_only"
+    },
+    {
+      "key": "iven",
+      "name": "Iven",
+      "sex": 0,
+      "age": 28,
+      "role": null,
+      "archetype": "balanced_survivor",
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:use_well",
+        "talk": "village:talk_square",
+        "sleep": "lodge:sleep_iven",
+        "home": "village:home_iven"
+      },
+      "work_mode": "anchor_only",
+      "personal": {
+        "coin": 40,
+        "rations": 1
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      }
+    },
+    {
+      "key": "elsa",
+      "name": "Elsa",
+      "sex": 1,
+      "age": 26,
+      "role": null,
+      "archetype": "social_climber",
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:use_campfire",
+        "talk": "village:elsa_talk",
+        "sleep": "lodge:sleep_elsa",
+        "home": "village:home_elsa"
+      },
+      "work_mode": "anchor_only",
+      "personal": {
+        "coin": 40,
+        "bandage": 1
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      }
+    },
+    {
+      "key": "rhea",
+      "name": "Rhea",
+      "sex": 1,
+      "age": 31,
+      "role": null,
+      "archetype": "caretaker",
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:rhea_work",
+        "talk": "village:rhea_talk",
+        "sleep": "west:sleep_rhea",
+        "home": "village:home_rhea"
+      },
+      "work_mode": "anchor_only",
+      "personal": {
+        "coin": 25,
+        "basket": 1,
+        "rations": 2
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      }
+    },
+    {
+      "key": "orrin",
+      "name": "Orrin",
+      "sex": 0,
+      "age": 42,
+      "role": null,
+      "archetype": "social_climber",
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:orrin_work",
+        "talk": "village:orrin_talk",
+        "sleep": "lodge:sleep_orrin",
+        "home": "village:home_orrin"
+      },
+      "work_mode": "anchor_only",
+      "personal": {
+        "coin": 60,
+        "basket": 1,
+        "rations": 1
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      }
+    },
+    {
+      "key": "nessa",
+      "name": "Nessa",
+      "sex": 1,
+      "age": 29,
+      "role": null,
+      "archetype": "caretaker",
+      "anchors": {
+        "spawn": "village:spawn",
+        "work": "village:nessa_work",
+        "talk": "village:nessa_talk",
+        "sleep": "west:sleep_nessa",
+        "home": "village:home_nessa"
+      },
+      "work_mode": "anchor_only",
+      "personal": {
+        "coin": 30,
+        "bandage": 2,
+        "rations": 1
+      },
+      "inventory": {
+        "slots": 8,
+        "weight": 24.0
+      }
+    }
+  ]
+}

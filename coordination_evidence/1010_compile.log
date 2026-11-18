@@ -1,0 +1,186 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] update_scripts_classes | Started Registering global classes... (22 steps)
+[   0% ] update_scripts_classes | 
+[   4% ] update_scripts_classes | 
+[   8% ] update_scripts_classes | 
+[  13% ] update_scripts_classes | 
+[  17% ] update_scripts_classes | 
+[  21% ] update_scripts_classes | 
+[  26% ] update_scripts_classes | 
+[  30% ] update_scripts_classes | 
+[  34% ] update_scripts_classes | 
+[  39% ] update_scripts_classes | 
+[  43% ] update_scripts_classes | 
+[  47% ] update_scripts_classes | 
+[  52% ] update_scripts_classes | 
+[  56% ] update_scripts_classes | 
+[  60% ] update_scripts_classes | 
+[  65% ] update_scripts_classes | 
+[  69% ] update_scripts_classes | 
+[  73% ] update_scripts_classes | 
+[  78% ] update_scripts_classes | 
+[  82% ] update_scripts_classes | 
+[  86% ] update_scripts_classes | 
+[  91% ] update_scripts_classes | 
+[ DONE ] update_scripts_classes
+
+[   0% ] _update_scan_actions | Started Scanning actions... (45 steps)
+[   0% ] _update_scan_actions | c3_inventory_only.png
+[   2% ] _update_scan_actions | c3_panel_accepted.png
+[   4% ] _update_scan_actions | c3_panel_delivered.png
+[   6% ] _update_scan_actions | c3_panel_delivered_with_inventory.png
+[   8% ] _update_scan_actions | c3_panel_duplicate_refusal.png
+[  10% ] _update_scan_actions | c3_panel_far_disabled.png
+[  13% ] _update_scan_actions | c3_panel_idle.png
+[  15% ] _update_scan_actions | c3_panel_ready.png
+[  17% ] _update_scan_actions | c3_panel_working_progress.png
+[  19% ] _update_scan_actions | c3_talk_prompt_highlight.png
+[  21% ] _update_scan_actions | c4_firstrun_1_title_menu.png
+[  23% ] _update_scan_actions | c4_firstrun_2_new_world_controls_card.png
+[  26% ] _update_scan_actions | c4_firstrun_3_card_dismissed.png
+[  28% ] _update_scan_actions | c4_firstrun_4_possessed_objective_marker.png
+[  30% ] _update_scan_actions | c4_firstrun_5_walking_to_the_door.png
+[  32% ] _update_scan_actions | c5_1_overview_panels.png
+[  34% ] _update_scan_actions | c5_2_other_map.png
+[  36% ] _update_scan_actions | c5_3_inspect_selected.png
+[  39% ] _update_scan_actions | c5_4_rain.png
+[  41% ] _update_scan_actions | c5_5_storm.png
+[  43% ] _update_scan_actions | c5_6_cold.png
+[  45% ] _update_scan_actions | c5_7_paused.png
+[  47% ] _update_scan_actions | c5_8_refused_no_iron.png
+[  50% ] _update_scan_actions | c5_9_gift_inspected.png
+[  52% ] _update_scan_actions | c5_10_accepted_after_gift.png
+[  54% ] _update_scan_actions | c6_changed_map_fresh_world.png
+[  56% ] _update_scan_actions | c6_continued_single_sword.png
+[  58% ] _update_scan_actions | c6_god_recovered.png
+[  60% ] _update_scan_actions | c6_offline_held_pose.png
+[  63% ] _update_scan_actions | c6_restart_continue_menu.png
+[  65% ] _update_scan_actions | c7_eight_resident_art.png
+[  67% ] _update_scan_actions | c7_nessa_inspection.png
+[  69% ] _update_scan_actions | c7_village_lodge_interior.png
+[  71% ] _update_scan_actions | c7_west_cottage_interior.png
+[  73% ] _update_scan_actions | c9_credits.png
+[  76% ] _update_scan_actions | c9_heal_memory.png
+[  78% ] _update_scan_actions | live_door_prompt.png
+[  80% ] _update_scan_actions | live_interior_zoom2.png
+[  82% ] _update_scan_actions | live_interior_zoom3.png
+[  84% ] _update_scan_actions | live_north_edge_clamped.png
+[  86% ] _update_scan_actions | live_village_overview.png
+[  89% ] _update_scan_actions | live_village_zoom2.png
+[  91% ] _update_scan_actions | live_walking_east.png
+[  93% ] _update_scan_actions | live_walking_south.png
+[  95% ] _update_scan_actions | live_wall_stop_overlay.png
+[ DONE ] _update_scan_actions
+
+[   0% ] reimport | Started (Re)Importing Assets (41 steps)
+[   0% ] reimport | Preparing files to reimport...
+[   2% ] reimport | Preparing files to reimport...
+[   4% ] reimport | Preparing files to reimport...
+[   7% ] reimport | Preparing files to reimport...
+[   9% ] reimport | Preparing files to reimport...
+[  11% ] reimport | Preparing files to reimport...
+[  14% ] reimport | Preparing files to reimport...
+[  16% ] reimport | Preparing files to reimport...
+[  19% ] reimport | Preparing files to reimport...
+[  21% ] reimport | Preparing files to reimport...
+[  23% ] reimport | Preparing files to reimport...
+[  26% ] reimport | Preparing files to reimport...
+[  28% ] reimport | Preparing files to reimport...
+[  30% ] reimport | Preparing files to reimport...
+[  33% ] reimport | Preparing files to reimport...
+[  35% ] reimport | Preparing files to reimport...
+[  38% ] reimport | Preparing files to reimport...
+[  40% ] reimport | Preparing files to reimport...
+[  42% ] reimport | Preparing files to reimport...
+[  45% ] reimport | Preparing files to reimport...
+[  47% ] reimport | Preparing files to reimport...
+[  50% ] reimport | Preparing files to reimport...
+[  52% ] reimport | Preparing files to reimport...
+[  54% ] reimport | Preparing files to reimport...
+[  57% ] reimport | Preparing files to reimport...
+[  59% ] reimport | Preparing files to reimport...
+[  61% ] reimport | Preparing files to reimport...
+[  64% ] reimport | Preparing files to reimport...
+[  66% ] reimport | Preparing files to reimport...
+[  69% ] reimport | Preparing files to reimport...
+[  71% ] reimport | Preparing files to reimport...
+[  73% ] reimport | Preparing files to reimport...
+[  76% ] reimport | Preparing files to reimport...
+[  78% ] reimport | Preparing files to reimport...
+[  80% ] reimport | Preparing files to reimport...
+[  83% ] reimport | Preparing files to reimport...
+[  85% ] reimport | Preparing files to reimport...
+[  88% ] reimport | Preparing files to reimport...
+[  90% ] reimport | Preparing files to reimport...
+[  92% ] reimport | Preparing files to reimport...
+[  95% ] reimport | Preparing files to reimport...
+[   0% ] reimport | Executing pre-reimport operations...
+[   0% ] reimport | c5_10_accepted_after_gift.png
+[   2% ] reimport | c6_changed_map_fresh_world.png
+[   4% ] reimport | c6_continued_single_sword.png
+[   7% ] reimport | c6_god_recovered.png
+[   9% ] reimport | c6_offline_held_pose.png
+[  11% ] reimport | c6_restart_continue_menu.png
+[  14% ] reimport | c7_nessa_inspection.png
+[  16% ] reimport | c7_village_lodge_interior.png
+[  19% ] reimport | c7_west_cottage_interior.png
+[  21% ] reimport | c9_credits.png
+[  23% ] reimport | c9_heal_memory.png
+[  26% ] reimport | live_door_prompt.png
+[  28% ] reimport | live_interior_zoom2.png
+[  30% ] reimport | live_interior_zoom3.png
+[  33% ] reimport | live_north_edge_clamped.png
+[  35% ] reimport | live_village_overview.png
+[  38% ] reimport | live_village_zoom2.png
+[  40% ] reimport | live_walking_east.png
+[  42% ] reimport | live_walking_south.png
+[  45% ] reimport | live_wall_stop_overlay.png
+[  47% ] reimport | c3_inventory_only.png
+[  50% ] reimport | c3_panel_accepted.png
+[  52% ] reimport | c3_panel_delivered.png
+[  54% ] reimport | c3_panel_delivered_with_inventory.png
+[  57% ] reimport | c3_panel_duplicate_refusal.png
+[  59% ] reimport | c3_panel_far_disabled.png
+[  61% ] reimport | c3_panel_idle.png
+[  64% ] reimport | c3_panel_ready.png
+[  66% ] reimport | c3_panel_working_progress.png
+[  69% ] reimport | c3_talk_prompt_highlight.png
+[  71% ] reimport | c4_firstrun_1_title_menu.png
+[  73% ] reimport | c4_firstrun_2_new_world_controls_card.png
+[  76% ] reimport | c4_firstrun_3_card_dismissed.png
+[  78% ] reimport | c4_firstrun_4_possessed_objective_marker.png
+[  80% ] reimport | c4_firstrun_5_walking_to_the_door.png
+[  83% ] reimport | c5_4_rain.png
+[  85% ] reimport | c5_5_storm.png
+[  88% ] reimport | c5_6_cold.png
+[  90% ] reimport | c5_7_paused.png
+[  92% ] reimport | c5_8_refused_no_iron.png
+[  95% ] reimport | c5_9_gift_inspected.png
+[  97% ] reimport | Finalizing Asset Import...
+[ DONE ] reimport
+
+[   0% ] reimport | Started (Re)Importing Assets (41 steps)
+[   0% ] reimport | Executing post-reimport operations...
+[ DONE ] reimport
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[ DONE ] loading_editor_layout
+
+ERROR: Cannot save file 'C:/Users/Rita/AppData/Roaming/Godot/editor_settings-4.6.tres'.
+   at: save (scene/resources/resource_format_text.cpp:1756)
+ERROR: Error saving editor settings to C:/Users/Rita/AppData/Roaming/Godot/editor_settings-4.6.tres
+   at: save (editor/settings/editor_settings.cpp:1404)

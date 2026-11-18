@@ -1,0 +1,179 @@
+{
+  "schema": "local-static-review-v1",
+  "scope": "local_static_evaluation",
+  "reviewer": "Codex root",
+  "review_date": "2026-10-10",
+  "review_record": "coordination_evidence/h008_local_static_review_1010.md",
+  "sets": {
+    "h008_creatures": {
+      "manifest_sha256": "92ac083d7ef84fc6a29a1d137d64f961a0f0cbbb032e6a56dfeebecd7bf56f7e",
+      "assets": [
+        {
+          "id": "43_idle_s",
+          "source_path": "h008_creatures/display/wolf-idle-s-h008-v1-1x.png",
+          "sha256": "ba0dc2739e588ba13077e78cd53ee3ec0b3eb19cc7d259e07e2a8bfabf073fae"
+        },
+        {
+          "id": "43_idle_e",
+          "source_path": "h008_creatures/display/wolf-idle-e-h008-v1-1x.png",
+          "sha256": "a0b07280d891d2e26e1f2b1bc7f4664ed134e1513c0e3362a3b65fc6e5e4255b"
+        },
+        {
+          "id": "43_idle_w",
+          "source_path": "h008_creatures/display/wolf-idle-w-h008-v1-1x.png",
+          "sha256": "5f035d4abfbfd1d5364f284b1b75dc284eec222088db7c57513a55689f70bb37"
+        },
+        {
+          "id": "43_dead_side",
+          "source_path": "h008_creatures/display/wolf-dead-side-h008-v1-1x.png",
+          "sha256": "c6d92ede7ac36ea041d860755b1081693698853c37462415be1a29cbc0f68249"
+        },
+        {
+          "id": "45_idle_s",
+          "source_path": "h008_creatures/display/boar-idle-s-h008-v1-1x.png",
+          "sha256": "87f1bf200e76b905b31a1a56845266620a04de30820152ae69d64f44cb084fe6"
+        },
+        {
+          "id": "45_idle_e",
+          "source_path": "h008_creatures/display/boar-idle-e-h008-v1-1x.png",
+          "sha256": "46bece55021ccd996bb9a8d397f7874b595481fc36120ee5e508c93d5651b58e"
+        },
+        {
+          "id": "45_idle_w",
+          "source_path": "h008_creatures/display/boar-idle-w-h008-v1-1x.png",
+          "sha256": "48c48c2dbd9c548d786bca940a1aa1b7f784842a2f0953170656707cecedf37e"
+        },
+        {
+          "id": "45_dead_side",
+          "source_path": "h008_creatures/display/boar-dead-side-h008-v1-1x.png",
+          "sha256": "34d26f3e0bcdf17080064f04d52783e3a9228482a68521e31856754aa634c4ab"
+        },
+        {
+          "id": "41_idle_s",
+          "source_path": "h008_creatures/display/deer-idle-s-h008-v1-1x.png",
+          "sha256": "b2c3290d823509d41bfbb1e2572b5a5f6f1a5a8a12f92104a849a95513571f38"
+        },
+        {
+          "id": "41_idle_e",
+          "source_path": "h008_creatures/display/deer-idle-e-h008-v1-1x.png",
+          "sha256": "13aadef3e52e8a2490b12f124eb0c54452c0f9ec2a3632ace30d7c0898e2fd83"
+        },
+        {
+          "id": "41_idle_w",
+          "source_path": "h008_creatures/display/deer-idle-w-h008-v1-1x.png",
+          "sha256": "2d2f344ebeef385f22bff73938e3e29d6ca1db5681177848ce95525430498950"
+        },
+        {
+          "id": "41_dead_side",
+          "source_path": "h008_creatures/display/deer-dead-side-h008-v1-1x.png",
+          "sha256": "44349dfe75b40b756432fdfaf575725a9e28162797d5321754a01eb23ece4c88"
+        },
+        {
+          "id": "46_idle_s",
+          "source_path": "h008_creatures/display/fox-idle-s-h008-v1-1x.png",
+          "sha256": "7b03cde2a789aa75e32a69eaed3a9074bd8dc2faba7a603640170f5ca62e24fc"
+        },
+        {
+          "id": "46_idle_e",
+          "source_path": "h008_creatures/display/fox-idle-e-h008-v1-1x.png",
+          "sha256": "2dfaf6b416a4c9255d2057e6fe94bbef35bd23f7dde764c09c0e6c6fc8438b9a"
+        },
+        {
+          "id": "46_idle_w",
+          "source_path": "h008_creatures/display/fox-idle-w-h008-v1-1x.png",
+          "sha256": "cac7faebeffa224ffd97fa074606f1aa905ab9a75af0137a91ff832775c75f3f"
+        },
+        {
+          "id": "40_idle_s",
+          "source_path": "h008_creatures/display/sheep-idle-s-h008-v1-1x.png",
+          "sha256": "419a014e77adc419757f4d05fa07ddb6792f5f453a3c02954b7e6cdd4da19adb"
+        },
+        {
+          "id": "40_idle_e",
+          "source_path": "h008_creatures/display/sheep-idle-e-h008-v1-1x.png",
+          "sha256": "3f46123b41b4f953746b130eccd4db9cf548650e6b8c36234e1fcd9524c691b9"
+        },
+        {
+          "id": "40_idle_w",
+          "source_path": "h008_creatures/display/sheep-idle-w-h008-v1-1x.png",
+          "sha256": "80f20a18134794904a4748176809fe3f2bfd23abd15fcb686d7a6e8d130a3c37"
+        },
+        {
+          "id": "47_idle_s",
+          "source_path": "h008_creatures/display/goblin-idle-s-h008-v1-1x.png",
+          "sha256": "2c240258717e9eb0089a9deb875007fe9a52eab155c984fafc5ddda18336836a"
+        },
+        {
+          "id": "47_idle_e",
+          "source_path": "h008_creatures/display/goblin-idle-e-h008-v1-1x.png",
+          "sha256": "2dff59d904e0d0463c0432db8995d831d4a60c698cd7e5879dd24ecda779f9c0"
+        },
+        {
+          "id": "47_idle_w",
+          "source_path": "h008_creatures/display/goblin-idle-w-h008-v1-1x.png",
+          "sha256": "7dca42326440e40b05eb95728690015f4d87cb98d309b681f5afd1ac3e9306fb"
+        },
+        {
+          "id": "48_idle_s",
+          "source_path": "h008_creatures/display/skeleton-idle-s-h008-v1-1x.png",
+          "sha256": "0dd55967713d171f63a9fc4711baf8201b5280d9f7c529330949ab938ccb0860"
+        },
+        {
+          "id": "48_idle_e",
+          "source_path": "h008_creatures/display/skeleton-idle-e-h008-v1-1x.png",
+          "sha256": "3c2d9b101cc4017a7d62ba3c7a8679edaaf8d81a1c55f5b522f9a071ed49b474"
+        },
+        {
+          "id": "48_idle_w",
+          "source_path": "h008_creatures/display/skeleton-idle-w-h008-v1-1x.png",
+          "sha256": "4dea3f0d5452ac3803897f95bda92368d766ac8eb51e31367029e8567fd95dc7"
+        },
+        {
+          "id": "49_idle_s",
+          "source_path": "h008_creatures/display/giant_spider-idle-s-h008-v1-1x.png",
+          "sha256": "28eeb7da8f4ea6cf284ca709ec85372254c6bd54c76e2946b2782a4f23b3036d"
+        },
+        {
+          "id": "49_idle_e",
+          "source_path": "h008_creatures/display/giant_spider-idle-e-h008-v1-1x.png",
+          "sha256": "41c127e0cecb0557553c07c6701372e660eab08084b3a2d5f5a90d4f8cc9625d"
+        },
+        {
+          "id": "49_idle_w",
+          "source_path": "h008_creatures/display/giant_spider-idle-w-h008-v1-1x.png",
+          "sha256": "0ffd95d1c135abc29f0c3eefcdd2bbc945d23f7f628e456c4e5ae3e4897c03c9"
+        },
+        {
+          "id": "60_idle_s",
+          "source_path": "h008_creatures/display/brambleback-idle-s-h008-v1-1x.png",
+          "sha256": "a4a6f54e84364a5d76fb55b44023e878fd32eb7565a90670cfcde9c4742fd8dd"
+        },
+        {
+          "id": "60_idle_e",
+          "source_path": "h008_creatures/display/brambleback-idle-e-h008-v1-1x.png",
+          "sha256": "5d0d836c7aa07c189c14303bfc1a514f0ef8fc3c6a755aef4d4b61f5976b3d98"
+        },
+        {
+          "id": "60_idle_w",
+          "source_path": "h008_creatures/display/brambleback-idle-w-h008-v1-1x.png",
+          "sha256": "9a0705112985d7a4c17c755988e1f9674c4e1637b1cac0358fb0f20a2f8bae81"
+        },
+        {
+          "id": "65_idle_s",
+          "source_path": "h008_creatures/display/bellhorn-idle-s-h008-v1-1x.png",
+          "sha256": "0e92c877a83a7afcbb3452085baf7ed96c115995d048af339abedfd2403f35cd"
+        },
+        {
+          "id": "65_idle_e",
+          "source_path": "h008_creatures/display/bellhorn-idle-e-h008-v1-1x.png",
+          "sha256": "51ca5d8edb544653741df0d478c105bb733ed939e6b429b098c5862f18bcb588"
+        },
+        {
+          "id": "65_idle_w",
+          "source_path": "h008_creatures/display/bellhorn-idle-w-h008-v1-1x.png",
+          "sha256": "5a29edcafa6d2f9a945636e5acbbbb831f5fa416c4d9cf673585e45458e0f95d"
+        }
+      ]
+    }
+  }
+}

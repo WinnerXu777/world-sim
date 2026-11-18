@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "id": "h_000001",
+  "profile": {
+    "name": "Mara",
+    "created_tick": 0,
+    "sex": 1,
+    "life_exp": 74.0,
+    "personality": {
+      "archetype": "coward",
+      "top_traits": [
+        "caution",
+        "fearfulness"
+      ],
+      "aggression": 0.168,
+      "caution": 0.861,
+      "vengefulness": 0.276,
+      "greed": 0.381,
+      "loyalty": 0.472,
+      "mercy": 0.541,
+      "pride": 0.541,
+      "fearfulness": 0.839,
+      "curiosity": 0.452,
+      "ambition": 0.219,
+      "deceitfulness": 0.37,
+      "protectiveness": 0.46,
+      "sociability": 0.555,
+      "discipline": 0.441,
+      "resourcefulness": 0.444,
+      "resolve": 0.251
+    },
+    "occupation": "builder"
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "observe",
+    "last_decision_tick": 0,
+    "last_reason": "created"
+  },
+  "relationships": {},
+  "personality": {
+    "schema_version": 1,
+    "archetype": "coward",
+    "birth_seed": 3744836432,
+    "traits": {
+      "aggression": 0.168,
+      "caution": 0.861,
+      "vengefulness": 0.276,
+      "greed": 0.381,
+      "loyalty": 0.472,
+      "mercy": 0.541,
+      "pride": 0.541,
+      "fearfulness": 0.839,
+      "curiosity": 0.452,
+      "ambition": 0.219,
+      "deceitfulness": 0.37,
+      "protectiveness": 0.46,
+      "sociability": 0.555,
+      "discipline": 0.441,
+      "resourcefulness": 0.444,
+      "resolve": 0.251
+    },
+    "top_traits": [
+      "caution",
+      "fearfulness"
+    ]
+  },
+  "occupation": {
+    "schema_version": 1,
+    "kind": "builder",
+    "origin": "assigned",
+    "parent_bias": "",
+    "skill": 0.534,
+    "stability": 0.706,
+    "mutation": false,
+    "notes": "Builds and repairs structures.",
+    "metadata": {
+      "weights": {
+        "builder": 1.4426,
+        "farmer": 1.4358,
+        "fisherman": 1.4379,
+        "gatherer": 1.3814,
+        "guard": 1.6055,
+        "healer": 1.785,
+        "hunter": 1.4956,
+        "trader": 1.7075,
+        "woodcutter": 1.225
+      }
+    }
+  },
+  "pressures": {
+    "fear_pressure": 0.101,
+    "vengeance_pressure": 0.095,
+    "greed_pressure": 0.424,
+    "loyalty_pressure": 0.337,
+    "security_pressure": 0.426,
+    "status_pressure": 0.303,
+    "curiosity_pressure": 0.455,
+    "resource_pressure": 0.342
+  },
+  "goals": [
+    {
+      "schema_version": 1,
+      "id": "g_0001",
+      "kind": "guard_home",
+      "priority": 0.698,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "reasoning_review_due",
+      "plan_hint": "stay near safety after loss",
+      "confidence": 0.5,
+      "created_tick": 0,
+      "last_review_tick": 6645,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    }
+  ],
+  "goal_state": {
+    "schema_version": 1,
+    "goal_counter": 1,
+    "last_review_tick": 6645,
+    "last_review_source": "reasoning_review_due",
+    "review_needed": false,
+    "review_reason": "",
+    "next_review_tick": 7123
+  },
+  "plans": [
+    {
+      "schema_version": 1,
+      "id": "p_0001",
+      "goal_id": "g_0001",
+      "plan_kind": "fortify_home",
+      "priority": 0.698,
+      "confidence": 0.64,
+      "status": "queued",
+      "origin": "reasoning",
+      "summary": "auto plan for guard_home",
+      "steps": [
+        {
+          "op": "return_home"
+        },
+        {
+          "op": "guard_place",
+          "place_hint": "home"
+        }
+      ],
+      "current_step_index": 0,
+      "created_tick": 650,
+      "last_review_tick": 6645,
+      "last_update_tick": 6645,
+      "expires_tick": null,
+      "metadata": {
+        "reason": "reasoning_review_due",
+        "goal_kind": "guard_home",
+        "compiled_steps": [
+          {
+            "index": 0,
+            "op": "return_home",
+            "target_id": null,
+            "place_hint": "",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          },
+          {
+            "index": 1,
+            "op": "guard_place",
+            "target_id": null,
+            "place_hint": "home",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          }
+        ],
+        "reasoning_id": 20
+      }
+    }
+  ],
+  "planning_state": {
+    "schema_version": 1,
+    "plan_counter": 1,
+    "review_needed": false,
+    "review_reason": "",
+    "last_review_tick": 6645,
+    "last_review_source": "reasoning_review_due",
+    "next_review_tick": 7273
+  },
+  "schedule_profile": {
+    "schema_version": 1,
+    "home_anchor_kind": "resident_home",
+    "home_anchor_id": null,
+    "block_preferences": {
+      "dawn": [
+        "visit_water",
+        "gather",
+        "wander_local"
+      ],
+      "day": [
+        "work_site",
+        "gather",
+        "patrol",
+        "wander_local"
+      ],
+      "dusk": [
+        "socialize",
+        "return_home",
+        "rest"
+      ],
+      "night": [
+        "sleep",
+        "stay_home",
+        "guard"
+      ]
+    },
+    "stability": 0.82,
+    "novelty_bias": 0.1,
+    "commitment_window_ticks": 240,
+    "notes": ""
+  },
+  "schedule_state": {
+    "schema_version": 1,
+    "current_routine": {
+      "kind": "work_site",
+      "status": "active",
+      "priority": 1.0,
+      "time_block": "dawn",
+      "reason": "bootstrap_schedule",
+      "created_tick": 0,
+      "last_update_tick": 0,
+      "target_place": {},
+      "metadata": {
+        "selection_mode": "expected_routine",
+        "consistency_probability": 0.826,
+        "selection_roll": 0.2385,
+        "stability": 0.852,
+        "novelty_bias": 0.074
+      }
+    },
+    "last_refresh_tick": 0,
+    "last_time_block": "dawn",
+    "last_reason": "bootstrap_schedule"
+  },
+  "crafting_state": {
+    "schema_version": 1,
+    "last_review_tick": 6960,
+    "review_reason": "manual_controlled",
+    "maturity_ready": true,
+    "survival_clear": true,
+    "auto_allowed": false,
+    "baseline_ready": false,
+    "required_tools": [
+      "hammer"
+    ],
+    "optional_tools": [
+      "rope",
+      "plank_bundle"
+    ],
+    "baseline_needs": [],
+    "active_need": null,
+    "material_cache": {},
+    "accessible_storage_count": 0,
+    "last_action_tick": -1,
+    "next_action_tick": 0,
+    "last_action": "",
+    "summary": "manual control pauses automatic occupation provisioning"
+  },
+  "construction_profile": {
+    "preferred_building_kinds": [],
+    "building_scope_bias": {},
+    "known_sites": []
+  },
+  "construction_state": {
+    "schema_version": 1,
+    "active_need_id": "personal_h_000001_personal_shelter",
+    "active_project_id": null,
+    "last_need_review_tick": 6979,
+    "last_project_review_tick": 6979,
+    "auto_allowed": false,
+    "review_reason": "live_sync",
+    "has_house_storage": false,
+    "house_entity_id": "",
+    "house_inventory_id": ""
+  },
+  "construction_needs": [
+    {
+      "schema_version": 1,
+      "id": "personal_h_000001_personal_shelter",
+      "building_kind": "personal_shelter",
+      "scope": "personal",
+      "priority": 0.84,
+      "source": "survival",
+      "status": "queued",
+      "summary": "Personal Shelter [personal]",
+      "owner_human_id": "h_000001",
+      "household_id": null,
+      "settlement_id": null,
+      "material_requirements": [
+        {
+          "item_kind": "wood_bundle",
+          "quantity": 6
+        },
+        {
+          "item_kind": "fiber_bundle",
+          "quantity": 3
+        },
+        {
+          "item_kind": "plank_bundle",
+          "quantity": 2
+        }
+      ],
+      "created_tick": 6979,
+      "last_update_tick": 6979,
+      "metadata": {}
+    }
+  ],
+  "construction_projects": [],
+  "tasks": [],
+  "task_state": {
+    "schema_version": 1,
+    "current_task_id": null,
+    "current_task": {},
+    "last_transition_tick": 0,
+    "blocked_reason": "post_complete",
+    "last_completed_task_kind": "move_to_place",
+    "last_source": "routine",
+    "last_task_action": "arrived_at_worksite",
+    "last_interrupt_reason": "",
+    "last_completed_task": {
+      "schema_version": 1,
+      "id": "task_016459",
+      "task_kind": "move_to_place",
+      "status": "completed",
+      "priority": 0.34,
+      "source": "routine",
+      "summary": "follow routine work_site",
+      "target_kind": "place",
+      "target_id": "worksite",
+      "target_place": {},
+      "required_item": "",
+      "requested_quantity": null,
+      "goal_id": null,
+      "plan_id": null,
+      "created_tick": 0,
+      "last_update_tick": 0,
+      "expires_tick": null,
+      "metadata": {
+        "routine_kind": "work_site",
+        "place_tag": "worksite",
+        "completion_reason": "arrived"
+      }
+    },
+    "paused_tasks": [],
+    "resume_candidate": {},
+    "cargo_cache": {},
+    "carry_manifest": {
+      "coin": 10,
+      "spear": 1,
+      "rations": 2,
+      "bandage": 1
+    },
+    "queue_revision": 2,
+    "carry_weight": 3.2,
+    "carry_capacity_weight": 28.0
+  },
+  "memory": {
+    "recent_events": [],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 6980,
+    "slot": 0,
+    "x": 564.98,
+    "y": 481.91,
+    "sex": 1,
+    "age": 24.0,
+    "hp": 100.0,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "threat": 0.0,
+    "mood": 80.0,
+    "stamina": 100.0,
+    "infection": 0.0,
+    "tribe": 0.0,
+    "escalated": false
+  },
+  "runtime": {
+    "slot": 0,
+    "alive": true,
+    "last_seen_tick": 6980
+  }
+}

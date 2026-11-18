@@ -1,0 +1,19 @@
+| seed | digest | dead | peak | thefts | cases | levied | robbed | fought_off | arrested | loans | repaid | defaulted | hired | paid | sales | pass |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1008 | 2fbbeae222e2dbd0 | 0 | 90.0 | 1 | 1 | 1 | 0 | 0 | 0 | 2 | 1 | 1 | 8 | 6 | 2 | True |
+| 1 | 506087d6cd7c03b7 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 9 | 7 | 2 | True |
+| 2 | 0c1caa5f808ab31f | 0 | 90.0 | 1 | 1 | 1 | 0 | 0 | 0 | 2 | 1 | 1 | 8 | 6 | 2 | True |
+| 3 | a346757a68219f68 | 0 | 90.0 | 1 | 1 | 1 | 0 | 0 | 0 | 2 | 1 | 1 | 10 | 8 | 2 | True |
+| 1008 | 2fbbeae222e2dbd0 | 0 | 90.0 | 1 | 1 | 1 | 0 | 0 | 0 | 2 | 1 | 1 | 8 | 6 | 2 | True |
+
+determinism: seed 1008 digests 2fbbeae222e2dbd0 vs 2fbbeae222e2dbd0 -> identical
+seed 1008 ok by rung: {'forage': 35, 'work': 42, 'buy': 2, 'trade': 21, 'beg': 20, 'borrow': 3, 'steal': 1, 'rob': 0}
+seed 1 ok by rung: {'forage': 38, 'work': 53, 'buy': 2, 'trade': 5, 'beg': 26, 'borrow': 6, 'steal': 0, 'rob': 0}
+seed 2 ok by rung: {'forage': 37, 'work': 41, 'buy': 2, 'trade': 12, 'beg': 21, 'borrow': 11, 'steal': 1, 'rob': 0}
+seed 3 ok by rung: {'forage': 28, 'work': 43, 'buy': 2, 'trade': 15, 'beg': 20, 'borrow': 3, 'steal': 1, 'rob': 0}
+seed 1008 ok by rung: {'forage': 35, 'work': 42, 'buy': 2, 'trade': 21, 'beg': 20, 'borrow': 3, 'steal': 1, 'rob': 0}
+seed 1008 answers: {'work_for:hire': 8, 'work_for:refuse_staffed': 1, 'request_item:give': 5, 'work_for:refuse_no_wage': 22, 'offer_trade:refuse_no_item': 21, 'request_item:refuse_no_item': 14, 'work_for:refuse_defaulter': 4, 'borrow_item:refuse_defaulter': 1, 'borrow_item:refuse_stranger': 2, 'report_theft:accept': 1, 'request_item:refuse_thief': 1, 'work_for:refuse_thief': 1}
+seed 1 answers: {'work_for:hire': 9, 'work_for:refuse_staffed': 1, 'request_item:give': 5, 'work_for:refuse_no_wage': 31, 'request_item:refuse_no_item': 21, 'offer_trade:refuse_no_item': 4, 'borrow_item:refuse_no_item': 1, 'offer_trade:accept': 1, 'work_for:refuse_defaulter': 5, 'borrow_item:refuse_stranger': 3, 'borrow_item:refuse_defaulter': 2}
+seed 2 answers: {'work_for:hire': 8, 'work_for:refuse_staffed': 1, 'request_item:give': 3, 'work_for:refuse_no_wage': 21, 'request_item:refuse_no_item': 16, 'borrow_item:refuse_no_item': 3, 'offer_trade:refuse_no_item': 12, 'work_for:refuse_defaulter': 2, 'borrow_item:refuse_defaulter': 2, 'borrow_item:refuse_stranger': 4, 'report_theft:accept': 1, 'work_for:refuse_thief': 3, 'request_item:refuse_thief': 2, 'borrow_item:refuse_thief': 2}
+seed 3 answers: {'work_for:hire': 10, 'work_for:refuse_staffed': 1, 'request_item:give': 3, 'work_for:refuse_no_wage': 22, 'offer_trade:accept': 1, 'request_item:refuse_no_item': 16, 'offer_trade:refuse_no_item': 14, 'report_theft:accept': 1, 'work_for:refuse_distrust': 1, 'request_item:refuse_distrust': 1, 'borrow_item:refuse_distrust': 1, 'work_for:refuse_defaulter': 1, 'borrow_item:refuse_stranger': 1, 'borrow_item:refuse_defaulter': 1}
+seed 1008 answers: {'work_for:hire': 8, 'work_for:refuse_staffed': 1, 'request_item:give': 5, 'work_for:refuse_no_wage': 22, 'offer_trade:refuse_no_item': 21, 'request_item:refuse_no_item': 14, 'work_for:refuse_defaulter': 4, 'borrow_item:refuse_defaulter': 1, 'borrow_item:refuse_stranger': 2, 'report_theft:accept': 1, 'request_item:refuse_thief': 1, 'work_for:refuse_thief': 1}

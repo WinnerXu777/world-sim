@@ -1,0 +1,7 @@
+start: {'sheep': 5, 'deer': 6, 'boar': 5, 'fox': 1}
+{"brain": "kernel", "hp_lost": 0.0, "deaths": 0, "attribution": {"total_deaths": 0, "deaths_by_cause": {}, "deaths_by_killer_species": {}, "damage_by_source": {}, "damage_by_species": {}, "total_damage_applied": 0.0, "proximity_matches_true_killer_rate": 0.0, "unattributed_deaths": 0, "unresolved_deaths": 0}}
+Executing <Task finished name='Task-2' coro=<Balance.test_run() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\tools\creature_balance.py:69> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.211 seconds
+----------------------------------------------------------------------
+Ran 1 test in 0.231s
+
+OK

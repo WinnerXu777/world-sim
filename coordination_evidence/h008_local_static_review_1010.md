@@ -1,0 +1,11 @@
+# H008 local static evaluation review — 2026-10-10
+
+Reviewer: Codex root. Scope: local static art evaluation, not production animation, runtime collision acceptance, or public release. Source metadata stays unchanged. Roadmap DR-7 permits existing static art integration while the walking budget remains OPEN; DR-9 still blocks public distribution.
+
+Viewed actual files: previews/qa-display-1.png through qa-display-5.png and mock-meadow-forest-display.png under myassets/h008_creatures. The five QA sheets show all 33 display poses with contract footprint rectangles and an adult scale reference. Each pose is visible at display size. Species, headings and silhouettes are readable; feet/ground contact are consistent enough for a local evaluation build. No walk-cycle acceptance is inferred.
+
+Accepted for a local static evaluation selection: wolf 43 (idle s/e/w, dead side), boar 45 (idle s/e/w, dead side), deer 41 (idle s/e/w, dead side), fox 46, sheep 40, goblin 47, skeleton 48, giant_spider 49, brambleback 60 and bellhorn 65 (each idle s/e/w). Acceptance must be bound to exact canonical manifest and display-byte hashes when a selection sidecar is generated. This review does not allow a changed asset to inherit acceptance.
+
+Known visual limits: wolf/boar south views are steeper than east; mirrored west reverses lighting; dead wolf/boar can resemble sleep without state feedback; goblin/skeleton side profiles are thin at display size. Preserve labels/state cues and missing-art placeholders. Footprint rectangles are proposed contract geometry, not proof of alpha-derived collision. North/movement/dead variants not delivered remain explicit fallbacks; never invent walking frames. A real client scene must still verify pivots, headings, dead state, Y-depth, rebase and scaling before R5.3/Gate F can be accepted.
+
+Importer handoff: current importer only recognises canonical accepted/approved status or motion acceptance, so this independent local review does not yet affect its output. An explicit hash-bound local selection mechanism or a validated temporary evaluation projection is needed; do not mutate canonical manifests or treat local review as blanket production approval. Do not let rejected-production walking strips inherit this static review.

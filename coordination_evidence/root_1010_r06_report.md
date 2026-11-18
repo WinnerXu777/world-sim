@@ -1,0 +1,7 @@
+R0.6 current-worktree focused verification
+
+EDEN_CALENDAR=1: emotion 25 tests passed; care suite exit0; rates10, consumers3, wire4 and rescale scenario7 passed. Calendar base suite19 has2 failures in LegacyIsTodayTests comparing explicit LEGACY results against ambient flag-on resolver/weather. Native AGY test-only repair assigned; production rates/defaults/refusal text unchanged. Market scenario subprocess is still pending exclusive heavy-run opportunity. This is partial R0.6 evidence, not a complete gate or at-HEAD clean archive suite. Logs: r06_calendar_checks.log/.json and r06_calendar_scenario.log.
+
+AGY calendar-test environment repair reviewed: original legacy random/edge assertions preserved; explicit absence/0 and nested flag1 restoration. Root19tests PASS withEDEN_CALENDAR1 and0.
+
+Market subprocess snapshot run finished exit1, all sampled source hashes unchanged.4tests,3pass (ordering2 and deterministic repeat),1failure expected market3000tick scenario. Actual log records nobody dies, coin conserved, no errors, no theft, but9buy attempts allout_of_stock, zero buy events and no price rise aftershock; digest999831d2ac57f5c6. This reproduces the inherited EMOTION-C5 known long-calendar exception; documented rather than weaken assertions or alter production rates. Source-snapshot scope is r06_market_result.json; later peer changes excluded. Root clean atHEAD integration gate still pending.

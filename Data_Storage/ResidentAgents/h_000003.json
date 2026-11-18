@@ -1,0 +1,929 @@
+{
+  "schema_version": 1,
+  "id": "h_000003",
+  "profile": {
+    "name": "Toma",
+    "created_tick": 0,
+    "sex": 0,
+    "life_exp": 71.0,
+    "personality": {
+      "archetype": "balanced_survivor",
+      "top_traits": [
+        "mercy",
+        "resourcefulness",
+        "sociability"
+      ],
+      "aggression": 0.464,
+      "caution": 0.441,
+      "vengefulness": 0.412,
+      "greed": 0.482,
+      "loyalty": 0.525,
+      "mercy": 0.571,
+      "pride": 0.499,
+      "fearfulness": 0.515,
+      "curiosity": 0.469,
+      "ambition": 0.51,
+      "deceitfulness": 0.312,
+      "protectiveness": 0.543,
+      "sociability": 0.565,
+      "discipline": 0.461,
+      "resourcefulness": 0.567,
+      "resolve": 0.451
+    },
+    "occupation": "gatherer"
+  },
+  "status": {
+    "alive": false,
+    "current_intent": "dead",
+    "last_decision_tick": 1325,
+    "last_reason": "died"
+  },
+  "relationships": {},
+  "personality": {
+    "schema_version": 1,
+    "archetype": "balanced_survivor",
+    "birth_seed": 2829919894,
+    "traits": {
+      "aggression": 0.464,
+      "caution": 0.441,
+      "vengefulness": 0.412,
+      "greed": 0.482,
+      "loyalty": 0.525,
+      "mercy": 0.571,
+      "pride": 0.499,
+      "fearfulness": 0.515,
+      "curiosity": 0.469,
+      "ambition": 0.51,
+      "deceitfulness": 0.312,
+      "protectiveness": 0.543,
+      "sociability": 0.565,
+      "discipline": 0.461,
+      "resourcefulness": 0.567,
+      "resolve": 0.451
+    },
+    "top_traits": [
+      "mercy",
+      "resourcefulness",
+      "sociability"
+    ]
+  },
+  "occupation": {
+    "schema_version": 1,
+    "kind": "gatherer",
+    "origin": "assigned",
+    "parent_bias": "",
+    "skill": 0.426,
+    "stability": 0.695,
+    "mutation": false,
+    "notes": "Collects scattered resources and edible goods.",
+    "metadata": {
+      "weights": {
+        "builder": 1.5193,
+        "farmer": 1.3407,
+        "fisherman": 1.4019,
+        "gatherer": 1.4329,
+        "guard": 1.936,
+        "healer": 1.7608,
+        "hunter": 1.7214,
+        "trader": 1.7785,
+        "woodcutter": 1.3247
+      }
+    }
+  },
+  "pressures": {
+    "fear_pressure": 0.293,
+    "vengeance_pressure": 0.158,
+    "greed_pressure": 0.513,
+    "loyalty_pressure": 0.377,
+    "security_pressure": 0.413,
+    "status_pressure": 0.428,
+    "curiosity_pressure": 0.503,
+    "resource_pressure": 0.708
+  },
+  "goals": [
+    {
+      "schema_version": 1,
+      "id": "g_0002",
+      "kind": "hoard_food",
+      "priority": 0.614,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "goal_review",
+      "plan_hint": "build a reserve before scarcity gets worse",
+      "confidence": 0.5,
+      "created_tick": 1263,
+      "last_review_tick": 1263,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    },
+    {
+      "schema_version": 1,
+      "id": "g_0003",
+      "kind": "guard_home",
+      "priority": 0.577,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "event",
+      "plan_hint": "stay near safety after loss",
+      "confidence": 0.5,
+      "created_tick": 1330,
+      "last_review_tick": 1330,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    },
+    {
+      "schema_version": 1,
+      "id": "g_0001",
+      "kind": "explore_region",
+      "priority": 0.573,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "goal_review",
+      "plan_hint": "",
+      "confidence": 0.5,
+      "created_tick": 0,
+      "last_review_tick": 1263,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    }
+  ],
+  "goal_state": {
+    "schema_version": 1,
+    "goal_counter": 3,
+    "last_review_tick": 1263,
+    "last_review_source": "goal_review",
+    "review_needed": true,
+    "review_reason": "death",
+    "next_review_tick": 1657
+  },
+  "plans": [
+    {
+      "schema_version": 1,
+      "id": "p_0002",
+      "goal_id": "g_0002",
+      "plan_kind": "scout_region",
+      "priority": 0.614,
+      "confidence": 0.54,
+      "status": "queued",
+      "origin": "reasoning",
+      "summary": "auto plan for hoard_food",
+      "steps": [
+        {
+          "op": "move_to_place",
+          "place_hint": "frontier"
+        },
+        {
+          "op": "observe_target",
+          "target_id": "region_interest"
+        }
+      ],
+      "current_step_index": 0,
+      "created_tick": 1263,
+      "last_review_tick": 1263,
+      "last_update_tick": 1263,
+      "expires_tick": null,
+      "metadata": {
+        "reason": "goal_review",
+        "goal_kind": "hoard_food",
+        "compiled_steps": [
+          {
+            "index": 0,
+            "op": "move_to_place",
+            "target_id": null,
+            "place_hint": "frontier",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          },
+          {
+            "index": 1,
+            "op": "observe_target",
+            "target_id": "region_interest",
+            "place_hint": "",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          }
+        ],
+        "reasoning_id": 10
+      }
+    },
+    {
+      "schema_version": 1,
+      "id": "p_0001",
+      "goal_id": "g_0001",
+      "plan_kind": "scout_region",
+      "priority": 0.573,
+      "confidence": 0.54,
+      "status": "queued",
+      "origin": "reasoning",
+      "summary": "auto plan for explore_region",
+      "steps": [
+        {
+          "op": "move_to_place",
+          "place_hint": "frontier"
+        },
+        {
+          "op": "observe_target",
+          "target_id": "region_interest"
+        }
+      ],
+      "current_step_index": 0,
+      "created_tick": 432,
+      "last_review_tick": 860,
+      "last_update_tick": 860,
+      "expires_tick": null,
+      "metadata": {
+        "reason": "goal_review",
+        "goal_kind": "explore_region",
+        "compiled_steps": [
+          {
+            "index": 0,
+            "op": "move_to_place",
+            "target_id": null,
+            "place_hint": "frontier",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          },
+          {
+            "index": 1,
+            "op": "observe_target",
+            "target_id": "region_interest",
+            "place_hint": "",
+            "threshold": null,
+            "target_tick": null,
+            "count": null,
+            "metadata": {}
+          }
+        ],
+        "reasoning_id": 6
+      }
+    }
+  ],
+  "planning_state": {
+    "schema_version": 1,
+    "plan_counter": 2,
+    "review_needed": true,
+    "review_reason": "event:death",
+    "last_review_tick": 1263,
+    "last_review_source": "goal_review",
+    "next_review_tick": 1863
+  },
+  "schedule_profile": {
+    "schema_version": 1,
+    "home_anchor_kind": "resident_home",
+    "home_anchor_id": null,
+    "block_preferences": {
+      "dawn": [
+        "visit_water",
+        "gather",
+        "wander_local"
+      ],
+      "day": [
+        "work_site",
+        "gather",
+        "patrol",
+        "wander_local"
+      ],
+      "dusk": [
+        "socialize",
+        "return_home",
+        "rest"
+      ],
+      "night": [
+        "sleep",
+        "stay_home",
+        "guard"
+      ]
+    },
+    "stability": 0.82,
+    "novelty_bias": 0.1,
+    "commitment_window_ticks": 240,
+    "notes": ""
+  },
+  "schedule_state": {
+    "schema_version": 1,
+    "current_routine": {
+      "kind": "visit_water",
+      "status": "active",
+      "priority": 0.618,
+      "time_block": "dawn",
+      "reason": "bootstrap_schedule",
+      "created_tick": 0,
+      "last_update_tick": 0,
+      "target_place": {},
+      "metadata": {
+        "selection_mode": "weighted_variation",
+        "consistency_probability": 0.765,
+        "selection_roll": 0.8699,
+        "stability": 0.803,
+        "novelty_bias": 0.109
+      }
+    },
+    "last_refresh_tick": 0,
+    "last_time_block": "dawn",
+    "last_reason": "bootstrap_schedule"
+  },
+  "crafting_state": {
+    "schema_version": 1,
+    "last_review_tick": 1280,
+    "review_reason": "survival_not_clear",
+    "maturity_ready": true,
+    "survival_clear": false,
+    "auto_allowed": false,
+    "baseline_ready": false,
+    "required_tools": [
+      "basket"
+    ],
+    "optional_tools": [
+      "knife"
+    ],
+    "baseline_needs": [],
+    "active_need": null,
+    "material_cache": {},
+    "accessible_storage_count": 0,
+    "last_action_tick": 80,
+    "next_action_tick": 100,
+    "last_action": "moving_to_gather fiber_bundle",
+    "summary": "survival stress delays occupation provisioning"
+  },
+  "construction_profile": {
+    "preferred_building_kinds": [],
+    "building_scope_bias": {},
+    "known_sites": []
+  },
+  "construction_state": {
+    "schema_version": 1,
+    "active_need_id": null,
+    "active_project_id": "project_personal_h_000003_personal_shelter",
+    "last_need_review_tick": 1329,
+    "last_project_review_tick": 1329,
+    "auto_allowed": false,
+    "review_reason": "live_sync",
+    "has_house_storage": false,
+    "house_entity_id": "",
+    "house_inventory_id": ""
+  },
+  "construction_needs": [],
+  "construction_projects": [
+    {
+      "schema_version": 1,
+      "id": "project_personal_h_000003_personal_shelter",
+      "need_id": "personal_h_000003_personal_shelter",
+      "building_kind": "personal_shelter",
+      "status": "planned",
+      "site": {},
+      "progress": 0.0,
+      "assigned_human_ids": [
+        "h_000003"
+      ],
+      "created_tick": 180,
+      "last_update_tick": 180,
+      "metadata": {
+        "priority": 0.84,
+        "scope": "personal",
+        "source": "survival",
+        "owner_human_id": "h_000003",
+        "place_tag": "home"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "schema_version": 1,
+      "id": "task_016549",
+      "task_kind": "flee_target",
+      "status": "active",
+      "priority": 0.97,
+      "source": "survival",
+      "summary": "flee immediate danger",
+      "target_kind": "",
+      "target_id": null,
+      "target_place": {},
+      "required_item": "",
+      "requested_quantity": null,
+      "goal_id": null,
+      "plan_id": null,
+      "created_tick": 159,
+      "last_update_tick": 159,
+      "expires_tick": null,
+      "metadata": {
+        "reason": "danger",
+        "threat": 71.2
+      }
+    }
+  ],
+  "task_state": {
+    "schema_version": 1,
+    "current_task_id": "task_016549",
+    "current_task": {
+      "schema_version": 1,
+      "id": "task_016549",
+      "task_kind": "flee_target",
+      "status": "active",
+      "priority": 0.97,
+      "source": "survival",
+      "summary": "flee immediate danger",
+      "target_kind": "",
+      "target_id": null,
+      "target_place": {},
+      "required_item": "",
+      "requested_quantity": null,
+      "goal_id": null,
+      "plan_id": null,
+      "created_tick": 159,
+      "last_update_tick": 159,
+      "expires_tick": null,
+      "metadata": {
+        "reason": "danger",
+        "threat": 71.2
+      }
+    },
+    "last_transition_tick": 159,
+    "blocked_reason": "safe_place_not_found",
+    "last_completed_task_kind": "",
+    "last_source": "survival",
+    "last_task_action": "fleeing_to_safety",
+    "last_interrupt_reason": "survival",
+    "last_completed_task": {},
+    "paused_tasks": [
+      {
+        "schema_version": 1,
+        "id": "task_016465",
+        "task_kind": "gather_material",
+        "status": "paused",
+        "priority": 0.76,
+        "source": "occupation_baseline",
+        "summary": "gather fiber_bundle for basket",
+        "target_kind": "item",
+        "target_id": "fiber_bundle",
+        "target_place": {},
+        "required_item": "",
+        "requested_quantity": 3,
+        "goal_id": null,
+        "plan_id": null,
+        "created_tick": 80,
+        "last_update_tick": 131,
+        "expires_tick": null,
+        "metadata": {
+          "workflow": "occupation_provision",
+          "occupation_kind": "gatherer",
+          "tool_kind": "basket",
+          "ingredient_kind": "fiber_bundle",
+          "recipe_id": "basket",
+          "paused_reason": "survival"
+        }
+      },
+      {
+        "schema_version": 1,
+        "id": "task_016466",
+        "task_kind": "craft_item",
+        "status": "queued",
+        "priority": 0.72,
+        "source": "occupation_baseline",
+        "summary": "craft basket",
+        "target_kind": "item",
+        "target_id": "basket",
+        "target_place": {},
+        "required_item": "",
+        "requested_quantity": null,
+        "goal_id": null,
+        "plan_id": null,
+        "created_tick": 80,
+        "last_update_tick": 80,
+        "expires_tick": null,
+        "metadata": {
+          "workflow": "occupation_provision",
+          "occupation_kind": "gatherer",
+          "tool_kind": "basket",
+          "recipe_id": "basket"
+        }
+      },
+      {
+        "schema_version": 1,
+        "id": "task_016461",
+        "task_kind": "move_to_place",
+        "status": "paused",
+        "priority": 0.34,
+        "source": "routine",
+        "summary": "follow routine visit_water",
+        "target_kind": "place",
+        "target_id": "water",
+        "target_place": {},
+        "required_item": "",
+        "requested_quantity": null,
+        "goal_id": null,
+        "plan_id": null,
+        "created_tick": 0,
+        "last_update_tick": 80,
+        "expires_tick": null,
+        "metadata": {
+          "routine_kind": "visit_water",
+          "place_tag": "water",
+          "paused_reason": "occupation_provision"
+        }
+      }
+    ],
+    "resume_candidate": {},
+    "cargo_cache": {},
+    "carry_manifest": {
+      "coin": 10,
+      "club": 1,
+      "fiber_bundle": 1
+    },
+    "queue_revision": 65,
+    "carry_weight": 2.8,
+    "carry_capacity_weight": 8.0
+  },
+  "memory": {
+    "recent_events": [
+      {
+        "tick": 1285,
+        "kind": "decision",
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 1285,
+        "last_reinforced_tick": 1285,
+        "expires_tick": 3085,
+        "permanent": false,
+        "archived": false
+      },
+      {
+        "tick": 1295,
+        "kind": "decision",
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 1295,
+        "last_reinforced_tick": 1295,
+        "expires_tick": 2495,
+        "permanent": false,
+        "archived": false
+      },
+      {
+        "tick": 1305,
+        "kind": "decision",
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 1305,
+        "last_reinforced_tick": 1305,
+        "expires_tick": 2505,
+        "permanent": false,
+        "archived": false
+      },
+      {
+        "tick": 1315,
+        "kind": "decision",
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 1315,
+        "last_reinforced_tick": 1315,
+        "expires_tick": 3115,
+        "permanent": false,
+        "archived": false
+      },
+      {
+        "tick": 1325,
+        "kind": "decision",
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 1325,
+        "last_reinforced_tick": 1325,
+        "expires_tick": 3125,
+        "permanent": false,
+        "archived": false
+      },
+      {
+        "tick": 1330,
+        "kind": "death",
+        "note": "agent removed from simulation",
+        "memory_class": "permanent",
+        "salience": 1.0,
+        "created_tick": 1330,
+        "last_reinforced_tick": 1330,
+        "expires_tick": null,
+        "permanent": true,
+        "archived": false
+      }
+    ],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [
+      {
+        "tick": 170,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.672
+      },
+      {
+        "tick": 180,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.557
+      },
+      {
+        "tick": 190,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.442
+      },
+      {
+        "tick": 200,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.327
+      },
+      {
+        "tick": 210,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.212
+      },
+      {
+        "tick": 220,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.111
+      },
+      {
+        "tick": 230,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.116
+      },
+      {
+        "tick": 240,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.121
+      },
+      {
+        "tick": 250,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.126
+      },
+      {
+        "tick": 260,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.131
+      },
+      {
+        "tick": 270,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.136
+      },
+      {
+        "tick": 280,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.141
+      },
+      {
+        "tick": 290,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.146
+      },
+      {
+        "tick": 300,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.151
+      },
+      {
+        "tick": 310,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.156
+      },
+      {
+        "tick": 320,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.161
+      },
+      {
+        "tick": 431,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.216
+      },
+      {
+        "tick": 859,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.43
+      },
+      {
+        "tick": 1262,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 0.636
+      },
+      {
+        "tick": 1285,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 1.657
+      },
+      {
+        "tick": 1295,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 1.707
+      },
+      {
+        "tick": 1305,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 1.757
+      },
+      {
+        "tick": 1315,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 1.807
+      },
+      {
+        "tick": 1325,
+        "intent": "flee_hazard",
+        "reason": "environmental hazard is too close",
+        "action": {
+          "type": "move_away",
+          "target_eid": 4,
+          "magnitude": 0.5185599999999999
+        },
+        "distress": 1.857
+      }
+    ],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 1330,
+    "slot": 2,
+    "x": 584.85,
+    "y": 412.81,
+    "sex": 0,
+    "age": 23.217,
+    "hp": 1.0,
+    "hunger": 66.499,
+    "thirst": 93.1,
+    "threat": 0.0,
+    "mood": 78.5,
+    "stamina": 100.0,
+    "infection": 0.0,
+    "tribe": 0.0,
+    "escalated": false
+  },
+  "runtime": {
+    "slot": 2,
+    "alive": false,
+    "last_seen_tick": 1330
+  }
+}

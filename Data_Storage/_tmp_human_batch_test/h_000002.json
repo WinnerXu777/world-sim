@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "h_000002",
+  "profile": {
+    "name": "Eve",
+    "created_tick": 40,
+    "sex": 1,
+    "life_exp": 80.0,
+    "personality": {
+      "archetype": "communal",
+      "caution": 0.869,
+      "sociability": 0.858,
+      "resourcefulness": 0.24,
+      "resolve": 0.264
+    }
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "seek_shelter",
+    "last_decision_tick": 40,
+    "last_reason": "threat and low resilience favor shelter"
+  },
+  "relationships": {
+    "h_000001": {
+      "kind": "neighbor",
+      "closeness": 0.05,
+      "last_seen_tick": 40,
+      "tags": [
+        "neighbor"
+      ],
+      "tag_meta": {
+        "neighbor": {
+          "last_seen_tick": 40,
+          "memory_class": "relationship",
+          "salience": 0.35,
+          "created_tick": 40,
+          "last_reinforced_tick": 40,
+          "expires_tick": 640,
+          "permanent": false,
+          "archived": false
+        }
+      }
+    }
+  },
+  "memory": {
+    "recent_events": [
+      {
+        "tick": 40,
+        "kind": "decision",
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 40,
+        "last_reinforced_tick": 40,
+        "expires_tick": 640,
+        "permanent": false,
+        "archived": false
+      }
+    ],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [
+      {
+        "tick": 40,
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "action": {
+          "type": "move_toward",
+          "target_eid": -1,
+          "magnitude": 6.8999999999999995
+        },
+        "distress": 1.0
+      }
+    ],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 40,
+    "slot": 1,
+    "x": 120.0,
+    "y": 120.0,
+    "sex": 1,
+    "age": 0.0,
+    "hp": 15.0,
+    "hunger": 40.0,
+    "thirst": 30.0,
+    "threat": 20.0,
+    "mood": 60.0,
+    "stamina": 40.0,
+    "infection": 0.0,
+    "tribe": 0.0,
+    "escalated": true
+  },
+  "runtime": {
+    "slot": 1,
+    "alive": true,
+    "last_seen_tick": 40
+  }
+}

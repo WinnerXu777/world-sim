@@ -1,0 +1,639 @@
+{
+ "version": 1,
+ "id_range": [
+  40,
+  79
+ ],
+ "species": [
+  {
+   "id": 40,
+   "name": "sheep",
+   "sprite": "a4/static/static-sheep-a4-v1.png",
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    10,
+    7
+   ],
+   "variants": [],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 41,
+   "name": "deer",
+   "sprite": "a4/static/static-deer-a4-v1.png",
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    12,
+    8
+   ],
+   "variants": [],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 42,
+   "name": "tiger",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    14,
+    8
+   ],
+   "variants": [],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 43,
+   "name": "wolf",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    12,
+    7
+   ],
+   "variants": [
+    "winter_wolf",
+    "pack_leader"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 44,
+   "name": "fish",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    6,
+    3
+   ],
+   "variants": [],
+   "enabled": true,
+   "flight": false,
+   "swim": true
+  },
+  {
+   "id": 45,
+   "name": "boar",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    12,
+    8
+   ],
+   "variants": [
+    "bristle_boar"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 46,
+   "name": "fox",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    8,
+    5
+   ],
+   "variants": [
+    "red_fox",
+    "grey_fox"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 47,
+   "name": "goblin",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    7,
+    7
+   ],
+   "variants": [
+    "goblin_barterer",
+    "scrap_raider"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 48,
+   "name": "skeleton",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    7,
+    7
+   ],
+   "variants": [
+    "armoured_skeleton"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 49,
+   "name": "giant_spider",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    14,
+    14
+   ],
+   "variants": [
+    "cave_spider",
+    "orchard_spider"
+   ],
+   "enabled": true,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 50,
+   "name": "goat",
+   "sprite": "a4/static/static-goat-a4-v1.png",
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    10,
+    7
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 51,
+   "name": "rabbit",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    5,
+    4
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 52,
+   "name": "dog",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    10,
+    6
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 53,
+   "name": "cat",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    7,
+    5
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 54,
+   "name": "cow",
+   "sprite": null,
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    16,
+    9
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 55,
+   "name": "horse",
+   "sprite": null,
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    16,
+    8
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 56,
+   "name": "chicken",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    5,
+    5
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 57,
+   "name": "songbird",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    3,
+    3
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": true,
+   "swim": false
+  },
+  {
+   "id": 58,
+   "name": "crow",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    4,
+    4
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": true,
+   "swim": false
+  },
+  {
+   "id": 60,
+   "name": "brambleback",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    11,
+    7
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 61,
+   "name": "mire_lantern",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    4,
+    4
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 62,
+   "name": "cinder_moth",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    4,
+    4
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": true,
+   "swim": false
+  },
+  {
+   "id": 63,
+   "name": "cairn_keeper",
+   "sprite": null,
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    14,
+    14
+   ],
+   "variants": [
+    "moss_cairn_keeper",
+    "frost_cairn_keeper"
+   ],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 64,
+   "name": "thread_thief",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    5,
+    4
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 65,
+   "name": "bellhorn",
+   "sprite": null,
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    18,
+    10
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 66,
+   "name": "glassfin",
+   "sprite": null,
+   "frame": [
+    64,
+    64
+   ],
+   "pivot": [
+    32,
+    56
+   ],
+   "footprint": [
+    6,
+    3
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": true
+  },
+  {
+   "id": 67,
+   "name": "moonhart",
+   "sprite": null,
+   "frame": [
+    160,
+    160
+   ],
+   "pivot": [
+    80,
+    144
+   ],
+   "footprint": [
+    14,
+    8
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 68,
+   "name": "rootling",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    7,
+    7
+   ],
+   "variants": [
+    "autumn_rootling"
+   ],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  },
+  {
+   "id": 69,
+   "name": "hollow_rook",
+   "sprite": null,
+   "frame": [
+    128,
+    128
+   ],
+   "pivot": [
+    64,
+    112
+   ],
+   "footprint": [
+    8,
+    8
+   ],
+   "variants": [],
+   "enabled": false,
+   "flight": false,
+   "swim": false
+  }
+ ]
+}

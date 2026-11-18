@@ -1,0 +1,11 @@
+# Core backend/runtime dependencies for the simulation server and shared
+# storage utilities. Keep this file platform-friendly.
+fastapi
+uvicorn[standard]
+torch
+requests
+numpy
+networkx
+aiosqlite
+sentence-transformers
+faiss-cpu

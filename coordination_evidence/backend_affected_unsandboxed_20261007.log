@@ -1,0 +1,20 @@
+test_a_truncated_last_line_does_not_lose_earlier_records (test_decision.LogAndReplayTests.test_a_truncated_last_line_does_not_lose_earlier_records) ... ok
+test_an_unwritable_log_never_breaks_a_decision (test_decision.LogAndReplayTests.test_an_unwritable_log_never_breaks_a_decision) ... ok
+test_jsonl_log_round_trip_outside_saves (test_decision.LogAndReplayTests.test_jsonl_log_round_trip_outside_saves) ... ok
+test_origins_from_a_json_file_and_an_explicit_primary_origin (test_map_placement.PlacementConfigTests.test_origins_from_a_json_file_and_an_explicit_primary_origin) ... ok
+test_exact_bytes_are_served_even_with_crlf_and_odd_whitespace (test_map_wire.AuthoredWireTests.test_exact_bytes_are_served_even_with_crlf_and_odd_whitespace) ... ok
+test_writes_atomically_coalesces_and_drains (test_memory_graph_background.WriterTests.test_writes_atomically_coalesces_and_drains) ... ok
+test_bad_structure_is_reported_not_raised (test_roster.ParseTests.test_bad_structure_is_reported_not_raised) ... ok
+test_cli_ok_and_nonzero_on_error (test_world_map.CliTests.test_cli_ok_and_nonzero_on_error) ... ok
+test_load_map_raises_with_issues_and_check_map_file_does_not (test_world_map.LoaderTests.test_load_map_raises_with_issues_and_check_map_file_does_not) ... ok
+test_unreadable_and_malformed_files (test_world_map.LoaderTests.test_unreadable_and_malformed_files) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.531s
+
+OK
+[Genesis] Generating map: playable_village
+[MemoryLightRAG] Saved graph (4 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8911e630768e4af0913d7d925c5cf363\MemoryRAG\memory_graph.pkl
+[Genesis] 'playable_village' ready — 11 entities, device=cpu.
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8911e630768e4af0913d7d925c5cf363\mg257qimov\g.pkl
+[MemoryLightRAG] Saved graph (19 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\tests\eden-startup-8911e630768e4af0913d7d925c5cf363\mg257qimov\g.pkl

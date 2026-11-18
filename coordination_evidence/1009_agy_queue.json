@@ -1,0 +1,326 @@
+{
+  "roadmap": "1009roadmap.md",
+  "decision_register": "1001decisios.md",
+  "checkpoint": "b555adc",
+  "quota_policy": "Run native agy -p /usage before and after assignments; when a Gemini bucket is exhausted, stop dispatch and Codex implements remaining eligible work. Failure or unknown usage is not exhaustion.",
+  "decision_policy": "Record specific user blockers without deciding OPEN roadmap choices; dispatch independent eligible tasks instead. Preserve all other roadmap work as pending, not complete or abandoned.",
+  "assignments": [
+    {
+      "id": "settlement-design",
+      "items": [
+        "R6.4"
+      ],
+      "state": "source_grounded_design_reviewed_foundation_under_repair",
+      "report": "coordination_evidence/codex_1010_settlement_design_report.md",
+      "scope": "Design first; concrete construction/storage/persistence APIs and conservation. Draft save refusal is DR-22 OPEN, no format bump approved",
+      "owner_thread": "01a125a9-9cb8-7c91-9c7e-bd0ea43611b2"
+    },
+    {
+      "id": "long-distance-walk",
+      "items": [
+        "R0.5"
+      ],
+      "state": "9_probe_tests_18_void_tests_pass_public_telemetry_agy_running_live_pending",
+      "report": "coordination_evidence/codex_1010_walk_report.md",
+      "scope": "Opt-in real 5000-unit outbound/return probe, truthful metrics and pure mock tests; live run follows source handoff"
+    },
+    {
+      "id": "client-streaming",
+      "items": [
+        "R5.1",
+        "R5.2",
+        "R5.4"
+      ],
+      "state": "focused_tests_passed_live_acceptance_pending",
+      "owner_thread": "01a125a9-9cb8-7c91-9c7e-bd0ea43611b2",
+      "reason": "Three AGY command auto-denials; standby repaired verified scene/409/window gaps",
+      "report": "coordination_evidence/codex_1010_client_report.md",
+      "verification": "Current stronger R5_REGRESSION_PASS and C2/frame/buffer harness markers verified; actual walk/visual acceptance still owed"
+    },
+    {
+      "id": "client-creatures",
+      "items": [
+        "R5.3"
+      ],
+      "state": "focused_and_published_art_checks_passed_live_pending",
+      "owner_thread": "01a125a9-9cb8-7c91-9c7e-bd0ea43611b2",
+      "reason": "AGY-first assignment terminated on command permission denial",
+      "scope": "Existing static creature art/heading/dead-pose/placeholder behavior; no new paid animation or defaults"
+    },
+    {
+      "id": "client-portal",
+      "items": [
+        "R5.8"
+      ],
+      "state": "live_verification_pending",
+      "report": "coordination_evidence/agy_1010_portal_report.md",
+      "scope": "Test copied and real runner registered by AGY with test-only spaces flags; live test pending stable client handoff"
+    },
+    {
+      "id": "authored-origin",
+      "items": [
+        "R5.1",
+        "DR-3"
+      ],
+      "state": "backend_targeted_tests_passed",
+      "report": "coordination_evidence/agy_1010_origin_report.md",
+      "scope": "17 targeted tests pass with normal Windows subprocess access; client consumption/full R5.1 acceptance still owed"
+    },
+    {
+      "id": "window-animals-integrated",
+      "items": [
+        "R6.6"
+      ],
+      "state": "39_targeted_tests_passed_strict_live_pending",
+      "owner_thread": "01a125a9-9cb8-7c91-9c7e-bd0ea43611b2",
+      "report": "coordination_evidence/codex_1010_window_report.md",
+      "scope": "Versioned integrated-set delta, two consumers and actual creature lifecycle validated; no defaults changed"
+    },
+    {
+      "id": "economy-balance",
+      "items": [
+        "R6.3"
+      ],
+      "state": "local_topic_commit_78_tests_four_seed_repeat_four_goldens_verified",
+      "owner_thread": "01a125a9-12d2-7710-a186-cb2a2fa4f69c",
+      "report": "coordination_evidence/codex_1010_r63_report.md",
+      "scope": "Opt-in balance implementation handoff verified; broader long-calendar/integration/fullsuite remain pending",
+      "commit": "08338f3"
+    },
+    {
+      "id": "god-power-ports",
+      "items": [
+        "R6.8"
+      ],
+      "state": "46_archive_tests_four_goldens_plus_final_11_tests_passed_report_pending",
+      "owner_thread": "01a125a9-12d2-7710-a186-cb2a2fa4f69c",
+      "reason": "AGY tried first and stopped on command permission",
+      "report": "coordination_evidence/codex_1010_power_ports_report.md",
+      "scope": "First3ports verified within snapshots; finalcurrentguard11focusedtestspass, remainingP1backlog assigned toAGY, fullR6.8andcombinedintegration pending"
+    },
+    {
+      "id": "client-art-import",
+      "items": [
+        "R5.5"
+      ],
+      "state": "18_tests_and_33_local_poses_verified",
+      "report": "coordination_evidence/agy_1010_import_report.md",
+      "verification": "18tests pass including stricter malformed selection controls; exact33H008poses validated and published locally, actual Godot texture/index consumption passes. No animation/collision/public release or full R5.5 claim.",
+      "scope": "Opt-in accepted h001/h005/h007/h008 importer/tests, pivots/scale/nearest; preserve legacy defaults and source art"
+    },
+    {
+      "id": "client-visual-acceptance",
+      "items": [
+        "R5.7",
+        "R5.9"
+      ],
+      "state": "decision_and_evidence_pending",
+      "decisions": [
+        "DR-5",
+        "DR-14"
+      ],
+      "scope": "Prepare/run evidence where possible; retain person-at-keyboard acceptance and target FPS as explicit prerequisites"
+    },
+    {
+      "id": "client-buildings",
+      "items": [
+        "R5.6"
+      ],
+      "state": "dependency_pending",
+      "dependencies": [
+        "R5.5",
+        "R6.4"
+      ],
+      "scope": "Do not certify proposed art footprints as collision or invent settlement contracts"
+    },
+    {
+      "id": "void-telemetry",
+      "items": [
+        "R0.5"
+      ],
+      "state": "agy_running",
+      "report": "coordination_evidence/agy_1010_void_telemetry_report.md"
+    },
+    {
+      "id": "aux-state-design",
+      "items": [
+        "R6.13"
+      ],
+      "state": "revised_design_reviewed_foundation_running",
+      "report": "coordination_evidence/agy_1010_aux_design_report.md",
+      "active_assignment": "agy_1010_aux_foundation"
+    },
+    {
+      "id": "human-creature-killer",
+      "items": [
+        "R6.9"
+      ],
+      "state": "codex_fallback_queued_after_power",
+      "owner_thread": "01a125a9-12d2-7710-a186-cb2a2fa4f69c",
+      "report": "coordination_evidence/codex_1010_creature_killer_report.md"
+    },
+    {
+      "id": "agy_1010_settlement_fix",
+      "items": [
+        "R6.4"
+      ],
+      "state": "37_tests_passed_root_fixture_tick_fixed",
+      "status_file": "coordination_evidence/agy_1010_settlement_fix_status.json",
+      "scope": "Scoped foundation/repair only; production integration and full roadmap gates remain pending",
+      "verification": "Original role partial mutation and engine member cap errors repaired; strict structure metadata and staged restore tested. No production integration yet."
+    },
+    {
+      "id": "agy_1010_void_secondfix",
+      "items": [
+        "R0.5"
+      ],
+      "state": "terminal_18_tests_pass_root_fixture_corrections",
+      "status_file": "coordination_evidence/agy_1010_void_secondfix_status.json",
+      "scope": "Scoped foundation/repair only; production integration and full roadmap gates remain pending"
+    },
+    {
+      "id": "agy_1010_aux_foundation",
+      "items": [
+        "R6.13"
+      ],
+      "state": "27_tests_pass_repaired_pure_storage_foundation_production_integration_pending",
+      "status_file": "coordination_evidence/agy_1010_aux_foundation_status.json",
+      "scope": "Scoped foundation/repair only; production integration and full roadmap gates remain pending",
+      "active_assignment": "agy_1010_aux_fix"
+    },
+    {
+      "id": "calendar-flag-sensitive-tests",
+      "items": [
+        "R0.6"
+      ],
+      "state": "19_tests_pass_both_flags_reviewed",
+      "status_file": "coordination_evidence/agy_1010_calendar_testfix_status.json",
+      "verification": "Calendar19passbothflags, emotion25/care/rates10/consumers3/wire4/scenario7pass; market3of4pass with inherited EMOTION-C5 long-calendar out_of_stock exception documented."
+    },
+    {
+      "id": "s3-scaled-roster",
+      "items": [
+        "R6.10"
+      ],
+      "state": "committed_scoped_verified_74fc2ea_14_tests_8_strict_goldens",
+      "status_file": "coordination_evidence/agy_1010_s3_scaled_status.json",
+      "scope": "Actual scaled-roster needs harness migration, no task-bridge completion claim",
+      "report": "coordination_evidence/agy_1010_s3_scaled_report.md",
+      "gate_runner": "coordination_evidence/run_s3_scaled_gate.py",
+      "result": "coordination_evidence/s3_scaled_gate_result.json",
+      "live_exec_session": 27252
+    },
+    {
+      "id": "calendar-market-scenario",
+      "items": [
+        "R0.6"
+      ],
+      "state": "known_long_calendar_exception_reproduced",
+      "report": "coordination_evidence/r06_market_result.json",
+      "scope": "4 tests:1 scenario failure,3pass; nine buy attempts out_of_stock, zero buys/price response, no deaths, repeat deterministic. Immutable snapshot unchanged. Exception documented, no production tuning/default changes."
+    },
+    {
+      "id": "agy_1010_aux_fix",
+      "items": [
+        "R6.13"
+      ],
+      "state": "27_tests_pass_repaired_pure_storage_foundation_production_integration_pending",
+      "status_file": "coordination_evidence/agy_1010_aux_fix_status.json",
+      "scope": "Repair defensive storage, rejection bounds, frozen lifecycle/token validation; no engine integration/persistence",
+      "reason": "AGY RunCommand attempt denied after substantive native file repairs; root verification succeeded, no quota/permission fallback needed for this finished service"
+    },
+    {
+      "id": "ecology-death-attribution",
+      "items": [
+        "R0.3"
+      ],
+      "state": "9_tests_pass_review_found_ambiguous_killer_and_prefeed_gaps",
+      "status_file": "coordination_evidence/agy_1010_balance_attribution_status.json",
+      "scope": "Real bounded damage-source diagnostic prerequisite for10day probe; no proximity-as-cause or fabricated duels",
+      "active_assignment": "agy_1010_balance_fix"
+    },
+    {
+      "id": "settlement-construction",
+      "items": [
+        "R6.4"
+      ],
+      "state": "root_rejected_41_tests_33error_1fail_mock_engine_gap_agy_repair_running",
+      "status_file": "coordination_evidence/agy_1010_settlement_construction_status.json",
+      "scope": "Real engine site planning, material-paid structure creation and reversible construction transaction; gameplay/save/growth/terraform integration remains pending",
+      "active_assignment": "agy_1010_construction_fix"
+    },
+    {
+      "id": "disaster-power-ports",
+      "items": [
+        "R6.8"
+      ],
+      "state": "root_rejected_23_tests_3fail_3error_agy_repair_running",
+      "status_file": "coordination_evidence/agy_1010_disaster_ports_status.json",
+      "scope": "All8P1disasterports actualregistry+dryrun+effect/event+legacyoracle tests, no publicliveworld execution",
+      "active_assignment": "agy_1010_disaster_fix"
+    },
+    {
+      "id": "agy_1010_balance_fix",
+      "items": [
+        "R0.3"
+      ],
+      "state": "agy_running",
+      "status_file": "coordination_evidence/agy_1010_balance_fix_status.json",
+      "scope": "Real simultaneous-attacker ambiguity, pre-feed death diagnostics and bounded UID-safe observation;10dayrun remains pending"
+    },
+    {
+      "id": "agy_1010_void_public",
+      "items": [
+        "R0.5"
+      ],
+      "state": "agy_running",
+      "status_file": "coordination_evidence/agy_1010_void_public_status.json",
+      "scope": "Window-mode-only public real counter envelope/lifetime/reset identity; controlled-input test; no full walk gate"
+    },
+    {
+      "id": "agy_1010_retaliate",
+      "items": [
+        "R6.1"
+      ],
+      "state": "agy_running",
+      "status_file": "coordination_evidence/agy_1010_retaliate_status.json",
+      "scope": "Existing attack task with factual same-target harm/goal justification through actual affordance/runner, opt-in; other missing verbs pending"
+    },
+    {
+      "id": "r01-committed-head-gate",
+      "items": [
+        "R0.1"
+      ],
+      "state": "running",
+      "pid": 33068,
+      "session_id": 88503,
+      "evidence": "coordination_evidence/r01_committed_gate_result.json",
+      "scope": "Immutable committed74fc2ea archive, fourstrictgoldens then fullsuite, no uncommitted overlay"
+    },
+    {
+      "id": "agy_1010_disaster_fix",
+      "items": [
+        "R6.8"
+      ],
+      "state": "agy_running",
+      "status_file": "coordination_evidence/agy_1010_disaster_fix_status.json"
+    },
+    {
+      "id": "agy_1010_construction_fix",
+      "items": [
+        "R6.4"
+      ],
+      "state": "agy_running",
+      "status_file": "coordination_evidence/agy_1010_construction_fix_status.json"
+    }
+  ],
+  "remaining_roadmap": {
+    "R0": "Pending gate closure/clean archive tests, long-calendar balance, walk evidence and DR-1; obey atomic heavy-run lock",
+    "R6": "Gameplay-depth implementation pending except active R6.3; all relevant roadmap implementation/source sharing authorized today; unresolved contract/design dependencies preserved",
+    "R7": "Pending defaults/hardening/packaging; user decisions retained, no push or deletion permission inferred",
+    "R8": "HELD for actual model inputs/APIs per roadmap",
+    "R9": "Art/content expansion remains pending beyond completed candidate generation; open creative/budget choices retained"
+  },
+  "updated_at": "2026-10-11T03:09:55.467693+00:00",
+  "current_head": "74fc2ea889cc362b6eda37e1be4e3ae275d50a97"
+}

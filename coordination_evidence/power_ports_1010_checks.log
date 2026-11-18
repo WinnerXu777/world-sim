@@ -1,0 +1,638 @@
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "-m", "unittest", "discover", "-s", "tests", "-p", "test_power_ports_1010.py"]
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.552s
+
+OK
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "-m", "unittest", "discover", "-s", "tests", "-p", "test_harness_powers.py"]
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+Executing <Task finished name='Task-1' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers.py:130> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.244 seconds
+.Executing <Task finished name='Task-5' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers.py:130> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.344 seconds
+.Executing <Task finished name='Task-9' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers.py:130> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.214 seconds
+..........
+----------------------------------------------------------------------
+Ran 12 tests in 1.008s
+
+OK
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-fd10c1432ee14b83aef11435c4d2bfaa\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "-m", "unittest", "discover", "-s", "tests", "-p", "test_harness_powers_batch2.py"]
+.........<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+Executing <Task finished name='Task-1' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.231 seconds
+.Executing <Task finished name='Task-5' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.266 seconds
+.Executing <Task finished name='Task-9' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.273 seconds
+.Executing <Task finished name='Task-13' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.270 seconds
+.Executing <Task finished name='Task-17' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.267 seconds
+.Executing <Task finished name='Task-21' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.315 seconds
+.Executing <Task finished name='Task-25' coro=<EngineEquivalenceTests.asyncSetUp() done, defined at C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\tests\test_harness_powers_batch2.py:213> result=None created at C:\Users\Rita\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py:100> took 0.261 seconds
+........
+----------------------------------------------------------------------
+Ran 23 tests in 2.134s
+
+OK
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\.tmp\tests\eden-startup-204dda6dd9674751b4cf40b384ce605b\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "tools/golden_trace.py", "--check", "--strict"]
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 8 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (27 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (32 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.5ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Saved graph (41 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-2r7qwjq9\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+no drift (11 checkpoints, 69.6 s)
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "tools/golden_trace.py", "--check", "--strict", "--resources"]
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 8 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (30 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (43 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (48 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Saved graph (48 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.5ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Saved graph (44 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-v0u8_ob4\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+no drift (11 checkpoints, 81.1 s)
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "tools/golden_trace.py", "--check", "--strict", "--spaces"]
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 8 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 10 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (27 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Saved graph (32 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Saved graph (35 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-4193o3kf\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+no drift (11 checkpoints, 72.9 s)
+["C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe", "tools/golden_trace.py", "--check", "--strict", "--window-hook"]
+[Genesis] Generating map: starter_village
+[MemoryLightRAG] Saved graph (0 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[Genesis] 'starter_village' ready ！ 27 entities, device=cpu.
+[MemoryLightRAG] Saved graph (8 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 8 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 11 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (29 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.5ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (36 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Saved graph (43 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Saved graph (40 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.5ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.4ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Saved graph (43 nodes) to C:\Users\Rita\Desktop\caleb\world_simulator\.tmp\power_ports_1010_final\temp\eden-harness-he7qprzy\MemoryRAG\memory_graph.pkl
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.3ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.2ms
+[MemoryLightRAG] Retrieved 12 nodes in 0.1ms
+no drift (11 checkpoints, 85.6 s)

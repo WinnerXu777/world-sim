@@ -1,0 +1,19 @@
+| seed | digest | dead | peak | thefts | cases | levied | robbed | fought_off | arrested | loans | repaid | defaulted | hired | paid | sales | pass |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1008 | 9c9597fca425d1a5 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+| 1 | abfe472b2d0e0a15 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 6 | 4 | 0 | True |
+| 2 | d416ea540f5f9ad0 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 6 | 4 | 0 | True |
+| 3 | 901a35fa3bad1aad | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 5 | 0 | True |
+| 1008 | 9c9597fca425d1a5 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+
+determinism: seed 1008 digests 9c9597fca425d1a5 vs 9c9597fca425d1a5 -> identical
+seed 1008 ok by rung: {'forage': 39, 'work': 11, 'buy': 0, 'trade': 0, 'beg': 2, 'borrow': 2, 'steal': 0, 'rob': 0}
+seed 1 ok by rung: {'forage': 44, 'work': 12, 'buy': 0, 'trade': 0, 'beg': 1, 'borrow': 1, 'steal': 0, 'rob': 0}
+seed 2 ok by rung: {'forage': 42, 'work': 14, 'buy': 0, 'trade': 0, 'beg': 4, 'borrow': 2, 'steal': 0, 'rob': 0}
+seed 3 ok by rung: {'forage': 43, 'work': 11, 'buy': 0, 'trade': 0, 'beg': 0, 'borrow': 0, 'steal': 0, 'rob': 0}
+seed 1008 ok by rung: {'forage': 39, 'work': 11, 'buy': 0, 'trade': 0, 'beg': 2, 'borrow': 2, 'steal': 0, 'rob': 0}
+seed 1008 answers: {'work_for:hire': 5, 'work_for:refuse_defaulter': 1, 'request_item:refuse_no_item': 2, 'borrow_item:refuse_stranger': 1, 'work_for:refuse_no_wage': 1, 'borrow_item:refuse_no_item': 1}
+seed 1 answers: {'work_for:hire': 6, 'work_for:refuse_distrust': 1, 'request_item:refuse_no_item': 1, 'borrow_item:refuse_stranger': 1, 'work_for:refuse_no_wage': 1}
+seed 2 answers: {'work_for:hire': 6, 'work_for:refuse_defaulter': 2, 'request_item:give': 1, 'request_item:refuse_no_item': 3, 'work_for:refuse_no_wage': 2, 'borrow_item:refuse_defaulter': 1, 'borrow_item:refuse_stranger': 1}
+seed 3 answers: {'work_for:hire': 5, 'work_for:refuse_no_wage': 1}
+seed 1008 answers: {'work_for:hire': 5, 'work_for:refuse_defaulter': 1, 'request_item:refuse_no_item': 2, 'borrow_item:refuse_stranger': 1, 'work_for:refuse_no_wage': 1, 'borrow_item:refuse_no_item': 1}

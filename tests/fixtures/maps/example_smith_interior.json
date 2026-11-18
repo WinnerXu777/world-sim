@@ -1,0 +1,34 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "example_smith_interior",
+  "revision": 0,
+  "tile_size_px": 48,
+  "units_per_tile": 8,
+  "actor_radius": 2.4,
+  "coordinate_system": "top_left_x_right_y_down",
+  "map_kind": "interior",
+  "size_tiles": [12, 10],
+  "layers": [{
+    "name": "floor", "kind": "terrain",
+    "palette": {"1": "sprites/floor.png"},
+    "tiles": [[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],
+              [1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],
+              [1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],
+              [1,1,1,1,1,1,1,1,1,1,1,1]]
+  }],
+  "walls": [
+    {"id": "example_smith_interior:wall_n", "min": [0, 0], "max": [96, 4]},
+    {"id": "example_smith_interior:wall_s", "min": [0, 76], "max": [96, 80]},
+    {"id": "example_smith_interior:wall_w", "min": [0, 4], "max": [4, 76]},
+    {"id": "example_smith_interior:wall_e", "min": [92, 4], "max": [96, 76]}
+  ],
+  "anchors": [
+    {"id": "example_smith_interior:entry", "kind": "spawn", "position": [48, 60]},
+    {"id": "example_smith_interior:exit", "kind": "door", "position": [48, 70]},
+    {"id": "example_smith_interior:work", "kind": "work", "position": [48, 36], "for_role": "smith"}
+  ],
+  "entities": [],
+  "portals": [
+    {"id": "example_smith_interior:portal_out", "from_anchor": "example_smith_interior:exit", "to_map": "example_smith", "to_anchor": "example_smith:spawn"}
+  ]
+}

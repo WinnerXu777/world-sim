@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Model/data generation utilities.
+openai
+tqdm
+vllm; platform_system != "Windows"

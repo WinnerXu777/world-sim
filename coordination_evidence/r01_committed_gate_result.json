@@ -1,0 +1,51 @@
+{
+  "base": "74fc2ea889cc362b6eda37e1be4e3ae275d50a97",
+  "snapshot": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.tmp\\r01-58f9b168",
+  "overlay": [],
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "seconds": 50.19
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--resources"
+      ],
+      "exit_code": 0,
+      "seconds": 51.75
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--spaces"
+      ],
+      "exit_code": 0,
+      "seconds": 49.7
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--window-hook"
+      ],
+      "exit_code": 0,
+      "seconds": 58.03
+    }
+  ],
+  "scope": "Committed HEAD archive only; excludes all uncommitted implementations. No timing or final combined implementation acceptance."
+}

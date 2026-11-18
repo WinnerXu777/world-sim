@@ -1,0 +1,90 @@
+{
+  "checked_at": "2026-10-11T03:10:55.897316+00:00",
+  "exhausted": true,
+  "gemini": {
+    "name": "Gemini Models",
+    "description": "Models within this group: Gemini Flash, Gemini Pro",
+    "buckets": [
+      {
+        "id": "gemini-weekly",
+        "name": "Weekly Limit Remaining",
+        "description": "You have hit your 5-hour limit, so the weekly limit does not currently apply. Your 5-hour limit will refresh in 4 hours, 3 minutes.",
+        "window": "weekly",
+        "remaining_fraction": 0.7078622579574585,
+        "reset_time": "2026-10-13T01:06:01Z"
+      },
+      {
+        "id": "gemini-5h",
+        "name": "Five Hour Limit Remaining",
+        "description": "You have hit your 5-hour limit, it will refresh in 4 hours, 3 minutes. If on a supported paid plan, you can use AI credits in the interim.",
+        "window": "5h",
+        "remaining_fraction": 0,
+        "reset_time": "2026-10-11T07:14:35Z"
+      }
+    ]
+  },
+  "native_report": {
+    "conversation_id": "",
+    "status": "SUCCESS",
+    "response": "Gemini Models\tWeekly Limit Remaining\t71%\t2026-10-13T01:06:01Z\nGemini Models\tFive Hour Limit Remaining\t0%\t2026-10-11T07:14:35Z\nClaude and GPT models\tWeekly Limit Remaining\t100%\t2026-10-18T03:10:55Z\nClaude and GPT models\tFive Hour Limit Remaining\t100%\t2026-10-11T08:10:55Z\n",
+    "duration_seconds": 0,
+    "num_turns": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "thinking_tokens": 0,
+      "cache_read_tokens": 0,
+      "total_tokens": 0
+    },
+    "command": {
+      "name": "usage",
+      "data": {
+        "description": "Within each group, models share a weekly limit and a 5-hour limit. Quota is consumed proportionally to the cost of the tokens. Thus, limits will last longer with shorter tasks or using more cost-effective models. The 5-hour limit smooths out aggregate demand to fairly distribute global capacity across all users, while your weekly limit is tied directly to your individual tier.",
+        "groups": [
+          {
+            "name": "Gemini Models",
+            "description": "Models within this group: Gemini Flash, Gemini Pro",
+            "buckets": [
+              {
+                "id": "gemini-weekly",
+                "name": "Weekly Limit Remaining",
+                "description": "You have hit your 5-hour limit, so the weekly limit does not currently apply. Your 5-hour limit will refresh in 4 hours, 3 minutes.",
+                "window": "weekly",
+                "remaining_fraction": 0.7078622579574585,
+                "reset_time": "2026-10-13T01:06:01Z"
+              },
+              {
+                "id": "gemini-5h",
+                "name": "Five Hour Limit Remaining",
+                "description": "You have hit your 5-hour limit, it will refresh in 4 hours, 3 minutes. If on a supported paid plan, you can use AI credits in the interim.",
+                "window": "5h",
+                "remaining_fraction": 0,
+                "reset_time": "2026-10-11T07:14:35Z"
+              }
+            ]
+          },
+          {
+            "name": "Claude and GPT models",
+            "description": "Models within this group: Claude Opus, Claude Sonnet, GPT-OSS",
+            "buckets": [
+              {
+                "id": "3p-weekly",
+                "name": "Weekly Limit Remaining",
+                "window": "weekly",
+                "remaining_fraction": 1,
+                "reset_time": "2026-10-18T03:10:55Z"
+              },
+              {
+                "id": "3p-5h",
+                "name": "Five Hour Limit Remaining",
+                "window": "5h",
+                "remaining_fraction": 1,
+                "reset_time": "2026-10-11T08:10:55Z"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "request": {
+    "job_id": "dialogue:t1",
+    "role": "dialogue",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "active",
+    "deadline_ms": 1500,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "talk_reply",
+      "cases": [
+        {
+          "resident_model_mode": "talk_reply",
+          "talk_mode": "direct_talk",
+          "speaker_id": "h_player",
+          "listener_id": "h_000123",
+          "prompt_case": {
+            "utterance": "I am going to kill you",
+            "personality_summary": "guarded (caution=0.84, aggression=0.31)",
+            "relationship_summary": "neighbor",
+            "allowed_physical_intents": [
+              "flee",
+              "back_away",
+              "scan_and_prepare",
+              "counterattack",
+              "call_help"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "dialogue:t1",
+    "role": "dialogue",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "talk_reply",
+      "responses": [
+        {
+          "packet": {
+            "resident_model_mode": "talk_reply",
+            "mode": "direct_talk",
+            "speaker_id": "h_player",
+            "listener_id": "h_000123",
+            "speech_text": "Stay away from me!",
+            "speech_act": "threat_response",
+            "tone": "neutral",
+            "physical_intent": "counterattack",
+            "danger_upgrade": false,
+            "reasoning_followup": false,
+            "witness_policy": "nearby_hear",
+            "relationship_delta": "neutral",
+            "pressure_deltas": {},
+            "memory_salience": 0.3
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

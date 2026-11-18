@@ -1,0 +1,15 @@
+{
+  "status": "needs_verification",
+  "items": [
+    "R6.13"
+  ],
+  "updated_at": "2026-10-11T02:54:43.601725+00:00",
+  "returncode": 0,
+  "conversation_id": "63569a51-d6fa-42e7-bcba-a8f970e29876",
+  "denied_actions": [
+    {
+      "action": "command",
+      "display_name": "RunCommand"
+    }
+  ]
+}

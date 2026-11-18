@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "id": "h_000002",
+  "profile": {
+    "name": "Mira-1",
+    "created_tick": 120,
+    "sex": 1,
+    "life_exp": 70.0,
+    "personality": {
+      "archetype": "avenger",
+      "top_traits": [
+        "vengefulness",
+        "resolve",
+        "pride"
+      ],
+      "aggression": 0.67,
+      "caution": 0.539,
+      "vengefulness": 0.903,
+      "greed": 0.403,
+      "loyalty": 0.478,
+      "mercy": 0.276,
+      "pride": 0.678,
+      "fearfulness": 0.277,
+      "curiosity": 0.42,
+      "ambition": 0.485,
+      "deceitfulness": 0.244,
+      "protectiveness": 0.573,
+      "sociability": 0.427,
+      "discipline": 0.542,
+      "resourcefulness": 0.594,
+      "resolve": 0.761
+    }
+  },
+  "status": {
+    "alive": true,
+    "current_intent": "seek_shelter",
+    "last_decision_tick": 120,
+    "last_reason": "threat and low resilience favor shelter"
+  },
+  "relationships": {
+    "h_000001": {
+      "kind": "tribe_mate",
+      "closeness": 0.05,
+      "last_seen_tick": 120,
+      "tags": [
+        "tribe_mate"
+      ],
+      "tag_meta": {
+        "tribe_mate": {
+          "last_seen_tick": 120,
+          "memory_class": "relationship",
+          "salience": 0.55,
+          "created_tick": 120,
+          "last_reinforced_tick": 120,
+          "expires_tick": 1920,
+          "permanent": false,
+          "archived": false
+        }
+      }
+    }
+  },
+  "personality": {
+    "schema_version": 1,
+    "archetype": "avenger",
+    "birth_seed": 1868293239,
+    "traits": {
+      "aggression": 0.67,
+      "caution": 0.539,
+      "vengefulness": 0.903,
+      "greed": 0.403,
+      "loyalty": 0.478,
+      "mercy": 0.276,
+      "pride": 0.678,
+      "fearfulness": 0.277,
+      "curiosity": 0.42,
+      "ambition": 0.485,
+      "deceitfulness": 0.244,
+      "protectiveness": 0.573,
+      "sociability": 0.427,
+      "discipline": 0.542,
+      "resourcefulness": 0.594,
+      "resolve": 0.761
+    },
+    "top_traits": [
+      "vengefulness",
+      "resolve",
+      "pride"
+    ]
+  },
+  "pressures": {
+    "fear_pressure": 0.452,
+    "vengeance_pressure": 0.346,
+    "greed_pressure": 0.522,
+    "loyalty_pressure": 0.371,
+    "security_pressure": 0.503,
+    "status_pressure": 0.489,
+    "curiosity_pressure": 0.43,
+    "resource_pressure": 0.478
+  },
+  "goals": [
+    {
+      "schema_version": 1,
+      "id": "g_0001",
+      "kind": "guard_home",
+      "priority": 0.5,
+      "target_id": null,
+      "target_place": {},
+      "horizon": "medium",
+      "status": "active",
+      "origin": "seed",
+      "plan_hint": "",
+      "confidence": 0.5,
+      "created_tick": 120,
+      "last_review_tick": 120,
+      "expires_tick": null,
+      "success_condition": "",
+      "failure_condition": "",
+      "metadata": {}
+    }
+  ],
+  "goal_state": {
+    "schema_version": 1,
+    "goal_counter": 1,
+    "last_review_tick": 120,
+    "last_review_source": "seed",
+    "review_needed": false,
+    "review_reason": "",
+    "next_review_tick": 504
+  },
+  "memory": {
+    "recent_events": [
+      {
+        "tick": 120,
+        "kind": "decision",
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "memory_class": "event",
+        "salience": 0.6,
+        "created_tick": 120,
+        "last_reinforced_tick": 120,
+        "expires_tick": 1320,
+        "permanent": false,
+        "archived": false
+      }
+    ],
+    "known_food_sources": [],
+    "known_water_sources": [],
+    "last_threats": []
+  },
+  "history": {
+    "decisions": [
+      {
+        "tick": 120,
+        "intent": "seek_shelter",
+        "reason": "threat and low resilience favor shelter",
+        "action": {
+          "type": "move_toward",
+          "target_eid": -1,
+          "magnitude": 6.8999999999999995
+        },
+        "distress": 1.6
+      }
+    ],
+    "world_decrees": []
+  },
+  "snapshot": {
+    "tick": 120,
+    "slot": 1,
+    "x": 120.0,
+    "y": 110.0,
+    "sex": 1,
+    "age": 0.0,
+    "hp": 80.0,
+    "hunger": 25.0,
+    "thirst": 25.0,
+    "threat": 95.0,
+    "mood": 60.0,
+    "stamina": 50.0,
+    "infection": 0.0,
+    "tribe": 1.0,
+    "escalated": true
+  },
+  "runtime": {
+    "slot": 1,
+    "alive": true,
+    "last_seen_tick": 120
+  }
+}

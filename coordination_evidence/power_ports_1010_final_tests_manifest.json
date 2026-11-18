@@ -1,0 +1,20 @@
+{
+  "base": "b555adc33776696f529ae9e4047c88acdb42f408",
+  "note": "Coordinator explicitly permitted this short final guard test under NORMAL root S3 gate; root lock untouched. Only flagged numeric conversion changed after golden snapshot.",
+  "command": [
+    "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_power_ports_1010.py",
+    "-v"
+  ],
+  "exit": 0,
+  "source_sha256": {
+    "at_the_beginning/harness/powers.py": "71fc04e74464c564da82d215dad3d6a87d03ec185f73fd8e52b4b913f531690d",
+    "tests/test_power_ports_1010.py": "85f17dc27a01693963922596f9b46dc13a1a71ac17821fcd6071271a7d1581c9"
+  }
+}

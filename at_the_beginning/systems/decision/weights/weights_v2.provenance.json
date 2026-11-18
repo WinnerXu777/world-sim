@@ -1,0 +1,36 @@
+{
+ "data": "matrix_data.npz (collected by train_matrix --collect, not shipped)",
+ "data_hash": "d1abc260d0438563",
+ "rows": 2904,
+ "hyper": {
+  "prior_weight": 1.0,
+  "l2": 0.01,
+  "iterations": 150
+ },
+ "train": {
+  "rows": 1936,
+  "labelled": 1523,
+  "agreement_prior": 0.6159,
+  "agreement_new": 0.8102,
+  "silent_rows": 413,
+  "silent_kl_to_prior": 0.1268
+ },
+ "test": {
+  "rows": 968,
+  "labelled": 777,
+  "agreement_prior": 0.6461,
+  "agreement_new": 0.8507,
+  "silent_rows": 191,
+  "silent_kl_to_prior": 0.13617
+ },
+ "max_weight_shift": 1.0414,
+ "gate": {
+  "improved_on_holdout": true,
+  "silent_kl_bounded": true,
+  "max_silent_kl": 0.15
+ },
+ "weights_hash": "1be410e9763ba2354549b04fade8cc7a4aa5be624b6082bed4b676ed657d21f7",
+ "format": "eden-matrix-weights",
+ "schema": 1,
+ "prior": "MatrixPolicy.initial() (weights v1)"
+}

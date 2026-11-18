@@ -1,0 +1,50 @@
+{
+  "request": {
+    "job_id": "j_17:decide",
+    "role": "decide",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 12,
+    "priority": "background",
+    "deadline_ms": 2500,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "resident_id": "h_000002",
+      "trigger": "plan_step_failed:e_000931",
+      "question_kind": "yes_no",
+      "tick": 9001,
+      "topic": "generic",
+      "state": {
+        "hunger": 71.0,
+        "hp": 88.0
+      },
+      "options": [
+        {
+          "id": "yes",
+          "description": "Keep the current plan."
+        },
+        {
+          "id": "no",
+          "description": "Drop the plan and ask for a new one."
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "j_17:decide",
+    "role": "decide",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 12,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "probabilities": {
+        "yes": 0.442582,
+        "no": 0.557418
+      }
+    }
+  }
+}

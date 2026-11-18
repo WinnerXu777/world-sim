@@ -1,0 +1,147 @@
+{
+  "base": "b555adc33776696f529ae9e4047c88acdb42f408",
+  "archive": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.tmp\\power_ports_1010_final",
+  "commands": [
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_power_ports_1010.py"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_harness_powers.py"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_harness_powers_batch2.py"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "tools/golden_trace.py",
+      "--check",
+      "--strict"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "tools/golden_trace.py",
+      "--check",
+      "--strict",
+      "--resources"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "tools/golden_trace.py",
+      "--check",
+      "--strict",
+      "--spaces"
+    ],
+    [
+      "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+      "tools/golden_trace.py",
+      "--check",
+      "--strict",
+      "--window-hook"
+    ]
+  ],
+  "source_sha256": {
+    "at_the_beginning/harness/powers.py": "6cff1b103eba900a02fe3864fc6d7402645ac7dbb391cd4a62a861a3f25fc6ba",
+    "tests/test_power_ports_1010.py": "687cd4e3ea9198b4cc2cfe10b4d2fb76dc622b0c4e51fb64e17f7ab3a0e4cb96"
+  },
+  "completed": [
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_power_ports_1010.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_harness_powers.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_harness_powers_batch2.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--resources"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--spaces"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+        "tools/golden_trace.py",
+        "--check",
+        "--strict",
+        "--window-hook"
+      ],
+      "exit": 0
+    }
+  ]
+}

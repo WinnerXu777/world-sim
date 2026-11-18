@@ -1,0 +1,38 @@
+[
+  {
+    "pattern": "test_harness_calendar.py",
+    "tests": 19,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "pass": false,
+    "seconds": 1.79
+  },
+  {
+    "pattern": "test_harness_calendar_rates.py",
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass": true,
+    "seconds": 0.45
+  },
+  {
+    "pattern": "test_harness_calendar_consumers.py",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass": true,
+    "seconds": 0.02
+  },
+  {
+    "pattern": "test_harness_calendar_wire.py",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass": true,
+    "seconds": 1.65
+  }
+]

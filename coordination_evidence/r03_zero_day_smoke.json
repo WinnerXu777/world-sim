@@ -1,0 +1,129 @@
+{
+ "first_deaths": [],
+ "brain": "kernel",
+ "calendar": "user",
+ "days": 0,
+ "humans": 6,
+ "start": {
+  "sheep": 5,
+  "deer": 6,
+  "boar": 5,
+  "fox": 1
+ },
+ "per_day": [],
+ "hp_lost": 0.0,
+ "deaths": 0,
+ "duels": [
+  {
+   "species": "tiger",
+   "hp": 100.0,
+   "hunter_seconds_to_kill": 5.0,
+   "creature_seconds_to_kill_resident": 0.3,
+   "creature_dps": 300.0,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "wolf",
+   "hp": 100.0,
+   "hunter_seconds_to_kill": 5.0,
+   "creature_seconds_to_kill_resident": 0.3,
+   "creature_dps": 300.0,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "boar",
+   "hp": 80.0,
+   "hunter_seconds_to_kill": 4.0,
+   "creature_seconds_to_kill_resident": 8.6,
+   "creature_dps": 11.7,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "goblin",
+   "hp": 50.0,
+   "hunter_seconds_to_kill": 2.5,
+   "creature_seconds_to_kill_resident": 13.8,
+   "creature_dps": 7.3,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "skeleton",
+   "hp": 70.0,
+   "hunter_seconds_to_kill": 3.5,
+   "creature_seconds_to_kill_resident": 9.3,
+   "creature_dps": 10.8,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "giant_spider",
+   "hp": 90.0,
+   "hunter_seconds_to_kill": 4.5,
+   "creature_seconds_to_kill_resident": 7.8,
+   "creature_dps": 12.9,
+   "estimate_type": "closed_form_formula"
+  }
+ ],
+ "duels_formula_estimates": [
+  {
+   "species": "tiger",
+   "hp": 100.0,
+   "hunter_seconds_to_kill": 5.0,
+   "creature_seconds_to_kill_resident": 0.3,
+   "creature_dps": 300.0,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "wolf",
+   "hp": 100.0,
+   "hunter_seconds_to_kill": 5.0,
+   "creature_seconds_to_kill_resident": 0.3,
+   "creature_dps": 300.0,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "boar",
+   "hp": 80.0,
+   "hunter_seconds_to_kill": 4.0,
+   "creature_seconds_to_kill_resident": 8.6,
+   "creature_dps": 11.7,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "goblin",
+   "hp": 50.0,
+   "hunter_seconds_to_kill": 2.5,
+   "creature_seconds_to_kill_resident": 13.8,
+   "creature_dps": 7.3,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "skeleton",
+   "hp": 70.0,
+   "hunter_seconds_to_kill": 3.5,
+   "creature_seconds_to_kill_resident": 9.3,
+   "creature_dps": 10.8,
+   "estimate_type": "closed_form_formula"
+  },
+  {
+   "species": "giant_spider",
+   "hp": 90.0,
+   "hunter_seconds_to_kill": 4.5,
+   "creature_seconds_to_kill_resident": 7.8,
+   "creature_dps": 12.9,
+   "estimate_type": "closed_form_formula"
+  }
+ ],
+ "duels_note": "Closed-form formula estimates from table numbers; residents do not fight back in this probe.",
+ "feed_semantics": "harness_fed_every_tick (needs/age/stamina reset every tick so deaths measure creature combat pressure)",
+ "attribution": {
+  "total_deaths": 0,
+  "deaths_by_cause": {},
+  "deaths_by_killer_species": {},
+  "damage_by_source": {},
+  "damage_by_species": {},
+  "total_damage_applied": 0.0,
+  "proximity_matches_true_killer_rate": 0.0,
+  "unattributed_deaths": 0,
+  "unresolved_deaths": 0
+ }
+}

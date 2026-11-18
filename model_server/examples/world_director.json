@@ -1,0 +1,81 @@
+{
+  "request": {
+    "job_id": "world:d1",
+    "role": "world",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "active",
+    "deadline_ms": 8000,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "director",
+      "cases": [
+        {
+          "query": "bless the harvest",
+          "reason": "decree",
+          "world": {
+            "tick": 5120,
+            "residents": 8
+          },
+          "powers": [
+            {
+              "name": "bless",
+              "risk": "reversible",
+              "example": {
+                "targets": {
+                  "ids": [
+                    "h_000123"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "plague",
+              "risk": "destructive",
+              "example": {}
+            }
+          ],
+          "limits": {
+            "max_intents": 2
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "world:d1",
+    "role": "world",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "director",
+      "responses": [
+        {
+          "packet": {
+            "thought": "mock director: bless",
+            "intents": [
+              {
+                "power": "bless",
+                "args": {
+                  "targets": {
+                    "ids": [
+                      "h_000123"
+                    ]
+                  }
+                },
+                "reason": "bless the harvest"
+              }
+            ]
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "request": {
+    "job_id": "world:d1",
+    "role": "world",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "active",
+    "deadline_ms": 8000,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "decree",
+      "cases": [
+        {
+          "world_model_mode": "decree",
+          "query": "let rain fall on the north fields",
+          "sub_queries": [],
+          "tool_bundle": {},
+          "execution_limits": {
+            "max_actions": 8
+          },
+          "raw_payload": {
+            "god_decree": "let rain fall on the north fields"
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "world:d1",
+    "role": "world",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "decree",
+      "responses": [
+        {
+          "packet": {
+            "thought": "mock decree: no world operation",
+            "map_actions": [],
+            "human_actions": [],
+            "new_entities": [],
+            "new_instincts": []
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

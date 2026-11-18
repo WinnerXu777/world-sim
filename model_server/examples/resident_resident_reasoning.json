@@ -1,0 +1,60 @@
+{
+  "request": {
+    "job_id": "resident:r1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "priority": "background",
+    "deadline_ms": 8000,
+    "cancel_token": "",
+    "schema_version": 1,
+    "payload": {
+      "mode": "resident_reasoning",
+      "cases": [
+        {
+          "world_model_mode": "resident_reasoning",
+          "resident_id": "h_000123",
+          "reason": "attack_event",
+          "resident_context": {
+            "goal_summary": "protect the family",
+            "plan_summary": "none"
+          },
+          "review_requested": true,
+          "auto_plan": true
+        }
+      ]
+    }
+  },
+  "response": {
+    "job_id": "resident:r1",
+    "role": "resident",
+    "world_epoch": "6f1c0d52-3a5e-4c1b-9d0a-0b5e7a1f2c11",
+    "state_revision": 5120,
+    "schema_version": 1,
+    "ok": true,
+    "provider_mode": "mock",
+    "latency_ms": 1.0,
+    "model_id": "mock-v1",
+    "result": {
+      "mode": "resident_reasoning",
+      "responses": [
+        {
+          "packet": {
+            "resident_id": "h_000123",
+            "reasoning_mode": "resident_reasoning",
+            "reason": "attack_event",
+            "goal_review": {
+              "requested": true,
+              "reason": "attack_event",
+              "force": false
+            },
+            "goal_updates": [],
+            "plans": [],
+            "auto_plan": false
+          },
+          "source": "mock_model_server"
+        }
+      ]
+    }
+  }
+}

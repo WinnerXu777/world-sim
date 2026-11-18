@@ -1,0 +1,38 @@
+{
+  "format_version": "0.2-draft",
+  "map_id": "tiny_interior",
+  "revision": 1,
+  "tile_size_px": 48,
+  "units_per_tile": 2.0,
+  "actor_radius": 0.5,
+  "map_kind": "interior",
+  "size_tiles": [4, 4],
+  "layers": [
+    {
+      "name": "floor",
+      "kind": "terrain",
+      "palette": {"1": "sprites/floor.png"},
+      "tiles": [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1]
+      ]
+    }
+  ],
+  "walls": [
+    {"id": "interior_wall_n", "min": [0, 0], "max": [8, 0.5]},
+    {"id": "interior_wall_s", "min": [0, 7.5], "max": [8, 8]},
+    {"id": "interior_wall_w", "min": [0, 0.5], "max": [0.5, 7.5]},
+    {"id": "interior_wall_e", "min": [7.5, 0.5], "max": [8, 7.5]},
+    {"id": "interior_table", "min": [2, 1.5], "max": [6, 2.5]}
+  ],
+  "anchors": [
+    {"id": "interior_entry", "kind": "spawn", "position": [4, 5]},
+    {"id": "interior_exit", "kind": "door", "position": [4, 6.5]}
+  ],
+  "entities": [],
+  "portals": [
+    {"id": "portal_out", "from_anchor": "interior_exit", "to_map": "tiny_village", "to_anchor": "door_front"}
+  ]
+}

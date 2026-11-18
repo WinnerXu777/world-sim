@@ -1,0 +1,19 @@
+| seed | digest | dead | peak | thefts | cases | levied | robbed | fought_off | arrested | loans | repaid | defaulted | hired | paid | sales | pass |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1008 | ced1b2bc7e8e6693 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+| 1 | c5c9b72f7762302f | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+| 2 | 2bf29d9420bc4201 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+| 3 | 4af2e14df5bc1c68 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 4 | 4 | 0 | True |
+| 1008 | ced1b2bc7e8e6693 | 0 | 90.0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 5 | 4 | 0 | True |
+
+determinism: seed 1008 digests ced1b2bc7e8e6693 vs ced1b2bc7e8e6693 -> identical
+seed 1008 ok by rung: {'forage': 57, 'work': 10, 'buy': 0, 'trade': 0, 'beg': 1, 'borrow': 1, 'steal': 0, 'rob': 0}
+seed 1 ok by rung: {'forage': 61, 'work': 10, 'buy': 0, 'trade': 0, 'beg': 0, 'borrow': 0, 'steal': 0, 'rob': 0}
+seed 2 ok by rung: {'forage': 59, 'work': 11, 'buy': 0, 'trade': 0, 'beg': 1, 'borrow': 1, 'steal': 0, 'rob': 0}
+seed 3 ok by rung: {'forage': 52, 'work': 9, 'buy': 0, 'trade': 0, 'beg': 0, 'borrow': 0, 'steal': 0, 'rob': 0}
+seed 1008 ok by rung: {'forage': 57, 'work': 10, 'buy': 0, 'trade': 0, 'beg': 1, 'borrow': 1, 'steal': 0, 'rob': 0}
+seed 1008 answers: {'work_for:hire': 5, 'work_for:refuse_defaulter': 1, 'request_item:refuse_no_item': 1, 'borrow_item:refuse_no_item': 1}
+seed 1 answers: {'work_for:hire': 5, 'work_for:refuse_distrust': 1}
+seed 2 answers: {'work_for:hire': 5, 'work_for:refuse_defaulter': 1, 'request_item:refuse_no_item': 1, 'borrow_item:refuse_no_item': 1, 'work_for:refuse_no_wage': 1}
+seed 3 answers: {'work_for:hire': 4, 'work_for:refuse_defaulter': 1}
+seed 1008 answers: {'work_for:hire': 5, 'work_for:refuse_defaulter': 1, 'request_item:refuse_no_item': 1, 'borrow_item:refuse_no_item': 1}

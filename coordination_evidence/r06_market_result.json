@@ -1,0 +1,34 @@
+{
+  "base": "b555adc33776696f529ae9e4047c88acdb42f408",
+  "snapshot": "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.tmp\\r63_fixed_goldens",
+  "command": [
+    "C:\\Users\\Rita\\Desktop\\caleb\\world_simulator\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_market_ladder.py",
+    "-v"
+  ],
+  "EDEN_CALENDAR": "1",
+  "exit_code": 1,
+  "seconds": 97.56,
+  "source_before": {
+    "tests/test_market_ladder.py": "332e090da3d667fba0994984264542a7649b8fcc2e79c33debe91a852fdd37bb",
+    "model_server/s1_family_farm.py": "ad3b261ecb819605d537d51888efca471a1e9d454860bf5de0f83ba6a97b1119",
+    "at_the_beginning/harness/calendar.py": "238c8e11d49c6980c915feda3e26be8e3f38f7626d942e5458a7c9b130e70c0b",
+    "at_the_beginning/instincts_and_tools.py": "39da1636044f5e2448d5e173b4f7bab226bdec96b61b942bd00e96bd04be5913",
+    "at_the_beginning/map_test.py": "e97e19e2bcb829f4150cdf921812476deafce214f1c8fbd89c20c200eef5c9ed"
+  },
+  "source_after": {
+    "tests/test_market_ladder.py": "332e090da3d667fba0994984264542a7649b8fcc2e79c33debe91a852fdd37bb",
+    "model_server/s1_family_farm.py": "ad3b261ecb819605d537d51888efca471a1e9d454860bf5de0f83ba6a97b1119",
+    "at_the_beginning/harness/calendar.py": "238c8e11d49c6980c915feda3e26be8e3f38f7626d942e5458a7c9b130e70c0b",
+    "at_the_beginning/instincts_and_tools.py": "39da1636044f5e2448d5e173b4f7bab226bdec96b61b942bd00e96bd04be5913",
+    "at_the_beginning/map_test.py": "e97e19e2bcb829f4150cdf921812476deafce214f1c8fbd89c20c200eef5c9ed"
+  },
+  "snapshot_changed": false,
+  "scope": "R0.6 market scenario on the immutable economy overlay snapshot; excludes later peer edits, not current HEAD integration/full suite"
+}

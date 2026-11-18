@@ -1,0 +1,29 @@
+{
+  "water": {
+    "filename": "water-local-v1.png",
+    "seed": 1006,
+    "width": 512,
+    "height": 512,
+    "steps": 32,
+    "prompt": "A single seamless repeating water texture tile for a top-down medieval pixel art RPG game. Orthographic view straight down at calm teal blue water. Cover the entire square edge to edge with uniform medium teal blue water and small sparse pale cyan horizontal ripple marks. Restrained muted colors, flat even daylight, hard crisp pixel edges, retro hand drawn 48 pixel game tile aesthetic enlarged to 512 pixels. Extremely subtle low contrast ripples. Same water color and density along all four borders for seamless tiling. No shoreline, no land, no objects, no text, no perspective, no horizon, no vignette, no border, no large waves, no gradients. This is only the water surface texture, not a scene.",
+    "negative_prompt": "photograph, realistic, painterly, watercolor, blurry, soft focus, shore, beach, trees, person, objects, text, watermark, border, vignette, horizon, perspective, dramatic light, large waves, foam, reflections of objects, sky"
+  },
+  "water2": {
+    "filename": "water-local-v2.png",
+    "seed": 1008,
+    "width": 512,
+    "height": 512,
+    "steps": 32,
+    "prompt": "Top down retro pixel art water surface texture, edge to edge medium muted teal blue. Many very small low contrast short horizontal pale blue ripple marks scattered evenly throughout the ENTIRE image including the CENTER. Ripples spread at random positions with equal density everywhere, not arranged in rows. A flat uniform calm water texture with evenly scattered tiny pixel ripple details. Orthographic directly overhead view. Hard pixel edges. Muted teal, blue green and desaturated cyan palette. There is no composition or focal point. All parts are the same texture. No frame. No decoration along edges. No empty center. No objects or scene. Only water surface pattern.",
+    "negative_prompt": "border, frame, square outline, edge decoration, empty center, central empty area, grid lines, photo, painterly, gradient, vignette, horizon, perspective, beach, shoreline, land, foam, text, watermark, large waves, sky, objects, dramatic light"
+  },
+  "sand": {
+    "filename": "sand-local-v1.png",
+    "seed": 1007,
+    "width": 512,
+    "height": 512,
+    "steps": 32,
+    "prompt": "A single seamless sand ground texture tile for a top-down medieval pixel art RPG game. Straight down orthographic view. Fill the entire square with muted warm tan sand, very sparse tiny scattered darker pixel grains. Restrained flat low contrast even daylight, crisp hard pixel edges, retro handcrafted 48 pixel RPG ground tile style enlarged to 512 pixels. Same color along all four edges for repeating tiling. No objects, no shells, no rocks, no grass, no water, no footprints, no text, no border, no vignette, no perspective, no horizon, no dramatic shadows.",
+    "negative_prompt": "photograph, realistic, painterly, watercolor, blurry, shore, objects, people, footprints, rocks, text, watermark, border, vignette, horizon, perspective, dramatic lighting"
+  }
+}

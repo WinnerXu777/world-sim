@@ -1,0 +1,118 @@
+env/
+myenv/
+.venv/
+.tmp/
+.pip-cache/
+logs/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.vscode/
+.env
+.idea/
+.DS_Store
+*.jsonl
+
+# Godot generated cache
+godot_client/.godot/
+
+# Godot third-party asset packs (top-level) - escape brackets
+godot_client/Fantasy Props MegaKit\[Standard\]/
+godot_client/Medieval Village MegaKit\[Standard\]/
+godot_client/Modular Character Outfits - Fantasy\[Standard\]/
+godot_client/Stylized Nature MegaKit\[Standard\]/
+godot_client/Universal Animation Library 2\[Standard\]/
+godot_client/Universal Base Characters\[Standard\]/
+
+# Godot third-party assets (inside assets/third_party)
+godot_client/assets/third_party/Fantasy Props MegaKit\[Standard\]/
+godot_client/assets/third_party/Medieval Village MegaKit\[Standard\]/
+godot_client/assets/third_party/Modular Character Outfits - Fantasy\[Standard\]/
+godot_client/assets/third_party/Universal Animation Library 2\[Standard\]/
+godot_client/assets/third_party/Universal Animation Library\[Standard\]/
+godot_client/assets/third_party/blend/
+godot_client/assets/third_party/medieval_castle/
+
+# Mixamo animation assets (large FBX files)
+godot_client/assets/mixamo/raw/
+
+# Animal 3D models
+godot_client/animal/
+
+# Humanizer addon (large data files)
+godot_client/addons/humanizer/
+
+# Third-party source archives
+third_party_archives/
+
+game_frontend/assets/
+
+# Isolated game saves and verification artifacts
+.runtime/
+
+# 1006implementation: Godot clients, art/assets, images and video are not committed
+godot_client/
+godot_client_2d/
+myassets/
+game_frontend/dist/models/
+2D1006newstart/screenshots/
+*.ogv
+*.mp4
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.glb
+*.fbx
+
+# --- world-sim publish: keep repo to code + design docs only ---
+# JS deps / build output
+node_modules/
+game_frontend/dist/
+game_frontend/public/models/
+*.tsbuildinfo
+
+# Local tooling / scratch
+.claude/
+tmp_*/
+*.pyc
+
+# Archives, binaries, audio, fonts, other asset-like or bulky formats
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.bin
+*.wasm
+*.exe
+*.dll
+*.so
+*.gltf
+*.obj
+*.blend
+*.map
+*.import
+*.res
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.wav
+*.mp3
+*.ogg
+*.psd
+*.hdr
+*.exr
+*.ktx2
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.gguf
