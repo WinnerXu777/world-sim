@@ -1,5 +1,7 @@
 > Renamed 2026-11-18 from 1009roadmap.md (date prefix dropped); old names are mapped in design_docs/README.md.
 
+Current to commit: 7c9df1e (doc pass 2026-11-18 by 1118wsimimplementation: da4ec10, 1ba8117, e627759, 8e733ec, fc69f3c, 7c9df1e)
+
 # 1009 roadmap: from the 1008 stage to a playable, intelligent, endless village
 
 Owner: orchestrator session `1008orchestrator` (does not implement; assigns, verifies, records).
@@ -143,14 +145,16 @@ Dependencies: `EDEN_AGENT_LADDER`, `EDEN_REPUTATION`, `EDEN_MARKET`, `EDEN_CREDI
 
 ## 8. R0 Close the current batch (NEXT)
 
-| Id | Task | Owner | Done when |
-| --- | --- | --- | --- |
-| R0.1 | Clean-archive gate on current HEAD: strict goldens (default, `--resources`, `--spaces`, `--window-hook`), s1 digests (`a2fcc8cbdd7143c8` steal+reputation, `f83fed5436dd08fe` trade), commons digests (`2fbbeae222e2dbd0`, `506087d6cd7c03b7`), full suite | Model plane | suite green, counts logged in `./DECISIONS.md` |
-| R0.2 | Flag-off golden for the sleep, darkness and clothing commits | Harness/engine | logged |
-| R0.3 | Restart the 10-day long-calendar balance run (60 to 90 min, single process); report population table, duels (hunter vs creature, creature vs resident), cause of the day-7 resident death; tune section 8 of `designs/creatures_gap.md` data if needed | Harness/engine | table in `designs/instincts_wiring_gap.md` or `designs/creatures_gap.md`, ledger row |
-| R0.4 | Third calendar refusal. Draft: "This save was made with a long calendar whose game day is {saved_day} ticks and whose year is {saved_year} ticks, but this session's long calendar has a game day of {now_day} ticks and a year of {now_year} ticks, so hunger, growth, weather and ageing would run at different rates and the save cannot be continued. Use the build the save was made with, or start a new world. The save file has not been changed." | User approves, then Harness/engine | text approved, code raises `SaveFormatError` |
-| R0.5 | Record a 5,000-unit straight walk in the live smoke (Gate D wording) | Harness/engine | logged |
-| R0.6 | Re-run emotion, care and calendar tests under `EDEN_CALENDAR=1` (market-scenario test is flag-sensitive) | Model plane | known exception resolved or documented |
+| Id | Task | Owner | Done when | Status (to `7c9df1e`) |
+| --- | --- | --- | --- | --- |
+| R0.1 | Clean-archive gate on current HEAD: strict goldens (default, `--resources`, `--spaces`, `--window-hook`), s1 digests (`a2fcc8cbdd7143c8` steal+reputation, `f83fed5436dd08fe` trade), commons digests (`2fbbeae222e2dbd0`, `506087d6cd7c03b7`), full suite | Model plane | suite green, counts logged in `./DECISIONS.md` | RAN, gate not met. 2026-11-18 at `baba278` in `C:\e1`: 4 strict goldens no drift; s1 and commons digests match all anchors (seed 2 `0c1caa5f808ab31f` recorded, no anchor); full suite 2345 tests, 28 failures + 144 errors. T1 triage of the 172: 125 missing sprite fixtures (17 modules; fixed `da4ec10`), 44 WIP-1010, 2 window-gate regression (fixed `e627759`, W1), 1 env (`faiss-cpu` in requirements.txt, not in the lock; deferred by the owner). Full suite not re-run since. `R01-GATE-1118`, `T1-TRIAGE-1118` |
+| R0.2 | Flag-off golden for the sleep, darkness and clothing commits | Harness/engine | logged | DONE (paper check, 2026-11-18): flag-off identity for sleep, darkness and clothing holds at `baba278` (R0.1 strict goldens, no flag set); the named commits exist only by content after the squash. No flag-on golden exists for them. `R02-1118` |
+| R0.3 | Restart the 10-day long-calendar balance run (60 to 90 min, single process); report population table, duels (hunter vs creature, creature vs resident), cause of the day-7 resident death; tune section 8 of `designs/creatures_gap.md` data if needed | Harness/engine | table in `designs/instincts_wiring_gap.md` or `designs/creatures_gap.md`, ledger row | IN PROGRESS: 10-day run restarted 2026-11-18 (Harness/engine lane); no table yet. Known input: under `EDEN_CALENDAR=1` the market stall stays empty (restock from calendar-rate nodes), see `R06-1118` |
+| R0.4 | Third calendar refusal. Draft: "This save was made with a long calendar whose game day is {saved_day} ticks and whose year is {saved_year} ticks, but this session's long calendar has a game day of {now_day} ticks and a year of {now_year} ticks, so hunger, growth, weather and ageing would run at different rates and the save cannot be continued. Use the build the save was made with, or start a new world. The save file has not been changed." | User approves, then Harness/engine | text approved, code raises `SaveFormatError` | DONE `e627759`: text approved as written (DR-1); `_check_calendar` raises `SaveFormatError` with it; round trip in `tests/test_harness_calendar_refusal3.py`. `R04-CAL3-1118` |
+| R0.5 | Record a 5,000-unit straight walk in the live smoke (Gate D wording) | Harness/engine | logged | IN PROGRESS: Gate D checks + unit tests in `tools/live_smoke_window.py` committed `8e733ec`. Live run 5 (`fc69f3c`): outbound 5,002 east with every invariant held, return leg blocked on axis-flat lines after a re-base (37/39), under diagnosis; not the F1 cause. Gate D stays open. `R05-TOOL-1118` |
+| R0.6 | Re-run emotion, care and calendar tests under `EDEN_CALENDAR=1` (market-scenario test is flag-sensitive) | Model plane | known exception resolved or documented | DONE `1ba8117`: every red case under `EDEN_CALENDAR=1` was the ambient flag leaking into legacy-day tests; 7 modules isolated (env only), no test was genuinely calendar-dependent. `R06-1118` |
+| F1 | Incarnated player spawned in a 3.2-unit slot under `EDEN_WINDOW` (follow-up from R0.5) | Harness/engine | player spawns outdoors and can walk; flag-off and goldens unchanged | DONE `7c9df1e`: the containment slabs (`map_slab_*`) are dropped once the window holds chunks (movement contract and creature collider); the incarnation anchor is the first overworld human, without the legacy clamp, under the window only. 8 new tests, 4 strict goldens no drift, live probe spawns in the village. `F1-SPAWN-1118` |
+| F2 | Flag-off default play spawns the incarnated player inside the smith interior (the anchor is the first live human, the smith at the forge) | Owner, later | owner rules on the desired spawn place | QUEUED (owner: separate item, later; flag-off behaviour change). `F2-QUEUED-1118` |
 
 ## 9. R5 Client integration and assets in the game (NEXT, the largest gap)
 
@@ -221,9 +225,9 @@ All art stays git-ignored in `myassets/`; imports into Godot are R5.5. Generator
 | R9.4 | Creatures h008: 10 creatures, 33 static poses, ids from the frozen contract | DONE static | `H008-RESULT` (`8561dc0`) |
 | R9.5 | Walking animation. Imagegen frames failed (h005), automatic cut-out failed (h006). Options: separately authored limb parts, hand-pixeled frames, two-pose walk for wolf and boar | NEXT decision | `H006-RESULT`, `ANIMATION_OPTIONS.md` |
 | R9.6 | Characters: children, elders, women, slim and sturdy builds, hair, headgear, boots variants, tools, armour; separate underwear impossible with imagegen (briefs stay baked) | QUEUED | `designs/expansion.md` |
-| R9.7 | Remaining creatures: dead poses for fox, sheep, goblin, skeleton, spider; 8 more invented species; north views | QUEUED | `H008-RESULT` |
-| R9.8 | More buildings: dwellings between hut and manor, workshops, civic, walls, gates, ruins, fantasy structures, seasonal variants that are real art not tints | QUEUED | `H007-RESULT` |
-| R9.9 | Props, flora, resource nodes, items and inventory icons for new items (meat, hide, bone, feather, egg, cloak, fur coat) | QUEUED | creature items request to Model plane |
+| R9.7 | Remaining creatures: dead poses for fox, sheep, goblin, skeleton, spider; 8 more invented species; north views | PARTLY ASSEMBLED 2026-11-18 (art candidates, git-ignored `myassets/h010_dead_poses`): dead-side fox, goblin, skeleton (validation pass; fox weak at 1x). Sheep and giant spider undelivered; invented species and north views still queued | `H008-RESULT`, `R97-ASSEMBLE-1118` |
+| R9.8 | More buildings: dwellings between hut and manor, workshops, civic, walls, gates, ruins, fantasy structures, seasonal variants that are real art not tints | PARTLY ASSEMBLED 2026-11-18 (art candidates, git-ignored `myassets/h011_buildings`): cottage, longhouse, weaver cottage, carpenter workshop, tannery, tileable stone wall. Undelivered: stone wall corner, palisade straight/corner/gate. Civic, ruins and fantasy out of this round (DR-17 ruling: readability first); seasonal variants queued | `H007-RESULT`, `R98-ASSEMBLE-1118` |
+| R9.9 | Props, flora, resource nodes, items and inventory icons for new items (meat, hide, bone, feather, egg, cloak, fur coat) | CANDIDATES DELIVERED 2026-11-18 (git-ignored `myassets/h009_items_props`: 7 icons, 8 props), user preview review open | creature items request to Model plane, `R99-H009-1118` |
 | R9.10 | Imagegen licence check by the user before public distribution | HELD | every art report |
 
 ## 14. Gates, in one table
@@ -356,7 +360,7 @@ Each card is self-contained. Acceptance is what a reviewer checks; "evidence" is
 - Evidence: table in `designs/creatures_gap.md` as-built, ledger row.
 
 ### R0.4 Third calendar refusal text
-- Needs the user's approval of the draft in section 8 (`R0.4`), then 9d882a's code path `_check_calendar` in `persistence/world_snapshot.py` raises `SaveFormatError` with it; add a round-trip test (calendar A save, calendar B session).
+- Done `e627759` (2026-11-18). Was: needs the user's approval of the draft in section 8 (`R0.4`), then 9d882a's code path `_check_calendar` in `persistence/world_snapshot.py` raises `SaveFormatError` with it; add a round-trip test (calendar A save, calendar B session).
 
 ### R0.5 5,000-unit straight walk (Gate D wording)
 - Do: extend `tools/live_smoke_window.py` phase_walk (or add a flag) to walk 5,000 units east and then back; log re-base epochs, memory, rejected inputs (must be 0), void hits (0), residents left behind keep absolute positions and slots, and memory growth bounded.
@@ -410,7 +414,7 @@ Status `OPEN` needs the user; `RECOMMENDED` means the agent may proceed on the r
 
 | Id | Decision | Options | Recommendation | Blocks | Status |
 | --- | --- | --- | --- | --- | --- |
-| DR-1 | Third calendar refusal wording (R0.4) | approve draft text in section 8 / change it | approve | R0.4 | OPEN (user) |
+| DR-1 | Third calendar refusal wording (R0.4) | approve draft text in section 8 / change it | approve | R0.4 | DECIDED 2026-11-18: approved as written (shipped `e627759`) |
 | DR-2 | Which flags become defaults, in what order, and when to re-record goldens | see R7.1 | calendar first, then window family, then creatures, then economy chain | R7.1 | OPEN (user at R7) |
 | DR-3 | Pinned authored-map placement in the chunk loader (descriptors carry no authored-map origin; maps spanning several chunks) | descriptor carries origin / client reads origin from `/bootstrap` maps / generator pins maps at chunk-aligned origins | descriptor carries `origin`; backend change in `chunk_routes.py` | R5.1 | RECOMMENDED |
 | DR-4 | Chunk props: client-drawn from chunk data or entities from the backend `map_delta` | props as visuals only / props as entities with ids | visuals for decorative props, entities for anything interactive (resources, structures), as the window already does | R5.1 | RECOMMENDED |
@@ -465,6 +469,10 @@ Cross-track edits go through a `[GAP]` note in the ledger or a message, never a 
 
 - 2026-10-09: first version, written from `./DECISIONS.md` rows up to `EMOTION-C5` (HEAD `56876b4`).
 - 2026-10-09: handover version: added sections 18 (cold start), 19 (task cards), 20 (decision register), 21 (tracks), 22 (glossary) so that Codex or Claude Code can continue from this file alone.
+
+### 2026-11-18 doc pass to `7c9df1e`
+
+- Documented `da4ec10` (placeholder map fixture sprites), `1ba8117` (R0.6), `e627759` (R0.4 + W1), `8e733ec` (R0.5 tool), `fc69f3c` (docs reorganized into `design_docs/`), `7c9df1e` (F1). Section 8 gained a status column and rows F1 (done) and F2 (queued); section 13 R9.7, R9.8, R9.9 statuses; DR-1 decided. W1 ruling: the window flag alone gates the window contract (`spatial._window_part`). Ledger rows under "2026-11-18 wsim batch" in `./DECISIONS.md`.
 
 ### 2026-10-10 verified implementation update
 

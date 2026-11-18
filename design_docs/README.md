@@ -1,5 +1,7 @@
 > Renamed 2026-11-18 from DOCS.md (date prefix dropped); old names are mapped in design_docs/README.md.
 
+Current to commit: 7c9df1e (doc pass 2026-11-18 by 1118wsimimplementation: da4ec10, 1ba8117, e627759, 8e733ec, fc69f3c, 7c9df1e)
+
 # Documentation index
 
 Written 2026-10-07 after the integrated 4-map build (8 residents). **Status words:** *current* = describes what the code does today; *plan* = a design or goal that guides work (parts may be done); *historical* = a record of how or why, no longer a description of the game; *stale parts* = mostly useful but contains lines that are no longer true (listed at the end).
