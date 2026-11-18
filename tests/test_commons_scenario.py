@@ -1,5 +1,6 @@
 """The S-1 ``commons`` scenario (market + credit + labour + justice, all on) in a fresh process (``model_server/s1_commons.py``)."""
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -11,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def scenario(*args, timeout=1200):
     out = Path(tempfile.mkdtemp()) / "out.json"
-    proc = subprocess.run([sys.executable, "-m", "model_server.s1_commons", "--single", *args, "--json", str(out)], cwd=str(ROOT), capture_output=True, text=True, timeout=timeout)
+    env = {k: v for k, v in os.environ.items() if k != "EDEN_CALENDAR"}   # R0.6: the scenario keeps its own day; an ambient EDEN_CALENDAR=1 must not reach it
+    proc = subprocess.run([sys.executable, "-m", "model_server.s1_commons", "--single", *args, "--json", str(out)], cwd=str(ROOT), capture_output=True, text=True, timeout=timeout, env=env)
     return proc, json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
 
 

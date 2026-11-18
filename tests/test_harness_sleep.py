@@ -45,6 +45,7 @@ class SleepFixture(WindowFixture):
         patcher = mock.patch.dict(os.environ, {"EDEN_SLEEP": "1"})
         patcher.start()
         self.addCleanup(patcher.stop)
+        os.environ.pop("EDEN_CALENDAR", None)          # R0.6: NIGHT/DAY and the 2400-tick closed forms are the legacy day's; the calendar case sets the flag itself
         self.addCleanup(lambda: self.engine.__dict__.pop("_sleep", None))
         self.addCleanup(lambda: self.engine.__dict__.pop("_sleep_debt_vec", None))
         self.addCleanup(lambda: self.engine.__dict__.pop("_sleep_asleep", None))

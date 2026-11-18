@@ -18,6 +18,13 @@ from systems.creatures import collide, kernel, table  # noqa: E402
 
 
 class FeedFixture(KernelFixture):
+    async def asyncSetUp(self):
+        await super().asyncSetUp()
+        patcher = mock.patch.dict(os.environ)          # R0.6: the flag-off rates are the legacy day's; the calendar case sets EDEN_CALENDAR=1 itself
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        os.environ.pop("EDEN_CALENDAR", None)
+
     def terrain(self, water=(), graze=True):
         """Patch the grids: ``water`` is a list of (x0, y0, x1, y1) unit rectangles; everything else is grass when ``graze``."""
         width, height, (col0, row0) = WINDOW_FRAME

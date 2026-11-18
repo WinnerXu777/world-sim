@@ -1,5 +1,6 @@
 """EDEN_MARKET: the ladder's ``buy`` rung (pure ordering) and the S-1 ``market`` scenario in a fresh process (``model_server/s1_family_farm.py``)."""
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -29,7 +30,8 @@ class Ordering(unittest.TestCase):
 
 def scenario(*args, timeout=1200):
     out = Path(tempfile.mkdtemp()) / "out.json"
-    proc = subprocess.run([sys.executable, "-m", "model_server.s1_family_farm", *args, "--json", str(out)], cwd=str(ROOT), capture_output=True, text=True, timeout=timeout)
+    env = {k: v for k, v in os.environ.items() if k != "EDEN_CALENDAR"}   # R0.6: the scenario keeps its own 600-tick day; an ambient EDEN_CALENDAR=1 slows the node regrowth and empties the stall
+    proc = subprocess.run([sys.executable, "-m", "model_server.s1_family_farm", *args, "--json", str(out)], cwd=str(ROOT), capture_output=True, text=True, timeout=timeout, env=env)
     return proc, json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
 
 

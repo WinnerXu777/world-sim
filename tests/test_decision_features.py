@@ -144,6 +144,10 @@ class BuilderTests(FeatureCase):
         self.assertEqual(self.build([iven]).row(iven)["at_home"], 0.0)
 
     def test_at_station_and_time_block(self):
+        patcher = unittest.mock.patch.dict(os.environ)   # R0.6: the is_night values below are the legacy blocks (flag off)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        os.environ.pop("EDEN_CALENDAR", None)
         smith = self.by_key["smith"]
         work = self.services.anchors(smith)["work"]
         self.put(smith, work.x, work.y)

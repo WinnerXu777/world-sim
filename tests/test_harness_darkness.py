@@ -41,6 +41,7 @@ class DarkFixture(WindowFixture):
         patcher = mock.patch.dict(os.environ, {"EDEN_DARKNESS": "1"})
         patcher.start()
         self.addCleanup(patcher.stop)
+        os.environ.pop("EDEN_CALENDAR", None)          # R0.6: NIGHT and the block light values are the legacy day's; the calendar case sets the flag itself
         self.addCleanup(lambda: self.engine.__dict__.pop("_darkness", None))
         self.engine.tick = NIGHT
         self.rows = []
