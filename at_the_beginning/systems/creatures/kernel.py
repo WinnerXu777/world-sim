@@ -322,6 +322,14 @@ def _toward(vec: torch.Tensor, speed: torch.Tensor) -> torch.Tensor:
     return vec / norm * speed.unsqueeze(1)
 
 
+def queue_human_kill(m: torch.Tensor, victim_slot: int, attacker_slot: int) -> None:
+    """Pass a lethal resolver hit to the engine's creature death scan."""
+    pending = getattr(m, "_creature_human_kills", None)
+    if pending is None:
+        pending = m._creature_human_kills = {}
+    pending[victim_slot] = (int(m[victim_slot, cfg.M_GEN]), attacker_slot)
+
+
 def record_killer(engine, victim_slot: int, killer_uid: str) -> bool:
     """Bind lethal attribution to both slot and current victim UID; the first successful attacker wins.
 
@@ -373,6 +381,7 @@ def _attack(engine, cidx, p, col, attacking, use_human, h_slots, dh_arg, a_slots
 def _scan_kills(engine) -> None:
     """Queue ``creature_killed`` once for every creature row that has HP 0 while its type is a creature (run before the legacy die zeroes it, i.e. at the end of the tick)."""
     m = engine.state.m_tensor
+    human_kills = vars(m).pop("_creature_human_kills", {})
     n = cfg.MAX_ENTITIES
     all_creatures = torch.isin(m[:n, cfg.M_TYPE], torch.tensor([float(r["id"]) for r in T.CREATURES.values()], dtype=m.dtype, device=m.device))
     dead = all_creatures & (m[:n, cfg.M_HP] <= 0.0) & (m[:n, cfg.M_SPACE] == 0)
@@ -384,6 +393,12 @@ def _scan_kills(engine) -> None:
         uid = engine._entity_uid_by_slot[slot]
         if not uid or uid in seen:
             continue
+        human_kill = human_kills.get(slot)
+        if human_kill is not None:
+            generation, attacker_slot = human_kill
+            # The scan runs before the engine retires human slot UIDs for the tick.
+            if generation == int(m[slot, cfg.M_GEN]):
+                record_killer(engine, slot, engine._human_uid_by_slot[attacker_slot])
         seen.add(uid)
         attribution = killers.pop(slot, None)
         killer_uid = attribution[1] if attribution is not None and attribution[0] == uid else None

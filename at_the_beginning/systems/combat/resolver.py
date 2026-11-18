@@ -58,6 +58,8 @@ except ImportError:  # pragma: no cover - package import fallback
     from at_the_beginning.systems.combat.queries import human_distance_to_entity, human_distance_to_human
     from at_the_beginning.systems.health import apply_entity_damage, apply_human_damage
 
+from ..creatures import enabled as creatures_enabled
+
 
 def target_in_range(
     h_tensor: torch.Tensor,
@@ -205,8 +207,13 @@ def resolve_human_attack_intents(
         clamp_rows_(h_tensor, attacker_idx, H_STAMINA, lo=0.0)
 
     hunts_completed = 0
+    creatures_on = creatures_enabled()
+    if creatures_on:
+        from ..creatures.kernel import queue_human_kill
+
     for slot in entity_targets:
-        if int(m_tensor[slot, M_TYPE]) not in HUNTABLE_ANIMAL_TYPES:
+        huntable = int(m_tensor[slot, M_TYPE]) in HUNTABLE_ANIMAL_TYPES
+        if not huntable and not creatures_on:
             continue
         if previous_entity_hp.get(slot, 0.0) <= 0.0 or float(m_tensor[slot, M_HP]) > 0.0:
             continue
@@ -214,6 +221,10 @@ def resolve_human_attack_intents(
         if not attackers:
             continue
         hunter_slot = attackers[0]
+        if creatures_on:
+            queue_human_kill(m_tensor, slot, hunter_slot)
+        if not huntable:
+            continue
         h_tensor[hunter_slot, HUNGER] -= float(hunt_hunger_restore)
         h_tensor[hunter_slot, HUNGER].clamp_(min=0.0)
         hunts_completed += 1
