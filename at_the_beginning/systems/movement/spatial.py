@@ -63,6 +63,15 @@ def _with_window(window, boxes, bounds, hashed, extras=None):
     return boxes + window["boxes"], bounds, {"static": hashed, "window": window["revision"], "bounds": bounds}
 
 
+def placed_boxes_for_window(boxes, window):
+    """F1: the placed maps' boxes minus their containment slabs (``map_slab_*``) once the window holds integrated chunks (its bounds are set):
+    that world has no map edge, the wall and void boxes bound it, and the slabs between the re-based village and the interior pockets would
+    cover open chunk ground. ``window`` None (flag off) or a finite window (no chunks, bounds None) keeps every box."""
+    if window is None or window.get("bounds") is None:
+        return boxes
+    return [box for box in boxes if not str(box["id"]).startswith("map_slab_")]
+
+
 def _compose(engine):
     """(boxes, actor_radius, bounds, hash_input, override). override is None for every legacy map."""
     walls = wall_boxes(engine.state.m_tensor, engine._entity_uid_by_slot)
@@ -80,7 +89,7 @@ def _compose(engine):
         extras["actor_radius"] = radius
     if map_bounds != bounds:
         extras["bounds"] = map_bounds
-    boxes = group["boxes"] + walls  # placed maps' walls, containment slabs, then live tensor walls
+    boxes = placed_boxes_for_window(group["boxes"], window) + walls  # placed maps' walls, containment slabs, then live tensor walls
     hashed = {"boxes": boxes, **extras} if extras else boxes
     boxes, map_bounds, hashed = _with_window(window, boxes, map_bounds, hashed)
     return boxes, radius, map_bounds, hashed, override

@@ -5116,11 +5116,20 @@ class Engine:
         self._build_frame_payload(h_mask, a_mask)
 
     def _player_incarnation_spawn_point(self, controller_id: str) -> tuple[float, float]:
-        live_slots = torch.where(self.state.h_tensor[:, TYPE] == AGENT_TYPE_HUMAN)[0].tolist()
+        windowed = window_wire.window_enabled()   # F1: anchor on an overworld resident (not one in an interior pocket); no legacy-frame clamp
+        humans = self.state.h_tensor[:, TYPE] == AGENT_TYPE_HUMAN
+        if windowed:
+            humans = humans & (self.state.h_tensor[:, H_SPACE] == 0)
+        live_slots = torch.where(humans)[0].tolist()
+        primary = get_map_contract(getattr(self, "_map_name", None)) if windowed else None
         if live_slots:
             anchor_slot = int(live_slots[0])
             base_x = float(self.state.h_tensor[anchor_slot, X]) + 18.0
             base_y = float(self.state.h_tensor[anchor_slot, Y]) + 12.0
+        elif primary is not None:                 # the primary map follows every re-base; the legacy centre does not
+            bounds = primary["bounds"]
+            base_x = (bounds[0] + bounds[2]) * 0.5
+            base_y = (bounds[1] + bounds[3]) * 0.5
         else:
             base_x = MAP_WIDTH * 0.5
             base_y = MAP_HEIGHT * 0.5
@@ -5129,6 +5138,8 @@ class Engine:
         rng = random.Random((seed * 17) + int(self.tick))
         offset_x = rng.uniform(-12.0, 12.0)
         offset_y = rng.uniform(-10.0, 10.0)
+        if windowed:                              # window-local coordinates have no fixed frame; spawn() still snaps to a standable point
+            return base_x + offset_x, base_y + offset_y
         spawn_x = min(max(base_x + offset_x, 20.0), MAP_WIDTH - 20.0)
         spawn_y = min(max(base_y + offset_y, 20.0), MAP_HEIGHT - 20.0)
         return spawn_x, spawn_y

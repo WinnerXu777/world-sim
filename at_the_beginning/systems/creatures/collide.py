@@ -20,13 +20,13 @@ from typing import Optional
 import torch
 
 try:
-    from harness.numerics import pairwise_distances
+    from harness.numerics import pairwise_distances, window_enabled
     from systems.movement.map_contract import compose_group
-    from systems.movement.spatial import RADIUS, wall_boxes
+    from systems.movement.spatial import RADIUS, placed_boxes_for_window, wall_boxes
 except ImportError:  # pragma: no cover - package import fallback
-    from at_the_beginning.harness.numerics import pairwise_distances
+    from at_the_beginning.harness.numerics import pairwise_distances, window_enabled
     from at_the_beginning.systems.movement.map_contract import compose_group
-    from at_the_beginning.systems.movement.spatial import RADIUS, wall_boxes
+    from at_the_beginning.systems.movement.spatial import RADIUS, placed_boxes_for_window, wall_boxes
 
 LAND, FLY, SWIM = 0, 1, 2
 EPS = 1e-4
@@ -62,7 +62,7 @@ def _static_boxes(engine) -> tuple:
     contract = getattr(engine, "_window_contract", None) or {}
     window = contract.get("boxes", [])
     group = compose_group(getattr(engine, "_map_name", None))
-    placed = group["boxes"] if group is not None else []
+    placed = placed_boxes_for_window(group["boxes"], contract if window_enabled() else None) if group is not None else []   # F1: no slabs over chunks
     key = (contract.get("revision"), id(placed), len(placed), len(window))
     cached = _BOXES.get(id(engine))
     if cached is not None and cached[0] == key:
