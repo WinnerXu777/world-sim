@@ -37,11 +37,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "at_the_beginning")
 
 import genesis_config as cfg  # noqa: E402
 import map_geo  # noqa: E402
+from harness import adapter  # noqa: E402
 from harness import effects as fx  # noqa: E402
+from harness import spaces as harness_spaces  # noqa: E402
 from harness import powers as pw  # noqa: E402
 from harness import target_selectors as sel  # noqa: E402
 from harness.world import FieldSpec, Table, World  # noqa: E402
-from instincts_and_tools import tool_drought, tool_smite  # noqa: E402
+from instincts_and_tools import instinct_flee, tool_drought, tool_smite  # noqa: E402
+from systems.movement.map_contract import MAP_CONTRACTS, clear_map_contracts, register_map_file  # noqa: E402
 from systems.health.effects import apply_area_attack_effect, kill_humans  # noqa: E402
 from systems.nature.disasters import (  # noqa: E402
     apply_earthquake as nature_apply_earthquake,
@@ -50,6 +53,8 @@ from systems.nature.disasters import (  # noqa: E402
     apply_volcanic_eruption as nature_apply_volcanic_eruption,
     ignite_wildfire as nature_ignite_wildfire,
 )
+
+MAP_FIXTURES = Path(__file__).resolve().parent / "fixtures" / "maps"
 
 H_COLS = {
     "type": 0, "x": 1, "y": 2, "hp": 3, "mood": 4, "threat": 5,
@@ -93,6 +98,33 @@ def make_disaster_world(num_humans: int = 6, num_entities: int = 12, seed: int =
                             fertility=40.0, burning=0.0, flooded=0.0, space=0.0)
         e_ids.append(eid)
     return world, h_ids, e_ids
+
+
+# The engine's real tensor layout: the column maps EngineWorld puts over cfg.HUMAN_TENSOR_COLS / MAP_TENSOR_COLS. The legacy
+# oracles index genesis_config columns directly, so parity runs both sides on clones of tensors in this layout.
+P_H_COLS = {name: getattr(cfg, const) for name, const in adapter.HUMAN_COLUMNS.items()}
+P_E_COLS = {name: getattr(cfg, const) for name, const in adapter.ENTITY_COLUMNS.items()}
+
+
+def make_production_layout_world(num_humans: int = 2, num_entities: int = 4, seed: int = 1010) -> tuple[World, list[str], list[str]]:
+    """The residents and tiles of make_disaster_world (same positions and values), on the production layout."""
+    t_h = Table("humans", torch.zeros((32, cfg.HUMAN_TENSOR_COLS)), P_H_COLS, type_col="type", pos_cols=("x", "y"),
+                id_prefix="h", field_specs=dict(adapter.HUMAN_SPECS), indexed=True)
+    t_e = Table("entities", torch.zeros((32, cfg.MAP_TENSOR_COLS)), P_E_COLS, type_col="type", pos_cols=("x", "y"),
+                id_prefix="e", indexed=True)
+    world = World(seed, [t_h, t_e])
+    h_ids = [world.add_row("humans", x=100.0 + 10.0 * i, y=100.0, hp=100.0, mood=60.0, threat=10.0,
+                           shelter=0.0 if i % 2 == 0 else 1.0) for i in range(num_humans)]
+    e_ids = [world.add_row("entities", x=100.0 + 15.0 * j, y=100.0, hp=100.0, food=50.0, water=50.0,
+                           fertility=40.0, burning=0.0, flooded=0.0) for j in range(num_entities)]
+    return world, h_ids, e_ids
+
+
+def assert_same_tensor(case: unittest.TestCase, harness_tensor: torch.Tensor, legacy_tensor: torch.Tensor) -> None:
+    """Every column of every row: whatever either side wrote must agree (float32 tensors; harness amounts are float64)."""
+    diff = (harness_tensor - legacy_tensor).abs()
+    case.assertTrue(torch.allclose(harness_tensor, legacy_tensor, atol=1e-4),
+                    f"harness and legacy differ at (row, col) {(diff > 1e-4).nonzero().tolist()}")
 
 
 def world_digest(world: World) -> tuple[str, str]:
@@ -209,18 +241,21 @@ class WildfireTests(BaseDisasterTestCase):
         self.assertEqual(ev.payload["ignited"], 2)
 
     def test_oracle_parity(self):
-        world, _, e_ids = make_disaster_world()
+        # Production layout: the legacy function reads M_TYPE and writes M_BURNING / M_RESOURCE_FOOD by cfg index.
+        world, _, e_ids = make_production_layout_world(num_entities=4)
         t_e = world.table("entities")
         for eid in e_ids[:3]:
-            t_e.tensor[t_e.slot_of(eid), E_COLS["type"]] = float(cfg.M_FOREST)
+            t_e.tensor[t_e.slot_of(eid), P_E_COLS["type"]] = float(cfg.M_FOREST)
+        t_e.tensor[t_e.slot_of(e_ids[3]), P_E_COLS["type"]] = float(cfg.M_FOREST)   # 45 units out: outside radius 40
 
-        # Clone tensor for legacy oracle
         legacy_m = t_e.tensor.clone()
         nature_ignite_wildfire(legacy_m, 100.0, 100.0, 40.0, entity_radial_ids_fn=lambda m, cx, cy, r: torch.tensor([0, 1, 2]))
 
-        pw.call(world, "wildfire", {"center": [100.0, 100.0], "radius": 40.0}, registry=self.reg)
-        self.assertTrue(torch.allclose(t_e.tensor[:3, E_COLS["burning"]], legacy_m[:3, cfg.M_BURNING]))
-        self.assertTrue(torch.allclose(t_e.tensor[:3, E_COLS["food"]], legacy_m[:3, cfg.M_RESOURCE_FOOD]))
+        res = pw.call(world, "wildfire", {"center": [100.0, 100.0], "radius": 40.0}, registry=self.reg)
+        self.assertTrue(res.ok)
+        self.assertEqual(t_e.get(e_ids[0], "burning"), 1.0)
+        self.assertEqual(t_e.get(e_ids[3], "burning"), 0.0)
+        assert_same_tensor(self, t_e.tensor, legacy_m)
 
     def test_refusals(self):
         world, _, _ = make_disaster_world()
@@ -266,43 +301,48 @@ class EarthquakeTests(BaseDisasterTestCase):
         self.assertEqual(t_e.get(e_ids[1], "type"), float(cfg.M_FOREST))
         self.assertEqual(t_e.get(e_ids[1], "hp"), 40.0)
 
-        # Humans in radius: hp damaged by 30, threat=100, fled outward
+        # Humans in radius: hp damaged by 30, threat=100
         for hid in h_ids[:2]:
             self.assertEqual(t_h.get(hid, "hp"), 70.0)
             self.assertEqual(t_h.get(hid, "threat"), 100.0)
-            self.assertGreater(t_h.get(hid, "x"), 100.0)
+        # Flee is a push away from the centre: h_ids[0] stands exactly on it, so its direction is zero and it stays put (legacy
+        # instinct_flee divides by norm.clamp(1e-6) the same way); h_ids[1] at x 110 is pushed outward.
+        self.assertEqual(t_h.get(h_ids[0], "x"), 100.0)
+        self.assertGreater(t_h.get(h_ids[1], "x"), 110.0)
 
         ev = world.events.get(res.event_ids[0])
         self.assertEqual(ev.type, "earthquake")
         self.assertEqual(ev.payload["rubble"], 1)
 
     def test_oracle_parity(self):
-        world, h_ids, e_ids = make_disaster_world(num_humans=2, num_entities=2)
+        # Production layout; the legacy flee is the one tool_earthquake passes (instinct_flee), so positions are compared too.
+        world, h_ids, e_ids = make_production_layout_world(num_humans=2, num_entities=2)
         t_e = world.table("entities")
         t_h = world.table("humans")
-        t_e.tensor[:, E_COLS["type"]] = float(cfg.M_GRASS)
+        for slot in t_e.live_slots():
+            t_e.tensor[slot, P_E_COLS["type"]] = float(cfg.M_GRASS)
+        t_h.tensor[t_h.slot_of(h_ids[0]), P_H_COLS["y"]] = 104.0   # off-centre, so both residents are pushed
 
         legacy_h = t_h.tensor.clone()
         legacy_m = t_e.tensor.clone()
 
-        random.seed(42)
+        random.seed(3)   # draws 0.238, 0.544: entity 0 turns to rubble, entity 1 does not
         nature_apply_earthquake(
             {"h_mask": legacy_h[:, cfg.TYPE] > 0},
             legacy_h, legacy_m,
             center_x=100.0, center_y=100.0, radius=50.0,
             entity_radial_ids_fn=lambda m, cx, cy, r: torch.tensor([0, 1]),
             agent_radial_mask_fn=lambda h, m, cx, cy, r, dev: torch.tensor([True, True] + [False] * (legacy_h.shape[0] - 2)),
+            flee_fn=instinct_flee,
         )
 
-        # Same draws in harness:
-        random.seed(42)
+        random.seed(3)
         draws = [random.random() for _ in range(2)]
-        pw.call(world, "earthquake", {"center": [100.0, 100.0], "radius": 50.0, "rubble_draws": draws}, registry=self.reg)
-
-        self.assertTrue(torch.allclose(t_e.tensor[:2, E_COLS["hp"]], legacy_m[:2, cfg.M_HP]))
-        self.assertTrue(torch.allclose(t_e.tensor[:2, E_COLS["type"]], legacy_m[:2, cfg.M_TYPE]))
-        self.assertTrue(torch.allclose(t_h.tensor[:2, H_COLS["hp"]], legacy_h[:2, cfg.HP]))
-        self.assertTrue(torch.allclose(t_h.tensor[:2, H_COLS["threat"]], legacy_h[:2, cfg.THREAT]))
+        res = pw.call(world, "earthquake", {"center": [100.0, 100.0], "radius": 50.0, "rubble_draws": draws}, registry=self.reg)
+        self.assertTrue(res.ok)
+        self.assertEqual(res.plan.preview["rubble_entities"], [e_ids[0]])
+        assert_same_tensor(self, t_e.tensor, legacy_m)
+        assert_same_tensor(self, t_h.tensor, legacy_h)
 
 
 class StormTests(BaseDisasterTestCase):
@@ -330,12 +370,17 @@ class StormTests(BaseDisasterTestCase):
         self.assertEqual(t_h.get(h_ids[1], "threat"), 40.0)
 
     def test_oracle_parity(self):
-        world, h_ids, _ = make_disaster_world(num_humans=2)
+        # Production layout. Legacy draws its displacement from torch.rand((n, 2)); the harness takes the same draws as
+        # displacement_draws, so the two runs see identical randomness and every column can be compared.
+        world, h_ids, _ = make_production_layout_world(num_humans=2)
         t_h = world.table("humans")
-        t_h.tensor[t_h.slot_of(h_ids[0]), H_COLS["shelter"]] = 0.0
-        t_h.tensor[t_h.slot_of(h_ids[1]), H_COLS["shelter"]] = 1.0
+        self.assertEqual(t_h.get(h_ids[0], "shelter"), 0.0)
+        self.assertEqual(t_h.get(h_ids[1], "shelter"), 1.0)
 
         legacy_h = t_h.tensor.clone()
+        torch.manual_seed(1010)
+        draws = torch.rand((2, 2)).tolist()
+        torch.manual_seed(1010)
         nature_apply_storm(
             {"h_mask": legacy_h[:, cfg.TYPE] > 0},
             legacy_h,
@@ -343,11 +388,11 @@ class StormTests(BaseDisasterTestCase):
             agent_radial_mask_fn=lambda h, m, cx, cy, r, dev: torch.tensor([True, True] + [False] * (legacy_h.shape[0] - 2)),
         )
 
-        # Compare HP, MOOD, THREAT
-        self.assertEqual(legacy_h[0, cfg.HP].item(), 92.0)
-        self.assertEqual(legacy_h[1, cfg.HP].item(), 100.0)
-        self.assertEqual(legacy_h[0, cfg.MOOD].item(), 35.0)
-        self.assertEqual(legacy_h[0, cfg.THREAT].item(), 40.0)
+        res = pw.call(world, "storm", {"center": [100.0, 100.0], "radius": 50.0, "displacement_draws": draws}, registry=self.reg)
+        self.assertTrue(res.ok)
+        self.assertEqual(t_h.get(h_ids[0], "hp"), 92.0)    # unsheltered
+        self.assertEqual(t_h.get(h_ids[1], "hp"), 100.0)   # sheltered
+        assert_same_tensor(self, t_h.tensor, legacy_h)
 
 
 class VolcanicEruptionTests(BaseDisasterTestCase):
@@ -416,17 +461,20 @@ class DroughtTests(BaseDisasterTestCase):
         self.assertEqual(t_e.get(e_ids[1], "water"), 50.0)
 
     def test_oracle_parity(self):
-        world, _, e_ids = make_disaster_world(num_entities=2)
+        # Production layout: tool_drought writes M_RESOURCE_FOOD / M_RESOURCE_WATER / M_FERTILITY by cfg index.
+        world, _, e_ids = make_production_layout_world(num_entities=2)
         t_e = world.table("entities")
-        t_e.tensor[t_e.slot_of(e_ids[0]), E_COLS["type"]] = float(cfg.M_LAKE)
+        t_e.tensor[t_e.slot_of(e_ids[0]), P_E_COLS["type"]] = float(cfg.M_LAKE)
+        t_e.tensor[t_e.slot_of(e_ids[1]), P_E_COLS["type"]] = float(cfg.M_FOREST)
 
         legacy_m = t_e.tensor.clone()
         tool_drought({}, legacy_m)
 
-        pw.call(world, "drought", {}, registry=self.reg)
-        self.assertTrue(torch.allclose(t_e.tensor[:1, E_COLS["food"]], legacy_m[:1, cfg.M_RESOURCE_FOOD]))
-        self.assertTrue(torch.allclose(t_e.tensor[:1, E_COLS["water"]], legacy_m[:1, cfg.M_RESOURCE_WATER]))
-        self.assertTrue(torch.allclose(t_e.tensor[:1, E_COLS["fertility"]], legacy_m[:1, cfg.M_FERTILITY]))
+        res = pw.call(world, "drought", {}, registry=self.reg)
+        self.assertTrue(res.ok)
+        self.assertEqual(t_e.get(e_ids[0], "water"), 0.0)
+        self.assertEqual(t_e.get(e_ids[1], "water"), 50.0)
+        assert_same_tensor(self, t_e.tensor, legacy_m)
 
 
 class FloodTests(BaseDisasterTestCase):
@@ -534,26 +582,46 @@ class SmiteTests(BaseDisasterTestCase):
 
 class ContractAndLifecycleTests(BaseDisasterTestCase):
     def test_spaces_isolation(self):
+        # harness.spaces.point_space returns None (= do not filter) unless EDEN_SPACES is on AND an authored world with an
+        # interior is registered, so the fixture registers one: the example smith map (0..48) with its interior placed at
+        # x 300..396, y 0..80 (the placement tests' origin). The centre (250, 40) is overworld (space 0); entity 1 stands
+        # inside the interior (space 1), 70 units away, within the radius.
         world, h_ids, e_ids = make_disaster_world(num_humans=2, num_entities=2)
-        t_h = world.table("humans")
         t_e = world.table("entities")
-
-        # Put entity 0 in space 0, entity 1 in space 1
+        t_e.tensor[t_e.slot_of(e_ids[0]), [E_COLS["x"], E_COLS["y"]]] = torch.tensor([250.0, 40.0])
         t_e.tensor[t_e.slot_of(e_ids[0]), E_COLS["space"]] = 0.0
         t_e.tensor[t_e.slot_of(e_ids[0]), E_COLS["type"]] = float(cfg.M_FOREST)
+        t_e.tensor[t_e.slot_of(e_ids[1]), [E_COLS["x"], E_COLS["y"]]] = torch.tensor([320.0, 40.0])
         t_e.tensor[t_e.slot_of(e_ids[1]), E_COLS["space"]] = 1.0
         t_e.tensor[t_e.slot_of(e_ids[1]), E_COLS["type"]] = float(cfg.M_FOREST)
 
-        # Simulate spaces enabled
-        os.environ["EDEN_SPACES"] = "1"
+        saved_contracts = dict(MAP_CONTRACTS)
+        saved_bound = harness_spaces._bound_name
+        clear_map_contracts()
+        harness_spaces._bound_name = None
         try:
-            # Query centered in space 0 should not reach space 1
-            res = pw.call(world, "wildfire", {"center": [100.0, 100.0], "radius": 50.0}, registry=self.reg)
+            register_map_file(MAP_FIXTURES / "example_smith.json", base_dir=MAP_FIXTURES)
+            register_map_file(MAP_FIXTURES / "example_smith_interior.json", origin=[300.0, 0.0], base_dir=MAP_FIXTURES,
+                              primary=False, world="example_smith")
+            os.environ["EDEN_SPACES"] = "1"
+            self.assertEqual(harness_spaces.point_space(250.0, 40.0), 0)
+            self.assertEqual(harness_spaces.point_space(320.0, 40.0), 1)
+
+            res = pw.call(world, "wildfire", {"center": [250.0, 40.0], "radius": 100.0}, registry=self.reg)
             self.assertTrue(res.ok)
+            self.assertEqual(res.plan.targets, (e_ids[0],))
             self.assertEqual(t_e.get(e_ids[0], "burning"), 1.0)
             self.assertEqual(t_e.get(e_ids[1], "burning"), 0.0)
+
+            # Control: with spaces off the same query reaches both (the isolation above is the space filter, not distance).
+            os.environ.pop("EDEN_SPACES", None)
+            plan = pw.plan(world, "wildfire", {"center": [250.0, 40.0], "radius": 100.0}, registry=self.reg)
+            self.assertEqual(set(plan.targets), {e_ids[0], e_ids[1]})
         finally:
             os.environ.pop("EDEN_SPACES", None)
+            clear_map_contracts()
+            MAP_CONTRACTS.update(saved_contracts)
+            harness_spaces._bound_name = saved_bound
 
     def test_stale_plan_and_slot_recycling(self):
         world, h_ids, _ = make_disaster_world(num_humans=3)

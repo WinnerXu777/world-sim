@@ -134,6 +134,28 @@ class EngineWorld(World):
             self.engine._pop_count[0] = len(self.table("humans").live_slots())
         return report
 
+    def sync_terrain(self, entity_ids) -> int:
+        """Re-register the geometry of entities whose terrain type a power just changed, as the legacy disaster functions do
+        after each conversion: ``map_geo.geo_mutate(slot)`` (tile lookup, ``geo_version``) per converted slot, in order, then
+        mark the map for the next client delta (legacy ``map_dirty``). Called only by ``powers.apply`` after a successful
+        terrain power under EDEN_GOD_POWER_PORTS; never on the tick path. Returns how many slots had geometry to sync."""
+        try:
+            import map_geo
+        except ImportError:  # pragma: no cover - package import fallback
+            from at_the_beginning import map_geo
+        table = self.table("entities")
+        device = self.engine.state.device
+        synced = 0
+        for entity_id in entity_ids:
+            slot = table.slot_of(entity_id)
+            if slot is None:
+                continue
+            synced += int(slot in map_geo.MAP_GEO)
+            map_geo.geo_mutate(slot, device=device)
+        if entity_ids:
+            self.engine._force_map_refresh = True
+        return synced
+
     @property
     def clock(self) -> Clock:                         # type: ignore[override]
         return _EngineClock(self.engine)

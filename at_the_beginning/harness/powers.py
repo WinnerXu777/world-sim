@@ -425,6 +425,10 @@ def apply(world, the_plan: Plan, registry: Optional[Registry] = None) -> PowerRe
     report = world.apply(list(the_plan.effects), atomic=True, cause=f"power:{the_plan.power}")
     if not report.ok:
         return PowerResult(ok=False, reason="apply_failed", plan=the_plan, report=report, replanned=replanned)
+    if os.environ.get("EDEN_GOD_POWER_PORTS") == "1" and hasattr(world, "sync_terrain"):
+        from . import disaster_powers                    # terrain powers: keep the live map geometry in step (legacy geo_mutate)
+        if the_plan.power in disaster_powers.TERRAIN_POWERS:
+            world.sync_terrain(disaster_powers.terrain_changes(the_plan))
     return PowerResult(ok=True, plan=the_plan, report=report, replanned=replanned, event_ids=tuple(e.id for e in report.events))
 
 

@@ -73,6 +73,19 @@ try:
 except ImportError:  # pragma: no cover - package import fallback
     from at_the_beginning import map_geo
 
+# The powers that convert terrain (entities.type). Legacy follows every conversion with map_geo.geo_mutate(slot); on a world
+# that holds live geometry (EngineWorld.sync_terrain) powers.apply does the same after a successful apply (WIP-D part 2).
+TERRAIN_POWERS = frozenset({"earthquake", "volcanic_eruption", "flood"})
+
+
+def terrain_changes(plan) -> tuple:
+    """Entity ids whose type the plan sets, once each, in effect order (the slots legacy re-registers with geo_mutate)."""
+    out: list = []
+    for effect in plan.effects:
+        if isinstance(effect, fx.Set) and effect.table == "entities" and effect.field == "type":
+            out.extend(i for i in effect.ids if i not in out)
+    return tuple(out)
+
 
 def _check_amounts(**amounts) -> None:
     for name, value in amounts.items():

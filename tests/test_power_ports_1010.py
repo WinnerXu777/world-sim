@@ -14,6 +14,8 @@ import genesis_config as cfg
 
 ALL = {"of": "humans"}
 PORTS = {"set_threat", "set_aggression", "reset_cooldown"}
+# harness/powers.py docstring: the same flag also exposes the eight disaster ports (harness/disaster_powers.py).
+DISASTERS = {"wildfire", "earthquake", "storm", "volcanic_eruption", "drought", "flood", "area_attack", "smite"}
 BASE = {"set_mood", "plague", "bless", "calm_area", "panic_area", "baby_boom",
         "cull", "enlighten", "bounty_area", "scarcity_area"}
 
@@ -48,7 +50,7 @@ class PowerPortsTests(unittest.TestCase):
             missing = pw.build_registry()
         self.assertEqual(set(off.powers), BASE)
         self.assertEqual(off.manifest(), missing.manifest())
-        self.assertEqual(set(self.reg.powers), BASE | PORTS)
+        self.assertEqual(set(self.reg.powers), BASE | PORTS | DISASTERS)
         for name in PORTS:
             result = pw.call(self.world, name, {"targets": ALL, "value": 5}, registry=off)
             self.assertEqual((result.ok, result.reason), (False, "invalid_arguments"))
