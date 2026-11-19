@@ -208,3 +208,10 @@ The ten invented species and the other bible fauna (dog, cat, cow, horse, goat, 
   * No bug deaths: none in the counting run. The earlier partial-run cases (a wolf death at probe tick 52114, a resident death on day 7) did not recur in either run.
 * Flag off: 4 strict goldens (default, `--resources`, `--spaces`, `--window-hook`) report no drift (11 checkpoints), on fc69f3c and again on 506f6c6 with the three files on top. Singles OK: creatures table 21 / parity 4 / kernel 21 / feed 11, harness_spaces_columns 18, harness_calendar x6.
 * Not done: per-species birth rates or litter sizes, an age/hunger death breakdown in the probe, and a run longer than 10 days.
+
+### F3 as built: breeding hold and litters (2026-11-19, `88b8c36`)
+
+* Table key `litter` (int 1..8, default 1; sheep 2, boar 2). `animal_tool_reproduce` bears `litter` young per birth under a non-legacy calendar and one under the legacy calendar; recovery unchanged (one calendar year).
+* Kernel breeding hold `hold_cooldown()` = `HOLD_COOLDOWN x LEGACY_YEAR_TICKS / life_year_ticks` (1.0 legacy, 0.05 under `EDEN_CALENDAR`: the same 600 ticks), used at both clamp sites (crowded pasture, hungry).
+* Tests `tests/test_f3_litter.py` (6), `tests/test_f3_hold.py` (4), `tests/test_animal_birth_calendar.py` (flag-on cases expect the litter). Probe `tools/f3_animal_deaths.py` (death cause per uid, breeding female-ticks).
+* Balance still open: single-seed 10-day counts are noisy (sheep 14 vs 3 between runs); thirst is the main sheep killer (F4); wolves breed again in calendar year 2 (F5). Evidence: `.orchestration/wsim/reports/f3_decline.md` (not in git).
