@@ -90,12 +90,21 @@ def refresh(engine) -> tuple:
         if uid not in since:
             since[uid] = int(engine.tick)
             log.append((int(engine.tick), "sleep", uid))
-    for uid in [u for u in since if u not in now]:
+    waking = [u for u in since if u not in now]
+    if waking and os.environ.get("EDEN_OFFSCREEN", "") == "1":              # R6.5: the dormant group is advanced by the missed days instead
+        from . import offscreen
+        offscreen.wake_all(engine, {uid: since.pop(uid) for uid in waking}, now)
+        log.extend((int(engine.tick), "wake", uid) for uid in waking)
+        waking = []
+    for uid in waking:
         started = since.pop(uid)
         slot = _slot_of(engine, uid)
         if slot is not None:
             wake(engine, slot, int(engine.tick) - started)
         log.append((int(engine.tick), "wake", uid))
+    if engine.__dict__.get("_offscreen_pending") and os.environ.get("EDEN_OFFSCREEN", "") == "1":   # R6.5: births counted while away, not placed yet
+        from . import offscreen
+        offscreen.retry(engine)
     del log[:-256]
     engine._dormant_h, engine._dormant_a = dormant_h, dormant_a
     return dormant_h, dormant_a

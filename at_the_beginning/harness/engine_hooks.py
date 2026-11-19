@@ -288,6 +288,8 @@ def install(dispatch) -> bool:
     from .numerics import window_enabled
     if os.environ.get("EDEN_WINDOW_DORMANCY", "") == "1" and not window_enabled():
         raise spaces.SpaceConfigError("EDEN_WINDOW_DORMANCY=1 requires EDEN_WINDOW=1: dormancy is defined by the integrated window. Set it or unset EDEN_WINDOW_DORMANCY.")
+    if os.environ.get("EDEN_OFFSCREEN", "") == "1" and os.environ.get("EDEN_WINDOW_DORMANCY", "") != "1":
+        raise spaces.SpaceConfigError("EDEN_OFFSCREEN=1 requires EDEN_WINDOW_DORMANCY=1: offscreen villages are advanced when their dormant residents wake. Set it or unset EDEN_OFFSCREEN.")
     if os.environ.get("EDEN_STRUCTURE_STORE", "") == "1" and not window_enabled():
         raise spaces.SpaceConfigError("EDEN_STRUCTURE_STORE=1 requires EDEN_WINDOW=1: the store is keyed by window chunk. Set it or unset EDEN_STRUCTURE_STORE.")
     if os.environ.get("EDEN_CREATURES", "") == "1" and not window_enabled():

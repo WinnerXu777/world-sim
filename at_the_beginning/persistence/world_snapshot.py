@@ -43,6 +43,13 @@ REFUSAL_CALENDAR_DIFFERENT = (
 )
 
 
+REFUSAL_OFFSCREEN_WITHOUT = (
+    "This save has children born in a village while the player was away who are still waiting to be placed (offscreen villages, EDEN_OFFSCREEN=1), "
+    "but this session runs without it, so they would be lost and the save cannot be continued. Start the game with EDEN_OFFSCREEN=1 (and "
+    "EDEN_WINDOW_DORMANCY=1) to continue it. The save file has not been changed."
+)
+
+
 class SaveFormatError(ValueError):
     """The save's world format does not match this session's (flag EDEN_SPACES); raised by ``validate`` before anything is changed."""
 
@@ -145,6 +152,9 @@ def capture(engine, geometry) -> bytes:
         payload["world_format"] = {"format": 3, "spaces": _space_layout(engine._map_name), "generator_version": GENERATOR_VERSION,
                                    "world_seed": str(window_manager.world_seed_of(engine)), "origin": window["origin"], "epoch": window["epoch"]}
         payload["window"] = window
+        offscreen_section = _offscreen().export(engine) if _offscreen().enabled() else None
+        if offscreen_section:                       # EDEN_OFFSCREEN with births still to place: an optional key, so every other save is unchanged
+            window["offscreen"] = offscreen_section
         if "structures" in window:                  # EDEN_STRUCTURE_STORE with structures stored away: world format 4 (an empty store stays format 3)
             payload["schema"] = 4
             payload["world_format"]["format"] = 4
@@ -193,6 +203,9 @@ def validate(payload, engine) -> None:
     if schema != expected and not (schema == 4 and expected == 3):
         raise ValueError("Unsupported world schema; migration required")
     _check_calendar(payload)
+    window_section = payload.get("window")
+    if isinstance(window_section, dict) and "offscreen" in window_section and not _offscreen().enabled():
+        raise SaveFormatError(REFUSAL_OFFSCREEN_WITHOUT)
     if set(payload["engine"]) != set(ENGINE_FIELDS) or set(payload["runtimes"]) != set(RUNTIMES):
         raise ValueError("World state schema mismatch")
     _require_known_map(payload["engine"].get("_map_name"))
@@ -234,6 +247,14 @@ def validate(payload, engine) -> None:
         raise ValueError("CUDA RNG device count differs; save migration required")
 
 
+def _offscreen():
+    try:
+        from harness import offscreen
+    except ImportError:  # pragma: no cover - package import fallback
+        from at_the_beginning.harness import offscreen
+    return offscreen
+
+
 def _structure_store_enabled() -> bool:
     try:
         from harness import structure_store
@@ -258,7 +279,9 @@ def _validate_window(payload, engine) -> None:
         raise ValueError(f"This save's world seed is {saved.get('world_seed')!r}; this session's is {seed!r} (EDEN_WORLD_SEED). Start with the seed the save was made with.")
     window = payload.get("window")
     keys = {"origin", "epoch", "chunks", "deltas", "owned", "log"}
-    optional = {"dormant_since", "structures"} if payload["schema"] == 4 else {"dormant_since"}
+    optional = {"dormant_since", "structures", "offscreen"} if payload["schema"] == 4 else {"dormant_since", "offscreen"}
+    if isinstance(window, dict) and "offscreen" in window:
+        _offscreen().validate_section(window["offscreen"])
     if payload["schema"] == 4:
         try:
             from harness.structure_store import StructureStore
@@ -320,6 +343,8 @@ def restore(payload, engine, geometry, control_factory) -> None:
     if payload["schema"] in (3, 4):                 # after the new epoch: a manager is rebuilt whenever its epoch differs from the engine's
         from harness import window_manager
         window_manager.restore_manager(engine, payload["window"])
+        if _offscreen().enabled():                  # EDEN_OFFSCREEN: births counted while away and not placed yet (none: an empty list)
+            _offscreen().load(engine, payload["window"].get("offscreen"))
     engine.world_loaded = True
     engine._runtime_profile = "full"
     engine._map_geo_version_sent = geometry.geo_version
