@@ -313,12 +313,15 @@ def memory_sample(pid):
 
 
 SUBLINEAR_FACTOR = 0.5   # orchestrator ruling 1118 (R0.5 REVISE), not a contract number
+NOISE_FLOOR_BYTES = 16 * 2 ** 20   # orchestrator ruling 1118 after run 7: allocator noise (run 7's peak was +10 MiB), not a contract number
 
 
 def memory_bound(samples):
-    """R0.5 plateau rule on main-backend RSS (no fixed byte threshold exists, so none is invented). With growth g1 = rss(half) - rss(start)
-    over the outbound leg's first half, it passes only when the second half grew clearly sublinearly, rss(far) - rss(half) <= 0.5 * g1, and
-    the return leg grew no more than the first half, rss(end) - rss(far) <= g1. ``ok`` is None when any marked sample is missing."""
+    """R0.5 plateau rule on main-backend RSS. With growth g1 = max(0, rss(half) - rss(start)) over the outbound leg's first half (a falling
+    RSS, e.g. Windows trimming the working set, is no growth: run 7), it passes only when the second half grew clearly sublinearly,
+    rss(far) - rss(half) <= max(0.5 * g1, NOISE_FLOOR_BYTES), and the return leg grew no more than the first half,
+    rss(end) - rss(far) <= g1 + NOISE_FLOOR_BYTES. The 16 MiB floor is allocator noise (orchestrator ruling after run 7). ``ok`` is None when
+    any marked sample is missing."""
     marks = {}
     for sample in samples:
         if sample.get('mark') and sample['mark'] not in marks:
@@ -328,14 +331,19 @@ def memory_bound(samples):
     values = [s['bytes'] for s in samples if type(s.get('bytes')) is int and s.get('pid_kind') != 'launcher_fallback']
     known = all(type(v) is int for v in (start, half, far, end))
     first = half - start if known else None
-    return {'rule': 'rss(far) - rss(half) <= 0.5 * (rss(half) - rss(start)) and rss(end) - rss(far) <= rss(half) - rss(start), main backend RSS',
+    grown = max(0, first) if known else None
+    return {'rule': ('g1 = max(0, rss(half) - rss(start)); rss(far) - rss(half) <= max(0.5 * g1, 16 MiB) and rss(end) - rss(far) <= g1 + 16 MiB, '
+                     'main backend RSS'),
             'sublinear_factor': SUBLINEAR_FACTOR,
             'sublinear_factor_source': 'orchestrator ruling 1118 (R0.5 REVISE); not a contract number',
+            'noise_floor_bytes': NOISE_FLOOR_BYTES,
+            'noise_floor_source': 'orchestrator ruling 1118 after run 7 (allocator noise); not a contract number',
+            'first_half_growth_clamped': (first < 0) if known else None,
             'start_bytes': start, 'half_bytes': half, 'far_bytes': far, 'end_bytes': end,
             'first_half_growth_bytes': first, 'second_half_growth_bytes': far - half if known else None,
             'return_leg_growth_bytes': end - far if known else None,
             'peak_minus_start_bytes': max(values) - start if values and type(start) is int else None,   # information only
-            'ok': (far - half <= SUBLINEAR_FACTOR * first and end - far <= first) if known else None}
+            'ok': (far - half <= max(SUBLINEAR_FACTOR * grown, NOISE_FLOOR_BYTES) and end - far <= grown + NOISE_FLOOR_BYTES) if known else None}
 
 
 def memory_summary(samples):
@@ -458,7 +466,8 @@ class Steer:
     ``max_episodes`` per leg. Every episode is recorded (start/end delta, max turn, duration, outcome)."""
 
     def __init__(self, name, step=45.0, min_move=0.5, eval_ticks=4, clear_moves=5, max_turn=1080.0, max_seconds=300.0, max_episodes=12,
-                 stuck_window=4, stuck_net=1.0, clock=time.monotonic):
+                 stuck_window=4, stuck_net=1.0, clock=time.monotonic, side=1):
+        self.side = 1 if side >= 0 else -1          # +1 turns counter-clockwise (+y first from an east heading), -1 the other way (R0.5 run 7)
         self.name, self.step, self.min_move, self.eval_ticks, self.clear_moves = name, step, min_move, eval_ticks, clear_moves
         self.max_turn, self.max_seconds, self.max_episodes, self.clock = max_turn, max_seconds, max_episodes, clock
         self.stuck_window, self.stuck_net = stuck_window, stuck_net
@@ -477,7 +486,7 @@ class Steer:
                 if len(self.episodes) >= self.max_episodes:
                     self.exhausted = True
                     return
-                self.episode = {'leg': self.name, 'start_delta': [round(pos[0], 1), round(pos[1], 1)], 'turn_first': '+y from an east heading',
+                self.episode = {'leg': self.name, 'start_delta': [round(pos[0], 1), round(pos[1], 1)], 'turn_first': self._label(),
                                 'max_turn_degrees': 0.0, 'started': self.clock(), 'duration_s': 0.0, 'end_delta': None, 'outcome': 'open'}
                 self.episodes.append(self.episode)
             self.turn += self.step
@@ -498,6 +507,16 @@ class Steer:
         elif self.turn > self.max_turn or episode['duration_s'] > self.max_seconds:
             episode['outcome'], self.exhausted = 'dead_end', True
 
+    def _label(self):
+        return '+y from an east heading' if self.side > 0 else '-y from an east heading'
+
+    def restart(self, side, outcome):
+        """Close the open episode with ``outcome`` and start afresh on turn side ``side`` (a back-leg re-route). The caps keep counting."""
+        if self.episode is not None:
+            self.episode['outcome'], self.episode = outcome, None
+        self.side = 1 if side >= 0 else -1
+        self.turn, self.free, self.last, self.last_tick = 0.0, 0, None, None
+
     def move(self, pos, heading, tick):
         if not self.exhausted and (self.last_tick is None or tick - self.last_tick >= self.decide_ticks):
             if self.last is not None:
@@ -505,7 +524,7 @@ class Steer:
             self.last, self.last_tick = tuple(pos), tick
         if self.exhausted:
             return {'x': 0.0, 'y': 0.0}
-        a = math.radians(self.turn)
+        a = math.radians(self.turn * self.side)
         x, y = heading[0] * math.cos(a) - heading[1] * math.sin(a), heading[0] * math.sin(a) + heading[1] * math.cos(a)
         norm = max(1e-9, math.hypot(x, y))
         return {'x': x / norm, 'y': y / norm}
@@ -544,15 +563,122 @@ class Breadcrumbs:
         return (dx / norm, dy / norm)
 
 
-def route_verdict(route_samples):
+class Retrace:
+    """The measured walk's back leg (R0.5 after run 7, orchestrator GO): ``Breadcrumbs`` give the target, ``Steer`` the local wall-follow,
+    and a progress-aware stall test sits above both. Progress = the target crumb index advanced, or the distance to the target dropped by
+    ``stuck_net`` below the best distance banked for that target (best moves only in ``stuck_net`` steps, so a swing that comes back to the
+    same distance is no progress, while a slow steady approach is). After ``stall_windows`` decision windows without progress the walker
+    re-routes: it walks back to the last crumb reached (proven path), then approaches the stalled crumb again with the Pledge turn side
+    flipped. It never skips a crumb: crumbs nearer home are not proven reachable from the stall point. Caps: ``max_per_crumb`` re-routes per
+    target crumb, ``max_reroutes`` per leg; one more stall is a dead end (a clean failure). Every re-route is recorded."""
+
+    def __init__(self, crumbs, steer=None, stall_windows=12, stuck_net=1.0, max_per_crumb=2, max_reroutes=6, clock=time.monotonic):
+        self.crumbs, self.clock = crumbs, clock
+        self.steer = steer if steer is not None else Steer('back', clock=clock)
+        self.name = self.steer.name
+        self.stall_windows, self.stuck_net, self.max_per_crumb, self.max_reroutes = stall_windows, stuck_net, max_per_crumb, max_reroutes
+        self.reroutes, self.per_crumb, self.retreat, self.dead_end = [], {}, None, None
+        self.key, self.best, self.stalls, self.last_tick, self.exhausted = None, math.inf, 0, None, False
+
+    @property
+    def episodes(self):
+        return self.steer.episodes
+
+    @staticmethod
+    def _unit(dx, dy):
+        norm = math.hypot(dx, dy)
+        return (0.0, 0.0) if norm < 1e-9 else (dx / norm, dy / norm)
+
+    def _target(self, pos):
+        """(progress key, target point, heading). While re-routing the target is the retreat crumb; once within reach, the stalled crumb."""
+        points = self.crumbs.points
+        if self.retreat is not None:
+            tx, ty = points[self.retreat['retreat_to']]
+            if math.hypot(tx - pos[0], ty - pos[1]) > self.crumbs.reach:
+                return ('retreat', self.retreat['retreat_to']), (tx, ty), self._unit(tx - pos[0], ty - pos[1])
+            self.retreat['outcome'], self.retreat = 'approaching', None
+        heading = self.crumbs.heading(pos)
+        if not points:
+            return ('home', None), (0.0, 0.0), heading
+        return ('crumb', self.crumbs.index), points[self.crumbs.index], heading
+
+    def _open_row(self):
+        return self.reroutes[-1] if self.reroutes and self.reroutes[-1]['outcome'] in ('retreating', 'approaching') else None
+
+    def _close(self, row, outcome, pos):
+        row['outcome'], row['end_delta'] = outcome, [round(pos[0], 1), round(pos[1], 1)]
+        row['duration_s'] = round(self.clock() - row['started'], 2)
+
+    def _judge(self, key, dist, pos):
+        row = self._open_row()
+        if row is not None and key[0] == 'crumb' and key[1] < row['crumb']:
+            self._close(row, 'resumed', pos)
+        if key != self.key:
+            self.key, self.best, self.stalls = key, dist, 0
+            return
+        if dist <= self.best - self.stuck_net:
+            self.best, self.stalls = dist, 0
+            return
+        self.stalls += 1
+        if self.stalls >= self.stall_windows:
+            self._stall(key, pos)
+
+    def _stall(self, key, pos):
+        row = self._open_row()
+        crumb = key[1] if key[0] == 'crumb' else row['crumb']
+        if row is not None:
+            self._close(row, 'stalled', pos)
+        self.retreat, self.key, self.stalls = None, None, 0
+        if self.per_crumb.get(crumb, 0) >= self.max_per_crumb or len(self.reroutes) >= self.max_reroutes:
+            self.exhausted = True
+            self.dead_end = {'leg': self.name, 'crumb': crumb, 'delta': [round(pos[0], 1), round(pos[1], 1)], 'outcome': 'dead_end',
+                             'reroutes_on_crumb': self.per_crumb.get(crumb, 0)}
+            if self.steer.episode is not None:
+                self.steer.episode['outcome'] = 'dead_end'
+            return
+        self.per_crumb[crumb] = self.per_crumb.get(crumb, 0) + 1
+        side = -self.steer.side
+        self.steer.restart(side, 'rerouted')
+        self.retreat = {'leg': self.name, 'crumb': crumb, 'retreat_to': min(crumb + 1, len(self.crumbs.points) - 1), 'side': side,
+                        'start_delta': [round(pos[0], 1), round(pos[1], 1)], 'started': self.clock(), 'duration_s': 0.0, 'end_delta': None,
+                        'outcome': 'retreating'}
+        self.reroutes.append(self.retreat)
+
+    def move(self, pos, tick):
+        if self.exhausted:
+            return {'x': 0.0, 'y': 0.0}
+        key, point, heading = self._target(pos)
+        if key[0] != 'home' and (self.last_tick is None or tick - self.last_tick >= self.steer.decide_ticks):
+            if self.last_tick is not None:
+                self._judge(key, math.hypot(point[0] - pos[0], point[1] - pos[1]), pos)
+                if self.exhausted:
+                    return {'x': 0.0, 'y': 0.0}
+                if self.retreat is not None and key[0] == 'crumb':
+                    key, point, heading = self._target(pos)          # a re-route just began: head for the retreat crumb
+            self.last_tick = tick
+        if heading == (0.0, 0.0):
+            heading = self._unit(-pos[0], -pos[1])
+        move = self.steer.move(pos, heading, tick)
+        self.exhausted = self.exhausted or self.steer.exhausted
+        return move
+
+
+def route_verdict(route_samples, spawn_chunk=None):
     """Every sampled player chunk must be ``ready`` on /chunks; it must also be in the window's integrated set, with at most a one-sample lag
     (a sprint across a border can sample the new chunk before its integration tick). Samples without a set coherent with the frame neither
-    extend nor break a lag run. Every lag is counted; two or more consecutive lagging samples fail (orchestrator ruling 1118)."""
-    lags, run, worst, ready = [], 0, 0, bool(route_samples)
+    extend nor break a lag run. Every lag is counted; two or more consecutive lagging samples fail (orchestrator ruling 1118).
+    ``spawn_chunk`` (R0.5 after run 7: F1 spawns the player inside the pinned starter village): a ``pinned_map`` row naming its map counts as
+    ready on that one chunk only. Every sample is taken at the player's own chunk, so that is exactly while the player is in it."""
+    lags, run, worst, ready, pinned = [], 0, 0, bool(route_samples), 0
+    spawn = list(spawn_chunk) if spawn_chunk is not None else None
     for index, sample in enumerate(route_samples):
         chunk_id = f"{sample['chunk'][0]}:{sample['chunk'][1]}"
         rows = sample.get('route') or []
-        ready &= len(rows) == 1 and rows[0].get('chunk_id') == chunk_id and rows[0].get('state') == 'ready'
+        row = rows[0] if len(rows) == 1 and rows[0].get('chunk_id') == chunk_id else None
+        on_spawn = (row is not None and spawn is not None and list(sample['chunk']) == spawn and row.get('state') == 'pinned_map'
+                    and bool(row.get('pinned_map')))
+        ready &= row is not None and (row.get('state') == 'ready' or on_spawn)
+        pinned += on_spawn
         if not sample.get('coherent_with_frame') or sample.get('integrated') is None:
             continue
         if chunk_id in sample['integrated']:
@@ -562,7 +688,9 @@ def route_verdict(route_samples):
             worst = max(worst, run)
             lags.append({'index': index, 'chunk': list(sample['chunk'])})
     return {'ok': bool(ready and worst < 2), 'all_ready': bool(ready), 'lag_samples': len(lags), 'max_consecutive_lag': worst, 'lags': lags,
-            'rule': 'ready on /chunks always; integrated at that sample or after at most one lagging sample'}
+            'spawn_chunk': spawn, 'pinned_accepted': pinned,
+            'rule': ('ready on /chunks always (pinned_map accepted on the spawn chunk only); integrated at that sample or after at most one '
+                     'lagging sample')}
 
 
 def backend_pid(stats, fallback):
@@ -604,6 +732,7 @@ def phase_long_walk(b, target, seconds, evidence):
     player, stats_before, half_marked = None, None, False
     legs = {'out': Steer('out'), 'back': Steer('back')}
     crumbs = Breadcrumbs()
+    retrace = Retrace(crumbs, legs['back'])
     path_length, max_lateral, last = 0.0, 0.0, None
     mem_pid, mem_kind = getattr(getattr(b, 'proc', None), 'pid', None), 'launcher_fallback'
 
@@ -620,6 +749,7 @@ def phase_long_walk(b, target, seconds, evidence):
         evidence['memory_pid'] = {'pid': mem_pid, 'kind': mem_kind, 'launcher_pid': getattr(getattr(b, 'proc', None), 'pid', None)}
         frame = b.get('/frame').json()
         start = current = player_position(frame, player)
+        evidence['spawn_chunk'] = [int(start[0][0]) + math.floor(start[1][0] / 256), int(start[0][1]) + math.floor(start[1][1] / 256)]
         evidence['memory_samples'].append(mem(mark='start', delta_east=0.0))
         evidence['player_id'] = player
         evidence['residents_start'] = resident_snapshot(frame)
@@ -647,11 +777,7 @@ def phase_long_walk(b, target, seconds, evidence):
                 evidence['memory_samples'].append(mem(mark='far', delta_east=dx))
             if outbound and math.hypot(dx, dy) <= 32:
                 break
-            steer = legs['back' if outbound else 'out']
-            norm = math.hypot(dx, dy)
-            heading = crumbs.heading((dx, dy)) if outbound else (1.0, 0.0)      # back leg: retrace the outbound crumbs in reverse
-            if heading == (0.0, 0.0):
-                heading = (-dx / max(norm, 1e-9), -dy / max(norm, 1e-9))
+            steer = retrace if outbound else legs['out']                 # back leg: retrace the outbound crumbs in reverse (Retrace)
             if iteration % 20 == 0:
                 evidence['samples'].append({'elapsed': seconds - (deadline - time.monotonic()),
                     'epoch': frame['window_epoch'], 'origin': list(current[0]), 'delta': [dx, dy],
@@ -669,10 +795,12 @@ def phase_long_walk(b, target, seconds, evidence):
                 coherent = delta.get('window_epoch') == frame['window_epoch'] and delta.get('window_origin') == frame['window_origin']
                 evidence['route_samples'].append({'chunk': [cx, cy], 'route': rows, 'integrated': integrated,
                     'coherent_with_frame': coherent, 'state_version': delta.get('state_version')})
-            move = steer.move((dx, dy), heading, tick=int(frame.get('tick', 4 * iteration)))
+            tick = int(frame.get('tick', 4 * iteration))
+            move = retrace.move((dx, dy), tick) if outbound else legs['out'].move((dx, dy), (1.0, 0.0), tick)
             if steer.exhausted:
                 raise RuntimeError(f'wall-follow cap reached on the {steer.name} leg at delta {[round(dx, 1), round(dy, 1)]}: dead end '
-                                   f'({len(steer.episodes)} episodes, last {steer.episodes[-1] if steer.episodes else None})')
+                                   f'({len(steer.episodes)} episodes, {len(retrace.reroutes) if outbound else 0} re-routes, '
+                                   f'last {steer.episodes[-1] if steer.episodes else None})')
             seq += 1
             body = dict(protocol_version=1, world_epoch=control['world_epoch'], possession_epoch=control['possession_epoch'],
                         target_kind='human', target_id=player, seq=seq, move=move,
@@ -707,11 +835,19 @@ def phase_long_walk(b, target, seconds, evidence):
                             'steering': ('outbound heads east; the back leg retraces the outbound breadcrumbs in reverse; capped Pledge wall-follow '
                                          '(Steer) only as the local fallback between crumbs: 45 degree turns, caps 1080 degrees / 300 s per episode, '
                                          f'12 episodes per leg; stuck only if net progress < {legs["out"].stuck_net} unit over '
-                                         f'{legs["out"].stuck_window} inputs (hysteresis, non-overlapping windows)'),
+                                         f'{legs["out"].stuck_window} inputs (hysteresis, non-overlapping windows); back leg: progress-aware '
+                                         f'stall test (no >= {retrace.stuck_net} unit gain on the best distance to the target crumb over '
+                                         f'{retrace.stall_windows} decision windows) re-routes to the last crumb reached and retries with the turn '
+                                         f'side flipped, never skips a crumb; caps {retrace.max_per_crumb} per crumb, {retrace.max_reroutes} per leg'),
                             'breadcrumbs': {'count': len(crumbs.points), 'spacing': crumbs.spacing, 'reach': crumbs.reach,
                                             'index_reached': crumbs.index, 'jumps': crumbs.jumps},
                             'detours': [{k: v for k, v in e.items() if k != 'started'} for e in legs['out'].episodes + legs['back'].episodes],
-                            'episode_budget_per_leg': legs['out'].max_episodes, 'exhausted': [n for n, s in legs.items() if s.exhausted]}
+                            'reroutes': [{k: v for k, v in r.items() if k != 'started'} for r in retrace.reroutes],
+                            'reroute_caps': {'stall_windows': retrace.stall_windows, 'per_crumb': retrace.max_per_crumb,
+                                             'per_leg': retrace.max_reroutes},
+                            'dead_end': retrace.dead_end,
+                            'episode_budget_per_leg': legs['out'].max_episodes,
+                            'exhausted': [n for n, s in (('out', legs['out']), ('back', retrace)) if s.exhausted]}
         if 'window_stats_after' not in evidence and stats_before is not None:
             evidence['window_stats_after'] = window_stats(b)          # the walk failed early: void must still be known
             evidence['window_stats_after_read_on_error_path'] = True
@@ -731,7 +867,7 @@ def phase_long_walk(b, target, seconds, evidence):
             {'added': sorted(after-before), 'removed': sorted(before-after)}
             for before, after in zip(coherent_sets, coherent_sets[1:]) if before != after]
         evidence['residency_changed'] = bool(evidence['residency_transitions'])
-        evidence['route_verdict'] = route_verdict(evidence['route_samples'])
+        evidence['route_verdict'] = route_verdict(evidence['route_samples'], evidence.get('spawn_chunk'))
         evidence['routes_ready'] = evidence['route_verdict']['ok']
         measured_ok = (evidence['outbound_complete'] and evidence['return_complete'] and len(epochs) > 1
                        and evidence['routes_ready'] and evidence['residency_changed'] and evidence.get('resident_ids_restored')

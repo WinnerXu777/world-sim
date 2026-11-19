@@ -5,9 +5,14 @@ import httpx
 from types import SimpleNamespace
 from unittest.mock import Mock
 
+import tools.live_smoke_window as lsw
+
 from tools.live_smoke_window import (displacement, distance_result, stamped_input, memory_summary, memory_bound, phase_long_walk, player_void_delta,
                                      left_behind_stable, live_gate, void_from_window_stats, Steer, route_verdict, backend_pid,
                                      Breadcrumbs)
+
+
+MIB = 2 ** 20
 
 
 def simulate(walls, goal_x=None, speed=10.0, steps=6000, start=(0.0, 0.0), jitter=0.0, heading=None, done=None, name='out', **steer_kw):
@@ -158,28 +163,32 @@ class LongWalkTests(unittest.TestCase):
     def mem(self, *rows):
         return [{'bytes': value, 'mark': mark} for mark, value in rows]
 
+    def mib(self, *rows):
+        # R0.5 after run 7: the plateau rule has a 16 MiB noise floor, so the rule tests are written in MiB (values unchanged otherwise)
+        return self.mem(*((mark, None if value is None else value * MIB) for mark, value in rows))
+
     def test_memory_bound_pass_fail_unknown(self):
-        plateau = memory_bound(self.mem(('start', 100), (None, 180), ('half', 200), (None, 230), ('far', 240), ('end', 250)))
+        plateau = memory_bound(self.mib(('start', 100), (None, 180), ('half', 200), (None, 230), ('far', 240), ('end', 250)))
         self.assertIs(plateau['ok'], True)
-        self.assertEqual(plateau['peak_minus_start_bytes'], 150)           # information only, no threshold
+        self.assertEqual(plateau['peak_minus_start_bytes'], 150 * MIB)     # information only, no threshold
         self.assertEqual(plateau['sublinear_factor'], 0.5)
         self.assertIn('orchestrator ruling', plateau['sublinear_factor_source'])
-        self.assertIs(memory_bound(self.mem(('start', 100), ('half', 200), ('far', 301), ('end', 301)))['ok'], False)
+        self.assertIs(memory_bound(self.mib(('start', 100), ('half', 200), ('far', 301), ('end', 301)))['ok'], False)
         for rows in ((('start', 100), ('half', 200)), (('start', 100), ('half', 200), ('far', 220)),      # no far / no end sample
                      (('start', None), ('half', 200), ('far', 250), ('end', 250)), ()):
             self.assertIsNone(memory_bound(self.mem(*rows))['ok'], rows)
         self.assertIsNone(memory_summary(self.mem(('start', 100), ('half', None), ('far', 120), ('end', 120)))['bounded_growth_acceptance'])
 
     def test_memory_bound_needs_clearly_sublinear_growth(self):
-        # orchestrator ruling 1118: second-half growth <= 0.5 x first-half growth, and return-leg growth <= first-half growth
-        linear = self.mem(('start', 1000), (None, 1500), ('half', 2000), (None, 2500), ('far', 3000), ('end', 3000))
+        # orchestrator ruling 1118: second-half growth <= 0.5 x first-half growth, and return-leg growth <= first-half growth (+ the noise floor)
+        linear = self.mib(('start', 1000), (None, 1500), ('half', 2000), (None, 2500), ('far', 3000), ('end', 3000))
         self.assertIs(memory_bound(linear)['ok'], False)                   # exactly linear growth fails
         self.assertIs(memory_summary(linear)['bounded_growth_acceptance'], False)
-        self.assertIs(memory_bound(self.mem(('start', 1000), ('half', 2000), ('far', 2500), ('end', 2600)))['ok'], True)    # 0.5x boundary
-        self.assertIs(memory_bound(self.mem(('start', 1000), ('half', 2000), ('far', 2501), ('end', 2501)))['ok'], False)
-        self.assertIs(memory_bound(self.mem(('start', 1000), ('half', 2000), ('far', 2100), ('end', 3200)))['ok'], False)   # return leg grows
-        self.assertIs(memory_bound(self.mem(('start', 1000), ('half', 2000), ('far', 2100), ('end', 3100)))['ok'], True)    # = first half
-        self.assertIs(memory_bound(self.mem(('start', 1000), ('half', 1000), ('far', 1000), ('end', 1000)))['ok'], True)    # flat plateau
+        self.assertIs(memory_bound(self.mib(('start', 1000), ('half', 2000), ('far', 2500), ('end', 2600)))['ok'], True)    # 0.5x boundary
+        self.assertIs(memory_bound(self.mib(('start', 1000), ('half', 2000), ('far', 2501), ('end', 2501)))['ok'], False)
+        self.assertIs(memory_bound(self.mib(('start', 1000), ('half', 2000), ('far', 2100), ('end', 3117)))['ok'], False)   # return leg grows
+        self.assertIs(memory_bound(self.mib(('start', 1000), ('half', 2000), ('far', 2100), ('end', 3116)))['ok'], True)    # = first half + 16 MiB
+        self.assertIs(memory_bound(self.mib(('start', 1000), ('half', 1000), ('far', 1000), ('end', 1000)))['ok'], True)    # flat plateau
 
     def walk_sample(self, epoch, origin, **residents):
         return {'epoch': epoch, 'origin': list(origin),
@@ -350,6 +359,139 @@ class LongWalkTests(unittest.TestCase):
             ok, reasons = live_gate({**good, key: value})
             self.assertFalse(ok, key)
             self.assertTrue(reasons)
+
+
+    # R0.5 after run 7 (orchestrator GO): A progress-aware back leg, B plateau noise floor, C spawn chunk pinned ------------------------------
+    def simulate_retrace(self, walls, path, start, speed=1.5, steps=40000, **kw):
+        """The back leg through ``Retrace`` on the same point walker as ``simulate`` (X then Y slide, one input per 4 ticks, 0.1 s)."""
+        clock = [0.0]
+        crumbs = self.outbound_crumbs(path)
+        retrace = lsw.Retrace(crumbs, lsw.Steer('back', clock=lambda: clock[0]), clock=lambda: clock[0], **kw)
+        inside = lambda px, py: any(x0 <= px < x1 and y0 <= py < y1 for x0, y0, x1, y1 in walls)
+        x, y = start
+        for step in range(steps):
+            if math.hypot(x, y) <= 32.0 or retrace.exhausted:
+                break
+            move = retrace.move((x, y), tick=4 * step)
+            if not inside(x + move['x'] * speed, y):
+                x += move['x'] * speed
+            if not inside(x, y + move['y'] * speed):
+                y += move['y'] * speed
+            clock[0] += 0.1
+        return retrace, (x, y)
+
+    RUN7_WEDGE = [(101.0, 30.0, 140.0, 118.0)]                              # a block in the wedge between a steep diagonal and the top line
+    RUN7_PATH = [(0, 0), (90, 0), (100, 120), (400, 120)]                    # outbound: east, steeply up west of the block, east above it
+
+    def test_back_leg_rerouting_escapes_a_run7_corner(self):
+        # run 7's stop: the cut from the top line towards the next crumb down the diagonal lands on the block; the turn flips 0 <-> 45 on a
+        # swing the displacement test reads as movement, and the episode runs to its cap
+        crumbs = self.outbound_crumbs(self.RUN7_PATH)
+        home = lambda pos: math.hypot(*pos) <= 32.0
+        old, end = simulate(self.RUN7_WEDGE, start=(400.0, 120.0), heading=crumbs.heading, done=home, name='back', speed=1.5,
+                            max_seconds=300.0, steps=40000)
+        self.assertFalse(home(end))
+        self.assertEqual((old.episodes[-1]['outcome'], old.episodes[-1]['max_turn_degrees']), ('dead_end', 45.0))
+        retrace, end = self.simulate_retrace(self.RUN7_WEDGE, self.RUN7_PATH, (400.0, 120.0))
+        self.assertTrue(home(end), end)
+        self.assertFalse(retrace.exhausted)
+        self.assertGreaterEqual(len(retrace.reroutes), 1)
+        first = retrace.reroutes[0]
+        self.assertEqual((first['side'], first['outcome'], first['retreat_to']), (-1, 'resumed', first['crumb'] + 1))
+
+    def test_retrace_stall_counts_a_swing_as_no_progress(self):
+        crumbs = Breadcrumbs()
+        crumbs.points = [(0.0, 0.0), (16.0, 0.0), (32.0, 0.0), (48.0, 0.0)]
+        retrace = lsw.Retrace(crumbs, lsw.Steer('back', clock=lambda: 0.0), clock=lambda: 0.0)
+        window = retrace.steer.decide_ticks
+        tick = 0
+        retrace.move((60.0, 0.0), tick)                                      # within reach of the last crumb: the target is crumb 2 (32, 0)
+        self.assertEqual(crumbs.index, 2)
+        for k in range(retrace.stall_windows + 1):                           # the walker swings 6 units in y at x 45: moving, no progress
+            tick += window
+            retrace.move((45.0, 3.0 if k % 2 else -3.0), tick)
+            if retrace.reroutes:
+                break
+        self.assertEqual(k, retrace.stall_windows)                           # the first window sets the base; 12 without progress follow
+        self.assertEqual(retrace.reroutes[0]['crumb'], 2)
+        self.assertEqual(retrace.reroutes[0]['retreat_to'], 3)
+        self.assertEqual(retrace.steer.side, -1)
+        steady = lsw.Retrace(Breadcrumbs(), lsw.Steer('back', clock=lambda: 0.0), clock=lambda: 0.0)
+        steady.crumbs.points = list(crumbs.points)
+        x = 60.0
+        for k in range(40):                                                  # a slow, steady approach (0.6 units per window) is progress
+            steady.move((x, 0.0), k * window)
+            x -= 0.6
+        self.assertEqual(steady.reroutes, [])
+
+    def test_retrace_reroute_cap_is_two_per_crumb(self):
+        # the outbound came through a gap that is now shut: no side gets past, so two re-routes on the crumb, then a clean dead end
+        shut = [(60.0, -200.0, 80.0, 200.0)]
+        retrace, end = self.simulate_retrace(shut, [(0, 0), (200, 0)], (200.0, 0.0), steps=20000)
+        self.assertTrue(retrace.exhausted)
+        self.assertEqual(len({r['crumb'] for r in retrace.reroutes}), 1)
+        self.assertEqual(len(retrace.reroutes), 2)
+        self.assertEqual([r['side'] for r in retrace.reroutes], [-1, 1])
+        self.assertTrue(all(r['outcome'] == 'stalled' for r in retrace.reroutes))
+        self.assertEqual(retrace.dead_end['outcome'], 'dead_end')
+        self.assertEqual(retrace.move(end, 10 ** 7), {'x': 0.0, 'y': 0.0})
+        self.assertLessEqual(len(retrace.reroutes), retrace.max_reroutes)
+
+    def test_retrace_clean_path_never_reroutes(self):
+        wall = [(100.0, -50000.0, 250.0, 150.0)]                             # the existing breadcrumb test's wall
+        retrace, end = self.simulate_retrace(wall, [(0, 0), (50, 0), (50, 200), (300, 200), (300, 0), (400, 0)], (400.0, 0.0), speed=10.0,
+                                             steps=4000)
+        self.assertLessEqual(math.hypot(*end), 32.0)
+        self.assertEqual(retrace.reroutes, [])
+        retrace, end = self.simulate_retrace([], [(0, 0), (300, 0)], (300.0, 0.0))
+        self.assertLessEqual(math.hypot(*end), 32.0)
+        self.assertEqual((retrace.reroutes, retrace.episodes), ([], []))
+
+    def test_steer_side_minus_one_turns_the_other_way(self):
+        for side, sign in ((1, -1.0), (-1, 1.0)):
+            steer = Steer('back', clock=lambda: 0.0, side=side)
+            steer.turn = 45.0
+            move = steer.move((0.0, 0.0), (-1.0, 0.0), tick=0)                # heading west, one 45 degree step
+            self.assertLess(move['x'], 0.0)
+            self.assertEqual(math.copysign(1.0, move['y']), sign)
+        self.assertTrue(Steer('back', side=-1)._label().startswith('-y'))
+        self.assertTrue(Steer('back')._label().startswith('+y'))
+
+    def test_memory_bound_falling_rss_and_the_noise_floor(self):
+        run7 = memory_bound(self.mem(('start', 269127680), ('half', 148250624), ('far', 114720768), ('end', 103133184)))
+        self.assertIs(run7['ok'], True)                                      # run 7: RSS fell 269 -> 103 MB; falling is not growth
+        self.assertIs(run7['first_half_growth_clamped'], True)
+        self.assertEqual(run7['first_half_growth_bytes'], 148250624 - 269127680)   # the raw number stays in the evidence
+        self.assertEqual(run7['noise_floor_bytes'], 16 * MIB)
+        self.assertIn('orchestrator ruling', run7['noise_floor_source'])
+        for start in (200, 260):                                             # a flat and a falling first half
+            self.assertIs(memory_bound(self.mib(('start', start), ('half', 200), ('far', 215), ('end', 215)))['ok'], True, start)
+            self.assertIs(memory_bound(self.mib(('start', start), ('half', 200), ('far', 217), ('end', 217)))['ok'], False, start)
+            self.assertIs(memory_bound(self.mib(('start', start), ('half', 200), ('far', 200), ('end', 215)))['ok'], True, start)
+            self.assertIs(memory_bound(self.mib(('start', start), ('half', 200), ('far', 200), ('end', 217)))['ok'], False, start)
+        self.assertIs(memory_bound(self.mib(('start', 100), ('half', 200), ('far', 250), ('end', 266)))['ok'], True)   # 0.5x beyond the floor
+        self.assertIs(memory_bound(self.mib(('start', 100), ('half', 200), ('far', 251), ('end', 251)))['ok'], False)
+
+    def test_route_verdict_accepts_pinned_map_only_on_the_spawn_chunk(self):
+        def pinned(cx, name='starter_village'):
+            return {'chunk': [cx, 0], 'route': [{'chunk_id': f'{cx}:0', 'state': 'pinned_map', 'pinned_map': name}],
+                    'integrated': [f'{cx}:0'], 'coherent_with_frame': True}
+        walk = [pinned(0), self.route(1, ['1:0']), self.route(2, ['2:0'])]
+        result = route_verdict(walk, spawn_chunk=[0, 0])
+        self.assertIs(result['ok'], True)
+        self.assertEqual((result['spawn_chunk'], result['pinned_accepted']), ([0, 0], 1))
+        self.assertIs(route_verdict(walk)['ok'], False)                      # no spawn chunk: today's rule, pinned is not ready
+        self.assertIs(route_verdict(walk, spawn_chunk=[1, 0])['ok'], False)  # pinned on a chunk that is not the spawn chunk
+        self.assertIs(route_verdict([pinned(0, name='')] + walk[1:], spawn_chunk=[0, 0])['ok'], False)
+        self.assertIs(route_verdict(walk + [pinned(5)], spawn_chunk=[0, 0])['ok'], False)   # pinned elsewhere later still fails
+        frame = dict(window_origin=[2, 1], window_epoch=1, agents=[dict(id='p', x=300.0, y=10.0)])
+        b = SimpleNamespace(proc=SimpleNamespace(pid=0), post=lambda *a: self.reply(200, ok=True, target_id='p', world_epoch=1, possession_epoch=1),
+                            get=lambda *a: self.reply(200, **frame))
+        evidence = {}
+        phase_long_walk(b, 5000, 0, evidence)
+        self.assertEqual(evidence['spawn_chunk'], [3, 1])                    # origin + floor(local / 256) at the claim
+        self.assertEqual(evidence['path']['reroutes'], [])
+        self.assertEqual(evidence['path']['reroute_caps'], {'stall_windows': 12, 'per_crumb': 2, 'per_leg': 6})
 
 
 if __name__ == '__main__':
