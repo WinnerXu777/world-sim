@@ -62,7 +62,7 @@ def _static_boxes(engine) -> tuple:
     contract = getattr(engine, "_window_contract", None) or {}
     window = contract.get("boxes", [])
     group = compose_group(getattr(engine, "_map_name", None))
-    placed = placed_boxes_for_window(group["boxes"], contract if window_enabled() else None) if group is not None else []   # F1: no slabs over chunks
+    placed = placed_boxes_for_window(group["boxes"], contract if window_enabled() else None, group["entries"]) if group is not None else []   # F1: no slabs over chunks
     key = (contract.get("revision"), id(placed), len(placed), len(window))
     cached = _BOXES.get(id(engine))
     if cached is not None and cached[0] == key:

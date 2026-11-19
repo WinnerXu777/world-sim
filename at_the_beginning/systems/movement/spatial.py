@@ -63,13 +63,26 @@ def _with_window(window, boxes, bounds, hashed, extras=None):
     return boxes + window["boxes"], bounds, {"static": hashed, "window": window["revision"], "bounds": bounds}
 
 
-def placed_boxes_for_window(boxes, window):
+def _exterior_boundary_ids(entries):
+    """F1b: the ids of the edge walls an exterior placed map draws round itself (``<prefix>:boundary_*`` of a ``map_kind == "exterior"`` map).
+    Interior maps keep theirs: in their pocket those walls are what hold the room."""
+    ids = set()
+    for entry in entries or ():
+        if (entry.get("info") or {}).get("map_kind") != "exterior":
+            continue
+        ids.update(str(box["id"]) for box in entry.get("boxes", ()) if str(box["id"]).split(":", 1)[-1].startswith("boundary_"))
+    return ids
+
+
+def placed_boxes_for_window(boxes, window, entries=()):
     """F1: the placed maps' boxes minus their containment slabs (``map_slab_*``) once the window holds integrated chunks (its bounds are set):
     that world has no map edge, the wall and void boxes bound it, and the slabs between the re-based village and the interior pockets would
-    cover open chunk ground. ``window`` None (flag off) or a finite window (no chunks, bounds None) keeps every box."""
+    cover open chunk ground. F1b: also minus the exterior maps' own edge walls (``entries``: the placed group), so a walker can leave the
+    village; houses, props and interior walls stay. ``window`` None (flag off) or a finite window (no chunks, bounds None) keeps every box."""
     if window is None or window.get("bounds") is None:
         return boxes
-    return [box for box in boxes if not str(box["id"]).startswith("map_slab_")]
+    edge = _exterior_boundary_ids(entries)
+    return [box for box in boxes if not str(box["id"]).startswith("map_slab_") and str(box["id"]) not in edge]
 
 
 def _compose(engine):
@@ -89,7 +102,7 @@ def _compose(engine):
         extras["actor_radius"] = radius
     if map_bounds != bounds:
         extras["bounds"] = map_bounds
-    boxes = placed_boxes_for_window(group["boxes"], window) + walls  # placed maps' walls, containment slabs, then live tensor walls
+    boxes = placed_boxes_for_window(group["boxes"], window, group["entries"]) + walls  # placed maps' walls, containment slabs, then live tensor walls
     hashed = {"boxes": boxes, **extras} if extras else boxes
     boxes, map_bounds, hashed = _with_window(window, boxes, map_bounds, hashed)
     return boxes, radius, map_bounds, hashed, override

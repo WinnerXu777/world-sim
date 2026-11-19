@@ -84,7 +84,7 @@ class ContainmentSlabTests(RegistryIsolation):
         group = compose_group("starter_village")["boxes"]
         os.environ["EDEN_WINDOW"] = "1"
         boxes, generated = collide._static_boxes(engine)
-        self.assertEqual(len(boxes), len(group) - len(slab_ids(group)) + len(CHUNK_WINDOW["boxes"]))
+        self.assertEqual(len(boxes), len(group) - len(slab_ids(group)) - 4 + len(CHUNK_WINDOW["boxes"]))   # F1b: and starter_village's 4 boundary walls
         self.assertEqual(len(generated), len(boxes))
 
     def test_the_creature_collider_keeps_the_slabs_in_a_finite_window_and_flag_off(self):
