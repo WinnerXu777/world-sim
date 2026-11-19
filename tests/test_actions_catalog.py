@@ -1,4 +1,4 @@
-"""The three descriptions of the verb vocabulary must not drift: Appendix A.2 of 1008implementation.md, the tables of 1008_actions.md section 2,
+"""The three descriptions of the verb vocabulary must not drift: Appendix A.2 of design_docs/designs/implementation.md, the tables of design_docs/designs/actions.md section 2,
 and ``systems/actions/catalog.py``; and every registered Action must match its catalog row and its affordance predicate."""
 import re
 import sys
@@ -17,13 +17,13 @@ def read(name):
 
 
 def appendix_a2_ids():
-    text = read("1008implementation.md")
+    text = read("design_docs/designs/implementation.md")
     block = text[text.index("**A.2 Resident verbs"):text.index("**A.3 God and world tools")]
     return re.findall(r"`([A-Za-z_]+)`", block.split("\n", 1)[1])
 
 
 def doc_table_rows():
-    text = read("1008_actions.md")
+    text = read("design_docs/designs/actions.md")
     section = text[text.index("## 2. Vocabulary"):text.index("**Counts**")]
     return re.findall(r"^\| `([A-Za-z_]+)` \|", section, flags=re.M)
 
@@ -33,17 +33,17 @@ class CatalogDriftTests(unittest.TestCase):
         a2, doc, cat = appendix_a2_ids(), doc_table_rows(), [row.id for row in CATALOG]
         self.assertEqual(len(a2), 65)
         self.assertEqual(len(set(a2)), 65)
-        self.assertEqual(sorted(a2), sorted(doc), "1008implementation.md A.2 vs 1008_actions.md tables")
+        self.assertEqual(sorted(a2), sorted(doc), "design_docs/designs/implementation.md A.2 vs design_docs/designs/actions.md tables")
         self.assertEqual(sorted(a2), sorted(cat), "A.2 vs systems/actions/catalog.py")
         self.assertEqual(len(set(cat)), len(cat))
 
     def test_counts_match_the_document(self):
         self.assertEqual(counts(), {"total": 65, "now": 37, "glue": 13, "new": 15})
-        text = read("1008_actions.md")
+        text = read("design_docs/designs/actions.md")
         self.assertIn("65 verbs; `now` 37, `glue` 13, `new` 15", text)
 
     def test_the_s1_list_matches_the_document_and_the_registry(self):
-        text = read("1008_actions.md")
+        text = read("design_docs/designs/actions.md")
         listed = re.findall(r"`([a-z_]+)`", text[text.index("The 17 `S1` verbs"):].split("\n\n", 1)[0].split("(first slice):", 1)[1])
         batches = [v for line in re.findall(r"^Batch \d+ verbs: (.*)$", text, flags=re.M) for v in re.findall(r"`([a-z_]+)`", line)]
         self.assertEqual(len(listed), 17)
