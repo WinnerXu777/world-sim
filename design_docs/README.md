@@ -1,6 +1,6 @@
 > Renamed 2026-11-18 from DOCS.md (date prefix dropped); old names are mapped in design_docs/README.md.
 
-Current to commit: 0c14bd2 (doc pass 2026-11-18 by 1118wsimimplementation: 22301b7, 222ba3c, 506f6c6, b1a02dd, 63e675e, 0c14bd2; earlier pass to 7c9df1e)
+Current to commit: 12fbb99 (doc pass 2026-11-19 by 1119wsimimplementation: 12fbb99; earlier passes to 0c14bd2 and 7c9df1e)
 
 # Documentation index
 
