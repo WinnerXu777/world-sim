@@ -13,6 +13,9 @@ sys.path.insert(0, str(ROOT / "at_the_beginning"))
 
 import genesis_config as cfg  # noqa: E402
 from harness import calendar as cal  # noqa: E402
+from systems.creatures import table  # noqa: E402
+
+LITTER = table.CREATURES["sheep"]["litter"]   # F3: young per birth under EDEN_CALENDAR (still one birth per calendar year)
 
 ROWS = 64
 
@@ -66,7 +69,7 @@ class BirthRecoveryTests(unittest.TestCase):
 
     def test_flag_on_the_recovery_is_one_calendar_year(self):
         m, born = self.run_once(True)
-        self.assertEqual(born, 1)
+        self.assertEqual(born, LITTER)
         recovery = float(m[2, cfg.A_COOLDOWN]) + cal.cooldown_decay_rate()      # the decay of the birth call itself
         self.assertAlmostEqual(recovery, cal.USER_DAYS_PER_YEAR * cal.USER_DAY_TICKS / cal.active().life_year_ticks, places=4)
         self.assertAlmostEqual(recovery / cal.cooldown_decay_rate(), cal.USER_DAY_TICKS * cal.USER_DAYS_PER_YEAR, delta=2.0)
@@ -83,7 +86,7 @@ class BirthRecoveryTests(unittest.TestCase):
             return original(*args, **kw)
         with mock.patch.object(self.iat, "animal_born", spy):
             self.births(m, 2 * cal.USER_DAY_TICKS)
-        self.assertEqual(counted[0], 1, "one birth per calendar year, not one per game day")
+        self.assertEqual(counted[0], LITTER, "one birth (one litter) per calendar year, not one per game day")
 
     def test_flag_on_the_life_year_decay_is_unchanged(self):
         patcher = calendar_flag(True)

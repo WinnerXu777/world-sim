@@ -46,7 +46,7 @@ FORAGE_CELL = 64.0           # units: a cell of 8x8 tiles
 CELL_FOOD = 0.09            # hunger a forage cell can take off its grazers per tick, shared (three grazers at the legacy drain 0.03: the carrying capacity, about 48 per chunk)
 CELL_CAPACITY = 3           # grazers a forage cell feeds (CELL_FOOD / the legacy drain 0.03)
 BREED_HUNGER_MAX = 40.0     # hunger above which a creature does not breed
-HOLD_COOLDOWN = 1.0         # the breeding cooldown the kernel pins on a creature that may not breed (the legacy birth rule needs it at zero)
+HOLD_COOLDOWN = 1.0         # the breeding cooldown the kernel pins on a creature that may not breed (the legacy birth rule needs it at zero), in legacy life-years
 DRINK_RATE = 0.4            # thirst lost per tick within a tile of water (ten times the drain, 0.04)
 SEEK_THIRST = 50.0          # thirst above which a creature walks to the nearest water within WATER_SEARCH units
 WATER_SEARCH = 240.0
@@ -57,6 +57,12 @@ _HOME = re.compile(r"^c(-?\d+)_(-?\d+):fauna:")
 _COLUMNS = ("hp", "walk", "run", "damage", "range", "cooldown", "aggro", "aggro_range", "flee_hp", "fear_humans", "fear_radius", "leash", "cohesion",
             "dawn", "day", "dusk", "night", "h_always", "h_hungry", "h_cornered", "table", "eats_none", "fly", "swim", "herb", "drinks")
 _CACHE: dict = {}
+
+
+def hold_cooldown() -> float:
+    """The breeding hold in the active calendar's life-years: ``HOLD_COOLDOWN`` legacy life-years, i.e. the same 600 ticks of cooldown decay under
+    both calendars (F3-4; exactly ``HOLD_COOLDOWN`` on the legacy calendar, 0.05 under EDEN_CALENDAR, where one life-year is a whole game day)."""
+    return HOLD_COOLDOWN * _calendar.LEGACY_YEAR_TICKS / _calendar.active().life_year_ticks
 
 
 def params(device) -> tuple:
@@ -288,6 +294,7 @@ def _step(engine) -> int:
     if held:
         engine.__dict__.setdefault("_creature_stats", {"held": 0})["held"] += held
     m[cidx, cfg.CX], m[cidx, cfg.CY] = new[:, 0], new[:, 1]
+    hold = hold_cooldown()
     need = float(_calendar.rate_scale("needs"))                                                  # intake keeps pace with the drain, which the calendar scales (1.0 flag off)
     drinking = (p[:, col["drinks"]] > 0) & collide.near_water(engine, new)
     if bool(drinking.any()):
@@ -301,9 +308,9 @@ def _step(engine) -> int:
         eat = torch.clamp(CELL_FOOD * need / counts[inverse].float(), max=GRAZE_RATE * need).to(m.dtype)
         m[rows, cfg.A_HUNGER] = (m[rows, cfg.A_HUNGER] - eat).clamp(min=0.0)
         crowded = rows[counts[inverse] > CELL_CAPACITY]                                         # no litters on a full pasture
-        m[crowded, cfg.A_COOLDOWN] = m[crowded, cfg.A_COOLDOWN].clamp(min=HOLD_COOLDOWN)
+        m[crowded, cfg.A_COOLDOWN] = m[crowded, cfg.A_COOLDOWN].clamp(min=hold)
     starving = cidx[m[cidx, cfg.A_HUNGER] > BREED_HUNGER_MAX]                                   # nor when hungry: the legacy birth rule (cooldown only) ignores food, so the kernel holds the cooldown
-    m[starving, cfg.A_COOLDOWN] = m[starving, cfg.A_COOLDOWN].clamp(min=HOLD_COOLDOWN)
+    m[starving, cfg.A_COOLDOWN] = m[starving, cfg.A_COOLDOWN].clamp(min=hold)
     m[cidx, T.C_STATE] = state
     timer = m[cidx, T.C_STATE_TICKS]
     m[cidx, T.C_STATE_TICKS] = (timer - 1.0).clamp(min=0.0)

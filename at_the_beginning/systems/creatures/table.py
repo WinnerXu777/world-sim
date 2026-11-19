@@ -37,7 +37,7 @@ STATIC_SPRITES = {"deer", "goat", "sheep"}      # the only wildlife art that exi
 
 _KEYS = {"id", "label", "frame", "footprint", "hp", "speed", "damage", "range", "cooldown", "aggro", "aggro_range", "flee_hp", "fear", "diet", "activity",
          "group", "territory", "life_exp", "mature", "habitat", "spawn_p", "loot", "hostile", "huntable", "flight", "swim", "brain", "variants", "enabled", "notes",
-         "tame", "products", "threat", "perceive_radius", "carcass"}
+         "tame", "products", "threat", "perceive_radius", "carcass", "litter"}
 
 _ALWAYS = {b: 1.0 for b in TIME_BLOCKS}
 
@@ -53,6 +53,7 @@ def _row(id_, label, frame, footprint, **kw) -> dict:
         "brain": "table", "variants": [], "enabled": False, "notes": "",
         "tame": {"mode": "wild", "food": [], "to_tame": 0, "decay_per_day": 0.0, "role": ""}, "products": [], "threat": None, "perceive_radius": None,
         "carcass": {"ticks": 0},
+        "litter": 1,   # young per birth under EDEN_CALENDAR (one birth per calendar year, R0.3); the legacy calendar always bears one (F3)
     }
     row.update(kw)
     return row
@@ -74,7 +75,7 @@ CREATURES: dict[str, dict] = {
     "sheep": _row(40, "sheep", FRAME_A, [10, 7], hp=100.0, speed={"walk": 2.0, "run": 3.0}, life_exp=[6.0, 12.0], aggro=0.0, brain="legacy", enabled=True,
                   fear={"humans": False, "radius": 0.0, "species": ["wolf", "tiger"]}, group={"kind": "herd", "size": [4, 10], "cohesion": 60.0},
                   activity=_act(0.7, 0.8, 0.7, 0.1), habitat={"spawn_entry": "sheep"}, spawn_p=0.10, huntable=True, territory={"radius": 250.0, "leash": 400.0},
-                  loot=_loot(("meat", 1, 2, 1.0), ("wool", 1, 2, 0.8), ("hide", 1, 1, 0.5)), notes="existing; switch to the kernel after the parity test", tame={"mode": "domestic", "food": ['grass'], "to_tame": 0, "decay_per_day": 0.0, "role": 'livestock'}, products=[{"item": "wool", "every_days": 2, "needs": "fed"}], carcass={"ticks": BIG_CARCASS}),
+                  loot=_loot(("meat", 1, 2, 1.0), ("wool", 1, 2, 0.8), ("hide", 1, 1, 0.5)), notes="existing; switch to the kernel after the parity test", tame={"mode": "domestic", "food": ['grass'], "to_tame": 0, "decay_per_day": 0.0, "role": 'livestock'}, products=[{"item": "wool", "every_days": 2, "needs": "fed"}], carcass={"ticks": BIG_CARCASS}, litter=2),
     "deer": _row(41, "deer", FRAME_C, [12, 8], hp=100.0, speed={"walk": 3.5, "run": 5.0}, life_exp=[8.0, 16.0], flee_hp=1.0, brain="legacy", enabled=True,
                  fear={"humans": True, "radius": 70.0, "species": ["wolf", "tiger"]}, group={"kind": "herd", "size": [3, 8], "cohesion": 50.0},
                  activity=_act(0.8, 0.6, 0.9, 0.4), habitat={"spawn_entry": "deer"}, spawn_p=0.12, huntable=True, territory={"radius": 350.0, "leash": 500.0},
@@ -98,7 +99,7 @@ CREATURES: dict[str, dict] = {
                  aggro=0.35, aggro_range=60.0, flee_hp=0.15, diet={"eats": ["forest", "carrion"], "prey": [], "humans": "cornered"}, hostile=True, huntable=True,
                  group={"kind": "solitary", "size": [1, 4], "cohesion": 30.0}, activity=_act(0.6, 0.8, 0.7, 0.3), territory={"radius": 200.0, "leash": 320.0},
                  habitat={"spawn_entry": "boar"}, spawn_p=0.15, variants=["bristle_boar"], loot=_loot(("meat", 2, 3, 1.0), ("hide", 1, 1, 0.7), ("bone", 1, 1, 0.4)),
-                 enabled=True, notes="charges when hit; hunts nothing", carcass={"ticks": BIG_CARCASS}),
+                 enabled=True, notes="charges when hit; hunts nothing", carcass={"ticks": BIG_CARCASS}, litter=2),
     "fox": _row(46, "fox", FRAME_A, [8, 5], hp=30.0, speed={"walk": 1.8, "run": 4.2}, damage=5.0, range=8.0, cooldown=16, life_exp=[5.0, 12.0],
                 aggro=0.3, aggro_range=50.0, flee_hp=0.5, fear={"humans": True, "radius": 60.0, "species": ["wolf"]},
                 diet={"eats": ["meat", "carrion"], "prey": ["rabbit", "chicken"], "humans": "never"}, group={"kind": "solitary", "size": [1, 2], "cohesion": 20.0},
@@ -205,6 +206,8 @@ def validate(table: Optional[dict] = None) -> list:
         lo, hi = row["life_exp"]
         if not 0 < lo <= hi:
             bad("life_exp needs 0 < lo <= hi")
+        if type(row["litter"]) is not int or not 1 <= row["litter"] <= 8:
+            bad(f"litter {row['litter']!r} must be an int in 1..8")
         for entry in row["loot"]:
             if set(entry) != {"item", "min", "max", "p"} or not (0 <= entry["min"] <= entry["max"] and 0.0 < entry["p"] <= 1.0):
                 bad(f"loot entry {entry!r}")

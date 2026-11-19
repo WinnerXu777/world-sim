@@ -1932,7 +1932,7 @@ def animal_tool_reproduce(ctx: dict, m_tensor: torch.Tensor,
     """
     Mature opposite-sex animals of the same species reproduce when close.
     Child spawns near mother with sex chosen at random.
-    Mother gains A_COOLDOWN of 1 year.
+    Mother gains A_COOLDOWN of 1 year (one calendar year under EDEN_CALENDAR, with the table's litter: F3).
     Same logic as tool_reproduce for humans — just simpler stat inheritance.
     """
     a_mask = ctx.get("a_mask")
@@ -1961,11 +1961,20 @@ def animal_tool_reproduce(ctx: dict, m_tensor: torch.Tensor,
         close  = (dists < ANIMAL_MATE_RADIUS).any(dim=1)
         f_idx  = torch.where(f_mask)[0]
 
+        litter = 1
+        if _calendar.active() is not _calendar.LEGACY:   # F3: the long calendar bears the table's litter; the legacy calendar always one, no lookup
+            try:
+                from systems.creatures.table import by_type as _creature_row
+            except ImportError:  # pragma: no cover - package import fallback
+                from at_the_beginning.systems.creatures.table import by_type as _creature_row
+            litter = int((_creature_row(species) or {}).get("litter", 1))
+
         for fi in f_idx[close].tolist():
-            cx  = float(m_tensor[fi, CX]) + random.uniform(-5, 5)
-            cy  = float(m_tensor[fi, CY]) + random.uniform(-5, 5)
-            animal_born(m_tensor, entity_count_ref, cx, cy, species,
-                        device=device)
+            for _ in range(litter):
+                cx  = float(m_tensor[fi, CX]) + random.uniform(-5, 5)
+                cy  = float(m_tensor[fi, CY]) + random.uniform(-5, 5)
+                animal_born(m_tensor, entity_count_ref, cx, cy, species,
+                            device=device)
             m_tensor[fi, A_COOLDOWN] = _calendar.active().year_ticks / _calendar.active().life_year_ticks   # one calendar year of recovery (legacy: 600/600 = 1.0)
 
     # Decay cooldowns
