@@ -50,6 +50,9 @@ HOLD_COOLDOWN = 1.0         # the breeding cooldown the kernel pins on a creatur
 DRINK_RATE = 0.4            # thirst lost per tick within a tile of water (ten times the drain, 0.04)
 SEEK_THIRST = 50.0          # thirst above which a creature walks to the nearest water within WATER_SEARCH units
 WATER_SEARCH = 240.0
+WATER_SEARCH_LONG = 1024.0  # the search under a non-legacy calendar (F4-2): herds spawned 387-486 units from water never drank within 240
+WOUND_RANGE = 120.0         # under a non-legacy calendar a wounded creature flees only from a human or a harmful animal this near (F4-3; twice the predators' aggro range)
+ADOPT_RADIUS = 16.0         # under a non-legacy calendar a newborn takes the home of the nearest of its species this near (its mother: born within 5 units, seen one step later)
 HUNGRY = 50.0
 CORNER_REACH = 1.5          # a "cornered" animal attacks humans within this many reaches
 CHUNK_UNITS = 256.0
@@ -63,6 +66,17 @@ def hold_cooldown() -> float:
     """The breeding hold in the active calendar's life-years: ``HOLD_COOLDOWN`` legacy life-years, i.e. the same 600 ticks of cooldown decay under
     both calendars (F3-4; exactly ``HOLD_COOLDOWN`` on the legacy calendar, 0.05 under EDEN_CALENDAR, where one life-year is a whole game day)."""
     return HOLD_COOLDOWN * _calendar.LEGACY_YEAR_TICKS / _calendar.active().life_year_ticks
+
+
+def long_calendar() -> bool:
+    """A non-legacy calendar is active (EDEN_CALENDAR): the gate of the F4-2 thirst rules, like the F3 litter in ``animal_tool_reproduce``."""
+    return _calendar.active() is not _calendar.LEGACY
+
+
+def water_search(hunts: bool = False) -> float:
+    """How far a thirsty creature looks for water: ``WATER_SEARCH`` on the legacy calendar; under a non-legacy one ``WATER_SEARCH_LONG`` for a
+    species with no prey (F4-2) and still ``WATER_SEARCH`` for one that ``hunts``: predators keep their leash and look for water from inside it."""
+    return WATER_SEARCH_LONG if long_calendar() and not hunts else WATER_SEARCH
 
 
 def params(device) -> tuple:
@@ -120,15 +134,42 @@ def unit(tick: int, slots: torch.Tensor, gens: torch.Tensor, stream: int) -> tor
     return (x.double() / 4294967296.0).float()
 
 
-def _home_chunks(engine, uids) -> tuple:
-    """(has_home bool list, chunk x list, chunk y list) from the uids; cached per uid."""
+def _home_chunks(engine, uids, pos=None, types=None) -> tuple:
+    """(has_home bool list, chunk x list, chunk y list) from the uids; cached per uid. Under a non-legacy calendar, given the rows' ``pos`` and
+    ``types``, a uid with no home chunk (a creature born in the window, ``e_*``) takes the home of the nearest creature of its species within
+    ``ADOPT_RADIUS`` that has one (its mother), else the chunk it stands in (F4-2: born creatures had no leash). Legacy: no home, as before."""
     cache = engine.__dict__.setdefault("_creature_home", {})
-    has, xs, ys = [], [], []
-    for uid in uids:
+    adopt = pos is not None and long_calendar()
+    entries, new = [], []
+    for i, uid in enumerate(uids):
         entry = cache.get(uid)
         if entry is None:
             found = _HOME.match(uid or "")
-            entry = cache[uid] = (int(found.group(1)), int(found.group(2))) if found else False
+            if found:
+                entry = cache[uid] = (int(found.group(1)), int(found.group(2)))
+            elif adopt and uid:
+                new.append(i)
+            else:
+                entry = cache[uid] = False
+        entries.append(entry)
+    if new:
+        ox, oy = engine._window.frame.origin if getattr(engine, "_window", None) is not None else (0, 0)
+        homed = [j for j, e in enumerate(entries) if e]
+        for i in new:
+            entry = False
+            if homed:
+                cand = torch.tensor(homed, device=pos.device)
+                d = (pos[cand] - pos[i]).norm(dim=1)
+                d = torch.where(types[cand] == types[i], d, torch.full_like(d, float("inf")))
+                best, arg = d.min(dim=0)
+                if float(best) <= ADOPT_RADIUS:
+                    entry = entries[homed[int(arg)]]
+            if not entry:
+                entry = (ox + math.floor(float(pos[i, 0]) / CHUNK_UNITS), oy + math.floor(float(pos[i, 1]) / CHUNK_UNITS))
+            entries[i] = cache[uids[i]] = entry
+            homed.append(i)
+    has, xs, ys = [], [], []
+    for entry in entries:
         has.append(bool(entry))
         xs.append(entry[0] if entry else 0)
         ys.append(entry[1] if entry else 0)
@@ -224,7 +265,16 @@ def _step(engine) -> int:
     t_dist = torch.where(use_human, dh, torch.where(use_prey, dp, inf))
     scared_human = (p[:, col["fear_humans"]] > 0) & (dh < p[:, col["fear_radius"]])
     scared_animal = df < p[:, col["fear_radius"]]
-    fleeing = (hp_frac < p[:, col["flee_hp"]]) | scared_human | scared_animal
+    hurt = hp_frac < p[:, col["flee_hp"]]
+    long_cal = long_calendar()
+    hunts = PREY[t].any(dim=1) if long_cal else None                                            # a species with prey: keeps its leash when thirsty (F4-2 after seed 1)
+    if long_cal:                                                                                # F4-3: a wound sends it running only from a real threat nearby
+        harm = (P[a_types, col["damage"]] > 0).unsqueeze(0) | PREY[a_types][:, t].T | FEAR[t][:, a_types]
+        harm = harm & (a_types.unsqueeze(0) != t.unsqueeze(1))                                  # another species that bites, hunts it or is feared: never a herd-mate
+        d_harm, harm_arg = torch.where(harm, dist_a, torch.full_like(dist_a, float("inf"))).min(dim=1)
+        fleeing = (hurt & (torch.minimum(dh, d_harm) < WOUND_RANGE)) | scared_human | scared_animal
+    else:
+        fleeing = hurt | scared_human | scared_animal
     can_hit = chasing & (t_dist <= reach) & (m[cidx, T.C_STATE_TICKS] <= 0.0) & (p[:, col["damage"]] > 0)
     attacking = can_hit & ~fleeing
     if bool(attacking.any()):                                                                 # a wall between them stops the blow
@@ -235,8 +285,12 @@ def _step(engine) -> int:
     target_pos = torch.where(use_human.unsqueeze(1), hpos[dh_arg] if hpos.shape[0] else pos, apos[dp_arg])
     d_any, any_arg = dist_a.min(dim=1)
     human_pos = hpos[dh_arg] if hpos.shape[0] else pos
-    origin_dist = torch.stack([dh, df, d_any], dim=1)
-    origin_pos = torch.stack([human_pos, apos[df_arg], apos[any_arg]], dim=1)                 # the nearest of: a human, a feared kind, any animal (what hurt it)
+    if long_cal:                                                                                # F4-3: the nearer of a human and a harmful animal
+        origin_dist = torch.stack([dh, d_harm], dim=1)
+        origin_pos = torch.stack([human_pos, apos[harm_arg]], dim=1)
+    else:
+        origin_dist = torch.stack([dh, df, d_any], dim=1)
+        origin_pos = torch.stack([human_pos, apos[df_arg], apos[any_arg]], dim=1)             # the nearest of: a human, a feared kind, any animal (what hurt it)
     threat_pos = origin_pos[torch.arange(count, device=m.device), origin_dist.argmin(dim=1)]
     move = torch.zeros_like(pos)
     state = torch.zeros(count, device=m.device)
@@ -259,20 +313,24 @@ def _step(engine) -> int:
     state = torch.where(far, torch.full_like(state, float(T.STATES["wander"])), state)
 
     thirsty = (p[:, col["drinks"]] > 0) & (m[cidx, cfg.A_THIRST] > SEEK_THIRST)
+    going = torch.zeros(count, dtype=torch.bool, device=m.device)
     if bool(thirsty.any()):                                                                    # walk to the nearest water (the legacy loops had no food or water in the window at all)
         rows = thirsty.nonzero(as_tuple=False).flatten()
-        vec, found = collide.toward_water(engine, pos[rows], WATER_SEARCH)
-        going = torch.zeros(count, dtype=torch.bool, device=m.device)
+        vec, found = collide.toward_water(engine, pos[rows], water_search())
+        if long_cal:                                                                            # predators keep the legacy search (F4-2 after seed 1)
+            found = found & (~hunts[rows].to(found.device) | (vec.norm(dim=1) <= water_search(hunts=True)).to(found.device))
         going[rows] = found & ~collide.near_water(engine, pos[rows])
         full = torch.zeros_like(pos)
         full[rows] = vec.to(pos.device)
         move = torch.where(going.unsqueeze(1), _toward(full, walk), move)
         state = torch.where(going, torch.full_like(state, float(T.STATES["wander"])), state)
-    has_home, hx, hy = _home_chunks(engine, [engine._entity_uid_by_slot[s] for s in cidx.tolist()])
+    has_home, hx, hy = _home_chunks(engine, [engine._entity_uid_by_slot[s] for s in cidx.tolist()], pos, t)
     ox, oy = engine._window.frame.origin if getattr(engine, "_window", None) is not None else (0, 0)
     home = torch.tensor([[(a - ox) * CHUNK_UNITS + CHUNK_UNITS / 2.0, (b - oy) * CHUNK_UNITS + CHUNK_UNITS / 2.0] for a, b in zip(hx, hy)], device=m.device).reshape(-1, 2)
     to_home = home - pos
     homeward = torch.tensor(has_home, dtype=torch.bool, device=m.device) & (to_home.norm(dim=1) > p[:, col["leash"]])
+    if long_cal:                                                                                # F4-2: thirst beats the leash for a species with no prey (flee and chase still win); predators and legacy: the leash wins
+        homeward = homeward & ~(going & ~hunts)
     move = torch.where(homeward.unsqueeze(1), _toward(to_home, walk), move)
     state = torch.where(homeward, torch.full_like(state, float(T.STATES["return"])), state)
 
