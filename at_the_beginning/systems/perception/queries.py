@@ -63,11 +63,47 @@ except ImportError:  # pragma: no cover - package import fallback
 
 
 DEFAULT_SAFE_TYPES = {M_GRASS, M_FOREST, M_BEACH, M_HOUSE, M_VILLAGE, M_FARM, M_WELL}
+PREFILTER_MIN = 8               # R66-PACE-2: below this many candidates the exact scan alone is cheaper than the prefilter
+PREFILTER_MARGIN = 1e-9         # relative and absolute slack of the float64 prefilters; their own error is about 1e-16 relative
 
 
 def point_distance(x0: float, y0: float, x1: float, y1: float) -> float:
     """Euclidean distance between two world positions."""
     return math.hypot(x1 - x0, y1 - y0)
+
+
+def _plain_coordinate(value) -> bool:
+    """A finite query coordinate whose arithmetic in the exact scan is plain float64: a float, or an int that converts exactly."""
+    if isinstance(value, float):
+        return math.isfinite(value)
+    return isinstance(value, int) and abs(value) < 2 ** 53
+
+
+def _nearest_candidates(tensor: torch.Tensor, col_x: int, col_y: int, px, py, ids: list) -> list | None:
+    """R66-PACE-2: the ids, in the caller's order, that can be nearest to (px, py); the exact scan then runs on these only.
+
+    One float64 gather and distance for all candidates instead of four scalar tensor reads each. The subtraction is the exact scan's own
+    float64 one and the square root differs from ``math.hypot`` by a few units in the last place, so with ``PREFILTER_MARGIN`` every id at
+    the exact minimum, ties included, survives and every id dropped is strictly farther: the strict ``<`` scan over the survivors (in the
+    caller's order) picks the same id. None means scan every candidate, as before: few candidates, a coordinate that is not a finite plain
+    float, an id outside the tensor, or a non-finite candidate position.
+    """
+    if len(ids) < PREFILTER_MIN or not (_plain_coordinate(px) and _plain_coordinate(py)):
+        return None
+    try:
+        index = torch.tensor([int(v) for v in ids], dtype=torch.long)
+    except (TypeError, ValueError, OverflowError, RuntimeError):
+        return None
+    if int(index.min()) < 0 or int(index.max()) >= tensor.shape[0]:
+        return None
+    index = index.to(tensor.device)
+    xs = tensor[:, col_x].index_select(0, index).double().cpu()
+    ys = tensor[:, col_y].index_select(0, index).double().cpu()
+    if not (bool(torch.isfinite(xs).all()) and bool(torch.isfinite(ys).all())):
+        return None
+    distances = torch.sqrt((xs - float(px)) ** 2 + (ys - float(py)) ** 2)
+    limit = float(distances.min()) * (1.0 + PREFILTER_MARGIN) + PREFILTER_MARGIN
+    return [ids[k] for k in torch.nonzero(distances <= limit, as_tuple=False).flatten().tolist()]
 
 
 def current_entity_id(px: float, py: float) -> int:
@@ -160,6 +196,53 @@ def nearest_geo_entity(
     return pick_best_entity(candidates, _edge_distance)
 
 
+def nearest_geo_entity_possible(
+    m_tensor: torch.Tensor,
+    points,
+    type_filter: set[int] | None = None,
+    radius: float = 0.0,
+) -> list[bool]:
+    """R66-PACE-2: for each (px, py), False only where ``nearest_geo_entity(m_tensor, px, py, type_filter, radius)`` returns -1 for certain.
+
+    True where an entity of a filtered type covers the point, or where a MAP_GEO entity of a filtered type lies within the radius (float64,
+    with ``PREFILTER_MARGIN``; spaces are not checked), so it is a superset of what the exact query finds. One gather for the whole batch
+    instead of one per point; the caller still runs the exact query wherever the answer is True. Non-finite input answers True.
+    """
+    points = [(px, py) for px, py in points]
+    answers = []
+    for px, py in points:
+        try:
+            entity_id = current_entity_id(px, py)
+            answers.append(entity_id != -1 and (type_filter is None or int(m_tensor[entity_id, M_TYPE]) in type_filter))
+        except (IndexError, ValueError, TypeError, OverflowError, RuntimeError):
+            answers.append(True)                          # the exact query meets the same input: let it decide (or raise) as before
+    try:
+        reach = float(radius)
+    except (TypeError, ValueError):
+        return [True] * len(points)
+    if not math.isfinite(reach):
+        return [True] * len(points)
+    if reach <= 0.0 or not points:
+        return answers
+    ids = map_geo.geo_ids_of_types(m_tensor, type_filter, MAX_ENTITIES)
+    if not ids:
+        return answers
+    index = torch.tensor(ids, dtype=torch.long, device=m_tensor.device)
+    ex = m_tensor[:, CX].index_select(0, index).double().cpu()
+    ey = m_tensor[:, CY].index_select(0, index).double().cpu()
+    if not (bool(torch.isfinite(ex).all()) and bool(torch.isfinite(ey).all())):
+        return [True] * len(points)
+    try:
+        qx = torch.tensor([float(px) for px, _ in points], dtype=torch.float64)
+        qy = torch.tensor([float(py) for _, py in points], dtype=torch.float64)
+    except (TypeError, ValueError):
+        return [True] * len(points)
+    finite = (torch.isfinite(qx) & torch.isfinite(qy)).tolist()
+    limit = (reach * (1.0 + PREFILTER_MARGIN) + PREFILTER_MARGIN) ** 2
+    near = (((ex.unsqueeze(0) - qx.unsqueeze(1)) ** 2 + (ey.unsqueeze(0) - qy.unsqueeze(1)) ** 2) <= limit).any(dim=1).tolist()
+    return [covered or not ok or bool(hit) for covered, ok, hit in zip(answers, finite, near)]
+
+
 def nearest_entity_from_ids(
     m_tensor: torch.Tensor,
     px: float,
@@ -174,7 +257,8 @@ def nearest_entity_from_ids(
     def _distance(entity_id: int) -> float:
         return point_distance(px, py, float(m_tensor[entity_id, CX]), float(m_tensor[entity_id, CY]))
 
-    best_entity_id = pick_best_entity(ids, _distance)
+    survivors = _nearest_candidates(m_tensor, CX, CY, px, py, ids)      # R66-PACE-2: None = scan them all, as before
+    best_entity_id = pick_best_entity(ids if survivors is None else survivors, _distance)
     if best_entity_id == -1:
         return -1, float("inf")
     return best_entity_id, _distance(best_entity_id)
@@ -197,7 +281,9 @@ def nearest_human_from_mask(
     def _distance(slot: int) -> float:
         return point_distance(px, py, float(h_tensor[slot, X]), float(h_tensor[slot, Y]))
 
-    best_slot = pick_best_entity(human_slots.tolist(), _distance)
+    slots = human_slots.tolist()
+    survivors = _nearest_candidates(h_tensor, X, Y, px, py, slots)      # R66-PACE-2: None = scan them all, as before
+    best_slot = pick_best_entity(slots if survivors is None else survivors, _distance)
     if best_slot == -1:
         return -1, float("inf")
     best_distance = _distance(best_slot)
@@ -305,6 +391,7 @@ __all__ = [
     "nearby_entity_ids",
     "nearest_entity_from_ids",
     "nearest_geo_entity",
+    "nearest_geo_entity_possible",
     "nearest_human_from_mask",
     "point_distance",
 ]

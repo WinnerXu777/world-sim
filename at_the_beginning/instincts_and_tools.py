@@ -94,6 +94,7 @@ try:
         nearest_entity_from_ids as _nearest_entity_from_ids,
         nearest_geo_entity as _nearest_geo_entity,
     )
+    from systems.perception.queries import nearest_geo_entity_possible as _nearest_geo_entity_possible   # R66-PACE-2
     from systems.movement.manual import (
         apply_manual_control_movement,
         build_manual_control_context,
@@ -194,6 +195,7 @@ except ImportError:  # pragma: no cover - package import fallback
         nearest_entity_from_ids as _nearest_entity_from_ids,
         nearest_geo_entity as _nearest_geo_entity,
     )
+    from at_the_beginning.systems.perception.queries import nearest_geo_entity_possible as _nearest_geo_entity_possible   # R66-PACE-2
     from at_the_beginning.systems.movement.manual import (
         apply_manual_control_movement,
         build_manual_control_context,
@@ -1840,14 +1842,23 @@ def animal_instinct_eat(ctx: dict, m_tensor: torch.Tensor, **_) -> dict:
 def animal_instinct_drink(ctx: dict, m_tensor: torch.Tensor, **_) -> dict:
     """
     Animals drink from nearby lakes or wells.
+    R66-PACE-2: one batch test (``nearest_geo_entity_possible``) first finds the thirsty animals with nothing drinkable covering them or
+    within reach; they skip the query, which returns -1 for them. Positions, types and the map geometry do not change in this loop (it
+    writes only the drinker's thirst and the water left), so the test made before the loop holds for every animal in it.
     """
     a_mask = ctx.get("a_mask")
     if a_mask is None or not a_mask.any():
         return {}
     map_dirty = False
-    for i in torch.where(a_mask)[0].tolist():
+    rows = torch.where(a_mask)[0]
+    thirsty = rows[~(m_tensor[rows, A_THIRST] <= 20.0)]
+    reach = dict(zip(thirsty.tolist(), _nearest_geo_entity_possible(m_tensor, m_tensor[thirsty][:, [CX, CY]].tolist(), DRINKABLE_TYPES,
+                                                                    DRINK_PROXIMITY_RADIUS))) if thirsty.numel() else {}
+    for i in rows.tolist():
         if m_tensor[i, A_THIRST] <= 20.0:
             continue
+        if not reach.get(i, True):
+            continue                                       # nothing drinkable in reach: the query below would return -1
         ax = float(m_tensor[i, CX])
         ay = float(m_tensor[i, CY])
         eid = _nearest_geo_entity(
@@ -1885,46 +1896,71 @@ def animal_instinct_predator_attack(ctx: dict, m_tensor: torch.Tensor,
 
     h_mask = ctx["h_mask"]
     dirty  = False
+    rows = torch.where(a_mask)[0].tolist()
+    reach = _predator_reach(rows, a_mask, h_mask, m_tensor, h_tensor, device)   # R66-PACE-2: every predator's first target in range
 
-    for i in torch.where(a_mask)[0].tolist():
+    for i in rows:
         species    = int(m_tensor[i, M_TYPE])
         prey_types = ANIMAL_PREY.get(species, set())
         if not prey_types:
             continue
-        px = float(m_tensor[i, CX])
-        py = float(m_tensor[i, CY])
 
         # Attack humans
         if AGENT_TYPE_HUMAN in prey_types and h_mask.any():
-            h_pos  = h_tensor[h_mask, :2]
-            center = torch.tensor([[px, py]], dtype=torch.float32,
-                                   device=device)
-            dists  = pairwise_distances(h_pos, center, space_a=space_slice(h_tensor, h_mask, "h"),
-                                        space_b=space_slice(m_tensor, i, "m")).squeeze(1)
-            near   = torch.where(h_mask)[0][dists < ANIMAL_PREDATOR_RANGE]
-            if near.numel():
-                victim = near[0]
+            victim = reach.get(("human", i))
+            if victim is not None:
                 victim_mask = torch.zeros(h_tensor.shape[0], dtype=torch.bool, device=h_tensor.device)
-                victim_mask[int(victim)] = True
+                victim_mask[victim] = True
                 apply_human_damage(victim_mask, h_tensor, ANIMAL_PREDATOR_ATTACK_DAMAGE, hp_col=HP)
                 h_tensor[victim, THREAT] = 100.0
 
         # Attack prey animals
         for prey_t in prey_types - {AGENT_TYPE_HUMAN}:
-            prey_mask = a_mask & (m_tensor[:, M_TYPE] == prey_t)
-            if not prey_mask.any():
-                continue
-            p_pos  = m_tensor[prey_mask][:, [CX, CY]].reshape(-1, 2)
-            center = torch.tensor([[px, py]], dtype=torch.float32, device=device)
-            dists  = pairwise_distances(p_pos, center, space_a=space_slice(m_tensor, prey_mask, "m"),
-                                        space_b=space_slice(m_tensor, i, "m")).squeeze(1)
-            hits   = torch.where(prey_mask)[0][dists < ANIMAL_PREDATOR_RANGE]
-            if hits.numel():
+            target = reach.get((prey_t, i))
+            if target is not None:
                 target_mask = torch.zeros(m_tensor.shape[0], dtype=torch.bool, device=m_tensor.device)
-                target_mask[int(hits[0])] = True
+                target_mask[target] = True
                 apply_entity_damage(target_mask, m_tensor, ANIMAL_PREDATOR_ATTACK_DAMAGE, hp_col=M_HP)
 
     return {"h_mask": h_tensor[:, TYPE] > AGENT_TYPE_EMPTY}
+
+
+def _predator_reach(rows: list, a_mask: torch.Tensor, h_mask: torch.Tensor, m_tensor: torch.Tensor, h_tensor: torch.Tensor,
+                    device: str) -> dict:
+    """R66-PACE-2: ("human", predator) -> the first ``h_mask`` slot within ``ANIMAL_PREDATOR_RANGE`` of it, (prey type, predator) -> the
+    first row of that type in ``a_mask`` within range; absent when none is. Positions, types, spaces and both masks do not change in the
+    attack loop (only HP and THREAT do), so this is computed once per tick: one ``pairwise_distances`` per target set with every predator
+    of it as a column, which is the one-point matrix the loop built per predator, column for column (EXACT_MODE, element-wise). A predator
+    whose type is not finite gets no entry here, so the loop meets it (and raises on it) as before."""
+    kinds = m_tensor[rows, M_TYPE].tolist() if rows else []
+    hunters: dict = {}
+    for i, kind in zip(rows, kinds):
+        if math.isfinite(kind):
+            for prey_t in ANIMAL_PREY.get(int(kind), set()):
+                hunters.setdefault(prey_t, []).append(i)
+    reach: dict = {}
+    for prey_t, predators in hunters.items():
+        if prey_t == AGENT_TYPE_HUMAN:
+            if not h_mask.any():
+                continue
+            key, target_mask, targets = "human", h_mask, h_tensor[h_mask, :2]
+            target_space = space_slice(h_tensor, h_mask, "h")
+        else:
+            target_mask = a_mask & (m_tensor[:, M_TYPE] == prey_t)
+            if not target_mask.any():
+                continue
+            key, targets = prey_t, m_tensor[target_mask][:, [CX, CY]].reshape(-1, 2)
+            target_space = space_slice(m_tensor, target_mask, "m")
+        index = torch.tensor(predators, dtype=torch.long, device=m_tensor.device)
+        centers = m_tensor[index][:, [CX, CY]].to(dtype=torch.float32, device=device)
+        within = pairwise_distances(targets, centers, space_a=target_space, space_b=space_slice(m_tensor, index, "m")) < ANIMAL_PREDATOR_RANGE
+        slots = torch.where(target_mask)[0].tolist()
+        found = within.any(dim=0).tolist()
+        first = within.to(torch.uint8).argmax(dim=0).tolist()       # the first row in range (argmax returns the first maximum)
+        for column, i in enumerate(predators):
+            if found[column]:
+                reach[(key, i)] = slots[first[column]]
+    return reach
 
 
 def animal_tool_reproduce(ctx: dict, m_tensor: torch.Tensor,

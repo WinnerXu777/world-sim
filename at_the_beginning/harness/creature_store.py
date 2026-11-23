@@ -4,6 +4,11 @@ Three jobs, all keyed by chunk and all closed-form (nothing replays ticks):
 
 * **populate** (``on_integrate`` / ``tick``): a chunk that has not been populated, or whose creatures have been away for ``RESPAWN_DAYS``, gets the creatures of its spawn plan
   (``systems.creatures.spawn.plan``, a pure function of the chunk document) that are neither alive nor stored, up to the creature row quota;
+* **ring-first** (R66-QUOTA-2, only while a player controls an actor): a chunk cannot take rows that a short chunk strictly nearer to a
+  controlled actor waits for; the nearest short chunk is filled late (``tick``, one a tick) with the plan creatures the quota left out and
+  its stored creatures; a short chunk in the inner ring (``INNER_RING``) takes rows from creatures standing in chunks farther than the
+  simulation radius from every controlled actor (stashed and restored through the store's own records, never saved). With no controlled
+  actor none of this runs;
 * **stash** (``on_unload``, ``sweep``): every creature standing in a chunk that leaves the window, or standing outside all integrated chunks (a wanderer), moves out of the tensors
   into a record of the chunk it stands in (position as an offset from the chunk corner, so a re-base needs nothing). The rows are released;
 * **restore** (``on_integrate``): the records of the chunk come back with a closed-form catch-up (age advances, hunger and thirst rise but stay under the starvation threshold, a
@@ -45,6 +50,7 @@ SWEEP_EVERY = 20                # ticks between the wanderer sweeps
 MAX_RECORDS = 512               # stored creatures kept; the oldest go first (a record for a chunk nobody returns to is not worth keeping)
 CHUNK_UNITS = 256.0
 SKIP_COLUMNS = (cfg.CX, cfg.CY, cfg.M_GEN, cfg.M_SPACE, cfg.M_TYPE)
+INNER_RING = 1                  # R66-QUOTA-2: a short chunk this close to a controlled actor takes rows from chunks outside its ring
 HUNGER_CAP, THIRST_CAP = 60.0, 60.0          # well under the damage thresholds (90 and 90): a creature is never killed by being stored
 
 
@@ -65,7 +71,9 @@ class CreatureStore:
         self.records: dict = {}              # ChunkCoord -> [record]
         self.index: dict = {}                # uid -> ChunkCoord of its record
         self.populated: dict = {}            # ChunkCoord -> tick of the last populate
-        self.counters = {"populated": 0, "stashed": 0, "restored": 0, "died_away": 0, "skipped_quota": 0, "skipped_rows": 0, "dropped_records": 0, "skipped_kernel": 0}
+        self.skipped: dict = {}              # R66-QUOTA-2: ChunkCoord -> uids of its plan the quota left out (only with a controlled actor)
+        self.counters = {"populated": 0, "stashed": 0, "restored": 0, "died_away": 0, "skipped_quota": 0, "skipped_rows": 0, "dropped_records": 0, "skipped_kernel": 0,
+                         "skipped_quota_near": 0, "populated_late": 0, "restored_late": 0, "evicted_for_ring": 0, "short_rows": 0}
         self._ids = None
 
     # -- queries ---------------------------------------------------------------------------------------------------------
@@ -100,7 +108,8 @@ class CreatureStore:
         added += self.populate(coord, chunk)
         return added
 
-    def restore(self, coord) -> int:
+    def restore(self, coord, limit=None) -> int:
+        """Stored creatures of ``coord`` come back while there are rows (and, with ``limit``, at most that many: the late fill's quota room)."""
         records = self.records.pop(coord, None)
         if not records:
             return 0
@@ -119,6 +128,8 @@ class CreatureStore:
                 continue
             back.append((record, cols))
         room = self.manager.allocator.headroom()                          # a stored creature returns whenever there is a row; the quota only limits new ones
+        if limit is not None:
+            room = min(room, max(0, int(limit)))
         for record, cols in back[room:]:
             keep.append(record)                                            # no row for it now: it stays stored
         back = back[:room]
@@ -126,7 +137,8 @@ class CreatureStore:
             self.records.setdefault(coord, []).extend(keep)
             for record in keep:
                 self.index[record["uid"]] = coord
-            self.counters["skipped_rows"] += len(keep)
+            if limit is None:
+                self.counters["skipped_rows"] += len(keep)
         return self._allocate(coord, [(r["uid"], r["type"], r["offset"][0], r["offset"][1], cols) for r, cols in back], restored=True)
 
     def _catch_up(self, record, now):
@@ -158,9 +170,24 @@ class CreatureStore:
                 continue
             wanted.append(rec)
         room = min(self.manager.allocator.headroom(), max(0, row_quota() - self.live_count()))
+        self.skipped.pop(coord, None)
+        players = self._player_chunks()
+        if players:                                                    # R66-QUOTA-2: strictly nearer short chunks keep their claim on the rows
+            distance = self._ring_distance(coord, players)
+            room = max(0, room - sum(self._short_rows(other) for d, other in self._pending(players) if d < distance and other != coord))
         if len(wanted) > room:
             self.counters["skipped_quota"] += len(wanted) - room
+            if players:
+                if distance <= self.manager.ring.simulation_radius:
+                    self.counters["skipped_quota_near"] += len(wanted) - room
+                self.skipped[coord] = [rec["uid"] for rec in wanted[room:]]
             wanted = wanted[:room]
+        added = self._allocate(coord, self._plan_rows(wanted), restored=False)
+        self.counters["populated"] += added
+        return added
+
+    @staticmethod
+    def _plan_rows(wanted) -> list:
         rows = []
         for rec in wanted:
             row = _table.CREATURES[rec["species"]]
@@ -168,9 +195,88 @@ class CreatureStore:
                     cfg.A_COOLDOWN: 0.0, cfg.A_HUNGER: 10.0, cfg.A_AGGRESSION: float(row["aggro"]), cfg.A_THIRST: 0.0,
                     _table.C_VARIANT: rec["variant"], _table.C_GROUP: rec["group"]}
             rows.append((rec["uid"], rec["id"], rec["x"], rec["y"], cols))
-        added = self._allocate(coord, rows, restored=False)
-        self.counters["populated"] += added
-        return added
+        return rows
+
+    # -- ring-first (R66-QUOTA-2) ----------------------------------------------------------------------------------------
+    def _player_chunks(self) -> list:
+        """Chunks of the controlled actors. Empty with no player: then nothing ring-first runs and the store behaves as before."""
+        size = float(self.manager.ring.chunk_units)
+        return sorted({(int(a.x // size), int(a.y // size)) for a in self.manager.controlled_actors()})
+
+    @staticmethod
+    def _ring_distance(coord, players) -> int:
+        return min(max(abs(coord.x - x), abs(coord.y - y)) for x, y in players)
+
+    def _short_rows(self, coord) -> int:
+        """Rows an integrated chunk waits for: plan creatures the quota left out, and its creatures stored while it stayed integrated."""
+        return len(self.skipped.get(coord, ())) + len(self.records.get(coord, ()))
+
+    def _pending(self, players) -> list:
+        """(distance, coord) of the integrated chunks that wait for rows, nearest to a controlled actor first (then x, y)."""
+        chunks = self.manager.chunks
+        coords = {c for c in self.skipped if c in chunks} | {c for c in self.records if c in chunks}
+        ranked = sorted((self._ring_distance(c, players), c.x, c.y, c) for c in coords if self._short_rows(c) > 0)
+        return [(d, c) for d, _, _, c in ranked]
+
+    def _room(self) -> int:
+        return min(self.manager.allocator.headroom(), max(0, row_quota() - self.live_count()))
+
+    def _ring_first(self, players) -> int:
+        """The nearest short chunk gets what rows there are: its stored creatures first, then the plan creatures the quota left out. In the
+        inner ring, with no room, creatures standing in chunks outside every controlled actor's simulation ring make room (``_evict``)."""
+        pending = self._pending(players)
+        if not pending:
+            return 0
+        distance, coord = pending[0]
+        room = self._room()
+        if room <= 0 and distance <= INNER_RING:
+            self._evict(players, self._short_rows(coord))
+            room = self._room()
+        if room <= 0:
+            return 0
+        back = self.restore(coord, limit=room)
+        self.counters["restored_late"] += back
+        room -= back
+        added = 0
+        uids = self.skipped.pop(coord, None)
+        if uids:
+            present = self._live_uids() | set(self.index)
+            missing = [u for u in uids if u not in present]
+            chunk = self.manager.service.peek(coord) if room > 0 and missing else None
+            if chunk is not None:
+                wanted = set(missing)
+                recs = [rec for rec in _spawn.plan(chunk.document) if rec["uid"] in wanted][:room]
+                added = self._allocate(coord, self._plan_rows(recs), restored=False)
+                self.counters["populated"] += added
+                self.counters["populated_late"] += added
+                done = {rec["uid"] for rec in recs[:added]}
+                missing = [u for u in missing if u not in done]
+            if missing:
+                self.skipped[coord] = missing
+        return back + added
+
+    def _evict(self, players, need) -> int:
+        """Stash up to ``need`` creatures standing in integrated chunks farther than the simulation radius from every controlled actor,
+        farthest chunk first, then by slot. They are stored with the chunk they stand in, exactly as a wanderer is, and come back by the
+        late fill (nearest first, so last) or when their chunk is integrated again."""
+        if need <= 0:
+            return 0
+        reach = int(self.manager.ring.simulation_radius)
+        m = self.manager.engine.state.m_tensor
+        ox, oy = self.manager.frame.origin
+        slots = self.live_mask().nonzero(as_tuple=False).flatten().tolist()
+        if not slots:
+            return 0
+        far = []
+        for slot, (x, y) in zip(slots, m[slots][:, [cfg.CX, cfg.CY]].tolist()):
+            coord = _make_coord(int(x // CHUNK_UNITS) + ox, int(y // CHUNK_UNITS) + oy)
+            if coord in self.manager.chunks:
+                distance = self._ring_distance(coord, players)
+                if distance > reach:
+                    far.append((-distance, slot))
+        stashed = self._stash([slot for _, slot in sorted(far)[:need]])
+        self.counters["evicted_for_ring"] += stashed
+        return stashed
 
     def _allocate(self, coord, rows, *, restored) -> int:
         if not rows:
@@ -191,6 +297,7 @@ class CreatureStore:
         """Stash the creatures standing in ``coord`` (called before its rows are released)."""
         if not enabled():
             return 0
+        self.skipped.pop(coord, None)
         m = self.manager.engine.state.m_tensor
         bx, by = self.manager._local_origin(coord)
         inside = (self.live_mask() & (m[:cfg.MAX_ENTITIES, cfg.CX] >= bx) & (m[:cfg.MAX_ENTITIES, cfg.CX] < bx + CHUNK_UNITS)
@@ -211,6 +318,12 @@ class CreatureStore:
                     self.restore(coord)
                     self.populate(coord, chunk)
                     break
+        players = self._player_chunks()                    # R66-QUOTA-2: nothing of this runs with no controlled actor
+        if players:
+            self._ring_first(players)
+            self.counters["short_rows"] = sum(self._short_rows(c) for _, c in self._pending(players))
+        elif self.counters["short_rows"]:
+            self.counters["short_rows"] = 0
 
     def sweep(self) -> int:
         """Creatures standing outside every integrated chunk go into the record of the chunk they stand in."""
@@ -266,6 +379,7 @@ class CreatureStore:
         self.records.clear()
         self.index.clear()
         self.populated.clear()
+        self.skipped.clear()
 
 
 def _make_coord(x, y):

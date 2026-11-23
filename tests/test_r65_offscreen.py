@@ -553,5 +553,59 @@ class FlagTests(unittest.TestCase):
             self.assertIn("EDEN_WINDOW_DORMANCY=1", str(caught.exception))
 
 
+class CalibrationToolTests(unittest.TestCase):
+    """R65-CAL: the pure parts of tools/offscreen_equivalence.py (the map and calendar it boots, the steady-state fit, the births interval)."""
+
+    @classmethod
+    def setUpClass(cls):
+        import importlib.util
+        path = Path(__file__).resolve().parents[1] / "tools" / "offscreen_equivalence.py"
+        spec = importlib.util.spec_from_file_location("offscreen_equivalence_under_test", path)
+        cls.tool = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.tool)
+
+    def test_the_tool_boots_the_named_map_on_the_named_calendar(self):
+        args = self.tool.parser.parse_args(["--map", "playable_village", "--calendar", "user"])
+        self.assertEqual(self.tool.environment_for(args), {"EDEN_MAP": "playable_village", "EDEN_CALENDAR": "1"})
+        self.assertEqual(self.tool.environment_for(self.tool.parser.parse_args([])), {})      # the 1119 runs: starter village, legacy, unchanged
+
+    def test_the_steady_fit_uses_only_the_samples_after_the_warm_up(self):
+        samples = [{"tick": 100, "hungers": [90.0, 90.0], "thirsts": [1.0]}]                 # in the warm-up: ignored
+        samples += [{"tick": t, "hungers": [18.0, 22.0], "thirsts": [10.0, 30.0]} for t in range(200, 1001, 100)]
+        fit = self.tool.steady_fit(samples, "hungers", after_tick=150)
+        self.assertEqual(fit["n"], 18)
+        self.assertAlmostEqual(fit["mean"], 20.0)
+        self.assertEqual((fit["p10"], fit["p50"], fit["p90"]), (18.0, 22.0, 22.0))
+        self.assertAlmostEqual(fit["first_half_mean"], 20.0)
+        self.assertAlmostEqual(fit["second_half_mean"], 20.0)
+        self.assertTrue(fit["steady"])
+
+    def test_a_need_that_keeps_rising_is_not_steady(self):
+        samples = [{"tick": t, "thirsts": [t / 100.0]} for t in range(100, 2001, 100)]
+        fit = self.tool.steady_fit(samples, "thirsts", after_tick=0)
+        self.assertFalse(fit["steady"])
+        self.assertIsNone(self.tool.steady_fit([], "thirsts", after_tick=0)["mean"])
+
+    def test_the_births_interval_is_the_exact_poisson_one(self):
+        low, high = self.tool.poisson_interval(0, 2.0)
+        self.assertEqual(low, 0.0)
+        self.assertAlmostEqual(high, 3.6889 / 2.0, places=3)                                  # -ln(0.025) / exposure
+        low, high = self.tool.poisson_interval(10, 1.0)
+        self.assertAlmostEqual(low, 4.7954, places=3)                                         # Garwood 95% for 10 events
+        self.assertAlmostEqual(high, 18.3904, places=3)
+        self.assertEqual(self.tool.poisson_interval(3, 0.0), (None, None))
+
+    def test_the_pooled_fit_pools_samples_and_mother_days(self):
+        a = {"fit": {"hungers": {"values": [10.0, 20.0]}, "thirsts": {"values": [5.0]}}, "births": {"active": 1, "ready_mother_days": 4.0}}
+        b = {"fit": {"hungers": {"values": [30.0]}, "thirsts": {"values": [15.0, 25.0]}}, "births": {"active": 3, "ready_mother_days": 6.0}}
+        pooled = self.tool.pooled_fit([a, b])
+        self.assertAlmostEqual(pooled["hunger_fed"], 20.0)
+        self.assertAlmostEqual(pooled["thirst_watered"], 15.0)
+        self.assertAlmostEqual(pooled["birth_p"], 0.4)
+        self.assertEqual(pooled["births"], 4)
+        self.assertAlmostEqual(pooled["ready_mother_days"], 10.0)
+        self.assertEqual(pooled["runs"], 2)
+
+
 if __name__ == "__main__":
     unittest.main()

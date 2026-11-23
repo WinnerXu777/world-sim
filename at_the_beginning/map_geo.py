@@ -555,6 +555,23 @@ def _radius_candidates(cx, cy, radius, m_tensor, col_x, col_y, max_entities) -> 
     return [eid for eid, ok in zip(live, keep) if ok]
 
 
+def geo_ids_of_types(m_tensor: "torch.Tensor", types: set | None, max_entities: int) -> list[int]:
+    """MAP_GEO ids below ``max_entities``, in MAP_GEO order, whose ``M_TYPE`` (as ``int``) is in ``types`` (all of them when None).
+
+    R66-PACE-2: the candidates of ``perception.queries.nearest_geo_entity_possible``, read in one gather. A superset is safe there, so a row
+    whose type is not finite is kept, and a negative id (never registered by the game) turns the type filter off.
+    """
+    from genesis_config import M_TYPE as _MT
+    live = [eid for eid in MAP_GEO.keys() if eid < max_entities]
+    if not live or types is None or min(live) < 0:
+        return live
+    index = torch.tensor(live, dtype=torch.long, device=m_tensor.device)
+    kinds = m_tensor[:, _MT].index_select(0, index).double().cpu()
+    wanted = torch.tensor(sorted(float(t) for t in types), dtype=torch.float64)
+    keep = (torch.isin(torch.trunc(kinds), wanted) | ~torch.isfinite(kinds)).tolist()
+    return [eid for eid, ok in zip(live, keep) if ok]
+
+
 def entities_in_radius(cx: float, cy: float, radius: float,
                         m_tensor: "torch.Tensor",
                         m_type_filter: set | None = None) -> list[int]:
