@@ -179,18 +179,91 @@ class ActionRunner:
             planned.detail["replanned"] = True
         draft = planned.draft
         effects = list(draft.effects) + ([draft.event] if draft.event is not None else [])
+        invitation_data = None
+        travel_snapshot = None
+        if planned.verb == "invite" and any(op.kind == "r61_invite" for op in draft.ops):
+            from .r61 import invitations_of
+            from .verbs.common import emit
+            book = invitations_of(self.services)
+            target, place = planned.args["target"], planned.args["place"]
+            relation = ((self.services.record(target) or {}).get("relationships") or {}).get(planned.actor) or {}
+            neighbour = self.aff.observation(planned.actor).neighbour(target)
+            answer = "accepted" if float(relation.get("closeness", 0)) >= 0 and neighbour and neighbour.mood >= 40 else "declined"
+            invitation_id = f"invitation_{len(book.records)+1:05d}"
+            travel = None
+            reason = None
+            if answer == "accepted":
+                import copy
+                from .draft import queue_task
+                record = self.services.record(target)
+                travel_snapshot = (record, copy.deepcopy(record)) if record is not None else None
+                places = list(self.services.entities())
+                for actor in self.world.table("humans").ids:
+                    if actor is not None:
+                        places.extend(self.services.anchors(actor).values())
+                        places.extend(a for a in self.services.sites(actor).values() if a is not None)
+                destination = next((p for p in places if p.id == place), None)
+                if destination is not None:
+                    task = queue_task("move_to_place", priority=0.35, summary="travel to invitation", target_kind="place",
+                                      target_id=place, target_place={"x": destination.x, "y": destination.y},
+                                      expires_tick=int(self.world.tick) + 60, metadata={"via": "invitation", "invitation": invitation_id})
+                    travel = self.record_ops.execute(task, target, int(self.world.tick))
+                if not travel or not travel.get("ok", False):
+                    if travel_snapshot:
+                        travel_snapshot[0].clear()
+                        travel_snapshot[0].update(travel_snapshot[1])
+                        travel_snapshot = None
+                    answer, reason = "declined", "no_route"
+            payload = {"invitation": invitation_id, "place": place}
+            if reason:
+                payload["reason"] = reason
+            effects.append(emit(self.world, target, "invitation_" + answer, payload, others=(planned.actor,)))
+            invitation_data = (book, answer, reason, travel)
         permit = self._permit(draft)
         report = self.world.apply(effects, atomic=True, cause=f"action:{planned.verb}", items=permit) if effects else None
         planned.report = report
         if report is not None and not report.ok:
+            if travel_snapshot:
+                travel_snapshot[0].clear()
+                travel_snapshot[0].update(travel_snapshot[1])
+                engine = getattr(self.record_ops, "engine", None)
+                if engine is not None:
+                    engine.resident_store.touch_resident(planned.args["target"])
             planned.ok, planned.code = False, "apply_failed"
             planned.detail = {**planned.detail, "skipped": [(s.kind, s.reason, s.detail) for s in report.skipped]}
             return planned
         self._recent.setdefault(planned.actor, []).append(int(self.world.tick))
+        if invitation_data:
+            book, answer, reason, travel = invitation_data
+            invitation = book.open(planned.actor, planned.args["target"], planned.args["place"], int(self.world.tick))
+            invitation["state"] = answer
+            if reason:
+                invitation["reason"] = reason
+            if travel is not None:
+                invitation["travel"] = travel
         for op in draft.ops:
+            if op.kind == "r61_invite" and invitation_data:
+                planned.ops.append({"kind": op.kind, "ok": True, "invitation": dict(invitation), "answer": answer})
+                continue
             planned.ops.append({"kind": op.kind, **self._execute_op(op, planned)})
         planned.revision = self.world.revision
         return planned
+
+    def expire_invitations(self, tick):
+        from .verbs.common import emit
+        owner = getattr(self.services, "engine", self.services)
+        book = getattr(owner, "_r61_invitations", None)
+        if book is None:
+            return
+        for invitation in book.records:
+            if invitation["state"] not in ("pending", "accepted") or tick < invitation["expires"]:
+                continue
+            event = emit(self.world, invitation["whom"], "invitation_expired",
+                         {"invitation": invitation["id"], "place": invitation["place"]}, others=(invitation["who"],))
+            report = self.world.apply([event], atomic=True, cause="invitation:expire")
+            if report.ok:
+                invitation["state"] = "expired"
+                self.record_ops.cancel_invitation_travel(invitation["whom"], invitation["id"], tick)
 
     # -- helpers ------------------------------------------------------------------------------------------------------
     def _execute_op(self, op, planned: ActionResult) -> dict:

@@ -22,6 +22,13 @@ def agent_driver_hook(engine):
         hook(engine)
 
 
+def invitation_expiry_hook(engine):
+    """Expire invitations even in worlds without agent-driven residents."""
+    if getattr(engine, "_r61_invitations", None) is not None:
+        from systems.actions.agent_driver import driver_of
+        driver_of(engine).runner(engine).expire_invitations(int(engine.tick))
+
+
 def motion_checkpoint_hook(engine):
     """Step hook: remember where the driver left every resident (the start of the task phase)."""
     from .motion import record_checkpoint
@@ -55,6 +62,9 @@ def install_smith_loop(dispatch):
         dispatch.register_step_hook("roster_driver", roster_driver_hook, builtin=True)
     if "agent_driver" not in names:  # D-008: moves roster residents whose driver is "agent"; a no-op while none is (the default)
         dispatch.register_step_hook("agent_driver", agent_driver_hook, builtin=True)
+    import os
+    if os.environ.get("EDEN_VERBS_R61") == "1" and "invitation_expiry" not in names:
+        dispatch.register_step_hook("invitation_expiry", invitation_expiry_hook, builtin=True)
     if "motion_checkpoint" not in names:
         dispatch.register_step_hook("motion_checkpoint", motion_checkpoint_hook, builtin=True)
     if "motion_limits" not in names:

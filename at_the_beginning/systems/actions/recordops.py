@@ -12,6 +12,19 @@ from typing import Optional
 
 
 class RecordOps:
+    def cancel_invitation_travel(self, actor, invitation, tick):
+        record = self._rec(actor) if hasattr(self, "_rec") else self._record(actor) if hasattr(self, "_record") else None
+        if record is None:
+            return
+        matches = [t for t in record.get("tasks", []) if t.get("metadata", {}).get("invitation") == invitation]
+        state = record.get("task_state") or {}
+        if any(t.get("id") == state.get("current_task_id") for t in matches):
+            from systems.tasks.ops import complete_current_task
+            complete_current_task(record, tick, outcome="cancelled", reason="invitation_expired")
+        record["tasks"] = [t for t in record.get("tasks", []) if t.get("metadata", {}).get("invitation") != invitation]
+        if hasattr(self, "engine"):
+            self.engine.resident_store.touch_resident(actor)
+
     def execute(self, op, actor: str, tick: int) -> dict:
         handler = getattr(self, f"op_{op.kind}", None)
         if handler is None:
@@ -87,6 +100,14 @@ class StaticRecordOps(RecordOps):
         relation["closeness"] = round(max(-1.0, min(1.0, float(relation.get("closeness", 0.0)) + float(delta))), 3)
         relation["last_seen_tick"] = tick
         return {"ok": True, "closeness": relation["closeness"]}
+
+    def op_r61_clear_goal(self, actor, tick, target):
+        record = self._rec(actor)
+        if record is None:
+            return {"ok": False, "reason": "no_record"}
+        goals = record.get("goals", [])
+        record["goals"] = [g for g in goals if not (g.get("kind") == "retaliate" and g.get("target_id") == target)]
+        return {"ok": True, "cleared": len(goals) - len(record["goals"])}
 
     def op_place_mark(self, actor, tick, name, x, y, space=0.0, source="mark"):
         record = self._rec(actor)
@@ -170,6 +191,15 @@ class EngineRecordOps(RecordOps):
         existing = ((self._record(owner) or {}).get("relationships") or {}).get(other) or {}
         self.engine.resident_store.update_relationship(owner, other, str(existing.get("kind") or kind), float(delta), tick)
         return {"ok": True}
+
+    def op_r61_clear_goal(self, actor, tick, target):
+        record = self._record(actor)
+        if record is None:
+            return {"ok": False, "reason": "no_record"}
+        goals = record.get("goals", [])
+        record["goals"] = [g for g in goals if not (g.get("kind") == "retaliate" and g.get("target_id") == target)]
+        self.engine.resident_store.touch_resident(actor)
+        return {"ok": True, "cleared": len(goals) - len(record["goals"])}
 
     def op_place_mark(self, actor, tick, name, x, y, space=0.0, source="mark"):
         record = self._record(actor)

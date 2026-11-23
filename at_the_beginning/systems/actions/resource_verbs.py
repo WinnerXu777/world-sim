@@ -103,6 +103,9 @@ def default_registry() -> Registry:
     if rob.enabled():
         from .rob_verbs import ROB_REGISTRY
         extras.append(ROB_REGISTRY)
+    from . import r61
+    if r61.enabled():
+        extras.append(r61.REGISTRY)
     if not extras:
         return REGISTRY
     key = tuple(id(r) for r in extras)

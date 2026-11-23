@@ -38,6 +38,14 @@ MACRO_VERBS = {
 class AffordanceEngine:
     def __init__(self, world, services, reach: Optional[Reach] = None, *, driver_mode: Optional[str] = None):
         self.world, self.services = world, services
+        from systems.actions.r61 import enabled
+        self._definitions = VERBS
+        self._macros = MACRO_VERBS
+        if enabled():
+            from .r61_predicates import DEFS
+            self._definitions = {**VERBS, **DEFS}
+            self._macros = {**MACRO_VERBS, "socialise": ("forgive", "invite") + MACRO_VERBS["socialise"],
+                            "attack": ("retaliate",) + MACRO_VERBS["attack"]}
         self.driver_mode = driver_mode         # None = config.DRIVER_MODE (see driver.py)
         self.reach = reach if reach is not None else Reach(services)
 
@@ -55,8 +63,8 @@ class AffordanceEngine:
         enough to know *whether* a verb is possible (the mask), and it skips the reachability searches for the rest."""
         S = situation or self.situation(actor)
         out = []
-        for name in (sorted(VERBS) if verbs is None else verbs):
-            definition = VERBS.get(name)
+        for name in (sorted(self._definitions) if verbs is None else verbs):
+            definition = self._definitions.get(name)
             if definition is None:
                 continue
             for params in definition.candidates(S):
@@ -69,7 +77,7 @@ class AffordanceEngine:
         return out
 
     def legal(self, actor: str, verb: str, params: Optional[dict] = None, *, situation: Optional[Situation] = None) -> Verdict:
-        definition = VERBS.get(verb)
+        definition = self._definitions.get(verb)
         if definition is None:
             return no("unknown_verb", verb=str(verb))
         params = dict(params or {})
@@ -82,13 +90,13 @@ class AffordanceEngine:
     # Tier 1 -------------------------------------------------------------------
     def macro_options(self, actor: str, macro: str, *, situation: Optional[Situation] = None) -> list:
         S = situation or self.situation(actor)
-        return [o for o in self.options(actor, verbs=MACRO_VERBS.get(macro, ()), situation=S) if _macro_filter(S, macro, o)]
+        return [o for o in self.options(actor, verbs=self._macros.get(macro, ()), situation=S) if _macro_filter(S, macro, o)]
 
     def resolve(self, macro: str, actor: str, *, situation: Optional[Situation] = None) -> Optional[ActionCall]:
         """First legal option of the macro's preferred verb, nearest first; None when the macro is illegal."""
         S = situation or self.situation(actor)
         options = self.macro_options(actor, macro, situation=S)
-        for name in MACRO_VERBS.get(macro, ()):
+        for name in self._macros.get(macro, ()):
             mine = sorted((o for o in options if o.verb == name), key=lambda o: (o.distance if o.distance is not None else 0.0, str(sorted(o.params.items()))))
             if mine:
                 return ActionCall(name, dict(mine[0].params), macro)
@@ -107,7 +115,8 @@ class AffordanceEngine:
             if not S.obs.alive:
                 continue
             cache: dict = {}
-            for macro, names in MACRO_VERBS.items():
+            for macro in MACRO_VERBS:
+                names = self._macros.get(macro, ())
                 if macro in ACTION_INDEX and any(self._verb_legal(S, name, macro, cache) for name in names):
                     out[row, ACTION_INDEX[macro]] = True
             for option in self.commission_outcomes(actor):

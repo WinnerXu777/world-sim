@@ -252,6 +252,9 @@ class AgentDriver:
     """Per-engine runtime."""
 
     def __init__(self, tier1=None, period: Optional[int] = None):
+        from .r61 import enabled as r61_enabled
+        self.r61_enabled = r61_enabled()
+        self.r61_routable = ROUTABLE_VERBS | {"retaliate", "forgive", "invite"} if self.r61_enabled else ROUTABLE_VERBS
         self.tier1 = tier1 or tier1_from_env()
         self.period = decide_period() if period is None else max(1, int(period))
         self.last_hp: dict = {}        # human id -> HP seen on the previous tick (sharp-drop interrupt)
@@ -303,7 +306,7 @@ class AgentDriver:
             return None
         runner = self.runner(engine)
         call = runner.aff.resolve(macro, human_id)
-        if call is None or call.verb not in ROUTABLE_VERBS or (call.verb == "eat" and "item" not in call.params):
+        if call is None or call.verb not in self.r61_routable or (call.verb == "eat" and "item" not in call.params):
             self.routed[f"none:{macro}"] += 1
             self.cool[(human_id, macro)] = tick + REFUSAL_COOLDOWN
             return None
@@ -334,6 +337,8 @@ class AgentDriver:
         from systems.roster.needs import after_step as needs_after_step, settings as needs_settings_of
         acts = actions_enabled()
         ladder_on = acts and ladder_module.enabled()
+        if self.r61_enabled and getattr(engine, "_r61_invitations", None) is not None:
+            self.runner(engine).expire_invitations(int(engine.tick))
         slots = dormancy_gate.filter_slots(self, engine, roster_slots(engine, "agent"))     # EDEN_WINDOW_DORMANCY: residents outside the integrated chunks do nothing
         results = {}
         if not slots:
@@ -406,7 +411,7 @@ class AgentDriver:
             if acts:
                 for row in due:
                     macro = macros[row.human_id]
-                    if macro in ACTION_MACROS and macro != rules_macro(row.routine, row.override):
+                    if (macro in ACTION_MACROS or (macro == "attack" and self.r61_enabled)) and macro != rules_macro(row.routine, row.override):
                         wanted = macro                                   # the matrix chose something other than the routine's walk
                     else:
                         wanted = self.rules_action(engine, row, state, tick)

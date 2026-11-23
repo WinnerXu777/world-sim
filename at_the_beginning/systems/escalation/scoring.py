@@ -32,6 +32,9 @@ def _consequence_delay_ticks(signals: dict[str, Any], manual_interaction: dict[s
         or manual_interaction.get("action")
         or ""
     ).strip().lower()
+    from systems.actions.r61 import enabled as r61_enabled
+    if r61_enabled() and action == "retaliate":
+        action = "attack"
     delay_seconds = {
         "attack": 6.0,
         "attack_target": 6.0,
