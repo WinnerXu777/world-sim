@@ -16,7 +16,7 @@ Nothing in the tick loop or the god API calls these yet.
 
 ``EDEN_GOD_POWER_PORTS=1`` at registry construction additionally exposes ``set_threat``, ``set_aggression`` and
 ``reset_cooldown``, plus eight disaster powers (``wildfire``, ``earthquake``, ``storm``, ``volcanic_eruption``,
-``drought``, ``flood``, ``area_attack``, ``smite``) through the same plan/apply pipeline. The flag is off by default.
+``drought``, ``flood``, ``area_attack``, ``smite``) through the same plan/apply pipeline. The flag is off by default. With EDEN_GOD_MIND_PORTS=1 as well, age_shift, life_exp_modify, grant_instinct, revoke_instinct, inherit_instinct and quarantine are also available.
 """
 from __future__ import annotations
 
@@ -55,6 +55,7 @@ class Draft:
     effects: list
     preview: dict
     event: Optional[fx.Emit] = None
+    items: Optional[fx.ItemPermit] = None
 
 
 @dataclass(frozen=True)
@@ -70,6 +71,7 @@ class Plan:
     risk: str = "reversible"
     revision: int = 0
     tick: int = 0
+    items: Optional[fx.ItemPermit] = None
 
 
 @dataclass
@@ -385,6 +387,11 @@ def build_registry() -> Registry:
         from . import disaster_powers
         disaster_powers.register_disaster_powers(reg)
 
+    if os.environ.get("EDEN_GOD_POWER_PORTS") == "1" and os.environ.get("EDEN_GOD_MIND_PORTS") == "1":
+        from . import mind_powers
+        mind_powers.register_mind_powers(reg)
+
+    from .new_powers import register_new_powers; register_new_powers(reg)
     return reg
 
 
@@ -409,7 +416,7 @@ def plan(world, name: str, args: dict, registry: Optional[Registry] = None) -> P
                     risk=risk, revision=world.revision, tick=int(world.tick))
     effects = tuple(draft.effects) + ((draft.event,) if draft.event is not None else ())
     return Plan(power=name, args=args, ok=True, targets=tuple(draft.targets.ids), effects=effects, preview=draft.preview, risk=risk,
-                revision=world.revision, tick=int(world.tick))
+                revision=world.revision, tick=int(world.tick), items=draft.items)
 
 
 def apply(world, the_plan: Plan, registry: Optional[Registry] = None) -> PowerResult:
@@ -422,7 +429,10 @@ def apply(world, the_plan: Plan, registry: Optional[Registry] = None) -> PowerRe
         replanned = True
         if not the_plan.ok:
             return PowerResult(ok=False, reason=the_plan.reason, plan=the_plan, replanned=True)
-    report = world.apply(list(the_plan.effects), atomic=True, cause=f"power:{the_plan.power}")
+    if the_plan.items is None:
+        report = world.apply(list(the_plan.effects), atomic=True, cause=f"power:{the_plan.power}")
+    else:
+        report = world.apply(list(the_plan.effects), atomic=True, cause=f"power:{the_plan.power}", items=the_plan.items)
     if not report.ok:
         return PowerResult(ok=False, reason="apply_failed", plan=the_plan, report=report, replanned=replanned)
     if os.environ.get("EDEN_GOD_POWER_PORTS") == "1" and hasattr(world, "sync_terrain"):

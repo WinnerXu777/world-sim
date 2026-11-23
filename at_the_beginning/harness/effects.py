@@ -73,6 +73,17 @@ class Emit:
 
 
 @dataclass(frozen=True)
+class ResidentRelations:
+    updates: tuple  # (owner, other, kind, closeness or None)
+
+
+@dataclass(frozen=True)
+class CalendarOverride:
+    field: str
+    value: Optional[str]
+
+
+@dataclass(frozen=True)
 class Task:
     """A task record operation. ``op``: ``create`` | ``assign`` | ``cancel`` | ``complete``.
 
@@ -308,6 +319,27 @@ class EffectApplier:
             self._validate_transfer(index, effect, problems, balances)
         elif isinstance(effect, Task):
             self._validate_task(index, effect, problems, balances)
+        elif isinstance(effect, ResidentRelations):
+            if not isinstance(effect.updates, (tuple, list)):
+                problems.append(Skip(index, "ResidentRelations", "invalid_updates"))
+                return
+            for update in effect.updates:
+                if not isinstance(update, (tuple, list)) or len(update) != 4:
+                    problems.append(Skip(index, "ResidentRelations", "invalid_update"))
+                    continue
+                owner, other, kind, value = update
+                if not isinstance(owner, str) or not isinstance(other, str) or owner not in w.residents or other not in w.residents:
+                    problems.append(Skip(index, "ResidentRelations", "unknown_resident", str(owner)))
+                if not isinstance(kind, str) or not kind:
+                    problems.append(Skip(index, "ResidentRelations", "invalid_kind"))
+                if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not -1 <= value <= 1):
+                    problems.append(Skip(index, "ResidentRelations", "invalid_value"))
+        elif isinstance(effect, CalendarOverride):
+            from . import calendar
+            if effect.field not in ("season", "time"):
+                problems.append(Skip(index, "CalendarOverride", "invalid_field"))
+            elif effect.value is not None and effect.value not in (calendar.SEASONS if effect.field == "season" else calendar.BLOCKS):
+                problems.append(Skip(index, "CalendarOverride", "invalid_value"))
         elif isinstance(effect, Emit):
             pass
         else:
@@ -542,6 +574,38 @@ class EffectApplier:
             self._transfer(index, effect, report)
         elif isinstance(effect, Task):
             self._task_apply(index, effect, report)
+        elif isinstance(effect, ResidentRelations):
+            problems = []
+            self._validate_one(index, effect, problems, {})
+            if problems:
+                report.skipped.extend(problems)
+                return
+            for owner, other, kind, value in effect.updates:
+                store = getattr(getattr(w, "engine", None), "resident_store", None)
+                if store is not None:
+                    old = w.residents[owner].get("relationships", {}).get(other, {})
+                    previous = float(old.get("closeness", 0.0))
+                    store.update_relationship(owner, other, kind, 0.0 if value is None else value - previous, int(w.tick))
+                    continue
+                relations = w.residents[owner].setdefault("relationships", {})
+                relation = relations.setdefault(other, {"kind": kind, "closeness": 0.0, "tags": [], "tag_meta": {}})
+                relation["kind"] = kind
+                if value is not None:
+                    relation["closeness"] = value
+                relation["last_seen_tick"] = int(w.tick)
+                tags = relation.setdefault("tags", [])
+                if kind not in tags:
+                    tags.append(kind)
+            report.count("ResidentRelations")
+        elif isinstance(effect, CalendarOverride):
+            from . import calendar
+            problems = []
+            self._validate_one(index, effect, problems, {})
+            if problems:
+                report.skipped.extend(problems)
+                return
+            calendar.set_override(w, effect.field, effect.value)
+            report.count("CalendarOverride")
         elif isinstance(effect, Emit):
             event = w.events.emit(effect.type, actors=effect.actors, place=effect.place, space=effect.space,
                                   visibility=effect.visibility, radius=effect.radius, payload=effect.payload,

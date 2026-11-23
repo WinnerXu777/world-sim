@@ -16,11 +16,16 @@ from ..occupation.ops import occupation_routine_score_adjustment, occupation_sch
 DEFAULT_DAY_LENGTH_TICKS = 2400
 
 
-def tick_to_time_block(tick: int, *, day_length_ticks: int = DEFAULT_DAY_LENGTH_TICKS) -> str:
+def tick_to_time_block(tick: int, *, day_length_ticks: int = DEFAULT_DAY_LENGTH_TICKS, world=None) -> str:
     try:
         from harness import calendar as _calendar
     except ImportError:  # pragma: no cover - package import fallback
         from at_the_beginning.harness import calendar as _calendar
+    if world is not None and getattr(getattr(world, "engine", world), "_god_calendar_overrides", None):
+        cal = _calendar.for_world(world)
+        if cal is not _calendar.active():
+            length = None if cal.name == "user" and day_length_ticks == DEFAULT_DAY_LENGTH_TICKS else day_length_ticks
+            return cal.block_for_tick(tick, length)
     if _calendar.calendar_enabled():          # EDEN_CALENDAR=1: the long calendar answers when the caller asks for the default day length
         return _calendar.tick_to_time_block(tick, day_length_ticks=day_length_ticks)
     day_length = max(4, int(day_length_ticks))
@@ -131,9 +136,10 @@ def routine_candidates_for_tick(
     *,
     context: dict[str, Any] | None = None,
     day_length_ticks: int = DEFAULT_DAY_LENGTH_TICKS,
+    world=None,
 ) -> list[dict[str, Any]]:
     ensure_schedule_state(resident, tick)
-    time_block = tick_to_time_block(tick, day_length_ticks=day_length_ticks)
+    time_block = tick_to_time_block(tick, day_length_ticks=day_length_ticks, world=world)
     context = dict(context or {})
     context["time_block"] = time_block
     profile = dict(resident.get("schedule_profile", {}))
@@ -161,6 +167,7 @@ def choose_schedule_routine(
     *,
     context: dict[str, Any] | None = None,
     day_length_ticks: int = DEFAULT_DAY_LENGTH_TICKS,
+    world=None,
 ) -> dict[str, Any]:
     context = dict(context or {})
     if bool(context.get("survival_override", False)):
@@ -170,7 +177,7 @@ def choose_schedule_routine(
     if bool(context.get("urgent_override", False)):
         return {"ok": False, "reason": "urgent_override", "routine": None}
 
-    candidates = routine_candidates_for_tick(resident, tick, context=context, day_length_ticks=day_length_ticks)
+    candidates = routine_candidates_for_tick(resident, tick, context=context, day_length_ticks=day_length_ticks, world=world)
     if not candidates:
         return {"ok": False, "reason": "no_candidates", "routine": None}
 

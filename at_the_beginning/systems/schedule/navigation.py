@@ -115,6 +115,7 @@ def build_schedule_navigation_bias(
     if resident_store is None or not h_mask.any():
         return {"nav_schedule_bias": bias}
 
+    world = getattr(resident_store, "_god_calendar_owner", None)
     for slot in torch.where(h_mask)[0].tolist():
         if player_control_runtime is not None and player_control_runtime.describe_human_slot(slot) is not None:
             continue
@@ -139,7 +140,7 @@ def build_schedule_navigation_bias(
 
         current_routine = dict((resident.get("schedule_state", {}) or {}).get("current_routine") or {})
         current_time_block = str(current_routine.get("time_block", "")).strip()
-        time_block = tick_to_time_block(tick)
+        time_block = tick_to_time_block(tick, world=world)
         has_active_plan = any(
             str(plan.get("status", "queued")) in {"active", "queued"}
             for plan in list(resident.get("plans", []))
@@ -148,6 +149,7 @@ def build_schedule_navigation_bias(
             decision = choose_resident_schedule_routine(
                 resident,
                 tick,
+                world=world,
                 context={
                     "reason": "live_schedule",
                     "has_home": True,

@@ -11,8 +11,8 @@ def ensure_resident_schedule(resident: dict, tick: int) -> dict:
     return ensure_schedule_state(resident, tick)
 
 
-def choose_resident_schedule_routine(resident: dict, tick: int, *, context: dict | None = None) -> dict:
-    decision = choose_schedule_routine(resident, tick, context=context)
+def choose_resident_schedule_routine(resident: dict, tick: int, *, context: dict | None = None, world=None) -> dict:
+    decision = choose_schedule_routine(resident, tick, context=context, world=world)
     if decision.get("ok") and decision.get("routine") is not None:
         routine = dict(decision["routine"])
         set_current_routine(

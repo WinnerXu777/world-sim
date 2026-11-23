@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import math
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Optional
 
 FLAG = "EDEN_CALENDAR"
@@ -80,6 +80,9 @@ class Calendar:
     life_year_ticks: float              # ticks per life-year (ageing is decoupled from the calendar year, design section 5)
     daylight: Optional[tuple] = None    # ((season, fraction), ...) or None: four equal blocks, no light curve (LEGACY)
 
+    season_override: Optional[str] = None
+    time_override: Optional[str] = None
+
     def __post_init__(self):
         if not (isinstance(self.day_ticks, int) and isinstance(self.year_ticks, int) and self.day_ticks >= 4 and self.year_ticks >= 4):
             raise ValueError("day_ticks and year_ticks must be integers of at least 4")
@@ -103,6 +106,8 @@ class Calendar:
 
     def season_for_tick(self, tick) -> str:
         """Quarters of the year; the expression is ``weather.season_for_tick`` verbatim."""
+        if self.season_override is not None:
+            return self.season_override
         phase = (float(tick) % float(self.year_ticks)) / float(self.year_ticks)
         if phase < 0.25:
             return "spring"
@@ -121,6 +126,8 @@ class Calendar:
     def block_for_tick(self, tick, day_length_ticks: Optional[int] = None) -> str:
         """``dawn | day | dusk | night``. With ``day_length_ticks`` different from this calendar's day, or without a daylight table, the four
         equal quarters of ``schedule.resolver.tick_to_time_block`` (verbatim): a caller that asks for its own day length keeps it."""
+        if self.time_override is not None:
+            return self.time_override
         if self.daylight is None or (day_length_ticks is not None and int(day_length_ticks) != self.day_ticks):
             day_length = max(4, int(self.day_ticks if day_length_ticks is None else day_length_ticks))
             quarter = max(1, day_length // 4)
@@ -143,6 +150,9 @@ class Calendar:
             return {"day": 1.0, "dawn": 0.5, "dusk": 0.5, "night": 0.0}[self.block_for_tick(tick)]
         tick_of_day = int(tick) % self.day_ticks
         up = self.sun_up_ticks(self.season_for_tick(tick))
+        if self.time_override is not None:
+            tick_of_day = {"dawn": DAWN_TICKS // 2, "day": up // 2,
+                           "dusk": up - DAWN_TICKS // 2, "night": up}[self.time_override]
         if tick_of_day >= up:
             return LIGHT_FLOOR
         return LIGHT_FLOOR + (1.0 - LIGHT_FLOOR) * math.sin(math.pi * tick_of_day / up) ** LIGHT_SHAPE
@@ -175,6 +185,28 @@ class Calendar:
     def cooldown_decay_rate(self) -> float:
         """Per-tick decay of the cooldowns that ``COOLDOWN_DECAY_RATE`` measures in years; they follow the life-year (design section 5)."""
         return 1.0 / self.life_year_ticks
+
+
+def set_override(world, field, value):
+    if field not in ("season", "time") or (value is not None and value not in (SEASONS if field == "season" else BLOCKS)):
+        raise ValueError("invalid calendar override")
+    owner = getattr(world, "engine", world)
+    overrides = getattr(owner, "_god_calendar_overrides", {}).copy()
+    overrides[field] = value
+    owner._god_calendar_overrides = overrides
+    store = getattr(owner, "resident_store", None)
+    if store is not None:
+        store._god_calendar_owner = owner
+
+
+def for_world(world):
+    """Calendar view for a world; tick-only legacy consumers remain unchanged."""
+    owner = getattr(world, "engine", world)
+    overrides = getattr(owner, "_god_calendar_overrides", {})
+    base = active()
+    if not isinstance(overrides, dict) or not any(overrides.values()) or os.environ.get("EDEN_GOD_NEW_TOOLS") != "1":
+        return base
+    return replace(base, season_override=overrides.get("season"), time_override=overrides.get("time"))
 
 
 LEGACY = Calendar(name="legacy", day_ticks=LEGACY_DAY_TICKS, year_ticks=LEGACY_YEAR_TICKS, life_year_ticks=float(LEGACY_YEAR_TICKS))

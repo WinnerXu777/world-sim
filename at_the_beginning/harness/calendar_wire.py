@@ -22,6 +22,7 @@ def world_block(engine) -> dict:
 def time_block(engine) -> dict:
     if not calendar.calendar_enabled():
         return {}
-    moment = calendar.now(int(engine.tick))
+    moment = (calendar.for_world(engine).now(int(engine.tick)) if getattr(engine, "_god_calendar_overrides", None)
+              else calendar.now(int(engine.tick)))
     return {"time": {"tick": moment.tick, "day": moment.day_index, "day_phase": round(moment.day_phase, PHASE_DIGITS), "block": moment.block, "season": moment.season,
                      "season_phase": round(moment.season_phase, PHASE_DIGITS), "year": moment.year, "light": round(moment.light, PHASE_DIGITS)}}

@@ -99,6 +99,16 @@ def season_for_tick(tick: int) -> str:
     return _calendar.season_for_tick(tick)
 
 
+def _world_season(engine, tick):
+    if isinstance(getattr(engine, "_god_calendar_overrides", None), dict) and engine._god_calendar_overrides:
+        try:
+            from harness import calendar
+        except ImportError:
+            from at_the_beginning.harness import calendar
+        return calendar.for_world(engine).season_for_tick(tick)
+    return season_for_tick(tick)
+
+
 def ensure_nature_state(engine: Any, *, tick: int) -> dict[str, Any]:
     state = getattr(engine, "_nature_state", None)
     if not isinstance(state, dict):
@@ -107,7 +117,7 @@ def ensure_nature_state(engine: Any, *, tick: int) -> dict[str, Any]:
     if state:
         return state
 
-    season = season_for_tick(tick)
+    season = _world_season(engine, tick)
     weather = _choose_weather(season)
     duration = int(round(random.randint(60, 110) * _rate("weather")))
     state.update(
@@ -156,7 +166,7 @@ def advance_nature_cycle(
     """Advance season/weather state and occasionally trigger extreme weather."""
     tick = int(getattr(engine, "tick", 0))
     state = ensure_nature_state(engine, tick=tick)
-    current_season = season_for_tick(tick)
+    current_season = _world_season(engine, tick)
     if current_season != state.get("season"):
         state["season"] = current_season
 
