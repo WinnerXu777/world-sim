@@ -215,3 +215,12 @@ The ten invented species and the other bible fauna (dog, cat, cow, horse, goat, 
 * Kernel breeding hold `hold_cooldown()` = `HOLD_COOLDOWN x LEGACY_YEAR_TICKS / life_year_ticks` (1.0 legacy, 0.05 under `EDEN_CALENDAR`: the same 600 ticks), used at both clamp sites (crowded pasture, hungry).
 * Tests `tests/test_f3_litter.py` (6), `tests/test_f3_hold.py` (4), `tests/test_animal_birth_calendar.py` (flag-on cases expect the litter). Probe `tools/f3_animal_deaths.py` (death cause per uid, breeding female-ticks).
 * Balance still open: single-seed 10-day counts are noisy (sheep 14 vs 3 between runs); thirst is the main sheep killer (F4); wolves breed again in calendar year 2 (F5). Evidence: `.orchestration/wsim/reports/f3_decline.md` (not in git).
+
+### F4 as built (2026-11-23)
+
+* Gate: these rules apply to the creature kernel under a non-legacy calendar (`long_calendar()`, with `EDEN_CALENDAR` enabled); legacy calendar behavior is unchanged.
+* Thirst: species with no prey search for water up to `WATER_SEARCH_LONG = 1024` units, and their thirst walk beats the home leash. Predators retain the 240-unit search and the leash wins over thirst (flight and chase retain their existing priority).
+* Wounds: a wounded creature flees a human or a harmful other species within `WOUND_RANGE = 120`; a harmful species can damage, prey on, or be feared by it. The nearer threat supplies the flee origin. Existing fear-driven flight remains in effect.
+* Newborn home: a creature without a home adopts the home of the nearest same-species creature with one within `ADOPT_RADIUS = 16` units, else its birth chunk. The home is cached per uid and gives the newborn the usual leash; the cache is not persisted across save/load.
+* Tests: `tests/test_f4_thirst.py` (7), `tests/test_f4_flee.py` (7), and `tests/test_f4_home.py` (10). The prior F4 implementation passed all four strict flag-off goldens with no drift. Seed evidence and limitations are in `.orchestration/wsim/reports/f4_seeds.md`.
+* F4-2b: an in-progress follow-up redirects a homed thirsty predator that finds water beyond its leash toward the water nearest its home, if that water is within the leash. The diversion persists while thirsty to cross gaps in the ordinary search radius; the leash remains in force. `tests/test_f4_predator_water.py` exercises this behavior, legacy behavior, and the no-home-water case. Ten-day seed acceptance for wolf thirst and resident deaths remains pending; this follow-up is not yet accepted.

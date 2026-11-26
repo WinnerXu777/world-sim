@@ -312,21 +312,43 @@ def _step(engine) -> int:
     move = torch.where(far.unsqueeze(1), _toward(to_centre, walk), move)
     state = torch.where(far, torch.full_like(state, float(T.STATES["wander"])), state)
 
+    has_home, hx, hy = _home_chunks(engine, [engine._entity_uid_by_slot[s] for s in cidx.tolist()], pos, t)
+    ox, oy = engine._window.frame.origin if getattr(engine, "_window", None) is not None else (0, 0)
+    home = torch.tensor([[(a - ox) * CHUNK_UNITS + CHUNK_UNITS / 2.0, (b - oy) * CHUNK_UNITS + CHUNK_UNITS / 2.0] for a, b in zip(hx, hy)], device=m.device).reshape(-1, 2)
     thirsty = (p[:, col["drinks"]] > 0) & (m[cidx, cfg.A_THIRST] > SEEK_THIRST)
     going = torch.zeros(count, dtype=torch.bool, device=m.device)
+    if long_cal:
+        divert = engine.__dict__.setdefault("_creature_water_home", set())
+        divert.intersection_update(engine._entity_uid_by_slot[int(cidx[i])] for i in thirsty.nonzero(as_tuple=False).flatten().tolist())
     if bool(thirsty.any()):                                                                    # walk to the nearest water (the legacy loops had no food or water in the window at all)
         rows = thirsty.nonzero(as_tuple=False).flatten()
         vec, found = collide.toward_water(engine, pos[rows], water_search())
         if long_cal:                                                                            # predators keep the legacy search (F4-2 after seed 1)
             found = found & (~hunts[rows].to(found.device) | (vec.norm(dim=1) <= water_search(hunts=True)).to(found.device))
+        if long_cal:
+            # Remember a diversion until the animal drinks: during the return trip
+            # both lakes can be outside the normal search radius.
+            uids = [engine._entity_uid_by_slot[int(cidx[i])] for i in rows.tolist()]
+            homed = torch.tensor(has_home, dtype=torch.bool, device=m.device)[rows]
+            outside = (pos[rows] + vec.to(pos.device) - home[rows]).norm(dim=1) > p[rows, col["leash"]]
+            candidates = hunts[rows] & homed & ((found.to(m.device) & outside) | torch.tensor([uid in divert for uid in uids], device=m.device))
+            if bool(candidates.any()):
+                indices = candidates.nonzero(as_tuple=False).flatten()
+                home_vec, home_found = collide.toward_water(engine, home[rows[indices]], WATER_SEARCH_LONG)
+                valid = home_found.to(m.device) & (home_vec.to(m.device).norm(dim=1) <= p[rows[indices], col["leash"]])
+                for j, ok in zip(indices.tolist(), valid.tolist()):
+                    if ok:
+                        divert.add(uids[j])
+                    else:
+                        divert.discard(uids[j])
+                chosen = indices[valid]
+                vec[chosen] = (home[rows[chosen]] + home_vec[valid].to(m.device) - pos[rows[chosen]]).to(vec.device)
+                found[chosen] = True
         going[rows] = found & ~collide.near_water(engine, pos[rows])
         full = torch.zeros_like(pos)
         full[rows] = vec.to(pos.device)
         move = torch.where(going.unsqueeze(1), _toward(full, walk), move)
         state = torch.where(going, torch.full_like(state, float(T.STATES["wander"])), state)
-    has_home, hx, hy = _home_chunks(engine, [engine._entity_uid_by_slot[s] for s in cidx.tolist()], pos, t)
-    ox, oy = engine._window.frame.origin if getattr(engine, "_window", None) is not None else (0, 0)
-    home = torch.tensor([[(a - ox) * CHUNK_UNITS + CHUNK_UNITS / 2.0, (b - oy) * CHUNK_UNITS + CHUNK_UNITS / 2.0] for a, b in zip(hx, hy)], device=m.device).reshape(-1, 2)
     to_home = home - pos
     homeward = torch.tensor(has_home, dtype=torch.bool, device=m.device) & (to_home.norm(dim=1) > p[:, col["leash"]])
     if long_cal:                                                                                # F4-2: thirst beats the leash for a species with no prey (flee and chase still win); predators and legacy: the leash wins

@@ -15,7 +15,10 @@ import math
 import os
 import random
 import struct
+import subprocess
 import sys
+import time
+import uuid
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -239,6 +242,91 @@ def animal_instinct_predator_attack(ctx: dict, m_tensor: torch.Tensor,
 '''
 
 
+REFERENCE_MOVE = r'''
+def animal_instinct_move(ctx: dict, m_tensor: torch.Tensor,
+                          device: str, **_) -> None:
+    """
+    Brownian motion for all live animals.
+    Each species uses its own ANIMAL_MOVE_STEP from genesis_config.
+    Predators bias toward nearest prey within detection range.
+    """
+    a_mask = ctx.get("a_mask")
+    if a_mask is None or not a_mask.any():
+        return
+    a_mask = _legacy_animal_rows(a_mask, m_tensor)
+    if not a_mask.any():
+        return
+    h_tensor = ctx.get("h_tensor_ref")   # passed via engine kwargs
+
+    a_idx = torch.where(a_mask)[0]
+    for i in a_idx.tolist():
+        species = int(m_tensor[i, M_TYPE])
+        step    = ANIMAL_MOVE_STEP.get(species, 2.0)
+        dx = (random.random() - 0.5) * step * 2
+        dy = (random.random() - 0.5) * step * 2
+        lake_home_eid = -1
+
+        # Predator attraction toward nearest prey (human or prey animal)
+        prey_types = ANIMAL_PREY.get(species, set())
+        if prey_types:
+            pos = m_tensor[i, [CX, CY]]
+            target_kind, target_slot, target_dist = nearest_predator_target(
+                h_tensor,
+                m_tensor,
+                float(pos[0]),
+                float(pos[1]),
+                prey_types,
+                max_distance=float(ANIMAL_PREDATOR_RANGE * 3),
+                exclude_entity_slot=i,
+            )
+            if target_slot != -1 and target_dist < ANIMAL_PREDATOR_RANGE * 3:
+                if target_kind == "human" and h_tensor is not None:
+                    target_pos = h_tensor[target_slot, :2]
+                else:
+                    target_pos = m_tensor[target_slot, [CX, CY]]
+                d = target_pos - pos
+                n = d.norm().clamp(min=1e-6)
+                dx += float(d[0] / n) * step
+                dy += float(d[1] / n) * step
+
+        if species == M_FISH:
+            lake_mask = m_tensor[:, M_TYPE] == M_LAKE
+            if lake_mask.any():
+                lake_idx = torch.where(lake_mask)[0]
+                lake_pos = m_tensor[lake_idx][:, [CX, CY]]
+                pos      = m_tensor[i, [CX, CY]]
+                nearest  = (((lake_pos - pos).pow(2)).sum(dim=1)).sqrt().argmin()
+                lake_home_eid = int(lake_idx[nearest])
+                center = m_tensor[lake_home_eid, [CX, CY]]
+                home_r = max(4.0, float(m_tensor[lake_home_eid, SCALE]) * 0.8)
+                delta  = center - pos
+                dist   = float(delta.norm())
+                if dist > home_r:
+                    unit = delta / delta.norm().clamp(min=1e-6)
+                    dx += float(unit[0]) * step * 2.5
+                    dy += float(unit[1]) * step * 2.5
+
+        m_tensor[i, CX] = float(m_tensor[i, CX]) + dx
+        m_tensor[i, CY] = float(m_tensor[i, CY]) + dy
+        x0, y0, x1, y1 = _world_limits()
+        m_tensor[i, CX] = max(x0, min(x1, float(m_tensor[i, CX])))
+        m_tensor[i, CY] = max(y0, min(y1, float(m_tensor[i, CY])))
+        if species == M_FISH and lake_home_eid != -1:
+            pos    = m_tensor[i, [CX, CY]]
+            center = m_tensor[lake_home_eid, [CX, CY]]
+            delta  = pos - center
+            dist   = float(delta.norm())
+            max_r  = max(4.0, float(m_tensor[lake_home_eid, SCALE]) * 0.95)
+            if dist > max_r:
+                unit = delta / delta.norm().clamp(min=1e-6)
+                clamped = center + unit * max_r
+                m_tensor[i, CX] = float(clamped[0].clamp(x0, x1))
+                m_tensor[i, CY] = float(clamped[1].clamp(y0, y1))
+
+
+'''
+
+
 def _reference():
     """The cddfa86 functions, defined against the live modules' globals (constants, map_geo, torch)."""
     space = dict(vars(queries))
@@ -248,6 +336,8 @@ def _reference():
     animals = dict(vars(it))
     animals["_nearest_geo_entity"] = ref["nearest_geo_entity"]
     exec(compile(REFERENCE_INSTINCTS, "cddfa86:instincts_and_tools", "exec"), animals)
+    exec(compile(REFERENCE_MOVE, "cddfa86:move", "exec"), animals)
+    ref["animal_instinct_move"] = animals["animal_instinct_move"]
     ref["animal_instinct_drink"] = animals["animal_instinct_drink"]
     ref["animal_instinct_predator_attack"] = animals["animal_instinct_predator_attack"]
     return ref
@@ -465,6 +555,63 @@ def animal_scene(rng, m, h, *, animals=60, humans=12, kind="uniform", spaces=Fal
     return a_mask, h[:, cfg.TYPE] == float(cfg.AGENT_TYPE_HUMAN)
 
 
+class MoveTests(unittest.TestCase):
+    def test_exact_random_scenes_and_cost_shape(self):
+        for seed in range(20):
+            rng = random.Random(seed)
+            m = torch.zeros((cfg.MAX_ENTITIES, cfg.MAP_TENSOR_COLS), dtype=torch.float32)
+            h = torch.zeros((cfg.MAX_HUMANS, cfg.HUMAN_TENSOR_COLS), dtype=torch.float32)
+            mask, _ = animal_scene(rng, m, h, animals=60, humans=12, kind=("grid", "uniform", "far")[seed % 3])
+            m[0, cfg.M_TYPE], m[0, cfg.CX], m[0, cfg.CY], m[0, cfg.SCALE] = cfg.M_LAKE, 0, 0, 25
+            results = []
+            for fn in (REF["animal_instinct_move"], it.animal_instinct_move):
+                copy = m.clone()
+                random.seed(seed + 250)
+                with mock.patch.object(it, "_legacy_animal_rows", side_effect=lambda a, m: a), mock.patch.object(it, "_creatures_enabled", return_value=True):
+                    fn({"a_mask": mask, "h_tensor_ref": h}, copy, device="cpu")
+                results.append((copy, random.getstate()))
+            self.assertTrue(same_tensor(results[0][0], results[1][0]), seed)
+            self.assertEqual(results[0][1], results[1][1])
+            with mock.patch.object(it, "_legacy_animal_rows", side_effect=lambda a, m: a), mock.patch.object(it, "_creatures_enabled", return_value=True), mock.patch.object(it, "nearest_predator_target", wraps=it.nearest_predator_target) as hunt:
+                it.animal_instinct_move({"a_mask": mask, "h_tensor_ref": h}, m.clone(), device="cpu")
+                self.assertEqual(hunt.call_count, 0)
+
+    def test_nonfinite_positions_use_reference(self):
+        m = torch.zeros((cfg.MAX_ENTITIES, cfg.MAP_TENSOR_COLS))
+        h = torch.zeros((cfg.MAX_HUMANS, cfg.HUMAN_TENSOR_COLS))
+        m[100, cfg.M_TYPE], m[100, cfg.M_HP], m[100, cfg.CX] = cfg.M_WOLF, 100, float("nan")
+        mask = torch.zeros(cfg.MAX_ENTITIES, dtype=torch.bool)
+        mask[100] = True
+        expected = m.clone()
+        random.seed(45)
+        REF["animal_instinct_move"]({"a_mask": mask, "h_tensor_ref": h}, expected, device="cpu")
+        state = random.getstate()
+        actual = m.clone()
+        random.seed(45)
+        with mock.patch.object(it, "_creatures_enabled", return_value=True), mock.patch.object(it, "_legacy_animal_rows", side_effect=lambda a, m: a), mock.patch.object(it, "_animal_move_reference", wraps=it._animal_move_reference) as fallback:
+            it.animal_instinct_move({"a_mask": mask, "h_tensor_ref": h}, actual, device="cpu")
+            self.assertEqual(fallback.call_count, 1)
+        self.assertTrue(same_tensor(expected, actual))
+        self.assertEqual(state, random.getstate())
+
+    def test_predator_as_prey_still_observes_moved_rows(self):
+        m = torch.zeros((cfg.MAX_ENTITIES, cfg.MAP_TENSOR_COLS))
+        h = torch.zeros((cfg.MAX_HUMANS, cfg.HUMAN_TENSOR_COLS))
+        for slot, species, x in ((100, cfg.M_TIGER, 20), (101, cfg.M_WOLF, 10), (102, cfg.M_SHEEP, 5)):
+            m[slot, cfg.M_TYPE], m[slot, cfg.M_HP], m[slot, cfg.CX] = species, 100, x
+        mask = torch.zeros(cfg.MAX_ENTITIES, dtype=torch.bool)
+        mask[100:103] = True
+        with mock.patch.dict(it.ANIMAL_PREY, {cfg.M_WOLF: {cfg.M_TIGER}}), mock.patch.object(it, "_creatures_enabled", return_value=True), mock.patch.object(it, "_legacy_animal_rows", side_effect=lambda a, m: a):
+            expected, actual = m.clone(), m.clone()
+            random.seed(88)
+            REF["animal_instinct_move"]({"a_mask": mask, "h_tensor_ref": h}, expected, device="cpu")
+            state = random.getstate()
+            random.seed(88)
+            it.animal_instinct_move({"a_mask": mask, "h_tensor_ref": h}, actual, device="cpu")
+        self.assertTrue(same_tensor(expected, actual))
+        self.assertEqual(state, random.getstate())
+
+
 class PredatorAttackTests(unittest.TestCase):
     def setUp(self):
         patcher = mock.patch.dict(os.environ)
@@ -654,7 +801,7 @@ class EngineDeterminismTests(AsyncRegistryIsolation, unittest.IsolatedAsyncioTes
             saved = [(entry, entry["fn"]) for entry in engine._registry]
             for entry in engine._registry:
                 name = getattr(entry["fn"], "__name__", "")
-                if name in ("animal_instinct_drink", "animal_instinct_predator_attack"):
+                if name in ("animal_instinct_drink", "animal_instinct_predator_attack", "animal_instinct_move"):
                     entry["fn"] = REF[name]
             self.addCleanup(lambda: [entry.__setitem__("fn", fn) for entry, fn in saved])
         for patch in patches:
@@ -673,6 +820,33 @@ class EngineDeterminismTests(AsyncRegistryIsolation, unittest.IsolatedAsyncioTes
             if reference:
                 for entry, fn in saved:
                     entry["fn"] = fn
+
+    async def test_300_ticks_with_installed_creature_and_window_hooks(self):
+        # Separate fresh processes install the hooks before map_test is imported.
+        # Inline chunk generation removes background scheduling from the comparison.
+        env = {k: v for k, v in os.environ.items() if not k.startswith("EDEN_")}
+        env.update({"EDEN_CREATURES": "1", "EDEN_WINDOW": "1", "EDEN_SPACES": "1",
+                    "EDEN_PERCEPTION_BOUNDED": "1", "EDEN_MAP_RESOURCES": "1",
+                    "EDEN_CHUNK_WORKERS": "0", "EDEN_WORLD_SEED": "6602", "PYTHONHASHSEED": "0"})
+        arms = []
+        for arm in ("reference", "optimized"):
+            env["EDEN_PACE_INSTALLED_ARM"] = arm
+            result = subprocess.run([sys.executable, str(Path(__file__).resolve()), "--installed-arm"],
+                                    env=env, capture_output=True, text=True, timeout=180)
+            self.assertEqual(result.returncode, 0, result.stdout[-4000:] + result.stderr[-4000:])
+            line = next((line for line in result.stdout.splitlines() if line.startswith("PACE_HASHES ")), None)
+            self.assertIsNotNone(line, result.stdout[-4000:])
+            arms.append(json.loads(line.removeprefix("PACE_HASHES ")))
+        self.assertGreater(arms[0]["creatures"], 0)
+        self.assertGreater(arms[1]["creatures"], 0)
+        self.assertEqual(arms[0]["hashes"], arms[1]["hashes"])
+
+    async def test_300_ticks_with_creatures_gate_equal_reference_move(self):
+        self.assertIsNone(_IMPORT_ERROR)
+        with mock.patch.dict(os.environ, {"EDEN_CREATURES": "1", "EDEN_WINDOW": "1"}):
+            reference = self.run_arm(await self.world(), reference=True)
+            actual = self.run_arm(await self.world(), reference=False)
+        self.assertEqual(actual, reference)
 
     async def test_300_ticks_with_the_new_queries_equal_300_ticks_with_the_cddfa86_ones(self):
         self.assertIsNone(_IMPORT_ERROR)
@@ -715,5 +889,66 @@ class EngineDeterminismTests(AsyncRegistryIsolation, unittest.IsolatedAsyncioTes
         self.assertEqual(new, reference)
 
 
+def _standing_benchmark():
+    """Recreate the documented post-walk sampling, alternating the reference and current move loops.
+
+    A full run starts six local backends and takes several minutes; run only
+    while holding the suite lease. Data and logs are kept in the test root.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+    import live_smoke_window as smoke
+    all_samples = {}
+    for run in range(3):
+        for arm in ("reference", "optimized"):
+            data = _test_storage / ("pace-" + uuid.uuid4().hex)
+            data.mkdir()
+            flags = dict(smoke.FLAGS, EDEN_WINDOW_DORMANCY="1", EDEN_CREATURES="1",
+                         EDEN_PACE_REFERENCE="1" if arm == "reference" else "0")
+            backend_process = smoke.Backend(8041, data, flags, shim=True)
+            backend_process.command = [sys.executable, str(Path(__file__).resolve()), "--pace-serve"]
+            try:
+                backend_process.start()
+                reply = backend_process.post("/session/new", {"name": "pace"})
+                reply.raise_for_status()
+                def sample():
+                    start_tick = backend_process.get("/frame").json()["tick"]
+                    start_time = time.monotonic()
+                    time.sleep(10.0)
+                    end_tick = backend_process.get("/frame").json()["tick"]
+                    return (end_tick - start_tick) / (time.monotonic() - start_time)
+                pre = sample()
+                smoke.phase_walk(backend_process)
+                time.sleep(2.0)
+                standing = [sample() for _ in range(3)]
+                all_samples.setdefault(arm, []).extend(standing)
+                print(json.dumps({"arm": arm, "run": run + 1, "pre_walk_ticks_s": pre,
+                                  "standing_ticks_s": standing, "data": str(data)}), flush=True)
+            finally:
+                backend_process.stop()
+    print(json.dumps({arm: {"standing_mean_ticks_s": sum(values) / len(values), "samples": values}
+                      for arm, values in all_samples.items()}), flush=True)
+
+
 if __name__ == "__main__":
-    unittest.main()
+    if "--standing-benchmark" in sys.argv:
+        _standing_benchmark()
+    elif "--pace-serve" in sys.argv:
+        if os.environ.get("EDEN_PACE_REFERENCE") == "1":
+            for entry in backend.engine._registry:
+                if getattr(entry["fn"], "__name__", "") == "animal_instinct_move":
+                    entry["fn"] = REF["animal_instinct_move"]
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import live_smoke_window as smoke
+        smoke.serve_backend()
+    elif "--installed-arm" in sys.argv:
+        from simulation.dispatch import DISPATCH
+        from harness.window_manager import manager_for
+        names = {name for name, _ in DISPATCH.step_hooks}
+        assert {"harness_window", "harness_creatures"} <= names, names
+        test = EngineDeterminismTests(methodName="runTest")
+        engine = asyncio.run(test.world())
+        hashes = test.run_arm(engine, reference=os.environ["EDEN_PACE_INSTALLED_ARM"] == "reference")
+        print("PACE_HASHES " + json.dumps({"hashes": hashes,
+              "creatures": manager_for(engine).creatures.counters["populated"]}), flush=True)
+    else:
+        unittest.main()

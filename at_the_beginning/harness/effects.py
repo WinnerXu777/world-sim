@@ -14,6 +14,7 @@ kinds is preserved.
 from __future__ import annotations
 
 import math
+import os
 from dataclasses import dataclass, field
 from typing import Any, Optional, Sequence
 
@@ -70,6 +71,26 @@ class Emit:
     radius: float = 80.0
     payload: Optional[dict] = None
     event_id: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class ResourceGuard:
+    tick: int
+    humans: Any
+    human_ids: tuple
+    entities: Any
+    entity_ids: tuple
+    geo_version: int
+
+
+@dataclass(frozen=True)
+class BirthBatch:
+    """Live-engine births, prepared without consuming engine IDs or mutating the world."""
+    births: tuple  # (mother id, father id, slot, fields)
+    tick: int
+    next_uid: int
+    guard_rows: Any
+    guard_ids: tuple
 
 
 @dataclass(frozen=True)
@@ -263,6 +284,9 @@ class EffectApplier:
                 run_key = key
                 continue
             self._apply_single(index, effect, report, touched, cause)
+            if atomic and isinstance(effect, BirthBatch) and report.skipped:
+                report.rolled_back = True
+                return report
         if run:
             self._flush(run, report, touched)
         for table_name, slots in touched.items():
@@ -310,6 +334,47 @@ class EffectApplier:
                 problems.append(Skip(index, "Spawn", "duplicate_id", effect.id))
             if float(effect.fields.get(table.type_col, 0)) <= 0:
                 problems.append(Skip(index, "Spawn", "missing_type", effect.table))
+        elif isinstance(effect, ResourceGuard):
+            import map_geo
+            humans, entities = w.table("humans"), w.table("entities")
+            if (index != 0 or os.environ.get("EDEN_GOD_POWER_PORTS") != "1" or os.environ.get("EDEN_GOD_MIND_PORTS") != "1"
+                    or int(w.tick) != effect.tick or map_geo.geo_version != effect.geo_version
+                    or tuple(humans.ids) != effect.human_ids or tuple(entities.ids) != effect.entity_ids
+                    or not torch.equal(humans.tensor, effect.humans) or not torch.equal(entities.tensor, effect.entities)):
+                problems.append(Skip(index, "ResourceGuard", "stale_or_disabled"))
+        elif isinstance(effect, BirthBatch):
+            engine = getattr(w, "engine", None)
+            table = w.table("humans")
+            if os.environ.get("EDEN_GOD_POWER_PORTS") != "1" or os.environ.get("EDEN_GOD_MIND_PORTS") != "1":
+                problems.append(Skip(index, "BirthBatch", "disabled"))
+                return
+            if (index != 0 or engine is None or int(w.tick) != effect.tick or engine._next_human_uid != effect.next_uid
+                    or tuple(table.ids) != effect.guard_ids or not torch.equal(table.tensor, effect.guard_rows)):
+                problems.append(Skip(index, "BirthBatch", "stale_or_unsupported"))
+                return
+            slots_seen = set()
+            for offset, (mother, father, slot, fields) in enumerate(effect.births):
+                uid = f"h_{effect.next_uid + offset:06d}"
+                store = engine.resident_store
+                cache = getattr(store, "_cache", getattr(store, "records", {}))
+                path_fn = getattr(store, "_path", None)
+                if (uid in table.ids or uid in cache or (callable(path_fn) and path_fn(uid).exists())
+                        or slot in slots_seen or not (0 <= slot < table.rows)):
+                    problems.append(Skip(index, "BirthBatch", "invalid_allocation", uid))
+                    continue
+                slots_seen.add(slot)
+                if table.ids[slot] is not None or table.is_live_slot(slot) or bool(engine._prev_h_mask[slot]):
+                    problems.append(Skip(index, "BirthBatch", "slot_unavailable", str(slot)))
+                for parent in (mother, father):
+                    parent_slot = table.slot_of(parent)
+                    if parent_slot is None or not table.is_live_slot(parent_slot):
+                        problems.append(Skip(index, "BirthBatch", "parent_unavailable", str(parent)))
+                if any(key not in table.columns or not math.isfinite(float(value)) for key, value in fields.items()):
+                    problems.append(Skip(index, "BirthBatch", "invalid_fields", uid))
+                if fields.get(table.type_col) != 1:
+                    problems.append(Skip(index, "BirthBatch", "invalid_type", uid))
+            if len(table.live_slots()) + len(effect.births) > table.rows:
+                problems.append(Skip(index, "BirthBatch", "table_full"))
         elif isinstance(effect, Despawn):
             table = w.table(effect.table)
             slots, missing = table.slots_of(effect.ids)
@@ -555,6 +620,49 @@ class EffectApplier:
         w = self.world
         if isinstance(effect, Spawn):
             self._spawn(index, effect, report, touched)
+        elif isinstance(effect, ResourceGuard):
+            return
+        elif isinstance(effect, BirthBatch):
+            engine, table = w.engine, w.table("humans")
+            problems = []
+            self._validate_one(index, effect, problems, {})
+            if problems:
+                report.skipped.extend(problems)
+                return
+            # Resident creation only mutates in-memory store collections; snapshot those collections
+            # before allocation so a failed ensure cannot leave a partial batch or consume IDs.
+            store = engine.resident_store
+            store_state = {key: value.copy() if isinstance(value, (dict, set, list)) else value
+                           for key, value in vars(store).items()}
+            previous_links = dict(engine._pending_birth_links_by_slot)
+            next_uid = engine._next_human_uid
+            slots = [birth[2] for birth in effect.births]
+            old_rows = {slot: table.tensor[slot].clone() for slot in slots}
+            try:
+                for mother, father, slot, fields in effect.births:
+                    uid = engine._make_human_id()
+                    table.tensor[slot] = 0.0
+                    for key, value in fields.items():
+                        table.tensor[slot, table.col(key)] = value
+                    table.ids[slot] = uid
+                    store.ensure_resident(uid, slot, table.tensor, int(w.tick))
+                    engine._pending_birth_links_by_slot[slot] = {"tick": int(w.tick), "parent_ids": [mother, father]}
+            except Exception as exc:
+                for slot in slots:
+                    table.tensor[slot] = old_rows[slot]
+                    table.ids[slot] = None
+                engine._next_human_uid = next_uid
+                engine._pending_birth_links_by_slot.clear()
+                engine._pending_birth_links_by_slot.update(previous_links)
+                vars(store).clear()
+                vars(store).update(store_state)
+                report.skipped.append(Skip(index, "BirthBatch", "birth_failed", type(exc).__name__))
+                return
+            for offset, (_, _, slot, _) in enumerate(effect.births):
+                uid = f"h_{effect.next_uid + offset:06d}"
+                report.spawned.append(("humans", uid))
+                report.count("BirthBatch")
+                touched.setdefault("humans", set()).add(slot)
         elif isinstance(effect, Despawn):
             table = w.table(effect.table)
             for eid in effect.ids:

@@ -1731,7 +1731,7 @@ def animal_instinct_die(ctx: dict, m_tensor: torch.Tensor,
     return {"a_mask": new_a_mask}
 
 
-def animal_instinct_move(ctx: dict, m_tensor: torch.Tensor,
+def _animal_move_reference(ctx: dict, m_tensor: torch.Tensor,
                           device: str, **_) -> None:
     """
     Brownian motion for all live animals.
@@ -1811,6 +1811,106 @@ def animal_instinct_move(ctx: dict, m_tensor: torch.Tensor,
                 m_tensor[i, CX] = float(clamped[0].clamp(x0, x1))
                 m_tensor[i, CY] = float(clamped[1].clamp(y0, y1))
 
+
+
+def animal_instinct_move(ctx: dict, m_tensor: torch.Tensor,
+                          device: str, **kwargs) -> None:
+    """Move legacy animals, caching hunting candidates when creatures are enabled.
+
+    Positions in the cache are updated in slot order, so a predator sees exactly
+    the prey positions that the reference loop would see at its turn.
+    Unusual tensor inputs retain the reference path.
+    """
+    if not _creatures_enabled():
+        return _animal_move_reference(ctx, m_tensor, device, **kwargs)
+    a_mask = ctx.get("a_mask")
+    if a_mask is None or not a_mask.any():
+        return
+    a_mask = _legacy_animal_rows(a_mask, m_tensor)
+    if not a_mask.any():
+        return
+    h_tensor = ctx.get("h_tensor_ref")
+    if (m_tensor.dtype != torch.float32 or m_tensor.device.type != "cpu"
+            or (h_tensor is not None and (h_tensor.dtype != torch.float32 or h_tensor.device.type != "cpu"))):
+        return _animal_move_reference(ctx, m_tensor, device, **kwargs)
+    rows = torch.where(a_mask)[0].tolist()
+    types = m_tensor[:, M_TYPE].tolist()
+    if not all(math.isfinite(types[i]) for i in rows):
+        return _animal_move_reference(ctx, m_tensor, device, **kwargs)
+    positions = m_tensor[:, [CX, CY]].tolist()
+    humans = h_tensor[:, :2].tolist() if h_tensor is not None else []
+    if not all(math.isfinite(v) for point in positions + humans for v in point):
+        return _animal_move_reference(ctx, m_tensor, device, **kwargs)
+    hp = m_tensor[:, M_HP].tolist()
+    human_types = h_tensor[:, TYPE].tolist() if h_tensor is not None else []
+    human_hp = h_tensor[:, HP].tolist() if h_tensor is not None else []
+    human_ids = [j for j, t in enumerate(human_types) if t == AGENT_TYPE_HUMAN and human_hp[j] > 0.0]
+    candidates = {}
+    for species in {int(types[i]) for i in rows}:
+        prey = ANIMAL_PREY.get(species, set())
+        animal_types = {int(t) for t in prey if int(t) != AGENT_TYPE_HUMAN}
+        candidates[species] = [j for j, t in enumerate(types) if t in animal_types and hp[j] > 0.0]
+    lake_idx = torch.where(m_tensor[:, M_TYPE] == M_LAKE)[0]
+    x0, y0, x1, y1 = _world_limits()
+    max_distance = float(ANIMAL_PREDATOR_RANGE * 3)
+    for i in rows:
+        species = int(types[i])
+        step = ANIMAL_MOVE_STEP.get(species, 2.0)
+        dx = (random.random() - 0.5) * step * 2
+        dy = (random.random() - 0.5) * step * 2
+        px, py = positions[i]
+        prey = ANIMAL_PREY.get(species, set())
+        best_distance = float("inf")
+        best_kind, best_slot = "", -1
+        if AGENT_TYPE_HUMAN in prey:
+            for j in human_ids:
+                dist = math.hypot(humans[j][0] - px, humans[j][1] - py)
+                if dist < best_distance:
+                    best_kind, best_slot, best_distance = "human", j, dist
+            if best_distance > max_distance:
+                best_kind, best_slot, best_distance = "", -1, float("inf")
+        for j in candidates[species]:
+            if j != i:
+                dist = math.hypot(positions[j][0] - px, positions[j][1] - py)
+                if dist <= max_distance and dist < best_distance:
+                    best_kind, best_slot, best_distance = "entity", j, dist
+        if best_slot != -1 and best_distance < max_distance:
+            pos = m_tensor[i, [CX, CY]]
+            target_pos = h_tensor[best_slot, :2] if best_kind == "human" else m_tensor[best_slot, [CX, CY]]
+            d = target_pos - pos
+            n = d.norm().clamp(min=1e-6)
+            dx += float(d[0] / n) * step
+            dy += float(d[1] / n) * step
+        lake_home_eid = -1
+        if species == M_FISH and lake_idx.numel():
+            lake_pos = m_tensor[lake_idx][:, [CX, CY]]
+            pos = m_tensor[i, [CX, CY]]
+            nearest = (((lake_pos - pos).pow(2)).sum(dim=1)).sqrt().argmin()
+            lake_home_eid = int(lake_idx[nearest])
+            center = m_tensor[lake_home_eid, [CX, CY]]
+            home_r = max(4.0, float(m_tensor[lake_home_eid, SCALE]) * 0.8)
+            delta = center - pos
+            dist = float(delta.norm())
+            if dist > home_r:
+                unit = delta / delta.norm().clamp(min=1e-6)
+                dx += float(unit[0]) * step * 2.5
+                dy += float(unit[1]) * step * 2.5
+        m_tensor[i, CX] = px + dx
+        m_tensor[i, CY] = py + dy
+        m_tensor[i, CX] = max(x0, min(x1, float(m_tensor[i, CX])))
+        m_tensor[i, CY] = max(y0, min(y1, float(m_tensor[i, CY])))
+        if species == M_FISH and lake_home_eid != -1:
+            pos = m_tensor[i, [CX, CY]]
+            center = m_tensor[lake_home_eid, [CX, CY]]
+            delta = pos - center
+            dist = float(delta.norm())
+            max_r = max(4.0, float(m_tensor[lake_home_eid, SCALE]) * 0.95)
+            if dist > max_r:
+                unit = delta / delta.norm().clamp(min=1e-6)
+                clamped = center + unit * max_r
+                m_tensor[i, CX] = float(clamped[0].clamp(x0, x1))
+                m_tensor[i, CY] = float(clamped[1].clamp(y0, y1))
+        positions[i] = [float(m_tensor[i, CX]), float(m_tensor[i, CY])]
 
 def animal_instinct_eat(ctx: dict, m_tensor: torch.Tensor, **_) -> dict:
     """

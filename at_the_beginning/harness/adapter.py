@@ -132,6 +132,8 @@ class EngineWorld(World):
         report = self.effects.apply(effects, **kwargs)
         if any(table == "humans" for table, _ in report.spawned + report.despawned):
             self.engine._pop_count[0] = len(self.table("humans").live_slots())
+        if report.ok and kwargs.get("cause") in ("power:harvest_food", "power:draw_water"):
+            self.engine._force_map_refresh = True
         return report
 
     def sync_terrain(self, entity_ids) -> int:

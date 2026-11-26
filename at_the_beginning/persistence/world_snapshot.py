@@ -4,6 +4,7 @@ world format carries ``calendar = {profile, day_ticks, year_ticks}`` (an optiona
 Explicit state, no executable objects or model handles."""
 from __future__ import annotations
 
+import os
 import random
 import uuid
 
@@ -47,6 +48,12 @@ REFUSAL_OFFSCREEN_WITHOUT = (
     "This save has children born in a village while the player was away who are still waiting to be placed (offscreen villages, EDEN_OFFSCREEN=1), "
     "but this session runs without it, so they would be lost and the save cannot be continued. Start the game with EDEN_OFFSCREEN=1 (and "
     "EDEN_WINDOW_DORMANCY=1) to continue it. The save file has not been changed."
+)
+
+
+REFUSAL_CALENDAR_OVERRIDES_WITHOUT = (
+    "This save contains calendar overrides made with EDEN_GOD_NEW_TOOLS=1. "
+    "Start the game with EDEN_GOD_NEW_TOOLS=1 to continue it. The save file has not been changed."
 )
 
 
@@ -99,6 +106,22 @@ def _check_calendar(payload) -> None:
                 saved_day=saved["day_ticks"], saved_year=saved["year_ticks"],
                 now_day=current["day_ticks"], now_year=current["year_ticks"],
             ))
+
+
+def _calendar_module():
+    try:
+        from harness import calendar
+    except ImportError:  # pragma: no cover - package import fallback
+        from at_the_beginning.harness import calendar
+    return calendar
+
+
+def _validate_calendar_overrides(section) -> None:
+    calendar = _calendar_module()
+    if (not isinstance(section, dict) or not section or set(section) - {"season", "time"}
+            or any(value not in (calendar.SEASONS if key == "season" else calendar.BLOCKS)
+                   for key, value in section.items())):
+        raise ValueError("Invalid calendar overrides in save")
 
 
 def _space_layout(map_name) -> list:
@@ -160,6 +183,13 @@ def capture(engine, geometry) -> bytes:
             payload["world_format"]["format"] = 4
     if _calendar_enabled():                         # EDEN_CALENDAR: an optional key, so every flag-off save is byte-identical to today
         payload.setdefault("world_format", {"format": payload["schema"]})["calendar"] = _calendar_section()
+    if os.environ.get("EDEN_GOD_NEW_TOOLS") == "1":
+        overrides = getattr(engine, "_god_calendar_overrides", {})
+        if isinstance(overrides, dict):
+            section = {key: overrides[key] for key in ("season", "time") if overrides.get(key) is not None}
+            if section:
+                _validate_calendar_overrides(section)
+                payload["calendar_overrides"] = section
     # Encoding copies tensors and mutable dictionaries before the first await/worker handoff.
     return codec.dumps(payload)
 
@@ -203,6 +233,10 @@ def validate(payload, engine) -> None:
     if schema != expected and not (schema == 4 and expected == 3):
         raise ValueError("Unsupported world schema; migration required")
     _check_calendar(payload)
+    if "calendar_overrides" in payload:
+        if os.environ.get("EDEN_GOD_NEW_TOOLS") != "1":
+            raise SaveFormatError(REFUSAL_CALENDAR_OVERRIDES_WITHOUT)
+        _validate_calendar_overrides(payload["calendar_overrides"])
     window_section = payload.get("window")
     if isinstance(window_section, dict) and "offscreen" in window_section and not _offscreen().enabled():
         raise SaveFormatError(REFUSAL_OFFSCREEN_WITHOUT)
@@ -309,6 +343,13 @@ def restore(payload, engine, geometry, control_factory) -> None:
     validate(payload, engine)
     # Decoding/validation must finish before mutating the current world.
     engine.reset_world()
+    # Loading an older save must not retain overrides from the previous world.
+    if hasattr(engine, "_god_calendar_overrides"):
+        engine._god_calendar_overrides = {}
+    if "calendar_overrides" in payload:
+        calendar = _calendar_module()
+        for field, value in payload["calendar_overrides"].items():
+            calendar.set_override(engine, field, value)
     device = engine.state.device
     engine.state.h_tensor.copy_(payload["humans"].to(device))
     engine.state.m_tensor.copy_(payload["entities"].to(device))

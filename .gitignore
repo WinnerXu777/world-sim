@@ -116,3 +116,6 @@ tmp_*/
 *.onnx
 *.safetensors
 *.gguf
+
+# large asset pack (from Google Drive)
+myassets/
